@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6254" systemVersion="14C109" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Locations" representedClassName="Locations" syncable="YES">
+        <attribute name="abbreviation" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="address" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="marketdays" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MarketDays" inverseName="location" inverseEntity="MarketDays" syncable="YES"/>
+    </entity>
+    <entity name="MarketDays" representedClassName="MarketDays" syncable="YES">
+        <attribute name="date" attributeType="Date" syncable="YES"/>
+        <attribute name="end_time" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="notes" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="start_time" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <relationship name="location" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Locations" inverseName="marketdays" inverseEntity="Locations" syncable="YES"/>
+        <relationship name="redemptions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Redemptions" inverseName="marketday" inverseEntity="Redemptions" syncable="YES"/>
+        <relationship name="staff" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MarketStaff" inverseName="marketday" inverseEntity="MarketStaff" syncable="YES"/>
+        <relationship name="terminal_totals" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TerminalTotals" inverseName="marketday" inverseEntity="TerminalTotals" syncable="YES"/>
+        <relationship name="tokenbank" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TokenBankTotals" inverseName="marketday" inverseEntity="TokenBankTotals" syncable="YES"/>
+        <relationship name="transactions" optional="YES" toMany="YES" deletionRule="Deny" ordered="YES" destinationEntity="Transactions" inverseName="marketday" inverseEntity="Transactions" syncable="YES"/>
+        <relationship name="vendors" optional="YES" toMany="YES" deletionRule="Deny" destinationEntity="Vendors" inverseName="marketdays" inverseEntity="Vendors" syncable="YES"/>
+    </entity>
+    <entity name="MarketStaff" representedClassName="MarketStaff" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="position" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="marketday" optional="YES" maxCount="1" deletionRule="Deny" destinationEntity="MarketDays" inverseName="staff" inverseEntity="MarketDays" syncable="YES"/>
+    </entity>
+    <entity name="Redemptions" representedClassName="Redemptions" syncable="YES">
+        <attribute name="bonus_count" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="check_number" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="credit_amount" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="credit_count" optional="YES" attributeType="Integer 16" syncable="YES"/>
+        <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="markedInvalid" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="snap_count" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="total" optional="YES" attributeType="Integer 16" syncable="YES"/>
+        <relationship name="marketday" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MarketDays" inverseName="redemptions" inverseEntity="MarketDays" syncable="YES"/>
+        <relationship name="vendor" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Vendors" inverseName="redemptions" inverseEntity="Vendors" syncable="YES"/>
+    </entity>
+    <entity name="TerminalTotals" representedClassName="TerminalTotals" syncable="YES">
+        <attribute name="credit_amount" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="credit_transactions" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="snap_amount" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="snap_transactions" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="total_amount" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="total_transactions" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="marketday" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MarketDays" inverseName="terminal_totals" inverseEntity="MarketDays" syncable="YES"/>
+    </entity>
+    <entity name="TokenBankTotals" representedClassName="TokenBankTotals" syncable="YES">
+        <attribute name="market_bonus_tokens" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="market_credit_tokens" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="market_snap_tokens" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="redeemed_bonus_tokens" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="redeemed_credit_tokens" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="redeemed_snap_tokens" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="marketday" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MarketDays" inverseName="tokenbank" inverseEntity="MarketDays" syncable="YES"/>
+    </entity>
+    <entity name="Transactions" representedClassName="Transactions" syncable="YES">
+        <attribute name="credit_fee" optional="YES" attributeType="Integer 16" syncable="YES"/>
+        <attribute name="credit_total" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="credit_used" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="cust_ethnicity" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="cust_frequency" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="cust_gender" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="cust_id" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="cust_referral" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="cust_senior" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="cust_zipcode" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="markedInvalid" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="snap_bonus" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="snap_total" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="snap_used" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="time" optional="YES" attributeType="Date" syncable="YES"/>
+        <relationship name="marketday" maxCount="1" deletionRule="Nullify" destinationEntity="MarketDays" inverseName="transactions" inverseEntity="MarketDays" syncable="YES"/>
+    </entity>
+    <entity name="Vendors" representedClassName="Vendors" syncable="YES">
+        <attribute name="address" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="business_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="federal_tax_id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="phone" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="product_types" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="state_tax_id" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="marketdays" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MarketDays" inverseName="vendors" inverseEntity="MarketDays" syncable="YES"/>
+        <relationship name="redemptions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Redemptions" inverseName="vendor" inverseEntity="Redemptions" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Locations" positionX="-17154" positionY="-1624" width="144" height="103"/>
+        <element name="MarketDays" positionX="-16974" positionY="-1639" width="117" height="208"/>
+        <element name="MarketStaff" positionX="-17300" positionY="-1594" width="128" height="90"/>
+        <element name="Redemptions" positionX="-16652" positionY="-1681" width="128" height="195"/>
+        <element name="TerminalTotals" positionX="-17453" positionY="-1485" width="128" height="148"/>
+        <element name="TokenBankTotals" positionX="-17424" positionY="-1318" width="128" height="148"/>
+        <element name="Transactions" positionX="-17118" positionY="-1440" width="117" height="285"/>
+        <element name="Vendors" positionX="-16803" positionY="-1503" width="117" height="193"/>
+    </elements>
+</model>

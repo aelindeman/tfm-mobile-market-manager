@@ -1,0 +1,1013 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="bUb-qd-0mY">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--Main Menu-->
+        <scene sceneID="UUA-yA-0ud">
+            <objects>
+                <tableViewController id="UgE-w3-5vM" customClass="MainMenuViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="4F2-Gx-one">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="MenuOptionCell" textLabel="wUd-9R-4NL" style="IBUITableViewCellStyleDefault" id="Mdc-JJ-i4w">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Mdc-JJ-i4w" id="HbI-5W-QnQ">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="wUd-9R-4NL">
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="UgE-w3-5vM" id="aPX-IJ-XRU"/>
+                            <outlet property="delegate" destination="UgE-w3-5vM" id="mio-qq-Cyf"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Main Menu" id="6uK-wH-jky"/>
+                    <keyCommands/>
+                    <connections>
+                        <segue destination="Utn-tX-255" kind="show" identifier="MarketDaysSegue" id="32B-bp-s4U"/>
+                        <segue destination="MZI-JO-5ww" kind="show" identifier="VendorsSegue" id="kSx-nr-gbA"/>
+                        <segue destination="Vcy-Lc-KUH" kind="show" identifier="MarketStaffSegue" id="lLl-Mb-243"/>
+                        <segue destination="ROY-3U-J8u" kind="show" identifier="AboutSegue" id="Hvp-eL-rej"/>
+                        <segue destination="vJE-Xu-YS8" kind="show" identifier="SyncSegue" id="BOc-36-Pft"/>
+                        <segue destination="QjC-On-Tbv" kind="show" identifier="LocationsSegue" id="dkY-4d-Iuw"/>
+                        <segue destination="tiF-zW-WZB" kind="presentation" identifier="NewMarketDayFromMainMenuSegue" modalPresentationStyle="formSheet" id="6RH-vK-sCl"/>
+                        <segue destination="KTV-OH-m7B" kind="show" identifier="ReportsSegue" id="P2X-Md-yyO"/>
+                        <segue destination="nO0-u0-KKk" kind="show" identifier="ExportSegue" id="fIc-Nt-25e"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3S6-P9-zRm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1092.96875" y="-1152.5390625"/>
+        </scene>
+        <!--Market Day Form View Controller-->
+        <scene sceneID="i4J-QK-TxC">
+            <objects>
+                <viewController id="bQG-GS-Cqg" customClass="MarketDayFormViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="WyW-PK-uMw"/>
+                        <viewControllerLayoutGuide type="bottom" id="YeP-rK-jDQ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="lVc-Fj-RpA">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="AL0-Rl-3Rz"/>
+                    <connections>
+                        <segue destination="7q7-eW-3Ac" kind="unwind" identifier="MarketOpenMenuSegue" unwindAction="segueToMarketOpenMenu:" id="LWl-9k-huN"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="y93-9v-nsn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="7q7-eW-3Ac" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="3371" y="-1153"/>
+        </scene>
+        <!--Reopen Market Day-->
+        <scene sceneID="xmd-4V-iZQ">
+            <objects>
+                <tableViewController title="Reopen Market Day" id="Utn-tX-255" customClass="MarketDayListViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="GaB-q2-zFo">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MarketDayCell" textLabel="bC1-EE-Yfg" detailTextLabel="gPO-Gy-ypu" style="IBUITableViewCellStyleValue1" id="llF-fV-7TT">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="llF-fV-7TT" id="zmj-15-N9L">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" id="bC1-EE-Yfg">
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" id="gPO-Gy-ypu">
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Utn-tX-255" id="8ir-yo-Gln"/>
+                            <outlet property="delegate" destination="Utn-tX-255" id="EcP-du-X9Y"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Reopen Market Day" id="TJy-cD-7rH">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="hr3-oG-wnQ">
+                            <connections>
+                                <segue destination="tiF-zW-WZB" kind="presentation" identifier="NewMarketDaySegue" modalPresentationStyle="formSheet" id="0wi-nW-tjb"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <segue destination="tiF-zW-WZB" kind="presentation" identifier="EditMarketDaySegue" modalPresentationStyle="formSheet" id="Xyf-yc-rV8"/>
+                        <segue destination="A0X-R3-m0v" kind="unwind" identifier="MarketOpenMenuSegue" unwindAction="segueToMarketOpenMenu:" id="vM8-ki-FRS"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nDm-ck-vB1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="A0X-R3-m0v" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="1964.0625" y="-1225.1953125"/>
+        </scene>
+        <!--Edit Vendors-->
+        <scene sceneID="bNn-Qt-GF2">
+            <objects>
+                <tableViewController id="MZI-JO-5ww" customClass="VendorsListViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="faT-MP-p5T">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="VendorCell" textLabel="SHD-fQ-Rth" detailTextLabel="PcW-c5-BrP" style="IBUITableViewCellStyleValue1" id="FZV-Yc-8A1">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="FZV-Yc-8A1" id="NQi-5d-ZAE">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" id="SHD-fQ-Rth">
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" id="PcW-c5-BrP">
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="MZI-JO-5ww" id="WiK-vM-0L6"/>
+                            <outlet property="delegate" destination="MZI-JO-5ww" id="whd-rQ-srv"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Edit Vendors" id="ZH5-mS-SE8">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="7TU-AX-teP">
+                            <connections>
+                                <segue destination="2Hn-ZH-gaB" kind="presentation" identifier="AddVendorSegue" modalPresentationStyle="formSheet" id="TgG-lG-Acz"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <segue destination="2Hn-ZH-gaB" kind="presentation" identifier="EditVendorSegue" modalPresentationStyle="formSheet" id="BzA-eb-QoZ"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PIH-Vm-RZ9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1964.0625" y="-284.765625"/>
+        </scene>
+        <!--Vendor Form View Controller-->
+        <scene sceneID="xdS-TU-g2S">
+            <objects>
+                <viewController id="UyV-sJ-NrZ" customClass="VendorFormViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="60e-yR-irs"/>
+                        <viewControllerLayoutGuide type="bottom" id="qyD-CB-XmC"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="1HY-Jd-25z">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="LtM-KY-ACw">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="72q-x0-k9U"/>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="r5Q-bZ-5a2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3371" y="-285"/>
+        </scene>
+        <!--About this app-->
+        <scene sceneID="jad-Q9-9Dd">
+            <objects>
+                <viewController id="ROY-3U-J8u" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Xp2-8Z-Jzf"/>
+                        <viewControllerLayoutGuide type="bottom" id="wkK-Hc-e7z"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Sob-K5-SVa">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="cWK-XZ-u9x">
+                                <rect key="frame" x="91" y="72" width="418" height="456"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="TheFarmersMarket.co">
+                                        <attributes>
+                                            <font key="NSFont" size="24" name="HelveticaNeue-MediumItalic"/>
+                                            <font key="NSOriginalFont" size="24" name="HelveticaNeue-MediumItalic"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural">
+                                                <tabStops>
+                                                    <textTab alignment="left" location="36"/>
+                                                    <textTab alignment="left" location="72"/>
+                                                    <textTab alignment="left" location="108"/>
+                                                    <textTab alignment="left" location="144"/>
+                                                    <textTab alignment="left" location="180"/>
+                                                    <textTab alignment="left" location="216"/>
+                                                    <textTab alignment="left" location="252"/>
+                                                    <textTab alignment="left" location="288"/>
+                                                    <textTab alignment="left" location="324"/>
+                                                    <textTab alignment="left" location="360"/>
+                                                    <textTab alignment="left" location="396"/>
+                                                    <textTab alignment="left" location="432"/>
+                                                </tabStops>
+                                            </paragraphStyle>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content" base64-UTF8="YES">
+Cg
+</string>
+                                        <attributes>
+                                            <font key="NSFont" size="24" name="HelveticaNeue-LightItalic"/>
+                                            <font key="NSOriginalFont" size="24" name="HelveticaNeue-LightItalic"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural">
+                                                <tabStops>
+                                                    <textTab alignment="left" location="36"/>
+                                                    <textTab alignment="left" location="72"/>
+                                                    <textTab alignment="left" location="108"/>
+                                                    <textTab alignment="left" location="144"/>
+                                                    <textTab alignment="left" location="180"/>
+                                                    <textTab alignment="left" location="216"/>
+                                                    <textTab alignment="left" location="252"/>
+                                                    <textTab alignment="left" location="288"/>
+                                                    <textTab alignment="left" location="324"/>
+                                                    <textTab alignment="left" location="360"/>
+                                                    <textTab alignment="left" location="396"/>
+                                                    <textTab alignment="left" location="432"/>
+                                                </tabStops>
+                                            </paragraphStyle>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Mobile Market Manager">
+                                        <attributes>
+                                            <font key="NSFont" size="24" name="HelveticaNeue-MediumItalic"/>
+                                            <font key="NSOriginalFont" size="24" name="HelveticaNeue-LightItalic"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural">
+                                                <tabStops>
+                                                    <textTab alignment="left" location="36"/>
+                                                    <textTab alignment="left" location="72"/>
+                                                    <textTab alignment="left" location="108"/>
+                                                    <textTab alignment="left" location="144"/>
+                                                    <textTab alignment="left" location="180"/>
+                                                    <textTab alignment="left" location="216"/>
+                                                    <textTab alignment="left" location="252"/>
+                                                    <textTab alignment="left" location="288"/>
+                                                    <textTab alignment="left" location="324"/>
+                                                    <textTab alignment="left" location="360"/>
+                                                    <textTab alignment="left" location="396"/>
+                                                    <textTab alignment="left" location="432"/>
+                                                </tabStops>
+                                            </paragraphStyle>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content" base64-UTF8="YES">
+Cg
+</string>
+                                        <attributes>
+                                            <color key="NSColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="12" name="HelveticaNeue"/>
+                                            <font key="NSOriginalFont" size="12" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural">
+                                                <tabStops>
+                                                    <textTab alignment="left" location="36"/>
+                                                    <textTab alignment="left" location="72"/>
+                                                    <textTab alignment="left" location="108"/>
+                                                    <textTab alignment="left" location="144"/>
+                                                    <textTab alignment="left" location="180"/>
+                                                    <textTab alignment="left" location="216"/>
+                                                    <textTab alignment="left" location="252"/>
+                                                    <textTab alignment="left" location="288"/>
+                                                    <textTab alignment="left" location="324"/>
+                                                    <textTab alignment="left" location="360"/>
+                                                    <textTab alignment="left" location="396"/>
+                                                    <textTab alignment="left" location="432"/>
+                                                </tabStops>
+                                            </paragraphStyle>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">Created by Alex Lindeman
+University of Mary Washington</string>
+                                        <attributes>
+                                            <color key="NSColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="16" name="HelveticaNeue-Light"/>
+                                            <font key="NSOriginalFont" size="16" name="HelveticaNeue-Light"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural">
+                                                <tabStops>
+                                                    <textTab alignment="left" location="36"/>
+                                                    <textTab alignment="left" location="72"/>
+                                                    <textTab alignment="left" location="108"/>
+                                                    <textTab alignment="left" location="144"/>
+                                                    <textTab alignment="left" location="180"/>
+                                                    <textTab alignment="left" location="216"/>
+                                                    <textTab alignment="left" location="252"/>
+                                                    <textTab alignment="left" location="288"/>
+                                                    <textTab alignment="left" location="324"/>
+                                                    <textTab alignment="left" location="360"/>
+                                                    <textTab alignment="left" location="396"/>
+                                                    <textTab alignment="left" location="432"/>
+                                                </tabStops>
+                                            </paragraphStyle>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content" base64-UTF8="YES">
+Cgo
+</string>
+                                        <attributes>
+                                            <color key="NSColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="12" name="HelveticaNeue"/>
+                                            <font key="NSOriginalFont" size="12" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural">
+                                                <tabStops>
+                                                    <textTab alignment="left" location="36"/>
+                                                    <textTab alignment="left" location="72"/>
+                                                    <textTab alignment="left" location="108"/>
+                                                    <textTab alignment="left" location="144"/>
+                                                    <textTab alignment="left" location="180"/>
+                                                    <textTab alignment="left" location="216"/>
+                                                    <textTab alignment="left" location="252"/>
+                                                    <textTab alignment="left" location="288"/>
+                                                    <textTab alignment="left" location="324"/>
+                                                    <textTab alignment="left" location="360"/>
+                                                    <textTab alignment="left" location="396"/>
+                                                    <textTab alignment="left" location="432"/>
+                                                </tabStops>
+                                            </paragraphStyle>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Open source technologies">
+                                        <attributes>
+                                            <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="24" name="HelveticaNeue-LightItalic"/>
+                                            <font key="NSOriginalFont" size="24" name="HelveticaNeue-LightItalic"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural">
+                                                <tabStops>
+                                                    <textTab alignment="left" location="36"/>
+                                                    <textTab alignment="left" location="72"/>
+                                                    <textTab alignment="left" location="108"/>
+                                                    <textTab alignment="left" location="144"/>
+                                                    <textTab alignment="left" location="180"/>
+                                                    <textTab alignment="left" location="216"/>
+                                                    <textTab alignment="left" location="252"/>
+                                                    <textTab alignment="left" location="288"/>
+                                                    <textTab alignment="left" location="324"/>
+                                                    <textTab alignment="left" location="360"/>
+                                                    <textTab alignment="left" location="396"/>
+                                                    <textTab alignment="left" location="432"/>
+                                                </tabStops>
+                                            </paragraphStyle>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content" base64-UTF8="YES">
+Cg
+</string>
+                                        <attributes>
+                                            <color key="NSColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="12" name="HelveticaNeue"/>
+                                            <font key="NSOriginalFont" size="12" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural">
+                                                <tabStops>
+                                                    <textTab alignment="left" location="36"/>
+                                                    <textTab alignment="left" location="72"/>
+                                                    <textTab alignment="left" location="108"/>
+                                                    <textTab alignment="left" location="144"/>
+                                                    <textTab alignment="left" location="180"/>
+                                                    <textTab alignment="left" location="216"/>
+                                                    <textTab alignment="left" location="252"/>
+                                                    <textTab alignment="left" location="288"/>
+                                                    <textTab alignment="left" location="324"/>
+                                                    <textTab alignment="left" location="360"/>
+                                                    <textTab alignment="left" location="396"/>
+                                                    <textTab alignment="left" location="432"/>
+                                                </tabStops>
+                                            </paragraphStyle>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="FXForms - github.com/nicklockwood/FXForms">
+                                        <attributes>
+                                            <color key="NSColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="16" name="HelveticaNeue-Light"/>
+                                            <font key="NSOriginalFont" size="16" name="HelveticaNeue-Light"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural">
+                                                <tabStops>
+                                                    <textTab alignment="left" location="36"/>
+                                                    <textTab alignment="left" location="72"/>
+                                                    <textTab alignment="left" location="108"/>
+                                                    <textTab alignment="left" location="144"/>
+                                                    <textTab alignment="left" location="180"/>
+                                                    <textTab alignment="left" location="216"/>
+                                                    <textTab alignment="left" location="252"/>
+                                                    <textTab alignment="left" location="288"/>
+                                                    <textTab alignment="left" location="324"/>
+                                                    <textTab alignment="left" location="360"/>
+                                                    <textTab alignment="left" location="396"/>
+                                                    <textTab alignment="left" location="432"/>
+                                                </tabStops>
+                                            </paragraphStyle>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content" base64-UTF8="YES">
+Cgo
+</string>
+                                        <attributes>
+                                            <color key="NSColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="12" name="HelveticaNeue"/>
+                                            <font key="NSOriginalFont" size="12" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural">
+                                                <tabStops>
+                                                    <textTab alignment="left" location="36"/>
+                                                    <textTab alignment="left" location="72"/>
+                                                    <textTab alignment="left" location="108"/>
+                                                    <textTab alignment="left" location="144"/>
+                                                    <textTab alignment="left" location="180"/>
+                                                    <textTab alignment="left" location="216"/>
+                                                    <textTab alignment="left" location="252"/>
+                                                    <textTab alignment="left" location="288"/>
+                                                    <textTab alignment="left" location="324"/>
+                                                    <textTab alignment="left" location="360"/>
+                                                    <textTab alignment="left" location="396"/>
+                                                    <textTab alignment="left" location="432"/>
+                                                </tabStops>
+                                            </paragraphStyle>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">Special thanks
+</string>
+                                        <attributes>
+                                            <font key="NSFont" size="24" name="HelveticaNeue-LightItalic"/>
+                                            <font key="NSOriginalFont" size="24" name="HelveticaNeue-LightItalic"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural">
+                                                <tabStops>
+                                                    <textTab alignment="left" location="36"/>
+                                                    <textTab alignment="left" location="72"/>
+                                                    <textTab alignment="left" location="108"/>
+                                                    <textTab alignment="left" location="144"/>
+                                                    <textTab alignment="left" location="180"/>
+                                                    <textTab alignment="left" location="216"/>
+                                                    <textTab alignment="left" location="252"/>
+                                                    <textTab alignment="left" location="288"/>
+                                                    <textTab alignment="left" location="324"/>
+                                                    <textTab alignment="left" location="360"/>
+                                                    <textTab alignment="left" location="396"/>
+                                                    <textTab alignment="left" location="432"/>
+                                                </tabStops>
+                                            </paragraphStyle>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">Karen Anewalt
+Bill Brooks
+Stephen Davies</string>
+                                        <attributes>
+                                            <color key="NSColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="16" name="HelveticaNeue-Light"/>
+                                            <font key="NSOriginalFont" size="16" name="HelveticaNeue-Light"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural">
+                                                <tabStops>
+                                                    <textTab alignment="left" location="36"/>
+                                                    <textTab alignment="left" location="72"/>
+                                                    <textTab alignment="left" location="108"/>
+                                                    <textTab alignment="left" location="144"/>
+                                                    <textTab alignment="left" location="180"/>
+                                                    <textTab alignment="left" location="216"/>
+                                                    <textTab alignment="left" location="252"/>
+                                                    <textTab alignment="left" location="288"/>
+                                                    <textTab alignment="left" location="324"/>
+                                                    <textTab alignment="left" location="360"/>
+                                                    <textTab alignment="left" location="396"/>
+                                                    <textTab alignment="left" location="432"/>
+                                                </tabStops>
+                                            </paragraphStyle>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="cWK-XZ-u9x" firstAttribute="top" secondItem="Xp2-8Z-Jzf" secondAttribute="bottom" constant="8" symbolic="YES" id="1Xd-cf-Q4K"/>
+                            <constraint firstItem="cWK-XZ-u9x" firstAttribute="leading" secondItem="Sob-K5-SVa" secondAttribute="leadingMargin" constant="75" id="7sN-J6-vvt"/>
+                            <constraint firstAttribute="centerX" secondItem="cWK-XZ-u9x" secondAttribute="centerX" id="9yG-ay-lt1"/>
+                            <constraint firstItem="cWK-XZ-u9x" firstAttribute="height" relation="lessThanOrEqual" secondItem="Sob-K5-SVa" secondAttribute="height" id="K8g-Pb-z1z"/>
+                            <constraint firstAttribute="centerY" secondItem="cWK-XZ-u9x" secondAttribute="centerY" id="OU8-O3-bRI"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="About this app" id="MhH-oP-ERl"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Lsd-k9-UOE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="327.34375" y="-284.765625"/>
+        </scene>
+        <!--Reports-->
+        <scene sceneID="exq-ho-4ua">
+            <objects>
+                <tableViewController id="KTV-OH-m7B" customClass="ReportsMenuViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="wLT-Sd-uHP">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="MenuOptionCell" textLabel="2KI-qs-KbM" style="IBUITableViewCellStyleDefault" id="5dq-aS-qvP">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5dq-aS-qvP" id="RvG-KK-Z4R">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="2KI-qs-KbM">
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="KTV-OH-m7B" id="blf-o4-l1w"/>
+                            <outlet property="delegate" destination="KTV-OH-m7B" id="RJO-gT-6B2"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Reports" id="YkO-bz-ujA"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aPu-RX-JRq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="327" y="389"/>
+        </scene>
+        <!--Edit Staff-->
+        <scene sceneID="b0e-M0-xZv">
+            <objects>
+                <tableViewController id="Vcy-Lc-KUH" customClass="MarketStaffListViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="tLw-I6-n7g">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MarketStaffCell" textLabel="Izv-0E-hkq" detailTextLabel="9hk-Te-3UY" style="IBUITableViewCellStyleValue1" id="bw0-Lz-hjs">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bw0-Lz-hjs" id="pHr-g1-0UM">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" id="Izv-0E-hkq">
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" id="9hk-Te-3UY">
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Vcy-Lc-KUH" id="eMa-ND-2fC"/>
+                            <outlet property="delegate" destination="Vcy-Lc-KUH" id="aoQ-V6-kCf"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Edit Staff" id="MzO-Fx-HkZ">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="GPd-iO-d7z">
+                            <connections>
+                                <segue destination="JNs-oc-Fnn" kind="presentation" identifier="AddStaffSegue" modalPresentationStyle="formSheet" id="oDc-ZR-8lr"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <segue destination="JNs-oc-Fnn" kind="presentation" identifier="EditStaffSegue" modalPresentationStyle="formSheet" id="tmR-C0-IUe"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Kdq-rr-HKe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1964.0625" y="389.6484375"/>
+        </scene>
+        <!--Edit Locations-->
+        <scene sceneID="e0t-8f-o91">
+            <objects>
+                <tableViewController id="QjC-On-Tbv" customClass="LocationsListViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="1yj-lB-mZk">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="LocationCell" textLabel="n8T-wP-NLD" detailTextLabel="lKh-Kd-6cP" style="IBUITableViewCellStyleValue1" id="Zzq-2d-hlB">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Zzq-2d-hlB" id="MeA-IE-bQ0">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" id="n8T-wP-NLD">
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" id="lKh-Kd-6cP">
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="QjC-On-Tbv" id="6dA-I7-dlm"/>
+                            <outlet property="delegate" destination="QjC-On-Tbv" id="4K9-Cl-aIa"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Edit Locations" id="xfG-hj-e1l">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="J9T-du-qAd">
+                            <connections>
+                                <segue destination="Lnq-mX-QN0" kind="presentation" identifier="AddLocationSegue" modalPresentationStyle="formSheet" id="uV5-lI-hNV"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <segue destination="Lnq-mX-QN0" kind="presentation" identifier="EditLocationSegue" modalPresentationStyle="formSheet" id="fZ2-QH-psV"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dyw-p1-myt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1964.0625" y="1071.6796875"/>
+        </scene>
+        <!--Market Staff Form View Controller-->
+        <scene sceneID="qxn-st-zIS">
+            <objects>
+                <viewController id="Xn2-Xb-HVZ" customClass="MarketStaffFormViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ffJ-xL-SSj"/>
+                        <viewControllerLayoutGuide type="bottom" id="5g7-lq-lzp"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="mmf-TL-Yrt">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="geh-kp-f3U"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6da-gb-tac" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3371" y="389"/>
+        </scene>
+        <!--Locations Form View Controller-->
+        <scene sceneID="lcn-73-iSf">
+            <objects>
+                <viewController id="zxn-tu-pFa" customClass="LocationsFormViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="oMV-T7-Fgh"/>
+                        <viewControllerLayoutGuide type="bottom" id="9cv-7O-esP"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="oeD-dx-Oh7">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="ec6-Pn-u2r"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EeR-aj-uHy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3371" y="1071"/>
+        </scene>
+        <!--Synchronize-->
+        <scene sceneID="KIM-F7-Cak">
+            <objects>
+                <viewController title="Synchronize" id="vJE-Xu-YS8" customClass="SyncViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="6TE-1E-gk3"/>
+                        <viewControllerLayoutGuide type="bottom" id="Ucw-GH-URt"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="a4S-dn-zPO">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cable" translatesAutoresizingMaskIntoConstraints="NO" id="xgW-KF-qdM">
+                                <rect key="frame" x="132" y="130" width="29" height="29"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="29" id="OVP-3q-HAj"/>
+                                    <constraint firstAttribute="width" constant="29" id="jSU-LR-KkB"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="Om6-Fm-rT7">
+                                <rect key="frame" x="169" y="125" width="300" height="38"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="300" id="vi8-Hl-ovD"/>
+                                </constraints>
+                                <attributedString key="attributedText">
+                                    <fragment>
+                                        <string key="content">Step 1: Connect USB Cable
+</string>
+                                        <attributes>
+                                            <color key="NSColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <font key="NSFont" size="17" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Attach the 30-pin connector to the iPad.">
+                                        <attributes>
+                                            <color key="NSColor" name="controlDarkShadowColor" catalog="System" colorSpace="catalog"/>
+                                            <font key="NSFont" size="15" name="HelveticaNeue-Light"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="download" translatesAutoresizingMaskIntoConstraints="NO" id="yGY-OQ-vkJ">
+                                <rect key="frame" x="132" y="185" width="29" height="29"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="29" id="1oK-hP-4HF"/>
+                                    <constraint firstAttribute="height" constant="29" id="pNY-x1-Y30"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="KzX-tS-D63">
+                                <rect key="frame" x="169" y="171" width="300" height="56"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="56" id="eUU-Ii-JFo"/>
+                                    <constraint firstAttribute="width" constant="300" id="ruG-ib-xNq"/>
+                                </constraints>
+                                <attributedString key="attributedText">
+                                    <fragment>
+                                        <string key="content">Step 2: Open Sync Client on PC
+</string>
+                                        <attributes>
+                                            <color key="NSColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <font key="NSFont" size="17" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Open the Sync Client program on the PC to prepare for synchronization.">
+                                        <attributes>
+                                            <color key="NSColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <font key="NSFont" size="15" name="HelveticaNeue-Light"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sync" translatesAutoresizingMaskIntoConstraints="NO" id="uU7-9W-CYi">
+                                <rect key="frame" x="132" y="240" width="29" height="29"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="29" id="PoS-eZ-lXr"/>
+                                    <constraint firstAttribute="width" constant="29" id="RvO-m8-hLn"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="bgf-YK-gEV">
+                                <rect key="frame" x="169" y="235" width="300" height="38"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="300" id="9Eq-ua-PCh"/>
+                                </constraints>
+                                <attributedString key="attributedText">
+                                    <fragment>
+                                        <string key="content">Step 3: Press Sync
+</string>
+                                        <attributes>
+                                            <color key="NSColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <font key="NSFont" size="17" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Press ">
+                                        <attributes>
+                                            <color key="NSColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <font key="NSFont" size="15" name="HelveticaNeue-Light"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Sync">
+                                        <attributes>
+                                            <color key="NSColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <font key="NSFont" size="15" name="HelveticaNeue-LightItalic"/>
+                                            <font key="NSOriginalFont" size="15" name="HelveticaNeue-LightItalic"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=" to begin transferring data.">
+                                        <attributes>
+                                            <color key="NSColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <font key="NSFont" size="15" name="HelveticaNeue-Light"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LtY-ga-KGn">
+                                <rect key="frame" x="150" y="578" width="300" height="2"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="300" id="9Bs-4r-zJp"/>
+                                </constraints>
+                            </progressView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Idle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="98T-Y0-TcS">
+                                <rect key="frame" x="150" y="556" width="300" height="14"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WI7-O8-5JW">
+                                <rect key="frame" x="275" y="297" width="51" height="39"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                <state key="normal" title="Sync">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="syncButtonPressed:" destination="vJE-Xu-YS8" eventType="touchUpInside" id="2uK-jg-WPg"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Om6-Fm-rT7" firstAttribute="centerY" secondItem="xgW-KF-qdM" secondAttribute="centerY" id="0o3-2n-zR7"/>
+                            <constraint firstItem="yGY-OQ-vkJ" firstAttribute="width" secondItem="uU7-9W-CYi" secondAttribute="width" id="43e-7B-33X"/>
+                            <constraint firstItem="uU7-9W-CYi" firstAttribute="leading" secondItem="yGY-OQ-vkJ" secondAttribute="leading" id="5iv-9x-KLU"/>
+                            <constraint firstItem="WI7-O8-5JW" firstAttribute="top" secondItem="bgf-YK-gEV" secondAttribute="bottom" constant="24" id="9kT-ya-IZm"/>
+                            <constraint firstItem="bgf-YK-gEV" firstAttribute="trailing" secondItem="KzX-tS-D63" secondAttribute="trailing" id="CFK-kB-a5c"/>
+                            <constraint firstAttribute="centerX" secondItem="98T-Y0-TcS" secondAttribute="centerX" id="D18-XP-1SG"/>
+                            <constraint firstItem="Om6-Fm-rT7" firstAttribute="top" secondItem="6TE-1E-gk3" secondAttribute="bottom" constant="61" id="EJX-G5-x10"/>
+                            <constraint firstItem="LtY-ga-KGn" firstAttribute="top" secondItem="98T-Y0-TcS" secondAttribute="bottom" constant="8" id="FTV-hQ-f4O"/>
+                            <constraint firstItem="yGY-OQ-vkJ" firstAttribute="height" secondItem="xgW-KF-qdM" secondAttribute="height" id="HX8-C8-HqT"/>
+                            <constraint firstItem="KzX-tS-D63" firstAttribute="trailing" secondItem="Om6-Fm-rT7" secondAttribute="trailing" id="KuW-yI-d94"/>
+                            <constraint firstItem="Ucw-GH-URt" firstAttribute="top" secondItem="LtY-ga-KGn" secondAttribute="bottom" constant="20" id="Nff-eR-AJa"/>
+                            <constraint firstItem="uU7-9W-CYi" firstAttribute="centerY" secondItem="bgf-YK-gEV" secondAttribute="centerY" id="TI6-c5-AfT"/>
+                            <constraint firstItem="bgf-YK-gEV" firstAttribute="top" secondItem="KzX-tS-D63" secondAttribute="bottom" constant="8" id="UoA-1W-SAX"/>
+                            <constraint firstAttribute="centerX" secondItem="WI7-O8-5JW" secondAttribute="centerX" id="Xyt-Sb-DQP"/>
+                            <constraint firstItem="Om6-Fm-rT7" firstAttribute="leading" secondItem="xgW-KF-qdM" secondAttribute="trailing" constant="8" id="aTF-NJ-PCv"/>
+                            <constraint firstAttribute="centerX" secondItem="Om6-Fm-rT7" secondAttribute="centerX" constant="-19" id="cax-pA-S6x"/>
+                            <constraint firstItem="KzX-tS-D63" firstAttribute="top" secondItem="Om6-Fm-rT7" secondAttribute="bottom" constant="8" id="dNt-9q-6VI"/>
+                            <constraint firstItem="yGY-OQ-vkJ" firstAttribute="height" secondItem="uU7-9W-CYi" secondAttribute="height" id="f7Q-dg-HVM"/>
+                            <constraint firstAttribute="centerX" secondItem="LtY-ga-KGn" secondAttribute="centerX" id="gIt-nm-Qvx"/>
+                            <constraint firstItem="yGY-OQ-vkJ" firstAttribute="leading" secondItem="xgW-KF-qdM" secondAttribute="leading" id="jIG-Mc-2er"/>
+                            <constraint firstItem="bgf-YK-gEV" firstAttribute="leading" secondItem="uU7-9W-CYi" secondAttribute="trailing" constant="8" id="jV5-o5-EaN"/>
+                            <constraint firstItem="yGY-OQ-vkJ" firstAttribute="centerY" secondItem="KzX-tS-D63" secondAttribute="centerY" id="rHt-wj-KKo"/>
+                            <constraint firstItem="KzX-tS-D63" firstAttribute="leading" secondItem="yGY-OQ-vkJ" secondAttribute="trailing" constant="8" id="rLs-uO-nTO"/>
+                            <constraint firstItem="LtY-ga-KGn" firstAttribute="width" secondItem="98T-Y0-TcS" secondAttribute="width" id="uOd-rh-cv1"/>
+                            <constraint firstItem="yGY-OQ-vkJ" firstAttribute="width" secondItem="xgW-KF-qdM" secondAttribute="width" id="xoi-dC-0LE"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Synchronize" id="WWo-Gi-Aoq"/>
+                    <connections>
+                        <outlet property="progressBar" destination="LtY-ga-KGn" id="7yO-w8-4wd"/>
+                        <outlet property="statusLabel" destination="98T-Y0-TcS" id="tAc-AH-GK4"/>
+                        <outlet property="syncButton" destination="WI7-O8-5JW" id="Cbh-a3-uLv"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JlG-7Q-3Nl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="327" y="1071"/>
+        </scene>
+        <!--Export-->
+        <scene sceneID="o83-Fs-8gs">
+            <objects>
+                <viewController id="nO0-u0-KKk" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="DXH-Ce-y4b"/>
+                        <viewControllerLayoutGuide type="bottom" id="Xct-gA-bUd"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="rOO-pV-HCI">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Export" id="eFN-d0-zPy"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Gav-jf-8hW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="327" y="1751"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="8Qd-5l-af3">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="JNs-oc-Fnn" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Ncr-Cw-Fax">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Xn2-Xb-HVZ" kind="relationship" relationship="rootViewController" id="gPO-5J-Poi"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1xt-Wc-FdF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2664.0625" y="389.6484375"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="YNu-cu-35A">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="2Hn-ZH-gaB" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="9Sp-2Q-LoX">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="UyV-sJ-NrZ" kind="relationship" relationship="rootViewController" id="CSj-wP-usu"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hCQ-dk-Kg7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2664.0625" y="-284.765625"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="MRA-Vm-9Hz">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="tiF-zW-WZB" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="zTj-dC-cyp"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="TWf-di-mGX">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="bQG-GS-Cqg" kind="relationship" relationship="rootViewController" id="4Qe-Ee-vk5"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Qqn-62-kFX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2673.4375" y="-1152.5390625"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="11N-ny-MIE">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="bUb-qd-0mY" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="o6r-n4-XSr"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="bdg-vQ-TJS">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="UgE-w3-5vM" kind="relationship" relationship="rootViewController" id="tSj-fP-tiC"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1hM-CM-duT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="327.34375" y="-1152.5390625"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="gQj-lc-rC9">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Lnq-mX-QN0" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="flA-7L-iAB">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="zxn-tu-pFa" kind="relationship" relationship="rootViewController" id="NLG-Qc-dSV"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0mq-Gi-AiF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2673.4375" y="1071.6796875"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="cable" width="16" height="16"/>
+        <image name="download" width="16" height="16"/>
+        <image name="sync" width="16" height="16"/>
+    </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="6RH-vK-sCl"/>
+        <segue reference="TgG-lG-Acz"/>
+        <segue reference="fZ2-QH-psV"/>
+        <segue reference="tmR-C0-IUe"/>
+    </inferredMetricsTieBreakers>
+</document>

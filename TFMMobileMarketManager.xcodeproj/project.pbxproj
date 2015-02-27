@@ -1,0 +1,539 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		FA0AC27B1A9FB2B000CCA13A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0AC2281A9FB2B000CCA13A /* AppDelegate.m */; };
+		FA0AC27C1A9FB2B000CCA13A /* FXForms.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0AC22B1A9FB2B000CCA13A /* FXForms.m */; };
+		FA0AC27F1A9FB2B000CCA13A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0AC22E1A9FB2B000CCA13A /* main.m */; };
+		FA0AC2801A9FB2B000CCA13A /* MarketClosed.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA0AC2301A9FB2B000CCA13A /* MarketClosed.storyboard */; };
+		FA0AC2811A9FB2B000CCA13A /* MarketOpen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA0AC2311A9FB2B000CCA13A /* MarketOpen.storyboard */; };
+		FA0AC2821A9FB2B000CCA13A /* Locations.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0AC2341A9FB2B000CCA13A /* Locations.m */; };
+		FA0AC2831A9FB2B000CCA13A /* MarketDays.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0AC2361A9FB2B000CCA13A /* MarketDays.m */; };
+		FA0AC2841A9FB2B000CCA13A /* MarketStaff.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0AC2381A9FB2B000CCA13A /* MarketStaff.m */; };
+		FA0AC2851A9FB2B000CCA13A /* Redemptions.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0AC23A1A9FB2B000CCA13A /* Redemptions.m */; };
+		FA0AC2861A9FB2B000CCA13A /* TerminalTotals.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0AC23C1A9FB2B000CCA13A /* TerminalTotals.m */; };
+		FA0AC2871A9FB2B000CCA13A /* TokenBankTotals.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0AC23E1A9FB2B000CCA13A /* TokenBankTotals.m */; };
+		FA0AC2881A9FB2B000CCA13A /* Transactions.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0AC2401A9FB2B000CCA13A /* Transactions.m */; };
+		FA0AC2891A9FB2B000CCA13A /* Vendors.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0AC2421A9FB2B000CCA13A /* Vendors.m */; };
+		FA0AC28A1A9FB2B000CCA13A /* LocationsForm.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0AC2461A9FB2B000CCA13A /* LocationsForm.m */; };
+		FA0AC28B1A9FB2B000CCA13A /* LocationsFormViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0AC2481A9FB2B000CCA13A /* LocationsFormViewController.m */; };
+		FA0AC28C1A9FB2B000CCA13A /* LocationsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0AC24A1A9FB2B000CCA13A /* LocationsListViewController.m */; };
+		FA0AC28D1A9FB2B000CCA13A /* MarketDayForm.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0AC24D1A9FB2B000CCA13A /* MarketDayForm.m */; };
+		FA0AC28E1A9FB2B000CCA13A /* MarketDayFormViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0AC24F1A9FB2B000CCA13A /* MarketDayFormViewController.m */; };
+		FA0AC28F1A9FB2B000CCA13A /* MarketDayListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0AC2511A9FB2B000CCA13A /* MarketDayListViewController.m */; };
+		FA0AC2901A9FB2B000CCA13A /* MarketStaffForm.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0AC2541A9FB2B000CCA13A /* MarketStaffForm.m */; };
+		FA0AC2911A9FB2B000CCA13A /* MarketStaffFormViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0AC2561A9FB2B000CCA13A /* MarketStaffFormViewController.m */; };
+		FA0AC2921A9FB2B000CCA13A /* MarketStaffListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0AC2581A9FB2B000CCA13A /* MarketStaffListViewController.m */; };
+		FA0AC2931A9FB2B000CCA13A /* CloseMarketViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0AC25B1A9FB2B000CCA13A /* CloseMarketViewController.m */; };
+		FA0AC2941A9FB2B000CCA13A /* MainMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0AC25D1A9FB2B000CCA13A /* MainMenuViewController.m */; };
+		FA0AC2951A9FB2B000CCA13A /* MarketOpenMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0AC25F1A9FB2B000CCA13A /* MarketOpenMenuViewController.m */; };
+		FA0AC2961A9FB2B000CCA13A /* RedemptionForm.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0AC2621A9FB2B000CCA13A /* RedemptionForm.m */; };
+		FA0AC2971A9FB2B000CCA13A /* RedemptionFormViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0AC2641A9FB2B000CCA13A /* RedemptionFormViewController.m */; };
+		FA0AC2981A9FB2B000CCA13A /* RedemptionsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0AC2661A9FB2B000CCA13A /* RedemptionsListViewController.m */; };
+		FA0AC2991A9FB2B000CCA13A /* ReportsMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0AC2691A9FB2B000CCA13A /* ReportsMenuViewController.m */; };
+		FA0AC29A1A9FB2B000CCA13A /* SyncViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0AC26C1A9FB2B000CCA13A /* SyncViewController.m */; };
+		FA0AC29B1A9FB2B000CCA13A /* TransactionForm.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0AC26F1A9FB2B000CCA13A /* TransactionForm.m */; };
+		FA0AC29C1A9FB2B000CCA13A /* TransactionFormViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0AC2711A9FB2B000CCA13A /* TransactionFormViewController.m */; };
+		FA0AC29D1A9FB2B000CCA13A /* TransactionListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0AC2731A9FB2B000CCA13A /* TransactionListViewController.m */; };
+		FA0AC29E1A9FB2B000CCA13A /* VendorForm.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0AC2761A9FB2B000CCA13A /* VendorForm.m */; };
+		FA0AC29F1A9FB2B000CCA13A /* VendorFormViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0AC2781A9FB2B000CCA13A /* VendorFormViewController.m */; };
+		FA0AC2A01A9FB2B000CCA13A /* VendorsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0AC27A1A9FB2B000CCA13A /* VendorsListViewController.m */; };
+		FA0AC2A21A9FB2E300CCA13A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA0AC2A11A9FB2E300CCA13A /* Assets.xcassets */; };
+		FAB118F11A9FB72B0012ED5D /* tfm-m3.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FAB118EF1A9FB72B0012ED5D /* tfm-m3.xcdatamodeld */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		FA0AC1FB1A9FB1EF00CCA13A /* TFMMobileMarketManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TFMMobileMarketManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FA0AC2271A9FB2B000CCA13A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		FA0AC2281A9FB2B000CCA13A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		FA0AC22A1A9FB2B000CCA13A /* FXForms.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXForms.h; sourceTree = "<group>"; };
+		FA0AC22B1A9FB2B000CCA13A /* FXForms.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXForms.m; sourceTree = "<group>"; };
+		FA0AC22D1A9FB2B000CCA13A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = TFMMobileMarketManager/Info.plist; sourceTree = SOURCE_ROOT; };
+		FA0AC22E1A9FB2B000CCA13A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		FA0AC2301A9FB2B000CCA13A /* MarketClosed.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MarketClosed.storyboard; sourceTree = "<group>"; };
+		FA0AC2311A9FB2B000CCA13A /* MarketOpen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MarketOpen.storyboard; sourceTree = "<group>"; };
+		FA0AC2331A9FB2B000CCA13A /* Locations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Locations.h; sourceTree = "<group>"; };
+		FA0AC2341A9FB2B000CCA13A /* Locations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Locations.m; sourceTree = "<group>"; };
+		FA0AC2351A9FB2B000CCA13A /* MarketDays.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarketDays.h; sourceTree = "<group>"; };
+		FA0AC2361A9FB2B000CCA13A /* MarketDays.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarketDays.m; sourceTree = "<group>"; };
+		FA0AC2371A9FB2B000CCA13A /* MarketStaff.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarketStaff.h; sourceTree = "<group>"; };
+		FA0AC2381A9FB2B000CCA13A /* MarketStaff.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarketStaff.m; sourceTree = "<group>"; };
+		FA0AC2391A9FB2B000CCA13A /* Redemptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Redemptions.h; sourceTree = "<group>"; };
+		FA0AC23A1A9FB2B000CCA13A /* Redemptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Redemptions.m; sourceTree = "<group>"; };
+		FA0AC23B1A9FB2B000CCA13A /* TerminalTotals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TerminalTotals.h; sourceTree = "<group>"; };
+		FA0AC23C1A9FB2B000CCA13A /* TerminalTotals.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TerminalTotals.m; sourceTree = "<group>"; };
+		FA0AC23D1A9FB2B000CCA13A /* TokenBankTotals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TokenBankTotals.h; sourceTree = "<group>"; };
+		FA0AC23E1A9FB2B000CCA13A /* TokenBankTotals.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TokenBankTotals.m; sourceTree = "<group>"; };
+		FA0AC23F1A9FB2B000CCA13A /* Transactions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Transactions.h; sourceTree = "<group>"; };
+		FA0AC2401A9FB2B000CCA13A /* Transactions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Transactions.m; sourceTree = "<group>"; };
+		FA0AC2411A9FB2B000CCA13A /* Vendors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vendors.h; sourceTree = "<group>"; };
+		FA0AC2421A9FB2B000CCA13A /* Vendors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Vendors.m; sourceTree = "<group>"; };
+		FA0AC2451A9FB2B000CCA13A /* LocationsForm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationsForm.h; sourceTree = "<group>"; };
+		FA0AC2461A9FB2B000CCA13A /* LocationsForm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationsForm.m; sourceTree = "<group>"; };
+		FA0AC2471A9FB2B000CCA13A /* LocationsFormViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationsFormViewController.h; sourceTree = "<group>"; };
+		FA0AC2481A9FB2B000CCA13A /* LocationsFormViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationsFormViewController.m; sourceTree = "<group>"; };
+		FA0AC2491A9FB2B000CCA13A /* LocationsListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationsListViewController.h; sourceTree = "<group>"; };
+		FA0AC24A1A9FB2B000CCA13A /* LocationsListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationsListViewController.m; sourceTree = "<group>"; };
+		FA0AC24C1A9FB2B000CCA13A /* MarketDayForm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarketDayForm.h; sourceTree = "<group>"; };
+		FA0AC24D1A9FB2B000CCA13A /* MarketDayForm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarketDayForm.m; sourceTree = "<group>"; };
+		FA0AC24E1A9FB2B000CCA13A /* MarketDayFormViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarketDayFormViewController.h; sourceTree = "<group>"; };
+		FA0AC24F1A9FB2B000CCA13A /* MarketDayFormViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarketDayFormViewController.m; sourceTree = "<group>"; };
+		FA0AC2501A9FB2B000CCA13A /* MarketDayListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarketDayListViewController.h; sourceTree = "<group>"; };
+		FA0AC2511A9FB2B000CCA13A /* MarketDayListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarketDayListViewController.m; sourceTree = "<group>"; };
+		FA0AC2531A9FB2B000CCA13A /* MarketStaffForm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarketStaffForm.h; sourceTree = "<group>"; };
+		FA0AC2541A9FB2B000CCA13A /* MarketStaffForm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarketStaffForm.m; sourceTree = "<group>"; };
+		FA0AC2551A9FB2B000CCA13A /* MarketStaffFormViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarketStaffFormViewController.h; sourceTree = "<group>"; };
+		FA0AC2561A9FB2B000CCA13A /* MarketStaffFormViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarketStaffFormViewController.m; sourceTree = "<group>"; };
+		FA0AC2571A9FB2B000CCA13A /* MarketStaffListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarketStaffListViewController.h; sourceTree = "<group>"; };
+		FA0AC2581A9FB2B000CCA13A /* MarketStaffListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarketStaffListViewController.m; sourceTree = "<group>"; };
+		FA0AC25A1A9FB2B000CCA13A /* CloseMarketViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CloseMarketViewController.h; sourceTree = "<group>"; };
+		FA0AC25B1A9FB2B000CCA13A /* CloseMarketViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CloseMarketViewController.m; sourceTree = "<group>"; };
+		FA0AC25C1A9FB2B000CCA13A /* MainMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuViewController.h; sourceTree = "<group>"; };
+		FA0AC25D1A9FB2B000CCA13A /* MainMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenuViewController.m; sourceTree = "<group>"; };
+		FA0AC25E1A9FB2B000CCA13A /* MarketOpenMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarketOpenMenuViewController.h; sourceTree = "<group>"; };
+		FA0AC25F1A9FB2B000CCA13A /* MarketOpenMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarketOpenMenuViewController.m; sourceTree = "<group>"; };
+		FA0AC2611A9FB2B000CCA13A /* RedemptionForm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RedemptionForm.h; sourceTree = "<group>"; };
+		FA0AC2621A9FB2B000CCA13A /* RedemptionForm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RedemptionForm.m; sourceTree = "<group>"; };
+		FA0AC2631A9FB2B000CCA13A /* RedemptionFormViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RedemptionFormViewController.h; sourceTree = "<group>"; };
+		FA0AC2641A9FB2B000CCA13A /* RedemptionFormViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RedemptionFormViewController.m; sourceTree = "<group>"; };
+		FA0AC2651A9FB2B000CCA13A /* RedemptionsListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RedemptionsListViewController.h; sourceTree = "<group>"; };
+		FA0AC2661A9FB2B000CCA13A /* RedemptionsListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RedemptionsListViewController.m; sourceTree = "<group>"; };
+		FA0AC2681A9FB2B000CCA13A /* ReportsMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReportsMenuViewController.h; sourceTree = "<group>"; };
+		FA0AC2691A9FB2B000CCA13A /* ReportsMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReportsMenuViewController.m; sourceTree = "<group>"; };
+		FA0AC26B1A9FB2B000CCA13A /* SyncViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncViewController.h; sourceTree = "<group>"; };
+		FA0AC26C1A9FB2B000CCA13A /* SyncViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncViewController.m; sourceTree = "<group>"; };
+		FA0AC26E1A9FB2B000CCA13A /* TransactionForm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransactionForm.h; sourceTree = "<group>"; };
+		FA0AC26F1A9FB2B000CCA13A /* TransactionForm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransactionForm.m; sourceTree = "<group>"; };
+		FA0AC2701A9FB2B000CCA13A /* TransactionFormViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransactionFormViewController.h; sourceTree = "<group>"; };
+		FA0AC2711A9FB2B000CCA13A /* TransactionFormViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransactionFormViewController.m; sourceTree = "<group>"; };
+		FA0AC2721A9FB2B000CCA13A /* TransactionListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransactionListViewController.h; sourceTree = "<group>"; };
+		FA0AC2731A9FB2B000CCA13A /* TransactionListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransactionListViewController.m; sourceTree = "<group>"; };
+		FA0AC2751A9FB2B000CCA13A /* VendorForm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VendorForm.h; sourceTree = "<group>"; };
+		FA0AC2761A9FB2B000CCA13A /* VendorForm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VendorForm.m; sourceTree = "<group>"; };
+		FA0AC2771A9FB2B000CCA13A /* VendorFormViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VendorFormViewController.h; sourceTree = "<group>"; };
+		FA0AC2781A9FB2B000CCA13A /* VendorFormViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VendorFormViewController.m; sourceTree = "<group>"; };
+		FA0AC2791A9FB2B000CCA13A /* VendorsListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VendorsListViewController.h; sourceTree = "<group>"; };
+		FA0AC27A1A9FB2B000CCA13A /* VendorsListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VendorsListViewController.m; sourceTree = "<group>"; };
+		FA0AC2A11A9FB2E300CCA13A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		FAB118F01A9FB72B0012ED5D /* tfm-m3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "tfm-m3.xcdatamodel"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FA0AC1F81A9FB1EF00CCA13A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		FA0AC1F01A9FB14C00CCA13A = {
+			isa = PBXGroup;
+			children = (
+				FA0AC1FC1A9FB1EF00CCA13A /* Products */,
+				FA0AC2231A9FB29200CCA13A /* Source */,
+			);
+			sourceTree = "<group>";
+		};
+		FA0AC1FC1A9FB1EF00CCA13A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FA0AC1FB1A9FB1EF00CCA13A /* TFMMobileMarketManager.app */,
+			);
+			name = Products;
+			sourceTree = SOURCE_ROOT;
+		};
+		FA0AC2231A9FB29200CCA13A /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				FA0AC2271A9FB2B000CCA13A /* AppDelegate.h */,
+				FA0AC2281A9FB2B000CCA13A /* AppDelegate.m */,
+				FA0AC2A11A9FB2E300CCA13A /* Assets.xcassets */,
+				FA0AC2291A9FB2B000CCA13A /* FXForms */,
+				FA0AC22E1A9FB2B000CCA13A /* main.m */,
+				FA0AC22D1A9FB2B000CCA13A /* Info.plist */,
+				FA0AC22F1A9FB2B000CCA13A /* storyboards */,
+				FAB118EF1A9FB72B0012ED5D /* tfm-m3.xcdatamodeld */,
+				FA0AC2321A9FB2B000CCA13A /* types */,
+				FA0AC2431A9FB2B000CCA13A /* views */,
+			);
+			name = Source;
+			path = TFMMobileMarketManager;
+			sourceTree = SOURCE_ROOT;
+		};
+		FA0AC2291A9FB2B000CCA13A /* FXForms */ = {
+			isa = PBXGroup;
+			children = (
+				FA0AC22A1A9FB2B000CCA13A /* FXForms.h */,
+				FA0AC22B1A9FB2B000CCA13A /* FXForms.m */,
+			);
+			path = FXForms;
+			sourceTree = "<group>";
+		};
+		FA0AC22F1A9FB2B000CCA13A /* storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				FA0AC2301A9FB2B000CCA13A /* MarketClosed.storyboard */,
+				FA0AC2311A9FB2B000CCA13A /* MarketOpen.storyboard */,
+			);
+			path = storyboards;
+			sourceTree = "<group>";
+		};
+		FA0AC2321A9FB2B000CCA13A /* types */ = {
+			isa = PBXGroup;
+			children = (
+				FA0AC2331A9FB2B000CCA13A /* Locations.h */,
+				FA0AC2341A9FB2B000CCA13A /* Locations.m */,
+				FA0AC2351A9FB2B000CCA13A /* MarketDays.h */,
+				FA0AC2361A9FB2B000CCA13A /* MarketDays.m */,
+				FA0AC2371A9FB2B000CCA13A /* MarketStaff.h */,
+				FA0AC2381A9FB2B000CCA13A /* MarketStaff.m */,
+				FA0AC2391A9FB2B000CCA13A /* Redemptions.h */,
+				FA0AC23A1A9FB2B000CCA13A /* Redemptions.m */,
+				FA0AC23B1A9FB2B000CCA13A /* TerminalTotals.h */,
+				FA0AC23C1A9FB2B000CCA13A /* TerminalTotals.m */,
+				FA0AC23D1A9FB2B000CCA13A /* TokenBankTotals.h */,
+				FA0AC23E1A9FB2B000CCA13A /* TokenBankTotals.m */,
+				FA0AC23F1A9FB2B000CCA13A /* Transactions.h */,
+				FA0AC2401A9FB2B000CCA13A /* Transactions.m */,
+				FA0AC2411A9FB2B000CCA13A /* Vendors.h */,
+				FA0AC2421A9FB2B000CCA13A /* Vendors.m */,
+			);
+			path = types;
+			sourceTree = "<group>";
+		};
+		FA0AC2431A9FB2B000CCA13A /* views */ = {
+			isa = PBXGroup;
+			children = (
+				FA0AC2441A9FB2B000CCA13A /* Locations */,
+				FA0AC24B1A9FB2B000CCA13A /* MarketDays */,
+				FA0AC2521A9FB2B000CCA13A /* MarketStaff */,
+				FA0AC2591A9FB2B000CCA13A /* Menus */,
+				FA0AC2601A9FB2B000CCA13A /* Redemptions */,
+				FA0AC2671A9FB2B000CCA13A /* Reports */,
+				FA0AC26A1A9FB2B000CCA13A /* Sync */,
+				FA0AC26D1A9FB2B000CCA13A /* Transactions */,
+				FA0AC2741A9FB2B000CCA13A /* Vendors */,
+			);
+			path = views;
+			sourceTree = "<group>";
+		};
+		FA0AC2441A9FB2B000CCA13A /* Locations */ = {
+			isa = PBXGroup;
+			children = (
+				FA0AC2451A9FB2B000CCA13A /* LocationsForm.h */,
+				FA0AC2461A9FB2B000CCA13A /* LocationsForm.m */,
+				FA0AC2471A9FB2B000CCA13A /* LocationsFormViewController.h */,
+				FA0AC2481A9FB2B000CCA13A /* LocationsFormViewController.m */,
+				FA0AC2491A9FB2B000CCA13A /* LocationsListViewController.h */,
+				FA0AC24A1A9FB2B000CCA13A /* LocationsListViewController.m */,
+			);
+			path = Locations;
+			sourceTree = "<group>";
+		};
+		FA0AC24B1A9FB2B000CCA13A /* MarketDays */ = {
+			isa = PBXGroup;
+			children = (
+				FA0AC24C1A9FB2B000CCA13A /* MarketDayForm.h */,
+				FA0AC24D1A9FB2B000CCA13A /* MarketDayForm.m */,
+				FA0AC24E1A9FB2B000CCA13A /* MarketDayFormViewController.h */,
+				FA0AC24F1A9FB2B000CCA13A /* MarketDayFormViewController.m */,
+				FA0AC2501A9FB2B000CCA13A /* MarketDayListViewController.h */,
+				FA0AC2511A9FB2B000CCA13A /* MarketDayListViewController.m */,
+			);
+			path = MarketDays;
+			sourceTree = "<group>";
+		};
+		FA0AC2521A9FB2B000CCA13A /* MarketStaff */ = {
+			isa = PBXGroup;
+			children = (
+				FA0AC2531A9FB2B000CCA13A /* MarketStaffForm.h */,
+				FA0AC2541A9FB2B000CCA13A /* MarketStaffForm.m */,
+				FA0AC2551A9FB2B000CCA13A /* MarketStaffFormViewController.h */,
+				FA0AC2561A9FB2B000CCA13A /* MarketStaffFormViewController.m */,
+				FA0AC2571A9FB2B000CCA13A /* MarketStaffListViewController.h */,
+				FA0AC2581A9FB2B000CCA13A /* MarketStaffListViewController.m */,
+			);
+			path = MarketStaff;
+			sourceTree = "<group>";
+		};
+		FA0AC2591A9FB2B000CCA13A /* Menus */ = {
+			isa = PBXGroup;
+			children = (
+				FA0AC25A1A9FB2B000CCA13A /* CloseMarketViewController.h */,
+				FA0AC25B1A9FB2B000CCA13A /* CloseMarketViewController.m */,
+				FA0AC25C1A9FB2B000CCA13A /* MainMenuViewController.h */,
+				FA0AC25D1A9FB2B000CCA13A /* MainMenuViewController.m */,
+				FA0AC25E1A9FB2B000CCA13A /* MarketOpenMenuViewController.h */,
+				FA0AC25F1A9FB2B000CCA13A /* MarketOpenMenuViewController.m */,
+			);
+			path = Menus;
+			sourceTree = "<group>";
+		};
+		FA0AC2601A9FB2B000CCA13A /* Redemptions */ = {
+			isa = PBXGroup;
+			children = (
+				FA0AC2611A9FB2B000CCA13A /* RedemptionForm.h */,
+				FA0AC2621A9FB2B000CCA13A /* RedemptionForm.m */,
+				FA0AC2631A9FB2B000CCA13A /* RedemptionFormViewController.h */,
+				FA0AC2641A9FB2B000CCA13A /* RedemptionFormViewController.m */,
+				FA0AC2651A9FB2B000CCA13A /* RedemptionsListViewController.h */,
+				FA0AC2661A9FB2B000CCA13A /* RedemptionsListViewController.m */,
+			);
+			path = Redemptions;
+			sourceTree = "<group>";
+		};
+		FA0AC2671A9FB2B000CCA13A /* Reports */ = {
+			isa = PBXGroup;
+			children = (
+				FA0AC2681A9FB2B000CCA13A /* ReportsMenuViewController.h */,
+				FA0AC2691A9FB2B000CCA13A /* ReportsMenuViewController.m */,
+			);
+			path = Reports;
+			sourceTree = "<group>";
+		};
+		FA0AC26A1A9FB2B000CCA13A /* Sync */ = {
+			isa = PBXGroup;
+			children = (
+				FA0AC26B1A9FB2B000CCA13A /* SyncViewController.h */,
+				FA0AC26C1A9FB2B000CCA13A /* SyncViewController.m */,
+			);
+			path = Sync;
+			sourceTree = "<group>";
+		};
+		FA0AC26D1A9FB2B000CCA13A /* Transactions */ = {
+			isa = PBXGroup;
+			children = (
+				FA0AC26E1A9FB2B000CCA13A /* TransactionForm.h */,
+				FA0AC26F1A9FB2B000CCA13A /* TransactionForm.m */,
+				FA0AC2701A9FB2B000CCA13A /* TransactionFormViewController.h */,
+				FA0AC2711A9FB2B000CCA13A /* TransactionFormViewController.m */,
+				FA0AC2721A9FB2B000CCA13A /* TransactionListViewController.h */,
+				FA0AC2731A9FB2B000CCA13A /* TransactionListViewController.m */,
+			);
+			path = Transactions;
+			sourceTree = "<group>";
+		};
+		FA0AC2741A9FB2B000CCA13A /* Vendors */ = {
+			isa = PBXGroup;
+			children = (
+				FA0AC2751A9FB2B000CCA13A /* VendorForm.h */,
+				FA0AC2761A9FB2B000CCA13A /* VendorForm.m */,
+				FA0AC2771A9FB2B000CCA13A /* VendorFormViewController.h */,
+				FA0AC2781A9FB2B000CCA13A /* VendorFormViewController.m */,
+				FA0AC2791A9FB2B000CCA13A /* VendorsListViewController.h */,
+				FA0AC27A1A9FB2B000CCA13A /* VendorsListViewController.m */,
+			);
+			path = Vendors;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		FA0AC1FA1A9FB1EF00CCA13A /* TFMMobileMarketManager */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FA0AC21F1A9FB1EF00CCA13A /* Build configuration list for PBXNativeTarget "TFMMobileMarketManager" */;
+			buildPhases = (
+				FA0AC1F71A9FB1EF00CCA13A /* Sources */,
+				FA0AC1F81A9FB1EF00CCA13A /* Frameworks */,
+				FA0AC1F91A9FB1EF00CCA13A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TFMMobileMarketManager;
+			productName = TFMMobileMarketManager;
+			productReference = FA0AC1FB1A9FB1EF00CCA13A /* TFMMobileMarketManager.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FA0AC1F11A9FB14C00CCA13A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = edu.umw.cpsc;
+				TargetAttributes = {
+					FA0AC1FA1A9FB1EF00CCA13A = {
+						CreatedOnToolsVersion = 6.1.1;
+						DevelopmentTeam = B4M68YXRYY;
+					};
+				};
+			};
+			buildConfigurationList = FA0AC1F41A9FB14C00CCA13A /* Build configuration list for PBXProject "TFMMobileMarketManager" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = FA0AC1F01A9FB14C00CCA13A;
+			productRefGroup = FA0AC1FC1A9FB1EF00CCA13A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FA0AC1FA1A9FB1EF00CCA13A /* TFMMobileMarketManager */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		FA0AC1F91A9FB1EF00CCA13A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FA0AC2A21A9FB2E300CCA13A /* Assets.xcassets in Resources */,
+				FA0AC2801A9FB2B000CCA13A /* MarketClosed.storyboard in Resources */,
+				FA0AC2811A9FB2B000CCA13A /* MarketOpen.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FA0AC1F71A9FB1EF00CCA13A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FA0AC28D1A9FB2B000CCA13A /* MarketDayForm.m in Sources */,
+				FA0AC2991A9FB2B000CCA13A /* ReportsMenuViewController.m in Sources */,
+				FA0AC27B1A9FB2B000CCA13A /* AppDelegate.m in Sources */,
+				FA0AC2821A9FB2B000CCA13A /* Locations.m in Sources */,
+				FA0AC2971A9FB2B000CCA13A /* RedemptionFormViewController.m in Sources */,
+				FA0AC29E1A9FB2B000CCA13A /* VendorForm.m in Sources */,
+				FA0AC2981A9FB2B000CCA13A /* RedemptionsListViewController.m in Sources */,
+				FA0AC2851A9FB2B000CCA13A /* Redemptions.m in Sources */,
+				FA0AC2831A9FB2B000CCA13A /* MarketDays.m in Sources */,
+				FA0AC29B1A9FB2B000CCA13A /* TransactionForm.m in Sources */,
+				FA0AC28A1A9FB2B000CCA13A /* LocationsForm.m in Sources */,
+				FA0AC2881A9FB2B000CCA13A /* Transactions.m in Sources */,
+				FA0AC2891A9FB2B000CCA13A /* Vendors.m in Sources */,
+				FA0AC2921A9FB2B000CCA13A /* MarketStaffListViewController.m in Sources */,
+				FA0AC28C1A9FB2B000CCA13A /* LocationsListViewController.m in Sources */,
+				FA0AC28F1A9FB2B000CCA13A /* MarketDayListViewController.m in Sources */,
+				FA0AC2861A9FB2B000CCA13A /* TerminalTotals.m in Sources */,
+				FA0AC2901A9FB2B000CCA13A /* MarketStaffForm.m in Sources */,
+				FA0AC29A1A9FB2B000CCA13A /* SyncViewController.m in Sources */,
+				FA0AC2941A9FB2B000CCA13A /* MainMenuViewController.m in Sources */,
+				FA0AC27C1A9FB2B000CCA13A /* FXForms.m in Sources */,
+				FA0AC2A01A9FB2B000CCA13A /* VendorsListViewController.m in Sources */,
+				FA0AC29C1A9FB2B000CCA13A /* TransactionFormViewController.m in Sources */,
+				FA0AC2911A9FB2B000CCA13A /* MarketStaffFormViewController.m in Sources */,
+				FA0AC2871A9FB2B000CCA13A /* TokenBankTotals.m in Sources */,
+				FA0AC27F1A9FB2B000CCA13A /* main.m in Sources */,
+				FA0AC2931A9FB2B000CCA13A /* CloseMarketViewController.m in Sources */,
+				FA0AC2951A9FB2B000CCA13A /* MarketOpenMenuViewController.m in Sources */,
+				FA0AC2841A9FB2B000CCA13A /* MarketStaff.m in Sources */,
+				FA0AC29D1A9FB2B000CCA13A /* TransactionListViewController.m in Sources */,
+				FA0AC28E1A9FB2B000CCA13A /* MarketDayFormViewController.m in Sources */,
+				FA0AC29F1A9FB2B000CCA13A /* VendorFormViewController.m in Sources */,
+				FA0AC2961A9FB2B000CCA13A /* RedemptionForm.m in Sources */,
+				FA0AC28B1A9FB2B000CCA13A /* LocationsFormViewController.m in Sources */,
+				FAB118F11A9FB72B0012ED5D /* tfm-m3.xcdatamodeld in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		FA0AC1F61A9FB14C00CCA13A /* Default */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Default;
+		};
+		FA0AC2201A9FB1EF00CCA13A /* Default */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "$(SRCROOT)/TFMMobileMarketManager/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Default;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		FA0AC1F41A9FB14C00CCA13A /* Build configuration list for PBXProject "TFMMobileMarketManager" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FA0AC1F61A9FB14C00CCA13A /* Default */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Default;
+		};
+		FA0AC21F1A9FB1EF00CCA13A /* Build configuration list for PBXNativeTarget "TFMMobileMarketManager" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FA0AC2201A9FB1EF00CCA13A /* Default */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Default;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		FAB118EF1A9FB72B0012ED5D /* tfm-m3.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				FAB118F01A9FB72B0012ED5D /* tfm-m3.xcdatamodel */,
+			);
+			currentVersion = FAB118F01A9FB72B0012ED5D /* tfm-m3.xcdatamodel */;
+			path = "tfm-m3.xcdatamodeld";
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = FA0AC1F11A9FB14C00CCA13A /* Project object */;
+}
