@@ -1,6 +1,6 @@
 //
 //  LocationsFormViewController.m
-//  tfmco-mip
+//  TFMMobileMarketManager
 //
 
 #import "LocationsFormViewController.h"
@@ -20,12 +20,12 @@
 	if ([self editMode])
 	{
 		// fetch the object we're supposed to edit
-		[self setEditObject:(Locations *)[TFM_DELEGATE.managedObjectContext objectWithID:[self editObjectID]]];
+		[self setEditObject:(Location *)[TFM_DELEGATE.managedObjectContext objectWithID:[self editObjectID]]];
 		[self setTitle:[NSString stringWithFormat:@"Edit “%@”", [self.editObject name]]];
 		
 		// populate form with passed data if in edit mode
 		LocationsForm *form = self.formController.form;
-		Locations *data = self.editObject;
+		Location *data = self.editObject;
 		
 		form.name = data.name;
 		form.abbreviation = data.abbreviation;
@@ -96,7 +96,7 @@
 		}
 		else
 		{
-			Locations *new = [NSEntityDescription insertNewObjectForEntityForName:@"Locations" inManagedObjectContext:TFM_DELEGATE.managedObjectContext];
+			Location *new = [NSEntityDescription insertNewObjectForEntityForName:@"Locations" inManagedObjectContext:TFM_DELEGATE.managedObjectContext];
 			new.name = form.name;
 			new.abbreviation = form.abbreviation;
 			new.address = form.address;

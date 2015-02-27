@@ -1,17 +1,17 @@
 //
 //  RedemptionForm.h
-//  tfmco-mip
+//  TFMMobileMarketManager
 //
 
 #import <Foundation/Foundation.h>
 #import "AppDelegate.h"
-#import "Vendors.h"
+#import "Vendor.h"
 #import "FXForms.h"
 
 @interface RedemptionForm : NSObject <FXForm>
 
 // Administrative
-@property Vendors *vendor;
+@property Vendor *vendor;
 @property NSDate *date;
 @property NSUInteger check_number;
 

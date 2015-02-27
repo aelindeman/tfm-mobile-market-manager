@@ -1,6 +1,6 @@
 //
 //  LocationsListViewController.m
-//  tfmco-mip
+//  TFMMobileMarketManager
 //
 
 #import "LocationsListViewController.h"
@@ -78,7 +78,7 @@
 // configure table cells
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
-	Locations *info = [_fetchedResultsController objectAtIndexPath:indexPath];
+	Location *info = [_fetchedResultsController objectAtIndexPath:indexPath];
 	NSString *plural = ([info.marketdays count] != 1) ? @"s" : @"";
 	[cell.textLabel setText:info.name];
 	[cell.detailTextLabel setText:[NSString stringWithFormat:@"%i market day%@", [info.marketdays count], plural]];

@@ -1,6 +1,6 @@
 //
 //  VendorForm.m
-//  tfmco-mip
+//  TFMMobileMarketManager
 //
 
 #import "VendorForm.h"

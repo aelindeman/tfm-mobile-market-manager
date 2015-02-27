@@ -1,6 +1,6 @@
 //
 //  MarketOpenMenuViewController.h
-//  tfmco-mip
+//  TFMMobileMarketManager
 //
 
 #import "AppDelegate.h"

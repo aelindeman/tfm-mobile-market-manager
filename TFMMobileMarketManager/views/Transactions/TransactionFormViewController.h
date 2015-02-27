@@ -1,17 +1,17 @@
 //
 //  TransactionFormViewController.h
-//  tfmco-mip
+//  TFMMobileMarketManager
 //
 
 #import "AppDelegate.h"
-#import "Transactions.h"
+#import "Transaction.h"
 #import "TransactionForm.h"
 #import "FXForms.h"
 
 @interface TransactionFormViewController : FXFormViewController
 
 @property (nonatomic) NSManagedObjectID *editObjectID;
-@property (nonatomic) Transactions *editObject;
+@property (nonatomic) Transaction *editObject;
 @property bool editMode;
 
 @end

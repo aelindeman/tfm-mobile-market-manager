@@ -1,6 +1,6 @@
 //
 //  RedemptionFormViewController.m
-//  tfmco-mip
+//  TFMMobileMarketManager
 //
 
 #import "RedemptionFormViewController.h"
@@ -29,7 +29,7 @@
 		RedemptionForm *form = self.formController.form;
 		Redemptions *data = self.editObject;
 		
-		form.vendor = (Vendors *)data.vendor;
+		form.vendor = (Vendor *)data.vendor;
 		form.date = data.date;
 		form.check_number = data.check_number;
 
@@ -99,7 +99,7 @@
 	{
 		if ([self editMode])
 		{
-			[self.editObject setVendor:(Vendors *)form.vendor];
+			[self.editObject setVendor:(Vendor *)form.vendor];
 			[self.editObject setDate:form.date];
 			[self.editObject setCheck_number:form.check_number];
 			
@@ -129,7 +129,7 @@
 			new.markedInvalid = form.markedInvalid;
 			
 			// don't directly set the market day equal to the active one, in case it is changed later. fetch it fresh from the database
-			new.marketday = (MarketDays *)[TFM_DELEGATE.managedObjectContext objectWithID:[TFM_DELEGATE.activeMarketDay objectID]];
+			new.marketday = (MarketDay *)[TFM_DELEGATE.managedObjectContext objectWithID:[TFM_DELEGATE.activeMarketDay objectID]];
 		}
 	}
 	

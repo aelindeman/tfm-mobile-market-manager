@@ -1,6 +1,6 @@
 //
 //  TokenBankTotals.m
-//  tfmco-mip
+//  TFMMobileMarketManager
 //
 
 #import "TokenBank.h"

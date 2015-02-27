@@ -1,6 +1,6 @@
 //
 //  Transactions.m
-//  tfmco-mip
+//  TFMMobileMarketManager
 //
 
 #import "Transaction.h"

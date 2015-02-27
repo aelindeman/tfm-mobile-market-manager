@@ -1,6 +1,6 @@
 //
 //  RedemptionsListViewController.h
-//  tfmco-mip
+//  TFMMobileMarketManager
 //
 
 #import "AppDelegate.h"

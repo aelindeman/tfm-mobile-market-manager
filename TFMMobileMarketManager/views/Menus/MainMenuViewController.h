@@ -1,14 +1,14 @@
 //
 //  MainMenuViewController.h
-//  tfmco-mip
+//  TFMMobileMarketManager
 //
 
 #import "AppDelegate.h"
 
 // temporary imports for database prepopulation
-#import "Locations.h"
-#import "MarketStaff.h"
-#import "Vendors.h"
+#import "Location.h"
+#import "Staff.h"
+#import "Vendor.h"
 
 @interface MainMenuViewController : UITableViewController
 

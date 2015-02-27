@@ -1,9 +1,8 @@
 //
 //  LocationsForm.h
-//  tfmco-mip
+//  TFMMobileMarketManager
 //
 
-#import <Foundation/Foundation.h>
 #import "AppDelegate.h"
 #import "FXForms.h"
 

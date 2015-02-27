@@ -1,18 +1,18 @@
 //
 //  MarketDayForm.h
-//  tfmco-mip
+//  TFMMobileMarketManager
 //
 
 #import <Foundation/Foundation.h>
 #import "AppDelegate.h"
-#import "Locations.h"
-#import "MarketStaff.h"
-#import "Vendors.h"
+#import "Location.h"
+#import "Staff.h"
+#import "Vendor.h"
 #import "FXForms.h"
 
 @interface MarketDayForm : NSObject <FXForm>
 
-@property Locations *location;
+@property Location *location;
 
 @property NSArray *vendors;
 

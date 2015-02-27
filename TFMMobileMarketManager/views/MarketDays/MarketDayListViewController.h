@@ -1,13 +1,13 @@
 //
 //  MarketDayListViewController.h
-//  tfmco-mip
+//  TFMMobileMarketManager
 //
 
 #import "AppDelegate.h"
-#import "Locations.h"
-#import "MarketDays.h"
+#import "Location.h"
+#import "MarketDay.h"
 #import "MarketDayFormViewController.h"
-#import "MarketStaff.h"
+#import "Staff.h"
 #import "FXForms.h"
 
 @interface MarketDayListViewController : UITableViewController <NSFetchedResultsControllerDelegate>

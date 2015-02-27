@@ -1,6 +1,6 @@
 //
 //  MarketOpenMenuViewController.m
-//  tfmco-mip
+//  TFMMobileMarketManager
 //
 
 #import "MarketOpenMenuViewController.h"

@@ -1,6 +1,6 @@
 //
 //  MarketDayFormViewController.m
-//  tfmco-mip
+//  TFMMobileMarketManager
 //
 
 #import "MarketDayFormViewController.h"
@@ -20,14 +20,14 @@
 	if ([self editMode])
 	{
 		// fetch the object we're supposed to edit
-		[self setMarketday:(MarketDays *)[TFM_DELEGATE.managedObjectContext objectWithID:[self marketdayID]]];
+		[self setMarketday:(MarketDay *)[TFM_DELEGATE.managedObjectContext objectWithID:[self marketdayID]]];
 		[self setTitle:@"Edit Market Day"];
 		
 		// populate form with passed data if in edit mode
 		MarketDayForm *form = self.formController.form;
-		MarketDays *data = self.marketday;
+		MarketDay *data = self.marketday;
 		
-		form.location = (Locations *)data.location;
+		form.location = (Location *)data.location;
 		
 		form.vendors = [data.vendors allObjects];
 		
@@ -130,7 +130,7 @@
 		}
 		else
 		{
-			MarketDays *new = [NSEntityDescription insertNewObjectForEntityForName:@"MarketDays" inManagedObjectContext:TFM_DELEGATE.managedObjectContext];
+			MarketDay *new = [NSEntityDescription insertNewObjectForEntityForName:@"MarketDays" inManagedObjectContext:TFM_DELEGATE.managedObjectContext];
 			
 			new.location = form.location;
 			

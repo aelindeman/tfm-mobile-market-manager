@@ -1,10 +1,10 @@
 //
 //  MarketDayFormViewController.h
-//  tfmco-mip
+//  TFMMobileMarketManager
 //
 
 #import "AppDelegate.h"
-#import "MarketDays.h"
+#import "MarketDay.h"
 #import "MarketDayForm.h"
 #import "MainMenuViewController.h"
 #import "FXForms.h"
@@ -12,7 +12,7 @@
 @interface MarketDayFormViewController : FXFormViewController
 
 @property (nonatomic) NSManagedObjectID *marketdayID;
-@property (nonatomic) MarketDays *marketday;
+@property (nonatomic) MarketDay *marketday;
 @property bool editMode;
 
 @end

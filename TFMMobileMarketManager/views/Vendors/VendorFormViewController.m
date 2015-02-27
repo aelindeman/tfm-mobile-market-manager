@@ -1,6 +1,6 @@
 //
 //  VendorFormViewController.m
-//  tfmco-mip
+//  TFMMobileMarketManager
 //
 
 #import "VendorFormViewController.h"
@@ -20,12 +20,12 @@
 	if ([self editMode])
 	{
 		// fetch the object we're supposed to edit
-		[self setEditObject:(Vendors *)[TFM_DELEGATE.managedObjectContext objectWithID:[self editObjectID]]];
+		[self setEditObject:(Vendor *)[TFM_DELEGATE.managedObjectContext objectWithID:[self editObjectID]]];
 		[self setTitle:[NSString stringWithFormat:@"Edit “%@”", [self.editObject business_name]]];
 		
 		// populate form with passed data if in edit mode
 		VendorForm *form = self.formController.form;
-		Vendors *data = self.editObject;
+		Vendor *data = self.editObject;
 		
 		form.business_name = data.business_name;
 		form.product_types = data.product_types;
@@ -133,7 +133,7 @@
 		// create a new object otherwise
 		else
 		{
-			Vendors *new = [NSEntityDescription insertNewObjectForEntityForName:@"Vendors" inManagedObjectContext:TFM_DELEGATE.managedObjectContext];
+			Vendor *new = [NSEntityDescription insertNewObjectForEntityForName:@"Vendors" inManagedObjectContext:TFM_DELEGATE.managedObjectContext];
 			
 			new.business_name = form.business_name;
 			new.product_types = form.product_types;

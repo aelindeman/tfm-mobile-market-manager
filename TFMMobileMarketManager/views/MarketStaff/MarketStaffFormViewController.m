@@ -1,6 +1,6 @@
 //
 //  MarketStaffFormViewController.m
-//  tfmco-mip
+//  TFMMobileMarketManager
 //
 
 #import "MarketStaffFormViewController.h"
@@ -20,12 +20,12 @@
 	if ([self editMode])
 	{
 		// fetch the object we're supposed to edit
-		[self setEditObject:(MarketStaff *)[TFM_DELEGATE.managedObjectContext objectWithID:[self editObjectID]]];
+		[self setEditObject:(Staff *)[TFM_DELEGATE.managedObjectContext objectWithID:[self editObjectID]]];
 		[self setTitle:[NSString stringWithFormat:@"Edit “%@”", [self.editObject name]]];
 		
 		// populate form with passed data if in edit mode
 		MarketStaffForm *form = self.formController.form;
-		MarketStaff *data = self.editObject;
+		Staff *data = self.editObject;
 		
 		form.name = data.name;
 		form.position = data.position;
@@ -92,7 +92,7 @@
 		// create a new object otherwise
 		else
 		{
-			MarketStaff *new = [NSEntityDescription insertNewObjectForEntityForName:@"MarketStaff" inManagedObjectContext:TFM_DELEGATE.managedObjectContext];
+			Staff *new = [NSEntityDescription insertNewObjectForEntityForName:@"MarketStaff" inManagedObjectContext:TFM_DELEGATE.managedObjectContext];
 			new.name = [form.name capitalizedString];
 			new.position = [form.position capitalizedString];
 		}

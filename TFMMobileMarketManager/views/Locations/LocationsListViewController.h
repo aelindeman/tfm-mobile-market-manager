@@ -1,10 +1,10 @@
 //
 //  LocationsListViewController.h
-//  tfmco-mip
+//  TFMMobileMarketManager
 //
 
 #import "AppDelegate.h"
-#import "Locations.h"
+#import "Location.h"
 #import "LocationsFormViewController.h"
 #import "FXForms.h"
 

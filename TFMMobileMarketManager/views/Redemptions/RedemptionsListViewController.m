@@ -1,6 +1,6 @@
 //
 //  RedemptionsListViewController.m
-//  tfmco-mip
+//  TFMMobileMarketManager
 //
 
 #import "RedemptionsListViewController.h"
@@ -79,7 +79,7 @@
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
 	Redemptions *info = [self.fetchedResultsController objectAtIndexPath:indexPath];
-	[cell.textLabel setText:[(Vendors *)info.vendor business_name]];
+	[cell.textLabel setText:[(Vendor *)info.vendor business_name]];
 	[cell.detailTextLabel setText:[NSString stringWithFormat:@"$%i", info.total]];
 	
 	if (info.check_number)

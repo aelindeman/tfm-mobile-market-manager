@@ -1,10 +1,10 @@
 //
 //  VendorsListViewController.h
-//  tfmco-mip
+//  TFMMobileMarketManager
 //
 
 #import "AppDelegate.h"
-#import "Vendors.h"
+#import "Vendor.h"
 #import "VendorFormViewController.h"
 #import "FXForms.h"
 

@@ -1,6 +1,6 @@
 //
 //  MarketStaff.m
-//  tfmco-mip
+//  TFMMobileMarketManager
 //
 
 #import "Staff.h"

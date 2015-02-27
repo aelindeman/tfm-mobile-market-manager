@@ -1,6 +1,6 @@
 //
 //  SyncViewController.m
-//  tfmco-mip
+//  TFMMobileMarketManager
 //
 
 #import "SyncViewController.h"

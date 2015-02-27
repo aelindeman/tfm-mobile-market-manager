@@ -1,6 +1,6 @@
 //
 //  RedemptionForm.m
-//  tfmco-mip
+//  TFMMobileMarketManager
 //
 
 #import "RedemptionForm.h"

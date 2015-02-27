@@ -1,6 +1,6 @@
 //
 //  MarketDayForm.m
-//  tfmco-mip
+//  TFMMobileMarketManager
 //
 
 #import "MarketDayForm.h"

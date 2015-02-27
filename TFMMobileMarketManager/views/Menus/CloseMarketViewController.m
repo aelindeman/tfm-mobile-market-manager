@@ -1,6 +1,6 @@
 //
 //  CloseMarketViewController.m
-//  tfmco-mip
+//  TFMMobileMarketManager
 //
 
 #import "CloseMarketViewController.h"

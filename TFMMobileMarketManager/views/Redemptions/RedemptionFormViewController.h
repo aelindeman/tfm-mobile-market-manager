@@ -1,11 +1,11 @@
 //
 //  RedemptionFormViewController.h
-//  tfmco-mip
+//  TFMMobileMarketManager
 //
 
 #import "AppDelegate.h"
-#import "MarketDays.h"
-#import "Vendors.h"
+#import "MarketDay.h"
+#import "Vendor.h"
 #import "Redemptions.h"
 #import "RedemptionForm.h"
 #import "FXForms.h"

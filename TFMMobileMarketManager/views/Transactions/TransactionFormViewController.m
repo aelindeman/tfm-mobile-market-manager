@@ -1,6 +1,6 @@
 //
 //  TransactionFormViewController.m
-//  tfmco-mip
+//  TFMMobileMarketManager
 //
 
 #import "TransactionFormViewController.h"
@@ -22,12 +22,12 @@
 	if ([self editMode])
 	{
 		// fetch the object we're supposed to edit
-		[self setEditObject:(Transactions *)[TFM_DELEGATE.managedObjectContext objectWithID:[self editObjectID]]];
+		[self setEditObject:(Transaction *)[TFM_DELEGATE.managedObjectContext objectWithID:[self editObjectID]]];
 		[self setTitle:@"Edit Transaction"];
 		
 		// populate form with passed data if in edit mode
 		TransactionForm *form = self.formController.form;
-		Transactions *data = self.editObject;
+		Transaction *data = self.editObject;
 		
 		form.cust_zipcode = data.cust_zipcode;
 		form.cust_id = data.cust_id;
@@ -144,7 +144,7 @@
 		else
 		{
 			// load it up
-			Transactions *new = [NSEntityDescription insertNewObjectForEntityForName:@"Transactions" inManagedObjectContext:TFM_DELEGATE.managedObjectContext];
+			Transaction *new = [NSEntityDescription insertNewObjectForEntityForName:@"Transactions" inManagedObjectContext:TFM_DELEGATE.managedObjectContext];
 			new.cust_zipcode = form.cust_zipcode;
 			new.cust_id = form.cust_id;
 			
@@ -165,7 +165,7 @@
 			new.markedInvalid = form.markedInvalid;
 		
 			// don't directly set the market day equal to the active one, in case it is changed later. fetch it fresh from the database
-			new.marketday = (MarketDays *)[TFM_DELEGATE.managedObjectContext objectWithID:[TFM_DELEGATE.activeMarketDay objectID]];
+			new.marketday = (MarketDay *)[TFM_DELEGATE.managedObjectContext objectWithID:[TFM_DELEGATE.activeMarketDay objectID]];
 		}
 		
 		// ...and save, hopefully

@@ -1,6 +1,6 @@
 //
 //  LocationsForm.m
-//  tfmco-mip
+//  TFMMobileMarketManager
 //
 
 #import "LocationsForm.h"

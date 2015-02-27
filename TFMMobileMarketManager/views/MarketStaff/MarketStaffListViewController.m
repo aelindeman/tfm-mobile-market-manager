@@ -1,6 +1,6 @@
 //
 //  MarketStaffListViewController.m
-//  tfmco-mip
+//  TFMMobileMarketManager
 //
 
 #import "MarketStaffListViewController.h"
@@ -78,7 +78,7 @@
 // configure table cells - display as first last -> position
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
-	MarketStaff *info = [self.fetchedResultsController objectAtIndexPath:indexPath];
+	Staff *info = [self.fetchedResultsController objectAtIndexPath:indexPath];
 	[cell.textLabel setText:info.name];
 	[cell.detailTextLabel setText:info.position];
 }

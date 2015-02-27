@@ -1,6 +1,6 @@
 //
 //  VendorsListViewController.m
-//  tfmco-mip
+//  TFMMobileMarketManager
 //
 
 #import "VendorsListViewController.h"
@@ -77,7 +77,7 @@
 // configure table cells - display as first last -> position
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
-	Vendors *info = [_fetchedResultsController objectAtIndexPath:indexPath];
+	Vendor *info = [_fetchedResultsController objectAtIndexPath:indexPath];
 	NSString *mdplural = ([info.marketdays count] != 1) ? @"s" : @"";
 	NSString *redplural = ([info.redemptions count] != 1) ? @"s" : @"";
 	[cell.textLabel setText:info.business_name];

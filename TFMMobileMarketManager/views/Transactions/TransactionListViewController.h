@@ -1,10 +1,10 @@
 //
 //  TransactionListViewController.h
-//  tfmco-mip
+//  TFMMobileMarketManager
 //
 
 #import "AppDelegate.h"
-#import "Transactions.h"
+#import "Transaction.h"
 #import "TransactionFormViewController.h"
 #import "FXForms.h"
 

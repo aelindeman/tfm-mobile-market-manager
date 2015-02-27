@@ -1,6 +1,6 @@
 //
 //  TerminalTotals.m
-//  tfmco-mip
+//  TFMMobileMarketManager
 //
 
 #import "TerminalTotals.h"

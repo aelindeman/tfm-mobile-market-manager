@@ -1,6 +1,6 @@
 //
 //  MarketDay.h
-//  tfmco-mip
+//  TFMMobileMarketManager
 //
 
 #import <Foundation/Foundation.h>

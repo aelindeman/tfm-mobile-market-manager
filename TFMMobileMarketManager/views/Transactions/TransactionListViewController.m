@@ -1,6 +1,6 @@
 //
 //  TransactionListViewController.m
-//  tfmco-mip
+//  TFMMobileMarketManager
 //
 
 #import "TransactionListViewController.h"
@@ -79,7 +79,7 @@
 // configure table cells - display as first last -> position
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
-	Transactions *info = [self.fetchedResultsController objectAtIndexPath:indexPath];
+	Transaction *info = [self.fetchedResultsController objectAtIndexPath:indexPath];
 	[cell.textLabel setText:[NSString stringWithFormat:@"[%f] %04d", info.time, info.cust_id]];
 	
 	if (info.credit_used)
@@ -132,7 +132,7 @@
 		case UITableViewCellEditingStyleDelete:
 		{
 			// DON'T DELETE THE OBJECT. Just load it and [obj setDeleted:true]
-			Transactions *toDelete = [_fetchedResultsController objectAtIndexPath:indexPath];
+			Transaction *toDelete = [_fetchedResultsController objectAtIndexPath:indexPath];
 			[toDelete setMarkedInvalid:true];
 			[[self.tableView cellForRowAtIndexPath:indexPath] setTintAdjustmentMode:UIViewTintAdjustmentModeDimmed];
 			break;

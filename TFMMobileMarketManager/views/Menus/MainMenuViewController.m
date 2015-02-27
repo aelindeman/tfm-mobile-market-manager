@@ -1,6 +1,6 @@
 //
 //  MainMenuViewController.m
-//  tfmco-mip
+//  TFMMobileMarketManager
 //
 
 #import "MainMenuViewController.h"
@@ -141,12 +141,12 @@
 	NSFetchRequest *locations = [NSFetchRequest fetchRequestWithEntityName:@"Locations"];
 	if ([[TFM_DELEGATE.managedObjectContext executeFetchRequest:locations error:&error] count] == 0)
 	{
-		Locations *fred = [NSEntityDescription insertNewObjectForEntityForName:@"Locations" inManagedObjectContext:TFM_DELEGATE.managedObjectContext];
+		Location *fred = [NSEntityDescription insertNewObjectForEntityForName:@"Locations" inManagedObjectContext:TFM_DELEGATE.managedObjectContext];
 		fred.name = @"Fredericksburg";
 		fred.abbreviation = @"fred";
 		fred.address = @"Hurkamp Park, Prince Edward St\nFredericksburg, VA 22401";
 		
-		Locations *spotsy = [NSEntityDescription insertNewObjectForEntityForName:@"Locations" inManagedObjectContext:TFM_DELEGATE.managedObjectContext];
+		Location *spotsy = [NSEntityDescription insertNewObjectForEntityForName:@"Locations" inManagedObjectContext:TFM_DELEGATE.managedObjectContext];
 		spotsy.name = @"Spotsylvania";
 		spotsy.abbreviation = @"spotsy";
 		spotsy.address = @"4240 Plank Rd\nFredericksburg, VA 22407";
@@ -158,19 +158,19 @@
 	NSFetchRequest *marketStaff = [NSFetchRequest fetchRequestWithEntityName:@"MarketStaff"];
 	if ([[TFM_DELEGATE.managedObjectContext executeFetchRequest:marketStaff error:&error] count] == 0)
 	{
-		MarketStaff *one = [NSEntityDescription insertNewObjectForEntityForName:@"MarketStaff" inManagedObjectContext:TFM_DELEGATE.managedObjectContext];
+		Staff *one = [NSEntityDescription insertNewObjectForEntityForName:@"MarketStaff" inManagedObjectContext:TFM_DELEGATE.managedObjectContext];
 		one.name = @"Employee 1";
 		one.position = @"Transactions";
 		
-		MarketStaff *two = [NSEntityDescription insertNewObjectForEntityForName:@"MarketStaff" inManagedObjectContext:TFM_DELEGATE.managedObjectContext];
+		Staff *two = [NSEntityDescription insertNewObjectForEntityForName:@"MarketStaff" inManagedObjectContext:TFM_DELEGATE.managedObjectContext];
 		two.name = @"Employee 2";
 		two.position = @"Redemptions";
 		
-		MarketStaff *three = [NSEntityDescription insertNewObjectForEntityForName:@"MarketStaff" inManagedObjectContext:TFM_DELEGATE.managedObjectContext];
+		Staff *three = [NSEntityDescription insertNewObjectForEntityForName:@"MarketStaff" inManagedObjectContext:TFM_DELEGATE.managedObjectContext];
 		three.name = @"Volunteer 1";
 		three.position = @"Volunteer";
 		
-		MarketStaff *four = [NSEntityDescription insertNewObjectForEntityForName:@"MarketStaff" inManagedObjectContext:TFM_DELEGATE.managedObjectContext];
+		Staff *four = [NSEntityDescription insertNewObjectForEntityForName:@"MarketStaff" inManagedObjectContext:TFM_DELEGATE.managedObjectContext];
 		four.name = @"Volunteer 2";
 		four.position = @"Volunteer";
 		
@@ -181,16 +181,16 @@
 	NSFetchRequest *vendors = [NSFetchRequest fetchRequestWithEntityName:@"Vendors"];
 	if ([[TFM_DELEGATE.managedObjectContext executeFetchRequest:vendors error:&error] count] == 0)
 	{
-		Vendors *vendor1 = [NSEntityDescription insertNewObjectForEntityForName:@"Vendors" inManagedObjectContext:TFM_DELEGATE.managedObjectContext];
+		Vendor *vendor1 = [NSEntityDescription insertNewObjectForEntityForName:@"Vendors" inManagedObjectContext:TFM_DELEGATE.managedObjectContext];
 		vendor1.business_name = @"Aaron’s Apples";
 		
-		Vendors *vendor2 = [NSEntityDescription insertNewObjectForEntityForName:@"Vendors" inManagedObjectContext:TFM_DELEGATE.managedObjectContext];
+		Vendor *vendor2 = [NSEntityDescription insertNewObjectForEntityForName:@"Vendors" inManagedObjectContext:TFM_DELEGATE.managedObjectContext];
 		vendor2.business_name = @"Betty’s Blueberries";
 		
-		Vendors *vendor3 = [NSEntityDescription insertNewObjectForEntityForName:@"Vendors" inManagedObjectContext:TFM_DELEGATE.managedObjectContext];
+		Vendor *vendor3 = [NSEntityDescription insertNewObjectForEntityForName:@"Vendors" inManagedObjectContext:TFM_DELEGATE.managedObjectContext];
 		vendor3.business_name = @"Carol’s Corn";
 		
-		Vendors *vendor4 = [NSEntityDescription insertNewObjectForEntityForName:@"Vendors" inManagedObjectContext:TFM_DELEGATE.managedObjectContext];
+		Vendor *vendor4 = [NSEntityDescription insertNewObjectForEntityForName:@"Vendors" inManagedObjectContext:TFM_DELEGATE.managedObjectContext];
 		vendor4.business_name = @"David’s Dirt";
 		
 		if (![TFM_DELEGATE.managedObjectContext save:&error]) NSLog(@"couldn't save: %@", error);
