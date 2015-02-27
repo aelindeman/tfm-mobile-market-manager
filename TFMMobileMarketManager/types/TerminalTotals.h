@@ -4,18 +4,22 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <CoreData/CoreData.h>
 
-@class MarketDays;
+#import "MarketDay.h"
 
-@interface TerminalTotals : NSManagedObject
+@interface TerminalTotals : NSObject
 
-@property (nonatomic) int16_t credit_amount;
-@property (nonatomic) int16_t credit_transactions;
-@property (nonatomic) int16_t snap_amount;
-@property (nonatomic) int16_t snap_transactions;
-@property (nonatomic) int16_t total_amount;
-@property (nonatomic) int16_t total_transactions;
-@property (nonatomic, retain) MarketDays *marketday;
+@property unsigned long identifier;
+
+@property unsigned int credit_amount;
+@property unsigned int credit_transactions;
+
+@property unsigned int snap_amount;
+@property unsigned int snap_transactions;
+
+@property unsigned int total_amount;
+@property unsigned int total_transactions;
+
+@property MarketDay *marketday;
 
 @end

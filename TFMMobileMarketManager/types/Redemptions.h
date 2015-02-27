@@ -4,21 +4,27 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <CoreData/CoreData.h>
 
-@class MarketDays;
+#import "MarketDay.h"
+#import "Vendor.h"
 
-@interface Redemptions : NSManagedObject
+@interface Redemptions : NSObject
 
-@property (nonatomic) int16_t bonus_count;
-@property (nonatomic) int16_t check_number;
-@property (nonatomic) int16_t credit_amount;
-@property (nonatomic) int16_t credit_count;
-@property (nonatomic) NSDate *date;
-@property (nonatomic) BOOL markedInvalid;
-@property (nonatomic) int16_t snap_count;
-@property (nonatomic) int16_t total;
-@property (nonatomic, retain) MarketDays *marketday;
-@property (nonatomic, retain) NSManagedObject *vendor;
+@property unsigned long identifier;
+
+@property NSDate *date;
+@property unsigned int check_number;
+
+@property unsigned int bonus_count;
+@property unsigned int credit_amount;
+@property unsigned int credit_count;
+
+@property unsigned int snap_count;
+@property unsigned int total;
+
+@property bool markedInvalid;
+
+@property MarketDay *marketday;
+@property Vendor *vendor;
 
 @end

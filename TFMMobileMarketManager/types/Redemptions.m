@@ -4,19 +4,23 @@
 //
 
 #import "Redemptions.h"
-#import "MarketDays.h"
-
 
 @implementation Redemptions
 
-@dynamic bonus_count;
+@dynamic identifier;
+
+@dynamic date;
 @dynamic check_number;
+
+@dynamic bonus_count;
 @dynamic credit_amount;
 @dynamic credit_count;
-@dynamic date;
-@dynamic markedInvalid;
+
 @dynamic snap_count;
 @dynamic total;
+
+@dynamic markedInvalid;
+
 @dynamic marketday;
 @dynamic vendor;
 
