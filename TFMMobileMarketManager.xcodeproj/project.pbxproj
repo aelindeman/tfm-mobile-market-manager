@@ -12,14 +12,14 @@
 		FA0AC27F1A9FB2B000CCA13A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0AC22E1A9FB2B000CCA13A /* main.m */; };
 		FA0AC2801A9FB2B000CCA13A /* MarketClosed.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA0AC2301A9FB2B000CCA13A /* MarketClosed.storyboard */; };
 		FA0AC2811A9FB2B000CCA13A /* MarketOpen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA0AC2311A9FB2B000CCA13A /* MarketOpen.storyboard */; };
-		FA0AC2821A9FB2B000CCA13A /* Locations.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0AC2341A9FB2B000CCA13A /* Locations.m */; };
-		FA0AC2831A9FB2B000CCA13A /* MarketDays.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0AC2361A9FB2B000CCA13A /* MarketDays.m */; };
-		FA0AC2841A9FB2B000CCA13A /* MarketStaff.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0AC2381A9FB2B000CCA13A /* MarketStaff.m */; };
+		FA0AC2821A9FB2B000CCA13A /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0AC2341A9FB2B000CCA13A /* Location.m */; };
+		FA0AC2831A9FB2B000CCA13A /* MarketDay.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0AC2361A9FB2B000CCA13A /* MarketDay.m */; };
+		FA0AC2841A9FB2B000CCA13A /* Staff.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0AC2381A9FB2B000CCA13A /* Staff.m */; };
 		FA0AC2851A9FB2B000CCA13A /* Redemptions.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0AC23A1A9FB2B000CCA13A /* Redemptions.m */; };
 		FA0AC2861A9FB2B000CCA13A /* TerminalTotals.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0AC23C1A9FB2B000CCA13A /* TerminalTotals.m */; };
-		FA0AC2871A9FB2B000CCA13A /* TokenBankTotals.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0AC23E1A9FB2B000CCA13A /* TokenBankTotals.m */; };
-		FA0AC2881A9FB2B000CCA13A /* Transactions.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0AC2401A9FB2B000CCA13A /* Transactions.m */; };
-		FA0AC2891A9FB2B000CCA13A /* Vendors.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0AC2421A9FB2B000CCA13A /* Vendors.m */; };
+		FA0AC2871A9FB2B000CCA13A /* TokenBank.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0AC23E1A9FB2B000CCA13A /* TokenBank.m */; };
+		FA0AC2881A9FB2B000CCA13A /* Transaction.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0AC2401A9FB2B000CCA13A /* Transaction.m */; };
+		FA0AC2891A9FB2B000CCA13A /* Vendor.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0AC2421A9FB2B000CCA13A /* Vendor.m */; };
 		FA0AC28A1A9FB2B000CCA13A /* LocationsForm.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0AC2461A9FB2B000CCA13A /* LocationsForm.m */; };
 		FA0AC28B1A9FB2B000CCA13A /* LocationsFormViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0AC2481A9FB2B000CCA13A /* LocationsFormViewController.m */; };
 		FA0AC28C1A9FB2B000CCA13A /* LocationsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0AC24A1A9FB2B000CCA13A /* LocationsListViewController.m */; };
@@ -44,7 +44,11 @@
 		FA0AC29F1A9FB2B000CCA13A /* VendorFormViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0AC2781A9FB2B000CCA13A /* VendorFormViewController.m */; };
 		FA0AC2A01A9FB2B000CCA13A /* VendorsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0AC27A1A9FB2B000CCA13A /* VendorsListViewController.m */; };
 		FA0AC2A21A9FB2E300CCA13A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA0AC2A11A9FB2E300CCA13A /* Assets.xcassets */; };
-		FAB118F11A9FB72B0012ED5D /* tfm-m3.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FAB118EF1A9FB72B0012ED5D /* tfm-m3.xcdatamodeld */; };
+		FAA61FE01AA0CE6500CD5242 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = FAA61FD61AA0CE6500CD5242 /* FMDatabase.m */; };
+		FAA61FE11AA0CE6500CD5242 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = FAA61FD81AA0CE6500CD5242 /* FMDatabaseAdditions.m */; };
+		FAA61FE21AA0CE6500CD5242 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = FAA61FDA1AA0CE6500CD5242 /* FMDatabasePool.m */; };
+		FAA61FE31AA0CE6500CD5242 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = FAA61FDC1AA0CE6500CD5242 /* FMDatabaseQueue.m */; };
+		FAA61FE41AA0CE6500CD5242 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = FAA61FDF1AA0CE6500CD5242 /* FMResultSet.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,22 +61,22 @@
 		FA0AC22E1A9FB2B000CCA13A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		FA0AC2301A9FB2B000CCA13A /* MarketClosed.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MarketClosed.storyboard; sourceTree = "<group>"; };
 		FA0AC2311A9FB2B000CCA13A /* MarketOpen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MarketOpen.storyboard; sourceTree = "<group>"; };
-		FA0AC2331A9FB2B000CCA13A /* Locations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Locations.h; sourceTree = "<group>"; };
-		FA0AC2341A9FB2B000CCA13A /* Locations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Locations.m; sourceTree = "<group>"; };
-		FA0AC2351A9FB2B000CCA13A /* MarketDays.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarketDays.h; sourceTree = "<group>"; };
-		FA0AC2361A9FB2B000CCA13A /* MarketDays.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarketDays.m; sourceTree = "<group>"; };
-		FA0AC2371A9FB2B000CCA13A /* MarketStaff.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarketStaff.h; sourceTree = "<group>"; };
-		FA0AC2381A9FB2B000CCA13A /* MarketStaff.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarketStaff.m; sourceTree = "<group>"; };
+		FA0AC2331A9FB2B000CCA13A /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Location.h; sourceTree = "<group>"; };
+		FA0AC2341A9FB2B000CCA13A /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Location.m; sourceTree = "<group>"; };
+		FA0AC2351A9FB2B000CCA13A /* MarketDay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarketDay.h; sourceTree = "<group>"; };
+		FA0AC2361A9FB2B000CCA13A /* MarketDay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarketDay.m; sourceTree = "<group>"; };
+		FA0AC2371A9FB2B000CCA13A /* Staff.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Staff.h; sourceTree = "<group>"; };
+		FA0AC2381A9FB2B000CCA13A /* Staff.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Staff.m; sourceTree = "<group>"; };
 		FA0AC2391A9FB2B000CCA13A /* Redemptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Redemptions.h; sourceTree = "<group>"; };
 		FA0AC23A1A9FB2B000CCA13A /* Redemptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Redemptions.m; sourceTree = "<group>"; };
 		FA0AC23B1A9FB2B000CCA13A /* TerminalTotals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TerminalTotals.h; sourceTree = "<group>"; };
 		FA0AC23C1A9FB2B000CCA13A /* TerminalTotals.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TerminalTotals.m; sourceTree = "<group>"; };
-		FA0AC23D1A9FB2B000CCA13A /* TokenBankTotals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TokenBankTotals.h; sourceTree = "<group>"; };
-		FA0AC23E1A9FB2B000CCA13A /* TokenBankTotals.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TokenBankTotals.m; sourceTree = "<group>"; };
-		FA0AC23F1A9FB2B000CCA13A /* Transactions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Transactions.h; sourceTree = "<group>"; };
-		FA0AC2401A9FB2B000CCA13A /* Transactions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Transactions.m; sourceTree = "<group>"; };
-		FA0AC2411A9FB2B000CCA13A /* Vendors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vendors.h; sourceTree = "<group>"; };
-		FA0AC2421A9FB2B000CCA13A /* Vendors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Vendors.m; sourceTree = "<group>"; };
+		FA0AC23D1A9FB2B000CCA13A /* TokenBank.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TokenBank.h; sourceTree = "<group>"; };
+		FA0AC23E1A9FB2B000CCA13A /* TokenBank.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TokenBank.m; sourceTree = "<group>"; };
+		FA0AC23F1A9FB2B000CCA13A /* Transaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Transaction.h; sourceTree = "<group>"; };
+		FA0AC2401A9FB2B000CCA13A /* Transaction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Transaction.m; sourceTree = "<group>"; };
+		FA0AC2411A9FB2B000CCA13A /* Vendor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vendor.h; sourceTree = "<group>"; };
+		FA0AC2421A9FB2B000CCA13A /* Vendor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Vendor.m; sourceTree = "<group>"; };
 		FA0AC2451A9FB2B000CCA13A /* LocationsForm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationsForm.h; sourceTree = "<group>"; };
 		FA0AC2461A9FB2B000CCA13A /* LocationsForm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationsForm.m; sourceTree = "<group>"; };
 		FA0AC2471A9FB2B000CCA13A /* LocationsFormViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationsFormViewController.h; sourceTree = "<group>"; };
@@ -120,7 +124,18 @@
 		FA0AC2791A9FB2B000CCA13A /* VendorsListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VendorsListViewController.h; sourceTree = "<group>"; };
 		FA0AC27A1A9FB2B000CCA13A /* VendorsListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VendorsListViewController.m; sourceTree = "<group>"; };
 		FA0AC2A11A9FB2E300CCA13A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		FAB118F01A9FB72B0012ED5D /* tfm-m3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "tfm-m3.xcdatamodel"; sourceTree = "<group>"; };
+		FAA61FD31AA0CB8700CD5242 /* typedefs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = typedefs.h; sourceTree = "<group>"; };
+		FAA61FD51AA0CE6500CD5242 /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
+		FAA61FD61AA0CE6500CD5242 /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
+		FAA61FD71AA0CE6500CD5242 /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseAdditions.h; sourceTree = "<group>"; };
+		FAA61FD81AA0CE6500CD5242 /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseAdditions.m; sourceTree = "<group>"; };
+		FAA61FD91AA0CE6500CD5242 /* FMDatabasePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabasePool.h; sourceTree = "<group>"; };
+		FAA61FDA1AA0CE6500CD5242 /* FMDatabasePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabasePool.m; sourceTree = "<group>"; };
+		FAA61FDB1AA0CE6500CD5242 /* FMDatabaseQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseQueue.h; sourceTree = "<group>"; };
+		FAA61FDC1AA0CE6500CD5242 /* FMDatabaseQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseQueue.m; sourceTree = "<group>"; };
+		FAA61FDD1AA0CE6500CD5242 /* FMDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDB.h; sourceTree = "<group>"; };
+		FAA61FDE1AA0CE6500CD5242 /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
+		FAA61FDF1AA0CE6500CD5242 /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,6 +168,7 @@
 		FA0AC2231A9FB29200CCA13A /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				FAA61FD41AA0CDA800CD5242 /* FMDB */,
 				FA0AC2271A9FB2B000CCA13A /* AppDelegate.h */,
 				FA0AC2281A9FB2B000CCA13A /* AppDelegate.m */,
 				FA0AC2A11A9FB2E300CCA13A /* Assets.xcassets */,
@@ -160,7 +176,6 @@
 				FA0AC22E1A9FB2B000CCA13A /* main.m */,
 				FA0AC22D1A9FB2B000CCA13A /* Info.plist */,
 				FA0AC22F1A9FB2B000CCA13A /* storyboards */,
-				FAB118EF1A9FB72B0012ED5D /* tfm-m3.xcdatamodeld */,
 				FA0AC2321A9FB2B000CCA13A /* types */,
 				FA0AC2431A9FB2B000CCA13A /* views */,
 			);
@@ -189,22 +204,23 @@
 		FA0AC2321A9FB2B000CCA13A /* types */ = {
 			isa = PBXGroup;
 			children = (
-				FA0AC2331A9FB2B000CCA13A /* Locations.h */,
-				FA0AC2341A9FB2B000CCA13A /* Locations.m */,
-				FA0AC2351A9FB2B000CCA13A /* MarketDays.h */,
-				FA0AC2361A9FB2B000CCA13A /* MarketDays.m */,
-				FA0AC2371A9FB2B000CCA13A /* MarketStaff.h */,
-				FA0AC2381A9FB2B000CCA13A /* MarketStaff.m */,
+				FA0AC2331A9FB2B000CCA13A /* Location.h */,
+				FA0AC2341A9FB2B000CCA13A /* Location.m */,
+				FA0AC2351A9FB2B000CCA13A /* MarketDay.h */,
+				FA0AC2361A9FB2B000CCA13A /* MarketDay.m */,
 				FA0AC2391A9FB2B000CCA13A /* Redemptions.h */,
 				FA0AC23A1A9FB2B000CCA13A /* Redemptions.m */,
+				FA0AC2371A9FB2B000CCA13A /* Staff.h */,
+				FA0AC2381A9FB2B000CCA13A /* Staff.m */,
 				FA0AC23B1A9FB2B000CCA13A /* TerminalTotals.h */,
 				FA0AC23C1A9FB2B000CCA13A /* TerminalTotals.m */,
-				FA0AC23D1A9FB2B000CCA13A /* TokenBankTotals.h */,
-				FA0AC23E1A9FB2B000CCA13A /* TokenBankTotals.m */,
-				FA0AC23F1A9FB2B000CCA13A /* Transactions.h */,
-				FA0AC2401A9FB2B000CCA13A /* Transactions.m */,
-				FA0AC2411A9FB2B000CCA13A /* Vendors.h */,
-				FA0AC2421A9FB2B000CCA13A /* Vendors.m */,
+				FA0AC23D1A9FB2B000CCA13A /* TokenBank.h */,
+				FA0AC23E1A9FB2B000CCA13A /* TokenBank.m */,
+				FA0AC23F1A9FB2B000CCA13A /* Transaction.h */,
+				FA0AC2401A9FB2B000CCA13A /* Transaction.m */,
+				FAA61FD31AA0CB8700CD5242 /* typedefs.h */,
+				FA0AC2411A9FB2B000CCA13A /* Vendor.h */,
+				FA0AC2421A9FB2B000CCA13A /* Vendor.m */,
 			);
 			path = types;
 			sourceTree = "<group>";
@@ -334,6 +350,24 @@
 			path = Vendors;
 			sourceTree = "<group>";
 		};
+		FAA61FD41AA0CDA800CD5242 /* FMDB */ = {
+			isa = PBXGroup;
+			children = (
+				FAA61FD51AA0CE6500CD5242 /* FMDatabase.h */,
+				FAA61FD61AA0CE6500CD5242 /* FMDatabase.m */,
+				FAA61FD71AA0CE6500CD5242 /* FMDatabaseAdditions.h */,
+				FAA61FD81AA0CE6500CD5242 /* FMDatabaseAdditions.m */,
+				FAA61FD91AA0CE6500CD5242 /* FMDatabasePool.h */,
+				FAA61FDA1AA0CE6500CD5242 /* FMDatabasePool.m */,
+				FAA61FDB1AA0CE6500CD5242 /* FMDatabaseQueue.h */,
+				FAA61FDC1AA0CE6500CD5242 /* FMDatabaseQueue.m */,
+				FAA61FDD1AA0CE6500CD5242 /* FMDB.h */,
+				FAA61FDE1AA0CE6500CD5242 /* FMResultSet.h */,
+				FAA61FDF1AA0CE6500CD5242 /* FMResultSet.m */,
+			);
+			name = FMDB;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -408,16 +442,19 @@
 				FA0AC28D1A9FB2B000CCA13A /* MarketDayForm.m in Sources */,
 				FA0AC2991A9FB2B000CCA13A /* ReportsMenuViewController.m in Sources */,
 				FA0AC27B1A9FB2B000CCA13A /* AppDelegate.m in Sources */,
-				FA0AC2821A9FB2B000CCA13A /* Locations.m in Sources */,
+				FAA61FE01AA0CE6500CD5242 /* FMDatabase.m in Sources */,
+				FA0AC2821A9FB2B000CCA13A /* Location.m in Sources */,
 				FA0AC2971A9FB2B000CCA13A /* RedemptionFormViewController.m in Sources */,
+				FAA61FE41AA0CE6500CD5242 /* FMResultSet.m in Sources */,
 				FA0AC29E1A9FB2B000CCA13A /* VendorForm.m in Sources */,
 				FA0AC2981A9FB2B000CCA13A /* RedemptionsListViewController.m in Sources */,
 				FA0AC2851A9FB2B000CCA13A /* Redemptions.m in Sources */,
-				FA0AC2831A9FB2B000CCA13A /* MarketDays.m in Sources */,
+				FAA61FE31AA0CE6500CD5242 /* FMDatabaseQueue.m in Sources */,
+				FA0AC2831A9FB2B000CCA13A /* MarketDay.m in Sources */,
 				FA0AC29B1A9FB2B000CCA13A /* TransactionForm.m in Sources */,
 				FA0AC28A1A9FB2B000CCA13A /* LocationsForm.m in Sources */,
-				FA0AC2881A9FB2B000CCA13A /* Transactions.m in Sources */,
-				FA0AC2891A9FB2B000CCA13A /* Vendors.m in Sources */,
+				FA0AC2881A9FB2B000CCA13A /* Transaction.m in Sources */,
+				FA0AC2891A9FB2B000CCA13A /* Vendor.m in Sources */,
 				FA0AC2921A9FB2B000CCA13A /* MarketStaffListViewController.m in Sources */,
 				FA0AC28C1A9FB2B000CCA13A /* LocationsListViewController.m in Sources */,
 				FA0AC28F1A9FB2B000CCA13A /* MarketDayListViewController.m in Sources */,
@@ -427,19 +464,20 @@
 				FA0AC2941A9FB2B000CCA13A /* MainMenuViewController.m in Sources */,
 				FA0AC27C1A9FB2B000CCA13A /* FXForms.m in Sources */,
 				FA0AC2A01A9FB2B000CCA13A /* VendorsListViewController.m in Sources */,
+				FAA61FE11AA0CE6500CD5242 /* FMDatabaseAdditions.m in Sources */,
 				FA0AC29C1A9FB2B000CCA13A /* TransactionFormViewController.m in Sources */,
 				FA0AC2911A9FB2B000CCA13A /* MarketStaffFormViewController.m in Sources */,
-				FA0AC2871A9FB2B000CCA13A /* TokenBankTotals.m in Sources */,
+				FA0AC2871A9FB2B000CCA13A /* TokenBank.m in Sources */,
 				FA0AC27F1A9FB2B000CCA13A /* main.m in Sources */,
 				FA0AC2931A9FB2B000CCA13A /* CloseMarketViewController.m in Sources */,
 				FA0AC2951A9FB2B000CCA13A /* MarketOpenMenuViewController.m in Sources */,
-				FA0AC2841A9FB2B000CCA13A /* MarketStaff.m in Sources */,
+				FA0AC2841A9FB2B000CCA13A /* Staff.m in Sources */,
 				FA0AC29D1A9FB2B000CCA13A /* TransactionListViewController.m in Sources */,
 				FA0AC28E1A9FB2B000CCA13A /* MarketDayFormViewController.m in Sources */,
 				FA0AC29F1A9FB2B000CCA13A /* VendorFormViewController.m in Sources */,
 				FA0AC2961A9FB2B000CCA13A /* RedemptionForm.m in Sources */,
 				FA0AC28B1A9FB2B000CCA13A /* LocationsFormViewController.m in Sources */,
-				FAB118F11A9FB72B0012ED5D /* tfm-m3.xcdatamodeld in Sources */,
+				FAA61FE21AA0CE6500CD5242 /* FMDatabasePool.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -521,19 +559,6 @@
 			defaultConfigurationName = Default;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		FAB118EF1A9FB72B0012ED5D /* tfm-m3.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				FAB118F01A9FB72B0012ED5D /* tfm-m3.xcdatamodel */,
-			);
-			currentVersion = FAB118F01A9FB72B0012ED5D /* tfm-m3.xcdatamodel */;
-			path = "tfm-m3.xcdatamodeld";
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = FA0AC1F11A9FB14C00CCA13A /* Project object */;
 }

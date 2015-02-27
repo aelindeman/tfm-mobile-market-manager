@@ -1,6 +1,6 @@
  //
 //  main.m
-//  tfmco-mip
+//  TFMMobileMarketManager
 //
 
 #import "AppDelegate.h"
