@@ -17,18 +17,18 @@
 	NSAssert([TFM_DELEGATE activeMarketDay] != nil, @"No active market day set!");
 	
 	// populate the menu
-	self.menuSectionHeaders = @[@"Transactions", @"Redemptions", @"Market Day"];
+	self.menuSectionHeaders = @[@"Market Day", @"Transactions", @"Redemptions"];
 	self.menuOptions = @[
 		@[
+			@{@"title": @"Edit market day", @"icon": @"marketday", @"action": @"EditMarketDaySegue"},
+			@{@"title": @"View token and terminal totals", @"icon": @"totals", @"action": @"viewTotals"},
+			@{@"title": @"Close market day", @"bold": @true, @"icon": @"x", @"action": @"CloseMarketDaySegue"}
+		], @[
 			@{@"title": @"Add a new transaction", @"bold": @true, @"icon": @"outbox", @"action": @"AddTransactionSegue"},
 			@{@"title": @"Edit transactions", @"icon": @"list", @"action": @"TransactionsSegue"}
 		], @[
 			@{@"title": @"Add a redemption", @"bold": @true, @"icon": @"inbox", @"action": @"AddRedemptionSegue"},
 			@{@"title": @"Edit redemptions", @"icon": @"list", @"action": @"RedemptionsSegue"}
-		], @[
-			@{@"title": @"Edit market day", @"icon": @"marketday", @"action": @"EditMarketDaySegue"},
-			@{@"title": @"View token and terminal totals", @"icon": @"totals", @"action": @"viewTotals"},
-			@{@"title": @"Close market day", @"bold": @true, @"icon": @"x", @"action": @"CloseMarketDaySegue"}
 		]];
 }
 
