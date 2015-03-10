@@ -30,6 +30,12 @@ typedef NS_ENUM(NSInteger, Ethnicity)
 	EthnicityOther
 };
 
+typedef NS_ENUM(NSInteger, Position)
+{
+	PositionVolunteer = 0,
+	PositionManager
+};
+
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;

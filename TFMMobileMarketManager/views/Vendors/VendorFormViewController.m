@@ -21,22 +21,22 @@
 	{
 		// fetch the object we're supposed to edit
 		[self setEditObject:(Vendors *)[TFM_DELEGATE.managedObjectContext objectWithID:[self editObjectID]]];
-		[self setTitle:[NSString stringWithFormat:@"Edit “%@”", [self.editObject business_name]]];
+		[self setTitle:[NSString stringWithFormat:@"Edit “%@”", [self.editObject businessName]]];
 		
 		// populate form with passed data if in edit mode
 		VendorForm *form = self.formController.form;
 		Vendors *data = self.editObject;
 		
-		form.business_name = data.business_name;
-		form.product_types = data.product_types;
+		form.businessName = data.businessName;
+		form.productTypes = data.productTypes;
 		
 		form.name = data.name;
 		form.address = data.address;
 		form.phone = data.phone;
 		form.email = data.email;
 		
-		form.state_tax_id = data.state_tax_id;
-		form.federal_tax_id	= data.federal_tax_id;
+		form.stateTaxID = data.stateTaxID;
+		form.federalTaxID	= data.federalTaxID;
 	}
 	else [self setTitle:@"Add Vendor"];
 	
@@ -77,10 +77,10 @@
 	VendorForm *form = self.formController.form;
 	NSMutableArray *errors = [[NSMutableArray alloc] init];
 	
-	if (form.business_name == nil || !([form.business_name length] > 0))
+	if (form.businessName == nil || !([form.businessName length] > 0))
 		[errors addObject:@"Business name must be set"];
 	
-	if (form.product_types == nil || !([form.product_types length] > 0))
+	if (form.productTypes == nil || !([form.productTypes length] > 0))
 		[errors addObject:@"Product types must be set"];
 	
 	if (form.name == nil || !([form.name length] > 0))
@@ -90,7 +90,7 @@
 		[errors addObject:@"Business address must be set"];
 	
 	// phone validation regex
-	NSString *phoneRegex = @"[0-9]{7}([0-9]{3})?";
+	NSString *phoneRegex = @"^(\\+\\d{1,2}\\s)?\\(?\\d{3}\\)?[\\s.-]?\\d{3}[\\s.-]?\\d{4}$";
 	NSPredicate *phoneTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", phoneRegex];
 	if (![phoneTest evaluateWithObject:form.phone] || !([form.phone length] > 0))
 		[errors addObject:@"Phone number must be valid"];
@@ -101,10 +101,10 @@
 	if (![emailTest evaluateWithObject:form.email] || !([form.email length] > 0))
 		[errors addObject:@"Email address must be valid"];
 	
-	if (form.state_tax_id == nil || !([form.state_tax_id length] > 0))
+	if (form.stateTaxID == nil || !([form.stateTaxID length] > 0))
 		[errors addObject:@"State tax ID must be set"];
 	
-	if (form.federal_tax_id == nil || !([form.federal_tax_id length] > 0))
+	if (form.federalTaxID == nil || !([form.federalTaxID length] > 0))
 		[errors addObject:@"Federal tax ID must be set"];
 	
 	if ([errors count] > 0)
@@ -118,8 +118,8 @@
 		// edit object in place, if in edit mode
 		if ([self editMode])
 		{
-			[self.editObject setBusiness_name:form.business_name];
-			[self.editObject setProduct_types:form.product_types];
+			[self.editObject setBusinessName:form.businessName];
+			[self.editObject setProductTypes:form.productTypes];
 			
 			[self.editObject setName:form.name];
 			[self.editObject setAddress:form.address];
@@ -127,16 +127,16 @@
 			[self.editObject setPhone:form.phone];
 			[self.editObject setEmail:form.email];
 			
-			[self.editObject setState_tax_id:form.state_tax_id];
-			[self.editObject setFederal_tax_id:form.federal_tax_id];
+			[self.editObject setStateTaxID:form.stateTaxID];
+			[self.editObject setFederalTaxID:form.federalTaxID];
 		}
 		// create a new object otherwise
 		else
 		{
 			Vendors *new = [NSEntityDescription insertNewObjectForEntityForName:@"Vendors" inManagedObjectContext:TFM_DELEGATE.managedObjectContext];
 			
-			new.business_name = form.business_name;
-			new.product_types = form.product_types;
+			new.businessName = form.businessName;
+			new.productTypes = form.productTypes;
 			
 			new.name = form.name;
 			new.address = form.address;
@@ -144,8 +144,8 @@
 			new.phone = form.phone;
 			new.email = form.email;
 			
-			new.state_tax_id = form.state_tax_id;
-			new.federal_tax_id = form.federal_tax_id;
+			new.stateTaxID = form.stateTaxID;
+			new.federalTaxID = form.federalTaxID;
 		}
 		
 		// ...and save, hopefully

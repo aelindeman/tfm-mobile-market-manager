@@ -10,8 +10,8 @@
 @interface VendorForm : NSObject <FXForm>
 
 // Basic info
-@property NSString *business_name;
-@property NSString *product_types; // description
+@property NSString *businessName;
+@property NSString *productTypes; // description
 
 // Business info
 @property NSString *name; // owner/operator name
@@ -21,8 +21,12 @@
 @property NSString *phone;
 @property NSString *email;
 
+// Transaction info
+@property bool acceptsSNAP;
+@property bool acceptsIncentives;
+
 // Tax info
-@property NSString *state_tax_id;
-@property NSString *federal_tax_id;
+@property NSString *stateTaxID;
+@property NSString *federalTaxID;
 
 @end

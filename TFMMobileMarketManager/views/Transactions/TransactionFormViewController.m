@@ -109,8 +109,8 @@
 	if (form.credit_used && form.snap_used)
 		[errors addObject:@"Transaction cannot use both snap and credit, make two seperate transactions"];
 
-	if ((form.credit_used && !form.credit_amount) || (form.snap_used && !form.credit_amount))
-		[errors addObject:@"Specify a transaction amount"];
+	if ((form.credit_used && !form.credit_amount) || (form.snap_used && !form.snap_amount))
+		[errors addObject:[NSString stringWithFormat:@"Specify an amount for the %@ transaction", (form.credit_used ? @"credit" : (form.snap_used ? @"SNAP" : @"either credit or SNAP"))]];
 	
 	if ([errors count] > 0)
 	{
@@ -206,14 +206,14 @@
 	}
 }
 
--(void)updateCreditTotal:(UITableViewCell<FXFormFieldCell> *)cell
+- (void)updateCreditTotal:(UITableViewCell<FXFormFieldCell> *)cell
 {
 	TransactionForm *form = self.formController.form;
 	[form setCredit_total:form.credit_amount + form.credit_fee];
 	[self.formController.tableView reloadData];
 }
 
--(void)updateSnapTotal:(UITableViewCell<FXFormFieldCell> *)cell
+- (void)updateSnapTotal:(UITableViewCell<FXFormFieldCell> *)cell
 {
 	TransactionForm *form = self.formController.form;
 	[form setSnap_total:form.snap_amount + form.snap_bonus];

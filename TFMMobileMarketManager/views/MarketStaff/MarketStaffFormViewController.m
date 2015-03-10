@@ -28,6 +28,7 @@
 		MarketStaff *data = self.editObject;
 		
 		form.name = data.name;
+		form.phone = data.phone;
 		form.position = data.position;
 	}
 	else [self setTitle:@"Add Staff"];
@@ -71,7 +72,12 @@
 	if (form.name == nil || !([form.name length] > 0))
 		[errors addObject:@"Name cannot be blank"];
 	
-	if (form.position == nil || !([form.position length] > 0))
+	NSString *phoneRegex = @"^(\\+\\d{1,2}\\s)?\\(?\\d{3}\\)?[\\s.-]?\\d{3}[\\s.-]?\\d{4}$";
+	NSPredicate *phoneTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", phoneRegex];
+	if (![phoneTest evaluateWithObject:form.phone] || !([form.phone length] > 0))
+		[errors addObject:@"Phone number must be valid"];
+	
+	if (form.position < 0)
 		[errors addObject:@"Position cannot be blank"];
 	
 	if ([errors count] > 0)
@@ -87,14 +93,16 @@
 		if ([self editMode])
 		{
 			[self.editObject setName:[form.name capitalizedString]];
-			[self.editObject setPosition:[form.position capitalizedString]];
+			[self.editObject setPhone:form.phone];
+			[self.editObject setPosition:form.position];
 		}
 		// create a new object otherwise
 		else
 		{
 			MarketStaff *new = [NSEntityDescription insertNewObjectForEntityForName:@"MarketStaff" inManagedObjectContext:TFM_DELEGATE.managedObjectContext];
 			new.name = [form.name capitalizedString];
-			new.position = [form.position capitalizedString];
+			new.phone = form.phone;
+			new.position = form.position;
 		}
 		
 		// ...and save, hopefully

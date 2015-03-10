@@ -11,7 +11,8 @@
 @interface MarketStaff : NSManagedObject
 
 @property (nonatomic, retain) NSString *name;
-@property (nonatomic, retain) NSString *position;
+@property (nonatomic, retain) NSString *phone;
+@property (nonatomic) int16_t position;
 @property (nonatomic, retain) MarketDays *marketday;
 
 - (NSString *)fieldDescription;

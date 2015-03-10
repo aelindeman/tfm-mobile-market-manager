@@ -10,6 +10,7 @@
 @interface MarketStaffForm : NSObject <FXForm>
 
 @property NSString *name;
-@property NSString *position;
+@property NSString *phone;
+@property Position position;
 
 @end

@@ -11,7 +11,8 @@
 {
 	return @[
 		@{FXFormFieldKey: @"name", @"textField.autocapitalizationType": @(UITextAutocapitalizationTypeWords)},
-		@{FXFormFieldKey: @"position", @"textField.autocapitalizationType": @(UITextAutocapitalizationTypeWords)}
+		@"phone",
+		@{FXFormFieldKey: @"position", FXFormFieldOptions: @[@"Volunteer", @"Manager"]}
 	];
 }
 

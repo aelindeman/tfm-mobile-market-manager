@@ -11,13 +11,13 @@
 @interface Vendors : NSManagedObject
 
 @property (nonatomic, retain) NSString * address;
-@property (nonatomic, retain) NSString * business_name;
+@property (nonatomic, retain) NSString * businessName;
 @property (nonatomic, retain) NSString * email;
-@property (nonatomic, retain) NSString * federal_tax_id;
+@property (nonatomic, retain) NSString * federalTaxID;
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSString * phone;
-@property (nonatomic, retain) NSString * product_types;
-@property (nonatomic, retain) NSString * state_tax_id;
+@property (nonatomic, retain) NSString * productTypes;
+@property (nonatomic, retain) NSString * stateTaxID;
 @property (nonatomic, retain) NSSet *marketdays;
 @property (nonatomic, retain) NSSet *redemptions;
 @end

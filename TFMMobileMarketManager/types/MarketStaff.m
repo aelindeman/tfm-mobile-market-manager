@@ -10,6 +10,7 @@
 @implementation MarketStaff
 
 @dynamic name;
+@dynamic phone;
 @dynamic position;
 @dynamic marketday;
 

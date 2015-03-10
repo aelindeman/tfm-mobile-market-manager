@@ -11,19 +11,19 @@
 @implementation Vendors
 
 @dynamic address;
-@dynamic business_name;
+@dynamic businessName;
 @dynamic email;
-@dynamic federal_tax_id;
+@dynamic federalTaxID;
 @dynamic name;
 @dynamic phone;
-@dynamic product_types;
-@dynamic state_tax_id;
+@dynamic productTypes;
+@dynamic stateTaxID;
 @dynamic marketdays;
 @dynamic redemptions;
 
 - (NSString *)fieldDescription
 {
-	return self.business_name;
+	return self.businessName;
 }
 
 @end

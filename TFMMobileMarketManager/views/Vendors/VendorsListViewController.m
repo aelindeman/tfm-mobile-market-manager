@@ -21,7 +21,7 @@
 - (void)load
 {
 	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Vendors"];
-	[fetchRequest setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"business_name" ascending:true]]];
+	[fetchRequest setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"businessName" ascending:true]]];
 	
 	self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:TFM_DELEGATE.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
 	[self.fetchedResultsController setDelegate:self];
@@ -80,7 +80,7 @@
 	Vendors *info = [_fetchedResultsController objectAtIndexPath:indexPath];
 	NSString *mdplural = ([info.marketdays count] != 1) ? @"s" : @"";
 	NSString *redplural = ([info.redemptions count] != 1) ? @"s" : @"";
-	[cell.textLabel setText:info.business_name];
+	[cell.textLabel setText:info.businessName];
 	[cell.detailTextLabel setText:[NSString stringWithFormat:@"%i market day%@, %i redemption%@", [info.marketdays count], mdplural, [info.redemptions count], redplural]];
 }
 

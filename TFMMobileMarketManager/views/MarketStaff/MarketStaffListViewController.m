@@ -22,6 +22,7 @@
 {
 	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"MarketStaff"];
 	[fetchRequest setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"position" ascending:true], [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:true]]];
+	//[fetchRequest setPropertiesToGroupBy:@[]];
 	
 	self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:TFM_DELEGATE.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
 	[self.fetchedResultsController setDelegate:self];
@@ -80,7 +81,7 @@
 {
 	MarketStaff *info = [self.fetchedResultsController objectAtIndexPath:indexPath];
 	[cell.textLabel setText:info.name];
-	[cell.detailTextLabel setText:info.position];
+	[cell.detailTextLabel setText:info.phone];
 }
 
 // populate the table view

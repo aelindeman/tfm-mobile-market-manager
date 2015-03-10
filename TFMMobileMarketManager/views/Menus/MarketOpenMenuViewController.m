@@ -30,6 +30,9 @@
 			@{@"title": @"Add a redemption", @"bold": @true, @"icon": @"inbox", @"action": @"AddRedemptionSegue"},
 			@{@"title": @"Edit redemptions", @"icon": @"list", @"action": @"RedemptionsSegue"}
 		]];
+	
+	// UINib *infoCellNib = [UINib nibWithNibName:@"MarketOpenMenuInfoCell" bundle:nil];
+	// [self.tableView registerNib:infoCellNib	forCellReuseIdentifier:@"MarketOpenMenuInfoCell"];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -56,25 +59,38 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MenuOptionCell" forIndexPath:indexPath];
-	NSDictionary *option = [[self.menuOptions objectAtIndex:[indexPath section]] objectAtIndex:[indexPath row]];
+	//static NSString *infoCellIdentifier = @"MarketOpenMenuInfoCell";
+	static NSString *optionCellIdentifier = @"MenuOptionCell";
 	
-	[cell.textLabel setText:[option valueForKey:@"title"]];
-	[cell setAccessoryType:[[option valueForKey:@"action"] hasSuffix:@"Segue"] ? UITableViewCellAccessoryDisclosureIndicator : UITableViewCellAccessoryNone];
-	
-	if ([option valueForKey:@"icon"])
-		[cell.imageView setImage:[UIImage imageNamed:[option valueForKey:@"icon"]]];
-	
-	if ([option valueForKey:@"bold"])
-		[cell.textLabel setFont:[UIFont boldSystemFontOfSize:[cell.textLabel.font pointSize]]];
-	
-	return cell;
+	/* if (indexPath.section == 0 && indexPath.row == 0)
+	{
+		UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:infoCellIdentifier forIndexPath:indexPath];
+		return cell;
+	}
+	else
+	{ */
+		UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:optionCellIdentifier forIndexPath:indexPath];
+		NSDictionary *option = [[self.menuOptions objectAtIndex:[indexPath section]] objectAtIndex:[indexPath row]];
+		
+		[cell.textLabel setText:[option valueForKey:@"title"]];
+		[cell setAccessoryType:[[option valueForKey:@"action"] hasSuffix:@"Segue"] ? UITableViewCellAccessoryDisclosureIndicator : UITableViewCellAccessoryNone];
+		
+		if ([option valueForKey:@"icon"])
+			[cell.imageView setImage:[UIImage imageNamed:[option valueForKey:@"icon"]]];
+		
+		if ([option valueForKey:@"bold"])
+			[cell.textLabel setFont:[UIFont boldSystemFontOfSize:[cell.textLabel.font pointSize]]];
+		
+		return cell;
+	//}
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	NSDictionary *selected = [[self.menuOptions objectAtIndex:[indexPath section]] objectAtIndex:[indexPath row]];
 	NSString *action = [selected valueForKey:@"action"];
+	
+	//if ([[selected valueForKey:@"title"] isEqualToString:@"MarketOpenMenuInfoCell"]) return;
 	
 	// dynamically perform segue if that's what was asked
 	if ([action hasSuffix:@"Segue"])

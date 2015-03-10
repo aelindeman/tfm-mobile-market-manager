@@ -24,7 +24,7 @@
 - (NSArray *)loadVendors
 {
 	NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Vendors"];
-	[request setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"business_name" ascending:true]]];
+	[request setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"businessName" ascending:true]]];
 	return [TFM_DELEGATE.managedObjectContext executeFetchRequest:request error:nil];
 }
 
@@ -33,7 +33,7 @@
 	return @[
 		@{FXFormFieldKey: @"location", FXFormFieldOptions: [self loadLocations]},
 		
-		@{FXFormFieldKey: @"vendors", FXFormFieldType: FXFormFieldTypeBitfield, FXFormFieldOptions: [self loadVendors], FXFormFieldHeader: @""},
+		@{FXFormFieldKey: @"vendors", FXFormFieldType: FXFormFieldTypeBitfield, FXFormFieldOptions: [self loadVendors], FXFormFieldAction: @"updateVendorDetailLabel:", FXFormFieldHeader: @""},
 		
 		@{FXFormFieldKey: @"date", FXFormFieldDefaultValue: [NSDate date], FXFormFieldHeader: @""},
 		@{FXFormFieldTitle: @"Start time", FXFormFieldDefaultValue: [NSDate date], FXFormFieldKey: @"start_time", FXFormFieldType: FXFormFieldTypeTime},
