@@ -12,7 +12,7 @@
 	NSAssert([TFM_DELEGATE activeMarketDay], @"No active market day set!");
 	NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Vendors"];
 	[request setPredicate:[NSPredicate predicateWithFormat:@"(%@ IN marketdays)", [TFM_DELEGATE activeMarketDay]]];
-	[request setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"business_name" ascending:true]]];
+	[request setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"businessName" ascending:true]]];
 	return [TFM_DELEGATE.managedObjectContext executeFetchRequest:request error:nil];
 }
 
