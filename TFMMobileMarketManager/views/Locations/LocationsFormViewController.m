@@ -28,7 +28,6 @@
 		Locations *data = self.editObject;
 		
 		form.name = data.name;
-		form.abbreviation = data.abbreviation;
 		form.address = data.address;
 	}
 	else [self setTitle:@"Add Location"];
@@ -72,11 +71,6 @@
 	if (form.name == nil || !([form.name length] > 0))
 		[errors addObject:@"Name cannot be blank"];
 	
-	if (form.abbreviation == nil || !([form.abbreviation length] > 0))
-		[errors addObject:@"Abbreviation cannot be blank"];
-	if ([form.abbreviation length] > 8)
-		[errors addObject:@"Abbreviation cannot be longer than 8 characters"];
-	
 	if (form.address == nil || !([form.address length] > 0))
 		[errors addObject:@"Address cannot be blank"];
 	
@@ -91,14 +85,12 @@
 		if ([self editMode])
 		{
 			[self.editObject setName:form.name];
-			[self.editObject setAbbreviation:form.abbreviation];
 			[self.editObject setAddress:form.address];
 		}
 		else
 		{
 			Locations *new = [NSEntityDescription insertNewObjectForEntityForName:@"Locations" inManagedObjectContext:TFM_DELEGATE.managedObjectContext];
 			new.name = form.name;
-			new.abbreviation = form.abbreviation;
 			new.address = form.address;
 		}
 		

@@ -11,7 +11,6 @@
 {
 	return @[
 		@"name",
-		@"abbreviation",
 		@{FXFormFieldKey: @"address", FXFormFieldType: FXFormFieldTypeLongText},
 	];
 }

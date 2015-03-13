@@ -9,7 +9,6 @@
 
 @interface LocationsForm : NSObject <FXForm>
 
-@property NSString *abbreviation;
 @property NSString *address;
 @property NSString *name;
 
