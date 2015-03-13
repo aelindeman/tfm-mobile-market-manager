@@ -15,7 +15,7 @@
 		@{FXFormFieldTitle: @"ID", FXFormFieldKey: @"cust_id", FXFormFieldFooter: @"Use the last 4 digits on driver’s license"},
 		@{FXFormFieldTitle: @"Visit Frequency", FXFormFieldKey: @"cust_frequency", FXFormFieldOptions: @[@"Unspecified", @"First time", @"Few times a season", @"Monthly", @"A few times a month", @"Weekly"], FXFormFieldDefaultValue: @5},
 		@{FXFormFieldTitle: @"Referral", FXFormFieldKey: @"cust_referral", FXFormFieldPlaceholder: @"How did you hear about us?"},
-		@{FXFormFieldTitle: @"Gender   ", FXFormFieldKey: @"cust_gender", FXFormFieldOptions: @[@"Male", @"Female"], FXFormFieldDefaultValue: @1, FXFormFieldCell: [FXFormOptionSegmentsCell class]},
+		@{FXFormFieldTitle: @"Gender   ", FXFormFieldKey: @"cust_gender", FXFormFieldOptions: @[@"Male", @"Female"], FXFormFieldCell: [FXFormOptionSegmentsCell class]},
 		@{FXFormFieldTitle: @"Senior citizen", FXFormFieldKey: @"cust_senior"},
 		@{FXFormFieldTitle: @"Ethnicity", FXFormFieldKey: @"cust_ethnicity", FXFormFieldOptions: @[@"Unspecified", @"White", @"Black", @"Hispanic", @"Asian", @"Other"], FXFormFieldDefaultValue: @1},
 		
