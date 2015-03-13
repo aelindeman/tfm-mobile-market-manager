@@ -13,7 +13,7 @@
         <relationship name="location" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Locations" inverseName="marketdays" inverseEntity="Locations" syncable="YES"/>
         <relationship name="redemptions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Redemptions" inverseName="marketday" inverseEntity="Redemptions" syncable="YES"/>
         <relationship name="staff" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MarketStaff" inverseName="marketday" inverseEntity="MarketStaff" syncable="YES"/>
-        <relationship name="terminalTotals" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TerminalTotals" inverseName="marketday" inverseEntity="TerminalTotals" syncable="YES"/>
+        <relationship name="terminalTotals" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TerminalTotals" inverseName="marketday" inverseEntity="TerminalTotals" syncable="YES"/>
         <relationship name="tokenTotals" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TokenTotals" inverseName="marketday" inverseEntity="TokenTotals" syncable="YES"/>
         <relationship name="transactions" optional="YES" toMany="YES" deletionRule="Deny" ordered="YES" destinationEntity="Transactions" inverseName="marketday" inverseEntity="Transactions" syncable="YES"/>
         <relationship name="vendors" optional="YES" toMany="YES" deletionRule="Deny" destinationEntity="Vendors" inverseName="marketdays" inverseEntity="Vendors" syncable="YES"/>
@@ -88,7 +88,7 @@
     </entity>
     <elements>
         <element name="Locations" positionX="0" positionY="0" width="128" height="90"/>
-        <element name="MarketDays" positionX="0" positionY="0" width="128" height="208"/>
+        <element name="MarketDays" positionX="0" positionY="0" width="128" height="210"/>
         <element name="MarketStaff" positionX="0" positionY="0" width="128" height="105"/>
         <element name="Redemptions" positionX="0" positionY="0" width="128" height="195"/>
         <element name="TerminalTotals" positionX="0" positionY="0" width="128" height="150"/>
