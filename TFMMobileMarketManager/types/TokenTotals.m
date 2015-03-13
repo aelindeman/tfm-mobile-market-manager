@@ -1,13 +1,13 @@
 //
-//  TokenBankTotals.m
+//  TokenTotals.m
 //  tfmco-mip
 //
 
-#import "TokenBankTotals.h"
+#import "TokenTotals.h"
 #import "MarketDays.h"
 
 
-@implementation TokenBankTotals
+@implementation TokenTotals
 
 @dynamic market_bonus_tokens;
 @dynamic market_credit_tokens;

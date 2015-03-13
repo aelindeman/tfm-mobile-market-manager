@@ -33,7 +33,7 @@
 	return @[
 		@{FXFormFieldKey: @"location", FXFormFieldOptions: [self loadLocations]},
 		
-		@{FXFormFieldKey: @"vendors", FXFormFieldType: FXFormFieldTypeBitfield, FXFormFieldOptions: [self loadVendors], FXFormFieldAction: @"updateVendorDetailLabel:", FXFormFieldHeader: @""},
+		@{FXFormFieldKey: @"vendors", FXFormFieldType: FXFormFieldTypeBitfield, FXFormFieldOptions: [self loadVendors], FXFormFieldHeader: @""},
 		
 		@{FXFormFieldKey: @"date", FXFormFieldDefaultValue: [NSDate date], FXFormFieldHeader: @""},
 		@{FXFormFieldTitle: @"Start time", FXFormFieldDefaultValue: [NSDate date], FXFormFieldKey: @"start_time", FXFormFieldType: FXFormFieldTypeTime},

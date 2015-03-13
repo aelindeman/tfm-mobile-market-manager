@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6254" systemVersion="14C109" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Locations" representedClassName="Locations" syncable="YES">
-        <attribute name="abbreviation" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="address" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="marketdays" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MarketDays" inverseName="location" inverseEntity="MarketDays" syncable="YES"/>
@@ -14,8 +13,8 @@
         <relationship name="location" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Locations" inverseName="marketdays" inverseEntity="Locations" syncable="YES"/>
         <relationship name="redemptions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Redemptions" inverseName="marketday" inverseEntity="Redemptions" syncable="YES"/>
         <relationship name="staff" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MarketStaff" inverseName="marketday" inverseEntity="MarketStaff" syncable="YES"/>
-        <relationship name="terminal_totals" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TerminalTotals" inverseName="marketday" inverseEntity="TerminalTotals" syncable="YES"/>
-        <relationship name="tokenbank" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TokenBankTotals" inverseName="marketday" inverseEntity="TokenBankTotals" syncable="YES"/>
+        <relationship name="terminalTotals" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TerminalTotals" inverseName="marketday" inverseEntity="TerminalTotals" syncable="YES"/>
+        <relationship name="tokenTotals" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TokenTotals" inverseName="marketday" inverseEntity="TokenTotals" syncable="YES"/>
         <relationship name="transactions" optional="YES" toMany="YES" deletionRule="Deny" ordered="YES" destinationEntity="Transactions" inverseName="marketday" inverseEntity="Transactions" syncable="YES"/>
         <relationship name="vendors" optional="YES" toMany="YES" deletionRule="Deny" destinationEntity="Vendors" inverseName="marketdays" inverseEntity="Vendors" syncable="YES"/>
     </entity>
@@ -44,16 +43,16 @@
         <attribute name="snap_transactions" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="total_amount" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="total_transactions" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <relationship name="marketday" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MarketDays" inverseName="terminal_totals" inverseEntity="MarketDays" syncable="YES"/>
+        <relationship name="marketday" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MarketDays" inverseName="terminalTotals" inverseEntity="MarketDays" syncable="YES"/>
     </entity>
-    <entity name="TokenBankTotals" representedClassName="TokenBankTotals" syncable="YES">
+    <entity name="TokenTotals" representedClassName="TokenBankTotals" syncable="YES">
         <attribute name="market_bonus_tokens" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="market_credit_tokens" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="market_snap_tokens" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="redeemed_bonus_tokens" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="redeemed_credit_tokens" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="redeemed_snap_tokens" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <relationship name="marketday" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MarketDays" inverseName="tokenbank" inverseEntity="MarketDays" syncable="YES"/>
+        <relationship name="marketday" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MarketDays" inverseName="tokenTotals" inverseEntity="MarketDays" syncable="YES"/>
     </entity>
     <entity name="Transactions" representedClassName="Transactions" syncable="YES">
         <attribute name="credit_fee" optional="YES" attributeType="Integer 16" syncable="YES"/>
@@ -88,13 +87,13 @@
         <relationship name="redemptions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Redemptions" inverseName="vendor" inverseEntity="Redemptions" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Locations" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="MarketDays" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="MarketStaff" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="Redemptions" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="TerminalTotals" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="TokenBankTotals" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="Transactions" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="Vendors" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Locations" positionX="0" positionY="0" width="128" height="90"/>
+        <element name="MarketDays" positionX="0" positionY="0" width="128" height="208"/>
+        <element name="MarketStaff" positionX="0" positionY="0" width="128" height="105"/>
+        <element name="Redemptions" positionX="0" positionY="0" width="128" height="195"/>
+        <element name="TerminalTotals" positionX="0" positionY="0" width="128" height="150"/>
+        <element name="TokenTotals" positionX="0" positionY="0" width="128" height="148"/>
+        <element name="Transactions" positionX="0" positionY="0" width="128" height="285"/>
+        <element name="Vendors" positionX="0" positionY="0" width="128" height="225"/>
     </elements>
 </model>

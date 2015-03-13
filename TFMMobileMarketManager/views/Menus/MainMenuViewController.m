@@ -143,12 +143,10 @@
 	{
 		Locations *fred = [NSEntityDescription insertNewObjectForEntityForName:@"Locations" inManagedObjectContext:TFM_DELEGATE.managedObjectContext];
 		fred.name = @"Fredericksburg";
-		fred.abbreviation = @"fred";
 		fred.address = @"Hurkamp Park, Prince Edward St\nFredericksburg, VA 22401";
 		
 		Locations *spotsy = [NSEntityDescription insertNewObjectForEntityForName:@"Locations" inManagedObjectContext:TFM_DELEGATE.managedObjectContext];
 		spotsy.name = @"Spotsylvania";
-		spotsy.abbreviation = @"spotsy";
 		spotsy.address = @"4240 Plank Rd\nFredericksburg, VA 22407";
 		
 		if (![TFM_DELEGATE.managedObjectContext save:&error]) NSLog(@"couldn't save: %@", error);

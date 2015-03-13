@@ -17,7 +17,7 @@
 		FA0AC2841A9FB2B000CCA13A /* MarketStaff.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0AC2381A9FB2B000CCA13A /* MarketStaff.m */; };
 		FA0AC2851A9FB2B000CCA13A /* Redemptions.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0AC23A1A9FB2B000CCA13A /* Redemptions.m */; };
 		FA0AC2861A9FB2B000CCA13A /* TerminalTotals.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0AC23C1A9FB2B000CCA13A /* TerminalTotals.m */; };
-		FA0AC2871A9FB2B000CCA13A /* TokenBankTotals.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0AC23E1A9FB2B000CCA13A /* TokenBankTotals.m */; };
+		FA0AC2871A9FB2B000CCA13A /* TokenTotals.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0AC23E1A9FB2B000CCA13A /* TokenTotals.m */; };
 		FA0AC2881A9FB2B000CCA13A /* Transactions.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0AC2401A9FB2B000CCA13A /* Transactions.m */; };
 		FA0AC2891A9FB2B000CCA13A /* Vendors.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0AC2421A9FB2B000CCA13A /* Vendors.m */; };
 		FA0AC28A1A9FB2B000CCA13A /* LocationsForm.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0AC2461A9FB2B000CCA13A /* LocationsForm.m */; };
@@ -45,7 +45,6 @@
 		FA0AC2A01A9FB2B000CCA13A /* VendorsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0AC27A1A9FB2B000CCA13A /* VendorsListViewController.m */; };
 		FA0AC2A21A9FB2E300CCA13A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA0AC2A11A9FB2E300CCA13A /* Assets.xcassets */; };
 		FAB118F11A9FB72B0012ED5D /* tfm-m3.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FAB118EF1A9FB72B0012ED5D /* tfm-m3.xcdatamodeld */; };
-		FAE4BEA41AAF620F001DCF9E /* MarketOpenMenuInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FAE4BEA31AAF620F001DCF9E /* MarketOpenMenuInfoCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,8 +67,8 @@
 		FA0AC23A1A9FB2B000CCA13A /* Redemptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Redemptions.m; sourceTree = "<group>"; };
 		FA0AC23B1A9FB2B000CCA13A /* TerminalTotals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TerminalTotals.h; sourceTree = "<group>"; };
 		FA0AC23C1A9FB2B000CCA13A /* TerminalTotals.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TerminalTotals.m; sourceTree = "<group>"; };
-		FA0AC23D1A9FB2B000CCA13A /* TokenBankTotals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TokenBankTotals.h; sourceTree = "<group>"; };
-		FA0AC23E1A9FB2B000CCA13A /* TokenBankTotals.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TokenBankTotals.m; sourceTree = "<group>"; };
+		FA0AC23D1A9FB2B000CCA13A /* TokenTotals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TokenTotals.h; sourceTree = "<group>"; };
+		FA0AC23E1A9FB2B000CCA13A /* TokenTotals.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TokenTotals.m; sourceTree = "<group>"; };
 		FA0AC23F1A9FB2B000CCA13A /* Transactions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Transactions.h; sourceTree = "<group>"; };
 		FA0AC2401A9FB2B000CCA13A /* Transactions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Transactions.m; sourceTree = "<group>"; };
 		FA0AC2411A9FB2B000CCA13A /* Vendors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vendors.h; sourceTree = "<group>"; };
@@ -122,7 +121,6 @@
 		FA0AC27A1A9FB2B000CCA13A /* VendorsListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VendorsListViewController.m; sourceTree = "<group>"; };
 		FA0AC2A11A9FB2E300CCA13A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FAB118F01A9FB72B0012ED5D /* tfm-m3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "tfm-m3.xcdatamodel"; sourceTree = "<group>"; };
-		FAE4BEA31AAF620F001DCF9E /* MarketOpenMenuInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MarketOpenMenuInfoCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -201,8 +199,8 @@
 				FA0AC23A1A9FB2B000CCA13A /* Redemptions.m */,
 				FA0AC23B1A9FB2B000CCA13A /* TerminalTotals.h */,
 				FA0AC23C1A9FB2B000CCA13A /* TerminalTotals.m */,
-				FA0AC23D1A9FB2B000CCA13A /* TokenBankTotals.h */,
-				FA0AC23E1A9FB2B000CCA13A /* TokenBankTotals.m */,
+				FA0AC23D1A9FB2B000CCA13A /* TokenTotals.h */,
+				FA0AC23E1A9FB2B000CCA13A /* TokenTotals.m */,
 				FA0AC23F1A9FB2B000CCA13A /* Transactions.h */,
 				FA0AC2401A9FB2B000CCA13A /* Transactions.m */,
 				FA0AC2411A9FB2B000CCA13A /* Vendors.h */,
@@ -275,7 +273,6 @@
 				FA0AC25D1A9FB2B000CCA13A /* MainMenuViewController.m */,
 				FA0AC25E1A9FB2B000CCA13A /* MarketOpenMenuViewController.h */,
 				FA0AC25F1A9FB2B000CCA13A /* MarketOpenMenuViewController.m */,
-				FAE4BEA31AAF620F001DCF9E /* MarketOpenMenuInfoCell.xib */,
 			);
 			path = Menus;
 			sourceTree = "<group>";
@@ -397,7 +394,6 @@
 			files = (
 				FA0AC2A21A9FB2E300CCA13A /* Assets.xcassets in Resources */,
 				FA0AC2801A9FB2B000CCA13A /* MarketClosed.storyboard in Resources */,
-				FAE4BEA41AAF620F001DCF9E /* MarketOpenMenuInfoCell.xib in Resources */,
 				FA0AC2811A9FB2B000CCA13A /* MarketOpen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -433,7 +429,7 @@
 				FA0AC2A01A9FB2B000CCA13A /* VendorsListViewController.m in Sources */,
 				FA0AC29C1A9FB2B000CCA13A /* TransactionFormViewController.m in Sources */,
 				FA0AC2911A9FB2B000CCA13A /* MarketStaffFormViewController.m in Sources */,
-				FA0AC2871A9FB2B000CCA13A /* TokenBankTotals.m in Sources */,
+				FA0AC2871A9FB2B000CCA13A /* TokenTotals.m in Sources */,
 				FA0AC27F1A9FB2B000CCA13A /* main.m in Sources */,
 				FA0AC2931A9FB2B000CCA13A /* CloseMarketViewController.m in Sources */,
 				FA0AC2951A9FB2B000CCA13A /* MarketOpenMenuViewController.m in Sources */,

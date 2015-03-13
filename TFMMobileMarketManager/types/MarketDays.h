@@ -16,8 +16,8 @@
 @property (nonatomic, retain) NSManagedObject *location;
 @property (nonatomic, retain) NSSet *redemptions;
 @property (nonatomic, retain) NSSet *staff;
-@property (nonatomic, retain) NSSet *terminal_totals;
-@property (nonatomic, retain) NSManagedObject *tokenbank;
+@property (nonatomic, retain) NSSet *terminalTotals;
+@property (nonatomic, retain) NSManagedObject *tokenTotals;
 @property (nonatomic, retain) NSOrderedSet *transactions;
 @property (nonatomic, retain) NSSet *vendors;
 @end

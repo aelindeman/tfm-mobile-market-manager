@@ -15,8 +15,8 @@
 @dynamic location;
 @dynamic redemptions;
 @dynamic staff;
-@dynamic terminal_totals;
-@dynamic tokenbank;
+@dynamic terminalTotals;
+@dynamic tokenTotals;
 @dynamic transactions;
 @dynamic vendors;
 

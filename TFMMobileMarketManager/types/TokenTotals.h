@@ -1,5 +1,5 @@
 //
-//  TokenBankTotals.h
+//  TokenTotals.h
 //  tfmco-mip
 //
 
@@ -8,7 +8,7 @@
 
 @class MarketDays;
 
-@interface TokenBankTotals : NSManagedObject
+@interface TokenTotals : NSManagedObject
 
 @property (nonatomic) int16_t market_bonus_tokens;
 @property (nonatomic) int16_t market_credit_tokens;
