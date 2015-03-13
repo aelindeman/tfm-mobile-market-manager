@@ -6,6 +6,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
+#import "Locations.h"
 
 @interface MarketDays : NSManagedObject
 
@@ -16,7 +17,7 @@
 @property (nonatomic, retain) NSManagedObject *location;
 @property (nonatomic, retain) NSSet *redemptions;
 @property (nonatomic, retain) NSSet *staff;
-@property (nonatomic, retain) NSSet *terminalTotals;
+@property (nonatomic, retain) NSManagedObject *terminalTotals;
 @property (nonatomic, retain) NSManagedObject *tokenTotals;
 @property (nonatomic, retain) NSOrderedSet *transactions;
 @property (nonatomic, retain) NSSet *vendors;
@@ -34,24 +35,23 @@
 - (void)addStaff:(NSSet *)values;
 - (void)removeStaff:(NSSet *)values;
 
-- (void)addTerminal_totalsObject:(NSManagedObject *)value;
-- (void)removeTerminal_totalsObject:(NSManagedObject *)value;
-- (void)addTerminal_totals:(NSSet *)values;
-- (void)removeTerminal_totals:(NSSet *)values;
-
 - (void)insertObject:(NSManagedObject *)value inTransactionsAtIndex:(NSUInteger)idx;
 - (void)removeObjectFromTransactionsAtIndex:(NSUInteger)idx;
 - (void)insertTransactions:(NSArray *)value atIndexes:(NSIndexSet *)indexes;
 - (void)removeTransactionsAtIndexes:(NSIndexSet *)indexes;
 - (void)replaceObjectInTransactionsAtIndex:(NSUInteger)idx withObject:(NSManagedObject *)value;
 - (void)replaceTransactionsAtIndexes:(NSIndexSet *)indexes withTransactions:(NSArray *)values;
+
 - (void)addTransactionsObject:(NSManagedObject *)value;
 - (void)removeTransactionsObject:(NSManagedObject *)value;
 - (void)addTransactions:(NSOrderedSet *)values;
 - (void)removeTransactions:(NSOrderedSet *)values;
+
 - (void)addVendorsObject:(NSManagedObject *)value;
 - (void)removeVendorsObject:(NSManagedObject *)value;
 - (void)addVendors:(NSSet *)values;
 - (void)removeVendors:(NSSet *)values;
+
+- (NSString *)fieldDescription;
 
 @end

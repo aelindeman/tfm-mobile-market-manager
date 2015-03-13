@@ -20,4 +20,15 @@
 @dynamic transactions;
 @dynamic vendors;
 
+- (NSString *)fieldDescription
+{
+	NSString *locationName = [(Locations *)self.location name];
+	
+	NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+	[dateFormatter setDateStyle:NSDateFormatterLongStyle];
+	NSString *date = [dateFormatter stringFromDate:self.date];
+	
+	return [NSString stringWithFormat:@"%@ – %@", locationName, date];
+}
+
 @end
