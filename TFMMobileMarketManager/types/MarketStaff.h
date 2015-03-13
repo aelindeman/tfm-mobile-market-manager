@@ -15,6 +15,7 @@
 @property (nonatomic) int16_t position;
 @property (nonatomic, retain) MarketDays *marketday;
 
+- (NSString *)description;
 - (NSString *)fieldDescription;
 
 @end

@@ -6,8 +6,6 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-#import "Locations.h"
-
 @interface MarketDays : NSManagedObject
 
 @property (nonatomic) NSDate *date;
@@ -52,6 +50,7 @@
 - (void)addVendors:(NSSet *)values;
 - (void)removeVendors:(NSSet *)values;
 
+- (NSString *)description;
 - (NSString *)fieldDescription;
 
 @end

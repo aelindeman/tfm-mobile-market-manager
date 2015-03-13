@@ -24,6 +24,7 @@
 
 @interface Vendors (CoreDataGeneratedAccessors)
 
+- (NSString *)description;
 - (NSString *)fieldDescription;
 
 - (void)addMarketdaysObject:(MarketDays *)value;

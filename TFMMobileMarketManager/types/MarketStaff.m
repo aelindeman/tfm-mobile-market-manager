@@ -14,9 +14,14 @@
 @dynamic position;
 @dynamic marketday;
 
-- (NSString *)fieldDescription
+- (NSString *)description
 {
 	return self.name;
+}
+
+- (NSString *)fieldDescription
+{
+	return [self description];
 }
 
 @end

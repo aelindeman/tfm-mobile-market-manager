@@ -21,9 +21,14 @@
 @dynamic marketdays;
 @dynamic redemptions;
 
-- (NSString *)fieldDescription
+- (NSString *)description
 {
 	return self.businessName;
+}
+
+- (NSString *)fieldDescription
+{
+	return [self description];
 }
 
 @end
