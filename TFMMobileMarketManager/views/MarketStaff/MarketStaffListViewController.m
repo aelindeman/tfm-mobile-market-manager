@@ -81,7 +81,13 @@
 {
 	MarketStaff *info = [self.fetchedResultsController objectAtIndexPath:indexPath];
 	[cell.textLabel setText:info.name];
-	[cell.detailTextLabel setText:info.phone];
+	
+	// TODO: this must be updated if positions are ever changed
+	NSDictionary *positionNames = @{
+		[NSNumber numberWithInt:PositionVolunteer]: @"Volunteer",
+		[NSNumber numberWithInt:PositionManager]: @"Manager"
+	};
+	[cell.detailTextLabel setText:[positionNames objectForKey:[NSNumber numberWithInt:info.position]]];
 }
 
 // populate the table view
