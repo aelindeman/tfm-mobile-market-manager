@@ -21,7 +21,7 @@
 - (void)load
 {
 	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"MarketDays"];
-	[fetchRequest setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"date" ascending:true],[NSSortDescriptor sortDescriptorWithKey:@"location.name" ascending:true]]];
+	[fetchRequest setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"date" ascending:false],[NSSortDescriptor sortDescriptorWithKey:@"location.name" ascending:true]]];
 	
 	self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:TFM_DELEGATE.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
 	[self.fetchedResultsController setDelegate:self];
@@ -78,7 +78,7 @@
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
 	MarketDays *info = [self.fetchedResultsController objectAtIndexPath:indexPath];
-	[cell.textLabel setText:[(Locations *)info.location name]];
+	[cell.textLabel setText:[info fieldDescription]];
 	[cell.detailTextLabel setText:[NSString stringWithFormat:@"%i vendor%@, %i transaction%@, %i redemption%@", [info.vendors count], ([info.vendors count] != 1) ? @"s" : @"", [info.transactions count], ([info.transactions count] != 1) ? @"s" : @"", [info.redemptions count], ([info.redemptions count] != 1) ? @"s" : @""]];
 }
 
