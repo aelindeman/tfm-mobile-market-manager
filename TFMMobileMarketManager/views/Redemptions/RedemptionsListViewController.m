@@ -15,6 +15,7 @@
 {
 	[super viewDidLoad];
 	NSAssert([TFM_DELEGATE activeMarketDay], @"No active market day set!");
+	[self.navigationItem setPrompt:[TFM_DELEGATE.activeMarketDay fieldDescription]];
 	self.tableView.allowsMultipleSelectionDuringEditing = false;
 	[self load];
 }

@@ -30,9 +30,10 @@
 			@{@"title": @"Add a redemption", @"bold": @true, @"icon": @"inbox", @"action": @"AddRedemptionSegue"},
 			@{@"title": @"Edit redemptions", @"icon": @"list", @"action": @"RedemptionsSegue"}
 		]];
-	
-	// UINib *infoCellNib = [UINib nibWithNibName:@"MarketOpenMenuInfoCell" bundle:nil];
-	// [self.tableView registerNib:infoCellNib	forCellReuseIdentifier:@"MarketOpenMenuInfoCell"];
+
+	/* UIBarButtonItem *closeMarketButton = [[UIBarButtonItem alloc] initWithTitle:@"Close" style:UIBarButtonItemStyleDone target:self action:@selector(closeMarketDay)];
+	[self.navigationItem setRightBarButtonItem:closeMarketButton]; */
+	[self.navigationItem setPrompt:[TFM_DELEGATE.activeMarketDay fieldDescription]];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
