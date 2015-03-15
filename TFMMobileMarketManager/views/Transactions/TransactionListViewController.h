@@ -11,5 +11,6 @@
 @interface TransactionListViewController : UITableViewController <NSFetchedResultsControllerDelegate>
 
 @property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
+@property (nonatomic) Transactions *selectedObject;
 
 @end

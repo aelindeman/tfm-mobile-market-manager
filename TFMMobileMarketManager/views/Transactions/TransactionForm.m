@@ -13,16 +13,16 @@
 		// Demographics
 		@{FXFormFieldTitle: @"ZIP Code", FXFormFieldKey: @"cust_zipcode", FXFormFieldHeader: @"Demographics"},
 		@{FXFormFieldTitle: @"ID", FXFormFieldKey: @"cust_id", FXFormFieldFooter: @"Use the last 4 digits on driver’s license"},
-		@{FXFormFieldTitle: @"Visit Frequency", FXFormFieldKey: @"cust_frequency", FXFormFieldOptions: @[@"Unspecified", @"First time", @"Few times a season", @"Monthly", @"A few times a month", @"Weekly"], FXFormFieldDefaultValue: @5},
+		@{FXFormFieldTitle: @"Visit Frequency", FXFormFieldKey: @"cust_frequency", FXFormFieldOptions: @[@"Unspecified", @"First time", @"Few times a season", @"Monthly", @"A few times a month", @"Weekly"]},
 		@{FXFormFieldTitle: @"Referral", FXFormFieldKey: @"cust_referral", FXFormFieldPlaceholder: @"How did you hear about us?"},
 		@{FXFormFieldTitle: @"Gender   ", FXFormFieldKey: @"cust_gender", FXFormFieldOptions: @[@"Male", @"Female"], FXFormFieldCell: [FXFormOptionSegmentsCell class]},
 		@{FXFormFieldTitle: @"Senior citizen", FXFormFieldKey: @"cust_senior"},
-		@{FXFormFieldTitle: @"Ethnicity", FXFormFieldKey: @"cust_ethnicity", FXFormFieldOptions: @[@"Unspecified", @"White", @"Black", @"Hispanic", @"Asian", @"Other"], FXFormFieldDefaultValue: @1},
+		@{FXFormFieldTitle: @"Ethnicity", FXFormFieldKey: @"cust_ethnicity", FXFormFieldOptions: @[@"Unspecified", @"White", @"Black", @"Hispanic", @"Asian", @"Other"]},
 		
 		// Credit
 		@{FXFormFieldTitle: @"Used credit", FXFormFieldKey: @"credit_used", FXFormFieldHeader: @"Credit", FXFormFieldAction: @"toggleSnapOrCredit:"},
 		@{FXFormFieldTitle: @"Credit amount", FXFormFieldKey: @"credit_amount", FXFormFieldAction: @"updateCreditTotal:"},
-		@{FXFormFieldTitle: @"Credit fee", FXFormFieldKey: @"credit_fee", FXFormFieldDefaultValue: @2, FXFormFieldAction: @"updateCreditTotal:"},
+		@{FXFormFieldTitle: @"Credit fee", FXFormFieldKey: @"credit_fee", FXFormFieldOptions: @[[NSNumber numberWithInt:0], [NSNumber numberWithInt:2]], FXFormFieldCell: [FXFormOptionSegmentsCell class], FXFormFieldAction: @"updateCreditTotal:"},
 		@{FXFormFieldTitle: @"Total", FXFormFieldKey: @"credit_total", FXFormFieldType: FXFormFieldTypeLabel},
 		
 		// SNAP

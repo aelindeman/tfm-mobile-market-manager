@@ -11,6 +11,9 @@
 
 @implementation TransactionListViewController
 
+static NSString *deleteConfirmationMessageTitle = @"Mark this transaction as invalid?";
+static NSString *deleteConfirmationMessageDetails = @"It won’t be deleted, but will not be considered when adding up transaction totals.";
+
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
@@ -81,21 +84,30 @@
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
 	Transactions *info = [self.fetchedResultsController objectAtIndexPath:indexPath];
-	[cell.textLabel setText:[NSString stringWithFormat:@"[%f] %04d", info.time, info.cust_id]];
+	UIView *c = cell.contentView;
 	
-	if (info.credit_used)
-		[cell.detailTextLabel setText:[NSString stringWithFormat:@"Credit, $%i", info.credit_total]];
-	else if (info.snap_used)
-		[cell.detailTextLabel setText:[NSString stringWithFormat:@"SNAP, $%i", info.snap_total]];
-	else
-		[cell.detailTextLabel setText:@"No payment information!"];
+	//time
+	NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+	[dateFormatter setDateFormat:@"HH:mm:ss pp"];
+	[(UILabel *)[c viewWithTag:1] setText:[dateFormatter stringFromDate:[NSDate dateWithTimeIntervalSince1970:info.time]]];
 	
+	// demographic details
+	[(UILabel *)[c viewWithTag:2] setText:[NSString stringWithFormat:@"%@", info.cust_zipcode]];
+	[(UILabel *)[c viewWithTag:3] setText:[NSString stringWithFormat:@"%04i", info.cust_id]];
+	
+	// transaction details
+	[(UILabel *)[c viewWithTag:4] setText:(info.credit_used ? @"Credit" : info.snap_used ? @"SNAP" : @"None")];
+	[(UILabel *)[c viewWithTag:5] setText:[NSString stringWithFormat:@"$%i", (info.credit_used ? info.credit_total : info.snap_used ? info.snap_total : 0)]];
+	
+	// strike out if marked invalid
 	if (info.markedInvalid)
 	{
 		NSDictionary *strike = @{NSStrikethroughStyleAttributeName: [NSNumber numberWithInt:NSUnderlineStyleSingle]};
-		[cell.textLabel setAttributedText:[[NSAttributedString alloc] initWithString:[cell.textLabel text] attributes:strike]];
-		[cell.textLabel setTextColor:[UIColor lightGrayColor]];
-		[cell.detailTextLabel setText:[NSString stringWithFormat:@"(Invalid) %@", cell.detailTextLabel.text]];
+		for (int i = 1; i <= 5; i ++)
+		{
+			[(UILabel *)[c viewWithTag:i] setTextColor:[UIColor lightGrayColor]];
+			[(UILabel *)[c viewWithTag:i] setAttributedText:[[NSAttributedString alloc] initWithString:[(UILabel *)[c viewWithTag:i] text] attributes:strike]];
+		}
 	}
 }
 
@@ -132,10 +144,8 @@
 			
 		case UITableViewCellEditingStyleDelete:
 		{
-			// DON'T DELETE THE OBJECT. Just load it and [obj setDeleted:true]
-			Transactions *toDelete = [_fetchedResultsController objectAtIndexPath:indexPath];
-			[toDelete setMarkedInvalid:true];
-			[[self.tableView cellForRowAtIndexPath:indexPath] setTintAdjustmentMode:UIViewTintAdjustmentModeDimmed];
+			self.selectedObject = [self.fetchedResultsController objectAtIndexPath:indexPath];
+			[[[UIAlertView alloc] initWithTitle:deleteConfirmationMessageTitle message:deleteConfirmationMessageDetails delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil] show];
 			break;
 		}
 	}
@@ -144,6 +154,23 @@
 	if (![TFM_DELEGATE.managedObjectContext save:&error]) NSLog(@"error committing edit: %@", error);
 	
 	[self.tableView endUpdates];
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+	if ([[alertView title] isEqualToString:deleteConfirmationMessageTitle])
+	{
+		switch (buttonIndex)
+		{
+			case 0:
+				// canceled
+				break;
+				
+			case 1:
+				[self.selectedObject setMarkedInvalid:true];
+				break;
+		}
+	}
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
