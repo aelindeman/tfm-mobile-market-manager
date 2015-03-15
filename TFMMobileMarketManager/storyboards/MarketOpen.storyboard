@@ -457,7 +457,7 @@
         <scene sceneID="Ubo-gb-n5N">
             <objects>
                 <tableViewController id="xd3-O1-BwY" customClass="MarketOpenMenuViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="DLL-UB-Nk7">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="DLL-UB-Nk7">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -651,7 +651,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Dxf-nq-7Fm"/>
-        <segue reference="hav-tp-KH6"/>
+        <segue reference="UoE-Fg-2nz"/>
+        <segue reference="Ys2-Zc-Rye"/>
     </inferredMetricsTieBreakers>
 </document>
