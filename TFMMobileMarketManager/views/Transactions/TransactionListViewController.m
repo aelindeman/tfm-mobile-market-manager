@@ -88,8 +88,8 @@ static NSString *deleteConfirmationMessageDetails = @"It won’t be deleted, but
 	
 	//time
 	NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-	[dateFormatter setDateFormat:@"HH:mm:ss pp"];
-	[(UILabel *)[c viewWithTag:1] setText:[dateFormatter stringFromDate:[NSDate dateWithTimeIntervalSince1970:info.time]]];
+	[dateFormatter setDateFormat:@"h:mm:ss a"];
+	[(UILabel *)[c viewWithTag:1] setText:[dateFormatter stringFromDate:info.time]];
 	
 	// demographic details
 	[(UILabel *)[c viewWithTag:2] setText:[NSString stringWithFormat:@"%@", info.cust_zipcode]];

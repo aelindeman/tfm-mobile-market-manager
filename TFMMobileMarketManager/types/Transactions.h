@@ -24,7 +24,7 @@
 @property (nonatomic) int16_t snap_bonus;
 @property (nonatomic) int16_t snap_total;
 @property (nonatomic) BOOL snap_used;
-@property (nonatomic) NSTimeInterval time;
+@property (nonatomic) NSDate *time;
 @property (nonatomic, retain) MarketDays *marketday;
 
 @end

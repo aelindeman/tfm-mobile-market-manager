@@ -146,7 +146,7 @@
 			// load it up
 			Transactions *new = [NSEntityDescription insertNewObjectForEntityForName:@"Transactions" inManagedObjectContext:TFM_DELEGATE.managedObjectContext];
 			
-			new.time = NSTimeIntervalSince1970;
+			new.time = [NSDate date];
 			
 			new.cust_zipcode = form.cust_zipcode;
 			new.cust_id = form.cust_id;
