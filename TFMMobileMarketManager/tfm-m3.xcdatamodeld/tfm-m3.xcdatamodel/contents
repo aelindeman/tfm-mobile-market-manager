@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6254" systemVersion="14C109" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6751" systemVersion="14C1510" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Locations" representedClassName="Locations" syncable="YES">
         <attribute name="address" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
@@ -11,12 +11,12 @@
         <attribute name="notes" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="start_time" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <relationship name="location" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Locations" inverseName="marketdays" inverseEntity="Locations" syncable="YES"/>
-        <relationship name="redemptions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Redemptions" inverseName="marketday" inverseEntity="Redemptions" syncable="YES"/>
+        <relationship name="redemptions" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Redemptions" inverseName="marketday" inverseEntity="Redemptions" syncable="YES"/>
         <relationship name="staff" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MarketStaff" inverseName="marketday" inverseEntity="MarketStaff" syncable="YES"/>
-        <relationship name="terminalTotals" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TerminalTotals" inverseName="marketday" inverseEntity="TerminalTotals" syncable="YES"/>
-        <relationship name="tokenTotals" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TokenTotals" inverseName="marketday" inverseEntity="TokenTotals" syncable="YES"/>
-        <relationship name="transactions" optional="YES" toMany="YES" deletionRule="Deny" ordered="YES" destinationEntity="Transactions" inverseName="marketday" inverseEntity="Transactions" syncable="YES"/>
-        <relationship name="vendors" optional="YES" toMany="YES" deletionRule="Deny" destinationEntity="Vendors" inverseName="marketdays" inverseEntity="Vendors" syncable="YES"/>
+        <relationship name="terminalTotals" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="TerminalTotals" inverseName="marketday" inverseEntity="TerminalTotals" syncable="YES"/>
+        <relationship name="tokenTotals" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="TokenTotals" inverseName="marketday" inverseEntity="TokenTotals" syncable="YES"/>
+        <relationship name="transactions" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="Transactions" inverseName="marketday" inverseEntity="Transactions" syncable="YES"/>
+        <relationship name="vendors" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Vendors" inverseName="marketdays" inverseEntity="Vendors" syncable="YES"/>
     </entity>
     <entity name="MarketStaff" representedClassName="MarketStaff" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
