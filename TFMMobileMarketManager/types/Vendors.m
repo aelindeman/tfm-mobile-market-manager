@@ -18,6 +18,8 @@
 @dynamic phone;
 @dynamic productTypes;
 @dynamic stateTaxID;
+@dynamic acceptsSNAP;
+@dynamic acceptsIncentives;
 @dynamic marketdays;
 @dynamic redemptions;
 
