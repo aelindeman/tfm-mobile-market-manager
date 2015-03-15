@@ -43,7 +43,7 @@
 
 		NSArray *result = [TFM_DELEGATE.managedObjectContext executeFetchRequest:request error:&error];
 		if (error) [NSException raise:@"Core Data error" format:@"%@", error];
-		else [self.output setText:[NSString stringWithFormat:@"Request returned %i rows", [result count]]];
+		else [self.output setText:[NSString stringWithFormat:@"Request returned %i rows:\n\n%@", [result count], result]];
 	}
 	@catch (NSException *exception)
 	{
