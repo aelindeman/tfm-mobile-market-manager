@@ -86,9 +86,6 @@
 	if (form.check_number != 0 || (form.check_number < 1000 && form.check_number > 9999))
 		[errors addObject:@"Enter a valid 4 digit check number, or 0 for no check"];
 	
-	if (form.total == 0)
-		[errors addObject:@"Token counts must total to be greater than 0"];
-	
 	if ([errors count] > 0)
 	{
 		// puke
@@ -149,13 +146,13 @@
 
 - (void)updateTokenTotals:(UITableViewCell<FXFormFieldCell> *)cell
 {
-	// TODO: calculate redemption totals on the fly
-	/* RedemptionForm *form = self.formController.form;
-	NSUInteger credit_token_total;
-	NSUInteger payment_total;
+	RedemptionForm *form = self.formController.form;
+	NSUInteger credit_token_total = form.credit_count * 5;
+	NSUInteger payment_total = form.snap_count + form.bonus_count + (form.credit_count * 5);
+	//  @"detailTextLabel.text": [NSString stringWithFormat:@"$%i.00", self.total]
 	[form setCredit_amount:credit_token_total];
 	[form setTotal:payment_total];
-	[self.formController.tableView reloadData]; */
+	[self.formController.tableView reloadData];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
