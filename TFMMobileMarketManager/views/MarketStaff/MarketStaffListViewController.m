@@ -11,6 +11,11 @@
 
 @implementation MarketStaffListViewController
 
+static NSString *deleteConfirmationMessageTitle = @"Delete this staff member?";
+static NSString *deleteConfirmationMessageDetails = @"";
+static NSString *deleteFailedMessageTitle = @"Can’t delete this staff member";
+static NSString *deleteFailedMessageDetails = @"There are market days in the database that are using this staff member.";
+
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
@@ -123,8 +128,20 @@
 			break;
 			
 		case UITableViewCellEditingStyleDelete:
-			//TODO: confirm deletion
-			[TFM_DELEGATE.managedObjectContext deleteObject:[self.fetchedResultsController objectAtIndexPath:indexPath]];
+			self.selectedObject = [self.fetchedResultsController objectAtIndexPath:indexPath];
+			// check that it's able to be deleted
+			
+			NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MarketStaff"];
+			[request setPredicate:[NSPredicate predicateWithFormat:@"(%@ IN marketdays.staff)", self.selectedObject]];
+			
+			if ([[TFM_DELEGATE.managedObjectContext executeFetchRequest:request error:nil] count] > 0)
+			{
+				[[[UIAlertView alloc] initWithTitle:deleteFailedMessageTitle message:deleteFailedMessageDetails delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:nil] show];
+			}
+			else
+			{
+				[[[UIAlertView alloc] initWithTitle:deleteConfirmationMessageTitle message:deleteConfirmationMessageDetails delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil] show];
+			}
 			break;
 	}
 	
@@ -132,6 +149,24 @@
 	if (![TFM_DELEGATE.managedObjectContext save:&error]) NSLog(@"error committing edit: %@", error);
 	
 	[self.tableView endUpdates];
+}
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+	if ([[alertView title] isEqualToString:deleteConfirmationMessageTitle])
+	{
+		switch (buttonIndex)
+		{
+			case 0:
+				// canceled
+				break;
+				
+			case 1:
+			{
+				[TFM_DELEGATE.managedObjectContext deleteObject:self.selectedObject];
+				break;
+			}
+		}
+	}
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender

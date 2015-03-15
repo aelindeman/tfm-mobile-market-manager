@@ -11,5 +11,6 @@
 @interface MarketStaffListViewController : UITableViewController <NSFetchedResultsControllerDelegate>
 
 @property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
+@property (nonatomic) MarketStaff *selectedObject;
 
 @end
