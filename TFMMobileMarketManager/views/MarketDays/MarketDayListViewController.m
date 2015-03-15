@@ -9,6 +9,9 @@
 
 @end
 
+static NSString *deleteConfirmationMessageTitle = @"Delete this market day?";
+static NSString *deleteConfirmationMessageDetails = @"Its associated transactions and redemptions will also be deleted permanently.";
+
 @implementation MarketDayListViewController
 
 - (void)viewDidLoad
@@ -115,8 +118,8 @@
 			
 		case UITableViewCellEditingStyleDelete:
 		{
-			// TODO: confirm deletion
-			[TFM_DELEGATE.managedObjectContext deleteObject:[_fetchedResultsController objectAtIndexPath:indexPath]];
+			self.selectedObject = [self.fetchedResultsController objectAtIndexPath:indexPath];
+			[[[UIAlertView alloc] initWithTitle:deleteConfirmationMessageTitle message:deleteConfirmationMessageDetails delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil] show];
 			break;
 		}
 	}
@@ -125,6 +128,23 @@
 	if (![TFM_DELEGATE.managedObjectContext save:&error]) NSLog(@"error committing edit: %@", error);
 	
 	[self.tableView endUpdates];
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+	if ([[alertView title] isEqualToString:deleteConfirmationMessageTitle])
+	{
+		switch (buttonIndex)
+		{
+			case 0:
+				// canceled
+				break;
+				
+			case 1:
+				[TFM_DELEGATE.managedObjectContext deleteObject:self.selectedObject];
+				break;
+		}
+	}
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender

@@ -11,5 +11,6 @@
 @interface LocationsListViewController : UITableViewController <NSFetchedResultsControllerDelegate>
 
 @property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
+@property (nonatomic) Locations *selectedObject;
 
 @end

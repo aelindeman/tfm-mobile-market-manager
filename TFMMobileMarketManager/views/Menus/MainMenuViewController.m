@@ -29,11 +29,13 @@
 		], @[
 			@{@"title": @"Create reports", @"icon": @"reports", @"action": @"ReportsSegue"},
 			@{@"title": @"Synchronize database with a PC", @"icon": @"sync", @"action": @"SyncSegue"},
-			@{@"title": @"Export data", @"icon": @"export", @"action": @"ExportSegue"},
+			@{@"title": @"Console", @"icon": @"console", @"action": @"ConsoleSegue"},
 			@{@"title": @"Destroy database", @"icon": @"reset", @"action": @"resetDatabasePrompt"}
 		], @[
 			@{@"title": @"About", @"icon": @"about", @"action": @"AboutSegue"}
 		]];
+	
+	[self setTitle:[@"TFM.co Mobile Market Manager – " stringByAppendingString:[[UIDevice currentDevice] name]]];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

@@ -11,5 +11,6 @@
 @interface MarketDayListViewController : UITableViewController <NSFetchedResultsControllerDelegate>
 
 @property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
+@property (nonatomic) MarketDays *selectedObject;
 
 @end

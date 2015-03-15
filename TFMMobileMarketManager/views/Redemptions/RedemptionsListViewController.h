@@ -11,5 +11,6 @@
 @interface RedemptionsListViewController : UITableViewController <NSFetchedResultsControllerDelegate>
 
 @property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
+@property (nonatomic) Redemptions *selectedObject;
 
 @end

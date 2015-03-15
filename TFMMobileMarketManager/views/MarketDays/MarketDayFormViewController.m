@@ -41,7 +41,7 @@
 	else [self setTitle:@"New Market Day"];
 	
 	UIBarButtonItem *closeButton = [[UIBarButtonItem alloc] initWithTitle:@"Close" style:UIBarButtonItemStylePlain target:self action:@selector(discard)];
-	UIBarButtonItem *openButton = [[UIBarButtonItem alloc] initWithTitle:@"Start" style:UIBarButtonItemStyleBordered target:self action:@selector(startMarketDayPrompt)];
+	UIBarButtonItem *openButton = [[UIBarButtonItem alloc] initWithTitle:@"Start" style:UIBarButtonItemStylePlain target:self action:@selector(startMarketDayPrompt)];
 	UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(submit)];
 	
 	self.navigationItem.leftBarButtonItem = closeButton;
@@ -181,6 +181,15 @@
 		[TFM_DELEGATE setActiveMarketDay:self.marketday];
 		[self performSegueWithIdentifier:@"MarketOpenMenuSegue" sender:self];
 	}
+}
+
+- (void)updateVendorCountLabel:(UITableViewCell<FXFormFieldCell> *)cell
+{
+	MarketDayForm *form = self.formController.form;
+	form.vendorsCount = [form.vendors count];
+	[self.tableView reloadData];
+	
+	NSLog(@"%@", [self.formController class]);
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender

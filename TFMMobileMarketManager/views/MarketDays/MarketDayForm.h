@@ -15,6 +15,7 @@
 @property Locations *location;
 
 @property NSArray *vendors;
+@property NSUInteger vendorsCount;
 
 @property NSDate *date;
 @property NSDate *start_time;

@@ -11,6 +11,9 @@
 
 @implementation RedemptionsListViewController
 
+static NSString *deleteConfirmationMessageTitle = @"Mark this redemption as invalid?";
+static NSString *deleteConfirmationMessageDetails = @"It won’t be deleted, but will not be considered when adding up redemption totals.";
+
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
@@ -128,10 +131,8 @@
 			
 		case UITableViewCellEditingStyleDelete:
 		{
-			// DON'T DELETE THE OBJECT. Just load it and [obj setDeleted:true]
-			Redemptions *toDelete = [_fetchedResultsController objectAtIndexPath:indexPath];
-			[toDelete setMarkedInvalid:true];
-			[[self.tableView cellForRowAtIndexPath:indexPath] setTintAdjustmentMode:UIViewTintAdjustmentModeDimmed];
+			self.selectedObject = [self.fetchedResultsController objectAtIndexPath:indexPath];
+			[[[UIAlertView alloc] initWithTitle:deleteConfirmationMessageTitle message:deleteConfirmationMessageDetails delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil] show];
 			break;
 		}
 	}
@@ -140,6 +141,23 @@
 	if (![TFM_DELEGATE.managedObjectContext save:&error]) NSLog(@"error committing edit: %@", error);
 	
 	[self.tableView endUpdates];
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+	if ([[alertView title] isEqualToString:deleteConfirmationMessageTitle])
+	{
+		switch (buttonIndex)
+		{
+			case 0:
+				// canceled
+				break;
+				
+			case 1:
+				[self.selectedObject setMarkedInvalid:true];
+				break;
+		}
+	}
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender

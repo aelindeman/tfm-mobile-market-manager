@@ -22,8 +22,6 @@ static NSString *optionCellIdentifier = @"MenuOptionCell";
 	// populate the menu
 	self.menuOptions = @[
 		@[
-			@{@"title": @"MarketDayInfoCell"},
-		], @[
 			@{@"title": @"Add a transaction", @"bold": @true, @"icon": @"outbox", @"action": @"AddTransactionSegue"},
 			@{@"title": @"Edit transactions", @"icon": @"list", @"action": @"TransactionsSegue"},
 		], @[
@@ -64,39 +62,19 @@ static NSString *optionCellIdentifier = @"MenuOptionCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	NSDictionary *option = [[self.menuOptions objectAtIndex:[indexPath section]] objectAtIndex:[indexPath row]];
-	UITableViewCell *cell;
+	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:optionCellIdentifier forIndexPath:indexPath];
 	
-	if ([[option valueForKey:@"title"] isEqualToString:infoCellIdentifier])
-	{
-		cell = [tableView dequeueReusableCellWithIdentifier:infoCellIdentifier forIndexPath:indexPath];
-		
-		// TODO: replace %z% in cell labels
-	}
-	else
-	{
-		cell = [tableView dequeueReusableCellWithIdentifier:optionCellIdentifier forIndexPath:indexPath];
+	[cell.textLabel setText:[option valueForKey:@"title"]];
+	[cell setAccessoryType:[[option valueForKey:@"action"] hasSuffix:@"Segue"] ? UITableViewCellAccessoryDisclosureIndicator : UITableViewCellAccessoryNone];
 	
-		[cell.textLabel setText:[option valueForKey:@"title"]];
-		[cell setAccessoryType:[[option valueForKey:@"action"] hasSuffix:@"Segue"] ? UITableViewCellAccessoryDisclosureIndicator : UITableViewCellAccessoryNone];
-		
-		if ([option valueForKey:@"icon"])
-			[cell.imageView setImage:[UIImage imageNamed:[option valueForKey:@"icon"]]];
-		
-		if ([option valueForKey:@"bold"])
-			[cell.textLabel setFont:[UIFont boldSystemFontOfSize:[cell.textLabel.font pointSize]]];
-	}
+	if ([option valueForKey:@"icon"])
+		[cell.imageView setImage:[UIImage imageNamed:[option valueForKey:@"icon"]]];
+	
+	if ([option valueForKey:@"bold"])
+		[cell.textLabel setFont:[UIFont boldSystemFontOfSize:[cell.textLabel.font pointSize]]];
 	
 	return cell;
 }
-
-/* the info cell should be bigger than the other cells, which should stay at the default height
-   I wish there was a way to just GET the default height, but it's 44 */
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-	NSDictionary *option = [[self.menuOptions objectAtIndex:[indexPath section]] objectAtIndex:[indexPath row]];
-	return ([[option valueForKey:@"title"] isEqualToString:infoCellIdentifier]) ? 110 : 44;
-}
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	NSDictionary *selected = [[self.menuOptions objectAtIndex:[indexPath section]] objectAtIndex:[indexPath row]];
@@ -107,7 +85,7 @@ static NSString *optionCellIdentifier = @"MenuOptionCell";
 		[self performSegueWithIdentifier:action sender:self];
 	
 	else if ([action isEqualToString:@"closeMarketDay"])
-		[[[UIAlertView alloc] initWithTitle:@"Terminal and token totals haven’t been reconciled" message:nil delegate:self cancelButtonTitle:@"Close anyway" otherButtonTitles:@"Don’t close", nil] show];
+		[[[UIAlertView alloc] initWithTitle:@"Terminal and token totals haven’t been reconciled" message:@"There may be a discrepancy between the recorded transactions and the card reader.\n\nYou can return to this menu to perform reconciliation for this market day at any time." delegate:self cancelButtonTitle:@"Return" otherButtonTitles:@"Close anyway", nil] show];
 	
 	else NSLog(@"nothing to do for “%@”", [selected valueForKey:@"title"]);
 	
@@ -121,11 +99,10 @@ static NSString *optionCellIdentifier = @"MenuOptionCell";
 		switch (buttonIndex)
 		{
 			case 0:
-				[self closeMarketDay];
 				break;
 				
 			case 1:
-				// canceled
+				[self closeMarketDay];
 				break;
 		}
 	}
