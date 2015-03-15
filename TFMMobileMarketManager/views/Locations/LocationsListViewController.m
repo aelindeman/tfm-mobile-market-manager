@@ -125,7 +125,7 @@ static NSString *deleteFailedMessageDetails = @"There are market days in the dat
 			// check that it's able to be deleted
 			
 			NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Locations"];
-			[request setPredicate:[NSPredicate predicateWithFormat:@"(%@ IN marketdays.location)", self.selectedObject]];
+			[request setPredicate:[NSPredicate predicateWithFormat:@"(SELF = %@) and (marketdays.@count > 0)", self.selectedObject]];
 			
 			if ([[TFM_DELEGATE.managedObjectContext executeFetchRequest:request error:nil] count] > 0)
 			{

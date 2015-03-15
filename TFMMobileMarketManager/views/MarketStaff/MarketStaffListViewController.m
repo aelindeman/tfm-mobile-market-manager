@@ -26,8 +26,7 @@ static NSString *deleteFailedMessageDetails = @"There are market days in the dat
 - (void)load
 {
 	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"MarketStaff"];
-	[fetchRequest setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"position" ascending:true], [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:true]]];
-	//[fetchRequest setPropertiesToGroupBy:@[]];
+	[fetchRequest setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"position" ascending:false], [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:true]]];
 	
 	self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:TFM_DELEGATE.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
 	[self.fetchedResultsController setDelegate:self];
@@ -132,7 +131,7 @@ static NSString *deleteFailedMessageDetails = @"There are market days in the dat
 			// check that it's able to be deleted
 			
 			NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MarketStaff"];
-			[request setPredicate:[NSPredicate predicateWithFormat:@"(%@ IN marketdays.staff)", self.selectedObject]];
+			[request setPredicate:[NSPredicate predicateWithFormat:@"(SELF == %@) and (marketdays.@count > 0)", self.selectedObject]];
 			
 			if ([[TFM_DELEGATE.managedObjectContext executeFetchRequest:request error:nil] count] > 0)
 			{

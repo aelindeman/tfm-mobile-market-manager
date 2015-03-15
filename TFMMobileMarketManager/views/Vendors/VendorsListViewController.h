@@ -11,5 +11,6 @@
 @interface VendorsListViewController : UITableViewController <NSFetchedResultsControllerDelegate>
 
 @property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
+@property (nonatomic) Vendors *selectedObject;
 
 @end

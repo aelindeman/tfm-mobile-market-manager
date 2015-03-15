@@ -128,6 +128,11 @@ static NSString *deleteConfirmationMessageDetails = @"It won’t be deleted, but
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
+- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	return @"Mark invalid";
+}
+
 // allow swipes for deleting rows
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {

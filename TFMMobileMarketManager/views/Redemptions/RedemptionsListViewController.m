@@ -106,6 +106,11 @@ static NSString *deleteConfirmationMessageDetails = @"It won’t be deleted, but
 	return cell;
 }
 
+- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	return @"Mark invalid";
+}
+
 // trigger edit window segue on selection
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
