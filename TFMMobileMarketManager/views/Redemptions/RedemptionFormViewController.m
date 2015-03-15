@@ -82,9 +82,6 @@
 	
 	if (form.vendor == nil)
 		[errors addObject:@"Choose a vendor"];
-		
-	if (form.check_number != 0 || (form.check_number < 1000 && form.check_number > 9999))
-		[errors addObject:@"Enter a valid 4 digit check number, or 0 for no check"];
 	
 	if ([errors count] > 0)
 	{

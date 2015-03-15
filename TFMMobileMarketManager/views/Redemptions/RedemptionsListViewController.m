@@ -83,18 +83,28 @@ static NSString *deleteConfirmationMessageDetails = @"It won’t be deleted, but
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
 	Redemptions *info = [self.fetchedResultsController objectAtIndexPath:indexPath];
-	[cell.textLabel setText:[(Vendors *)info.vendor businessName]];
-	[cell.detailTextLabel setText:[NSString stringWithFormat:@"$%i", info.total]];
+	UIView *c = cell.contentView;
+	
+	NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+	[dateFormatter setDateStyle:NSDateFormatterShortStyle];
+	[(UILabel *)[c viewWithTag:1] setText:[dateFormatter stringFromDate:info.date]];
+	
+	[(UILabel *)[c viewWithTag:2] setText:[(Vendors *)info.vendor businessName]];
+	[(UILabel *)[c viewWithTag:4] setText:[NSString stringWithFormat:@"$%i", info.total]];
 	
 	if (info.check_number)
-		[cell.detailTextLabel setText:[NSString stringWithFormat:@"Paid, check #%i – $%i", info.check_number, info.total]];
+		[(UILabel *)[c viewWithTag:3] setText:[NSString stringWithFormat:@"%i", info.check_number]];
+	else
+		[(UILabel *)[c viewWithTag:3] setText:@""];
 	
 	if (info.markedInvalid)
 	{
 		NSDictionary *strike = @{NSStrikethroughStyleAttributeName: [NSNumber numberWithInt:NSUnderlineStyleSingle]};
-		[cell.textLabel setAttributedText:[[NSAttributedString alloc] initWithString:[cell.textLabel text] attributes:strike]];
-		[cell.textLabel setTextColor:[UIColor lightGrayColor]];
-		[cell.detailTextLabel setText:[NSString stringWithFormat:@"(Invalid) %@", cell.detailTextLabel.text]];
+		for (int i = 1; i <= 4; i ++)
+		{
+			[(UILabel *)[c viewWithTag:i] setTextColor:[UIColor lightGrayColor]];
+			[(UILabel *)[c viewWithTag:i] setAttributedText:[[NSAttributedString alloc] initWithString:[(UILabel *)[c viewWithTag:i] text] attributes:strike]];
+		}
 	}
 }
 
@@ -137,7 +147,7 @@ static NSString *deleteConfirmationMessageDetails = @"It won’t be deleted, but
 		case UITableViewCellEditingStyleDelete:
 		{
 			self.selectedObject = [self.fetchedResultsController objectAtIndexPath:indexPath];
-			[[[UIAlertView alloc] initWithTitle:deleteConfirmationMessageTitle message:deleteConfirmationMessageDetails delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil] show];
+			if ([self.selectedObject markedInvalid]) [[[UIAlertView alloc] initWithTitle:deleteConfirmationMessageTitle message:deleteConfirmationMessageDetails delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil] show];
 			break;
 		}
 	}

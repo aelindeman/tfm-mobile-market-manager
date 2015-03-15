@@ -150,7 +150,7 @@ static NSString *deleteConfirmationMessageDetails = @"It won’t be deleted, but
 		case UITableViewCellEditingStyleDelete:
 		{
 			self.selectedObject = [self.fetchedResultsController objectAtIndexPath:indexPath];
-			[[[UIAlertView alloc] initWithTitle:deleteConfirmationMessageTitle message:deleteConfirmationMessageDetails delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil] show];
+			if ([self.selectedObject markedInvalid]) [[[UIAlertView alloc] initWithTitle:deleteConfirmationMessageTitle message:deleteConfirmationMessageDetails delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil] show];
 			break;
 		}
 	}
