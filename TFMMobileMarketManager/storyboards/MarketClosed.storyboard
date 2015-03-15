@@ -110,7 +110,7 @@
                             <outlet property="delegate" destination="Utn-tX-255" id="EcP-du-X9Y"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Reopen Market Day" id="TJy-cD-7rH">
+                    <navigationItem key="navigationItem" title="Reopen a Market Day" id="TJy-cD-7rH">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="hr3-oG-wnQ">
                             <connections>
                                 <segue destination="tiF-zW-WZB" kind="presentation" identifier="NewMarketDaySegue" modalPresentationStyle="formSheet" id="0wi-nW-tjb"/>
@@ -198,7 +198,7 @@
             </objects>
             <point key="canvasLocation" x="3371" y="-285"/>
         </scene>
-        <!--About this app-->
+        <!--About-->
         <scene sceneID="jad-Q9-9Dd">
             <objects>
                 <viewController id="ROY-3U-J8u" sceneMemberID="viewController">
@@ -520,13 +520,13 @@ Stephen Davies</string>
                             <constraint firstAttribute="centerY" secondItem="cWK-XZ-u9x" secondAttribute="centerY" id="OU8-O3-bRI"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="About this app" id="MhH-oP-ERl"/>
+                    <navigationItem key="navigationItem" title="About" id="MhH-oP-ERl"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lsd-k9-UOE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="327.34375" y="-284.765625"/>
         </scene>
-        <!--Reports-->
+        <!--Generate Reports-->
         <scene sceneID="exq-ho-4ua">
             <objects>
                 <tableViewController id="KTV-OH-m7B" customClass="ReportsMenuViewController" sceneMemberID="viewController">
@@ -555,7 +555,7 @@ Stephen Davies</string>
                             <outlet property="delegate" destination="KTV-OH-m7B" id="RJO-gT-6B2"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Reports" id="YkO-bz-ujA"/>
+                    <navigationItem key="navigationItem" title="Generate Reports" id="YkO-bz-ujA"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aPu-RX-JRq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1144,9 +1144,9 @@ Stephen Davies</string>
         <image name="sync" width="16" height="16"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="6RH-vK-sCl"/>
-        <segue reference="TgG-lG-Acz"/>
         <segue reference="fZ2-QH-psV"/>
         <segue reference="tmR-C0-IUe"/>
+        <segue reference="Xyf-yc-rV8"/>
+        <segue reference="TgG-lG-Acz"/>
     </inferredMetricsTieBreakers>
 </document>

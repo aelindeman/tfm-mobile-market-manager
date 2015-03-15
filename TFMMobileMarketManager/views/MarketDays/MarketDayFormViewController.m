@@ -41,7 +41,7 @@
 	else [self setTitle:@"New Market Day"];
 	
 	UIBarButtonItem *closeButton = [[UIBarButtonItem alloc] initWithTitle:@"Close" style:UIBarButtonItemStylePlain target:self action:@selector(discard)];
-	UIBarButtonItem *openButton = [[UIBarButtonItem alloc] initWithTitle:@"Start" style:UIBarButtonItemStylePlain target:self action:@selector(startMarketDayPrompt)];
+	UIBarButtonItem *openButton = [[UIBarButtonItem alloc] initWithTitle:@"Open" style:UIBarButtonItemStylePlain target:self action:@selector(startMarketDay)];
 	UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(submit)];
 	
 	self.navigationItem.leftBarButtonItem = closeButton;
@@ -60,19 +60,6 @@
 				
 			case 1:
 				[self dismissViewControllerAnimated:true completion:nil];
-				break;
-		}
-	}
-	if ([[alertView title] isEqualToString:@"Reopen this market day?"])
-	{
-		switch (buttonIndex)
-		{
-			case 0:
-				// canceled
-				break;
-				
-			case 1:
-				[self startMarketDay];
 				break;
 		}
 	}
@@ -157,19 +144,6 @@
 		
 		[self dismissViewControllerAnimated:true completion:nil];
 		return true;
-	}
-}
-
-- (void)startMarketDayPrompt
-{
-	if ([self editMode] && ![TFM_DELEGATE activeMarketDay])
-	{
-		UIAlertView *prompt = [[UIAlertView alloc] initWithTitle:@"Reopen this market day?" message:@"Changes made on this form will be saved." delegate:self cancelButtonTitle:@"Don’t open" otherButtonTitles:@"Open", nil];
-		[prompt show];
-	}
-	else
-	{
-		[self startMarketDay];
 	}
 }
 

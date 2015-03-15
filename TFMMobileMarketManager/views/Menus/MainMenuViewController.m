@@ -21,7 +21,7 @@
 	self.menuOptions = @[
 		@[
 			@{@"title": @"Start new market day", @"bold": @true, @"icon": @"marketday", @"action": @"NewMarketDayFromMainMenuSegue"},
-			@{@"title": @"Reopen a closed market day", @"icon": @"marketdays", @"action": @"MarketDaysSegue"}
+			@{@"title": @"Reopen a market day", @"icon": @"marketdays", @"action": @"MarketDaysSegue"}
 		], @[
 			@{@"title": @"Edit vendors", @"icon": @"vendors", @"action": @"VendorsSegue"},
 			@{@"title": @"Edit staff", @"icon": @"staff", @"action": @"MarketStaffSegue"},
