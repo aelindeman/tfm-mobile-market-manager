@@ -222,6 +222,57 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="q3z-cC-Fft">
+                            <rect key="frame" x="0.0" y="64" width="600" height="22"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O4s-PO-o8h">
+                                    <rect key="frame" x="20" y="2" width="125" height="18"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="125" id="zCm-b9-jwB"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vendor" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TDo-Ig-fFx">
+                                    <rect key="frame" x="153" y="2" width="283" height="18"/>
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Value" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XCc-d9-0iH">
+                                    <rect key="frame" x="522" y="2" width="70" height="18"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="70" id="IoJ-sx-sEF"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Check #" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BhB-VJ-qwZ">
+                                    <rect key="frame" x="444" y="2" width="70" height="18"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="70" id="hj8-jW-yg0"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" red="0.1215686275" green="0.12941176469999999" blue="0.14117647059999999" alpha="0.84999999999999998" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstItem="O4s-PO-o8h" firstAttribute="leading" secondItem="q3z-cC-Fft" secondAttribute="leading" constant="20" symbolic="YES" id="0YB-zj-lep"/>
+                                <constraint firstAttribute="centerY" secondItem="BhB-VJ-qwZ" secondAttribute="centerY" id="0aB-oB-sSo"/>
+                                <constraint firstItem="BhB-VJ-qwZ" firstAttribute="leading" secondItem="TDo-Ig-fFx" secondAttribute="trailing" constant="8" symbolic="YES" id="0vZ-HR-QNv"/>
+                                <constraint firstAttribute="centerY" secondItem="TDo-Ig-fFx" secondAttribute="centerY" id="7xm-Dk-tnu"/>
+                                <constraint firstAttribute="trailing" secondItem="XCc-d9-0iH" secondAttribute="trailing" constant="8" id="8xU-gP-eBD"/>
+                                <constraint firstAttribute="centerY" secondItem="O4s-PO-o8h" secondAttribute="centerY" id="KwM-oL-Qq9"/>
+                                <constraint firstAttribute="centerY" secondItem="XCc-d9-0iH" secondAttribute="centerY" id="PAD-Dg-Y7e"/>
+                                <constraint firstItem="XCc-d9-0iH" firstAttribute="leading" secondItem="BhB-VJ-qwZ" secondAttribute="trailing" constant="8" symbolic="YES" id="cIr-Xv-oFc"/>
+                                <constraint firstItem="TDo-Ig-fFx" firstAttribute="leading" secondItem="O4s-PO-o8h" secondAttribute="trailing" constant="8" symbolic="YES" id="oDy-8v-HwQ"/>
+                            </constraints>
+                        </view>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="RedemptionCell" textLabel="7d3-YU-ORe" detailTextLabel="tG7-ib-ePj" style="IBUITableViewCellStyleValue1" id="OKT-jK-F9b">
                                 <autoresizingMask key="autoresizingMask"/>
@@ -556,7 +607,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Ys2-Zc-Rye"/>
-        <segue reference="UoE-Fg-2nz"/>
+        <segue reference="Dxf-nq-7Fm"/>
+        <segue reference="hav-tp-KH6"/>
     </inferredMetricsTieBreakers>
 </document>
