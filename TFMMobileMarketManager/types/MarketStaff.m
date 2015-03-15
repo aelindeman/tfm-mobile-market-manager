@@ -12,7 +12,7 @@
 @dynamic name;
 @dynamic phone;
 @dynamic position;
-@dynamic marketday;
+@dynamic marketdays;
 
 - (NSString *)description
 {

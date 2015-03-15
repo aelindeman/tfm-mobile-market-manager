@@ -13,7 +13,7 @@
 @property (nonatomic, retain) NSString *name;
 @property (nonatomic, retain) NSString *phone;
 @property (nonatomic) int16_t position;
-@property (nonatomic, retain) MarketDays *marketday;
+@property (nonatomic, retain) NSSet *marketdays;
 
 - (NSString *)description;
 - (NSString *)fieldDescription;
