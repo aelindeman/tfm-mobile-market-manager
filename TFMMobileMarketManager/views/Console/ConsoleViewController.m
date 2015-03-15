@@ -14,6 +14,11 @@
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
+	
+	// Field order (make the "Next" button work)
+	[self.tableField addTarget:self.predicateField action:@selector(becomeFirstResponder) forControlEvents:UIControlEventEditingDidEndOnExit];
+	[self.predicateField addTarget:self.sortField action:@selector(becomeFirstResponder) forControlEvents:UIControlEventEditingDidEndOnExit];
+	[self.sortField addTarget:self action:@selector(executeButtonPressed:) forControlEvents:UIControlEventEditingDidEndOnExit];
 }
 
 - (IBAction)clearButtonPressed:(id)sender
