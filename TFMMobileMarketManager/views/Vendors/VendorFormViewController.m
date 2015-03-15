@@ -35,6 +35,9 @@
 		form.phone = data.phone;
 		form.email = data.email;
 		
+		form.acceptsSNAP = data.acceptsSNAP;
+		form.acceptsIncentives = data.acceptsIncentives;
+		
 		form.stateTaxID = data.stateTaxID;
 		form.federalTaxID	= data.federalTaxID;
 	}
@@ -123,9 +126,11 @@
 			
 			[self.editObject setName:form.name];
 			[self.editObject setAddress:form.address];
-			
 			[self.editObject setPhone:form.phone];
 			[self.editObject setEmail:form.email];
+			
+			[self.editObject setAcceptsSNAP:form.acceptsSNAP];
+			[self.editObject setAcceptsIncentives:form.acceptsIncentives];
 			
 			[self.editObject setStateTaxID:form.stateTaxID];
 			[self.editObject setFederalTaxID:form.federalTaxID];
@@ -140,9 +145,11 @@
 			
 			new.name = form.name;
 			new.address = form.address;
-			
 			new.phone = form.phone;
 			new.email = form.email;
+			
+			new.acceptsSNAP = form.acceptsSNAP;
+			new.acceptsIncentives = form.acceptsIncentives;
 			
 			new.stateTaxID = form.stateTaxID;
 			new.federalTaxID = form.federalTaxID;

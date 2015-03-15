@@ -18,6 +18,8 @@
 @property (nonatomic, retain) NSString * phone;
 @property (nonatomic, retain) NSString * productTypes;
 @property (nonatomic, retain) NSString * stateTaxID;
+@property (nonatomic) bool acceptsSNAP;
+@property (nonatomic) bool acceptsIncentives;
 @property (nonatomic, retain) NSSet *marketdays;
 @property (nonatomic, retain) NSSet *redemptions;
 @end
