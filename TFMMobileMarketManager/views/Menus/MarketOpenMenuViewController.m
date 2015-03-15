@@ -14,8 +14,17 @@
 static NSString *infoCellIdentifier = @"MarketDayInfoCell";
 static NSString *optionCellIdentifier = @"MenuOptionCell";
 
+// strings shown when reconciliation isn't yet complete
 static NSString *reconciliationWarningTitle = @"Terminal and token totals haven’t been reconciled";
 static NSString *reconciliationWarningMessage = @"There may be a discrepancy between values of the transactions recorded on this device and the card reader.";
+static NSString *terminalTotalsNotDoneWarningTitle = @"";
+static NSString *terminalTotalsNotDoneWarningMessage = @"";
+static NSString *tokenTotalsNotDoneWarningTitle = @"";
+static NSString *tokenTotalsNotDoneWarningMessage = @"";
+
+// strings shown when reconciliation is complete, but isn't correct
+static NSString *reconciliationFailureTitle = @"";
+static NSString *reconciliationFailureMessage = @"";
 
 - (void)viewDidLoad
 {
@@ -34,7 +43,7 @@ static NSString *reconciliationWarningMessage = @"There may be a discrepancy bet
 			@{@"title": @"Reconcile terminal totals", @"icon": @"terminal", @"action": @"TerminalTotalsReconciliationFormSegue"},
 			@{@"title": @"Reconcile token totals", @"icon": @"tokens", @"action": @"TokenTotalsReconciliationFormSegue"},
 			@{@"title": @"Edit market day", @"icon": @"marketday", @"action": @"EditMarketDaySegue"},
-			@{@"title": @"Close market day", @"icon": @"x", @"action": @"closeMarketDay"}
+			@{@"title": @"Close market day", @"icon": @"exit", @"action": @"closeMarketDay"}
 		]];
 
 	[self.navigationItem setPrompt:[TFM_DELEGATE.activeMarketDay fieldDescription]];
