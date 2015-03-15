@@ -11,7 +11,7 @@
 {
 	return @[
 		@{FXFormFieldTitle: @"Business name", FXFormFieldKey: @"businessName", FXFormFieldHeader: @"Basic information"},
-		@{FXFormFieldTitle: @"Product types", FXFormFieldKey: @"productTypes", FXFormFieldType: FXFormFieldTypeLongText, FXFormFieldFooter: @"Separate product types by commas and no spaces"},
+		@{FXFormFieldTitle: @"Product types", FXFormFieldKey: @"productTypes", FXFormFieldType: FXFormFieldTypeLongText},
 		
 		@{FXFormFieldTitle: @"Operator name", FXFormFieldKey: @"name", FXFormFieldHeader: @"Contact"},
 		@{FXFormFieldTitle: @"Address", FXFormFieldKey: @"address", FXFormFieldType: FXFormFieldTypeLongText, FXFormFieldPlaceholder: @"Include city, state, and zip code in address"},
