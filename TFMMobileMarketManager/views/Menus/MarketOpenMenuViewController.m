@@ -14,6 +14,9 @@
 static NSString *infoCellIdentifier = @"MarketDayInfoCell";
 static NSString *optionCellIdentifier = @"MenuOptionCell";
 
+static NSString *reconciliationWarningTitle = @"Terminal and token totals haven’t been reconciled";
+static NSString *reconciliationWarningMessage = @"There may be a discrepancy between values of the transactions recorded on this device and the card reader.";
+
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
@@ -85,7 +88,7 @@ static NSString *optionCellIdentifier = @"MenuOptionCell";
 		[self performSegueWithIdentifier:action sender:self];
 	
 	else if ([action isEqualToString:@"closeMarketDay"])
-		[[[UIAlertView alloc] initWithTitle:@"Terminal and token totals haven’t been reconciled" message:@"There may be a discrepancy between the recorded transactions and the card reader.\n\nYou can return to this menu to perform reconciliation for this market day at any time." delegate:self cancelButtonTitle:@"Return" otherButtonTitles:@"Close anyway", nil] show];
+		[[[UIAlertView alloc] initWithTitle:reconciliationWarningTitle message:reconciliationWarningMessage delegate:self cancelButtonTitle:@"Return" otherButtonTitles:@"Close anyway", nil] show];
 	
 	else NSLog(@"nothing to do for “%@”", [selected valueForKey:@"title"]);
 	
@@ -94,7 +97,7 @@ static NSString *optionCellIdentifier = @"MenuOptionCell";
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-	if ([[alertView title] isEqualToString:@"Terminal and token totals haven’t been reconciled"])
+	if ([[alertView title] isEqualToString:reconciliationWarningTitle])
 	{
 		switch (buttonIndex)
 		{
