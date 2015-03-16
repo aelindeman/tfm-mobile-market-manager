@@ -13,6 +13,7 @@
 	NSAssert([TFM_DELEGATE activeMarketDay], @"No active market day set!");
 	
 	self.formController.form = [[TerminalTotalsReconciliationForm alloc] init];
+	TerminalTotalsReconciliationForm *form = self.formController.form;
 	
 	[self setEditMode:([self editObjectID] != nil)];
 	if ([self editMode])
@@ -21,7 +22,6 @@
 		[self setEditObject:(TerminalTotals *)[TFM_DELEGATE.managedObjectContext objectWithID:[self editObjectID]]];
 		
 		// populate form with passed data if in edit mode
-		TerminalTotalsReconciliationForm *form = self.formController.form;
 		TerminalTotals *data = self.editObject;
 		
 		form.terminalCreditAmount = data.credit_amount;
@@ -33,6 +33,31 @@
 	}
 	
 	[self setTitle:@"Reconcile Terminal Totals"];
+	
+	// reset these counters
+	form.deviceCreditAmount = form.deviceCreditTransactionCount = form.deviceSnapAmount = form.deviceSnapTransactionCount = form.deviceTotalAmount = form.deviceTotalTransactionCount = 0;
+	
+	// calculate totals from transactions
+	NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Transactions"];
+	[request setPredicate:[NSPredicate predicateWithFormat:@"marketday = %@ and markedInvalid = false", [TFM_DELEGATE activeMarketDay]]];
+	NSArray *tx = [TFM_DELEGATE.managedObjectContext executeFetchRequest:request error:nil];
+
+	form.deviceTotalTransactionCount = [tx count];
+	for (Transactions *t in tx)
+	{
+		if ([t credit_used])
+		{
+			form.deviceCreditTransactionCount ++;
+			form.deviceCreditAmount += [t credit_total];
+			form.deviceTotalAmount += [t credit_total];
+		}
+		if ([t snap_used])
+		{
+			form.deviceSnapTransactionCount ++;
+			form.deviceSnapAmount += [t snap_total];
+			form.deviceTotalAmount += [t snap_total];
+		}
+	}
 	
 	UIBarButtonItem *closeButton = [[UIBarButtonItem alloc] initWithTitle:@"Close" style:UIBarButtonItemStylePlain target:self action:@selector(discard)];
 	self.navigationItem.leftBarButtonItem = closeButton;

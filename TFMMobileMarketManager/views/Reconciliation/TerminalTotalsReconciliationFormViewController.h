@@ -7,6 +7,7 @@
 #import "FXForms.h"
 #import "TerminalTotals.h"
 #import "TerminalTotalsReconciliationForm.h"
+#import "Transactions.h"
 
 @interface TerminalTotalsReconciliationFormViewController : FXFormViewController
 

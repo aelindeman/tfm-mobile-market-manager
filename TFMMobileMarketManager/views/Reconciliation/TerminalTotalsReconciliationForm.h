@@ -15,4 +15,11 @@
 @property unsigned int terminalTotalAmount;
 @property unsigned int terminalTotalTransactionCount;
 
+@property unsigned int deviceCreditAmount;
+@property unsigned int deviceCreditTransactionCount;
+@property unsigned int deviceSnapAmount;
+@property unsigned int deviceSnapTransactionCount;
+@property unsigned int deviceTotalAmount;
+@property unsigned int deviceTotalTransactionCount;
+
 @end
