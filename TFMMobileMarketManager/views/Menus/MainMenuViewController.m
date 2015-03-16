@@ -60,6 +60,26 @@
 	}
 }
 
+- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
+{
+	if (section == [self.menuOptions count] - 1)
+	{
+		NSString *version = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"];
+		NSString *compileTime = [NSString stringWithFormat:@"%@ %@", [NSString stringWithUTF8String:__DATE__], [NSString stringWithUTF8String:__TIME__]];
+		
+		NSDateFormatter *interpreter = [[NSDateFormatter alloc] init];
+		[interpreter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
+		[interpreter setDateFormat:@"MMM d yyyy HH:mm:ss"];
+		NSDate *builtAt = [interpreter dateFromString:compileTime];
+		
+		NSDateFormatter *df = [[NSDateFormatter alloc] init];
+		[df setDateFormat:@"YYYY-MM-dd HH:mm a"];
+		
+		return [NSString stringWithFormat:@"Version info:\n\t%@\n\trev %@\n\tbuilt %@", [[NSBundle mainBundle] bundleIdentifier], version, [df stringFromDate:builtAt]];
+	}
+	else return nil;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MenuOptionCell" forIndexPath:indexPath];

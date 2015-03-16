@@ -3,6 +3,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--Main Menu View Controller-->
@@ -12,7 +13,7 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="4F2-Gx-one">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="MenuOptionCell" textLabel="wUd-9R-4NL" style="IBUITableViewCellStyleDefault" id="Mdc-JJ-i4w">
                                 <autoresizingMask key="autoresizingMask"/>
@@ -22,7 +23,7 @@
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="wUd-9R-4NL">
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -92,7 +93,7 @@
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" id="bC1-EE-Yfg">
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" id="gPO-Gy-ypu">
@@ -144,7 +145,7 @@
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" id="SHD-fQ-Rth">
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" id="PcW-c5-BrP">
@@ -210,8 +211,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.25000000000000006" adjustsLetterSpacingToFitWidth="YES" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="cWK-XZ-u9x">
-                                <rect key="frame" x="91" y="72" width="418" height="456"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="cWK-XZ-u9x">
+                                <rect key="frame" x="65" y="163" width="321" height="274"/>
                                 <attributedString key="attributedText">
                                     <fragment content="TheFarmersMarket.co">
                                         <attributes>
@@ -433,7 +434,80 @@ Cg
                                     </fragment>
                                     <fragment>
                                         <string key="content" base64-UTF8="YES">
-Cgo
+Cg
+</string>
+                                        <attributes>
+                                            <color key="NSColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="16" name="HelveticaNeue-Light"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural">
+                                                <tabStops>
+                                                    <textTab alignment="left" location="36"/>
+                                                    <textTab alignment="left" location="72"/>
+                                                    <textTab alignment="left" location="108"/>
+                                                    <textTab alignment="left" location="144"/>
+                                                    <textTab alignment="left" location="180"/>
+                                                    <textTab alignment="left" location="216"/>
+                                                    <textTab alignment="left" location="252"/>
+                                                    <textTab alignment="left" location="288"/>
+                                                    <textTab alignment="left" location="324"/>
+                                                    <textTab alignment="left" location="360"/>
+                                                    <textTab alignment="left" location="396"/>
+                                                    <textTab alignment="left" location="432"/>
+                                                </tabStops>
+                                            </paragraphStyle>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="NSDataAdditions - cocoabits.com">
+                                        <attributes>
+                                            <color key="NSColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="16" name="HelveticaNeue-Light"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural">
+                                                <tabStops>
+                                                    <textTab alignment="left" location="36"/>
+                                                    <textTab alignment="left" location="72"/>
+                                                    <textTab alignment="left" location="108"/>
+                                                    <textTab alignment="left" location="144"/>
+                                                    <textTab alignment="left" location="180"/>
+                                                    <textTab alignment="left" location="216"/>
+                                                    <textTab alignment="left" location="252"/>
+                                                    <textTab alignment="left" location="288"/>
+                                                    <textTab alignment="left" location="324"/>
+                                                    <textTab alignment="left" location="360"/>
+                                                    <textTab alignment="left" location="396"/>
+                                                    <textTab alignment="left" location="432"/>
+                                                </tabStops>
+                                            </paragraphStyle>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content" base64-UTF8="YES">
+Cg
+</string>
+                                        <attributes>
+                                            <color key="NSColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="12" name="HelveticaNeue"/>
+                                            <font key="NSOriginalFont" size="12" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural">
+                                                <tabStops>
+                                                    <textTab alignment="left" location="36"/>
+                                                    <textTab alignment="left" location="72"/>
+                                                    <textTab alignment="left" location="108"/>
+                                                    <textTab alignment="left" location="144"/>
+                                                    <textTab alignment="left" location="180"/>
+                                                    <textTab alignment="left" location="216"/>
+                                                    <textTab alignment="left" location="252"/>
+                                                    <textTab alignment="left" location="288"/>
+                                                    <textTab alignment="left" location="324"/>
+                                                    <textTab alignment="left" location="360"/>
+                                                    <textTab alignment="left" location="396"/>
+                                                    <textTab alignment="left" location="432"/>
+                                                </tabStops>
+                                            </paragraphStyle>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content" base64-UTF8="YES">
+Cg
 </string>
                                         <attributes>
                                             <color key="NSColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
@@ -511,14 +585,21 @@ Stephen Davies</string>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="cWK-XZ-u9x" firstAttribute="top" secondItem="Xp2-8Z-Jzf" secondAttribute="bottom" constant="8" symbolic="YES" id="1Xd-cf-Q4K"/>
                             <constraint firstItem="cWK-XZ-u9x" firstAttribute="leading" secondItem="Sob-K5-SVa" secondAttribute="leadingMargin" constant="75" id="7sN-J6-vvt"/>
-                            <constraint firstAttribute="centerX" secondItem="cWK-XZ-u9x" secondAttribute="centerX" id="9yG-ay-lt1"/>
+                            <constraint firstAttribute="centerX" secondItem="cWK-XZ-u9x" secondAttribute="centerX" multiplier="4:3" id="9yG-ay-lt1"/>
                             <constraint firstItem="cWK-XZ-u9x" firstAttribute="height" relation="lessThanOrEqual" secondItem="Sob-K5-SVa" secondAttribute="height" id="K8g-Pb-z1z"/>
                             <constraint firstAttribute="centerY" secondItem="cWK-XZ-u9x" secondAttribute="centerY" id="OU8-O3-bRI"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="1Xd-cf-Q4K"/>
+                                <exclude reference="7sN-J6-vvt"/>
+                                <exclude reference="K8g-Pb-z1z"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" title="About" id="MhH-oP-ERl"/>
                 </viewController>
@@ -533,7 +614,7 @@ Stephen Davies</string>
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="wLT-Sd-uHP">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="MenuOptionCell" textLabel="2KI-qs-KbM" style="IBUITableViewCellStyleDefault" id="5dq-aS-qvP">
                                 <autoresizingMask key="autoresizingMask"/>
@@ -543,7 +624,7 @@ Stephen Davies</string>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="2KI-qs-KbM">
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -578,7 +659,7 @@ Stephen Davies</string>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" id="Izv-0E-hkq">
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" id="9hk-Te-3UY">
@@ -628,7 +709,7 @@ Stephen Davies</string>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" id="n8T-wP-NLD">
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" id="lKh-Kd-6cP">
@@ -728,7 +809,7 @@ Stephen Davies</string>
                                         <string key="content">Step 1: Connect USB Cable
 </string>
                                         <attributes>
-                                            <color key="NSColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <font key="NSFont" size="17" name="HelveticaNeue"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
                                         </attributes>
@@ -761,14 +842,14 @@ Stephen Davies</string>
                                         <string key="content">Step 2: Open Sync Client on PC
 </string>
                                         <attributes>
-                                            <color key="NSColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <font key="NSFont" size="17" name="HelveticaNeue"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
                                         </attributes>
                                     </fragment>
                                     <fragment content="Open the Sync Client program on the PC to prepare for synchronization.">
                                         <attributes>
-                                            <color key="NSColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <font key="NSFont" size="15" name="HelveticaNeue-Light"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
                                         </attributes>
@@ -793,21 +874,21 @@ Stephen Davies</string>
                                         <string key="content">Step 3: Press Sync
 </string>
                                         <attributes>
-                                            <color key="NSColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <font key="NSFont" size="17" name="HelveticaNeue"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
                                         </attributes>
                                     </fragment>
                                     <fragment content="Press ">
                                         <attributes>
-                                            <color key="NSColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <font key="NSFont" size="15" name="HelveticaNeue-Light"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
                                         </attributes>
                                     </fragment>
                                     <fragment content="Sync">
                                         <attributes>
-                                            <color key="NSColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <font key="NSFont" size="15" name="HelveticaNeue-LightItalic"/>
                                             <font key="NSOriginalFont" size="15" name="HelveticaNeue-LightItalic"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
@@ -815,7 +896,7 @@ Stephen Davies</string>
                                     </fragment>
                                     <fragment content=" to begin transferring data.">
                                         <attributes>
-                                            <color key="NSColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <font key="NSFont" size="15" name="HelveticaNeue-Light"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
                                         </attributes>
@@ -832,7 +913,7 @@ Stephen Davies</string>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Idle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="98T-Y0-TcS">
                                 <rect key="frame" x="150" y="556" width="300" height="14"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WI7-O8-5JW">
@@ -846,7 +927,7 @@ Stephen Davies</string>
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="Om6-Fm-rT7" firstAttribute="centerY" secondItem="xgW-KF-qdM" secondAttribute="centerY" id="0o3-2n-zR7"/>
                             <constraint firstItem="yGY-OQ-vkJ" firstAttribute="width" secondItem="uU7-9W-CYi" secondAttribute="width" id="43e-7B-33X"/>
@@ -901,43 +982,43 @@ Stephen Davies</string>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Table" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e6k-Ra-U83">
                                 <rect key="frame" x="16" y="78" width="37" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="SELECT * FROM…" minimumFontSize="11" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="m4s-da-EWx">
                                 <rect key="frame" x="61" y="72" width="523" height="30"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Predicate" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="th9-sU-zrO">
                                 <rect key="frame" x="16" y="116" width="65" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="WHERE…" minimumFontSize="11" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="cc8-0F-jRm">
                                 <rect key="frame" x="89" y="110" width="495" height="30"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sort by" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A41-5p-Glq">
                                 <rect key="frame" x="16" y="154" width="50" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="SORT BY…" minimumFontSize="11" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="81B-Mp-CiK">
                                 <rect key="frame" x="74" y="148" width="510" height="30"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="go" enablesReturnKeyAutomatically="YES"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sort order" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Cm-n4-7iB">
                                 <rect key="frame" x="16" y="191" width="69" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="hPZ-qs-d7G">
@@ -968,7 +1049,7 @@ Stephen Davies</string>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="interactive" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sFS-53-wCG">
                                 <rect key="frame" x="0.0" y="224" width="600" height="376"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
+                                <color key="backgroundColor" red="0.12156862745098039" green="0.12941176470588237" blue="0.14117647058823529" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="11"/>
@@ -976,7 +1057,7 @@ Stephen Davies</string>
                                 <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES"/>
                             </textView>
                         </subviews>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="Xct-gA-bUd" firstAttribute="top" secondItem="sFS-53-wCG" secondAttribute="bottom" id="1YW-6B-lGV"/>
                             <constraint firstItem="cc8-0F-jRm" firstAttribute="trailing" secondItem="rOO-pV-HCI" secondAttribute="trailingMargin" id="1jg-7j-iTr"/>
