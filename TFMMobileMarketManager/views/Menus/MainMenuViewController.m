@@ -201,8 +201,7 @@
 - (IBAction)segueToMarketOpenMenu:(UIStoryboardSegue *)unwindSegue
 {
 	UINavigationController *menu = [[UIStoryboard storyboardWithName:@"MarketOpen" bundle:nil] instantiateInitialViewController];
-	//[menu setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal]; // too fancy
-	[menu setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
+	[menu setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
 	[self.navigationController presentViewController:menu animated:true completion:nil];
 }
 
