@@ -116,6 +116,11 @@ static NSString *deleteConfirmationMessageDetails = @"It won’t be deleted, but
 	return cell;
 }
 
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+	return [[[NSBundle mainBundle] loadNibNamed:@"RedemptionsListHeaderView" owner:self options:nil] firstObject];
+}
+
 - (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	return @"Mark invalid";

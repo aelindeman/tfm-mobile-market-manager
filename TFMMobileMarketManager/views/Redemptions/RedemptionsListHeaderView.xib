@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="ob0-G7-dtz">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="22"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wpv-oZ-zQY">
+                    <rect key="frame" x="20" y="2" width="125" height="18"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="125" id="qa9-be-Cmw"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vendor" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9nD-pw-sMb">
+                    <rect key="frame" x="153" y="2" width="283" height="18"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Value" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GqV-He-dTk">
+                    <rect key="frame" x="522" y="2" width="70" height="18"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="70" id="nQ0-Sj-1KN"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Check #" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qQV-2s-ybE">
+                    <rect key="frame" x="444" y="2" width="70" height="18"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="70" id="dkZ-4z-lbG"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="0.1215686275" green="0.12941176469999999" blue="0.14117647059999999" alpha="0.84999999999999998" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="qQV-2s-ybE" firstAttribute="leading" secondItem="9nD-pw-sMb" secondAttribute="trailing" constant="8" symbolic="YES" id="3Wg-ZU-dTb"/>
+                <constraint firstAttribute="centerY" secondItem="qQV-2s-ybE" secondAttribute="centerY" id="Nx8-V2-je3"/>
+                <constraint firstAttribute="trailing" secondItem="GqV-He-dTk" secondAttribute="trailing" constant="8" id="SdQ-PM-N0f"/>
+                <constraint firstItem="wpv-oZ-zQY" firstAttribute="leading" secondItem="ob0-G7-dtz" secondAttribute="leading" constant="20" symbolic="YES" id="X0e-qt-21Y"/>
+                <constraint firstItem="9nD-pw-sMb" firstAttribute="leading" secondItem="wpv-oZ-zQY" secondAttribute="trailing" constant="8" symbolic="YES" id="agf-eC-02G"/>
+                <constraint firstItem="GqV-He-dTk" firstAttribute="leading" secondItem="qQV-2s-ybE" secondAttribute="trailing" constant="8" symbolic="YES" id="dnx-yG-xAK"/>
+                <constraint firstAttribute="centerY" secondItem="9nD-pw-sMb" secondAttribute="centerY" id="g8b-4F-V8Q"/>
+                <constraint firstAttribute="centerY" secondItem="wpv-oZ-zQY" secondAttribute="centerY" id="oaO-yO-yks"/>
+                <constraint firstAttribute="centerY" secondItem="GqV-He-dTk" secondAttribute="centerY" id="sJg-aK-LA2"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="662" y="-393"/>
+        </view>
+    </objects>
+</document>

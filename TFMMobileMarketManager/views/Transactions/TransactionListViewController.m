@@ -128,6 +128,11 @@ static NSString *deleteConfirmationMessageDetails = @"It won’t be deleted, but
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+	return [[[NSBundle mainBundle] loadNibNamed:@"TransactionListHeaderView" owner:self options:nil] firstObject];
+}
+
 - (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	return @"Mark invalid";
