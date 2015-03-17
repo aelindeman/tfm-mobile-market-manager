@@ -43,6 +43,8 @@
 		FA0AC29F1A9FB2B000CCA13A /* VendorFormViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0AC2781A9FB2B000CCA13A /* VendorFormViewController.m */; };
 		FA0AC2A01A9FB2B000CCA13A /* VendorsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0AC27A1A9FB2B000CCA13A /* VendorsListViewController.m */; };
 		FA0AC2A21A9FB2E300CCA13A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA0AC2A11A9FB2E300CCA13A /* Assets.xcassets */; };
+		FA11AAF51AB7E05D00D4C360 /* TransactionTotalsView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA11AAF41AB7E05D00D4C360 /* TransactionTotalsView.m */; };
+		FA68EF521AB74E6500F0CB95 /* TransactionTotalsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA68EF511AB74E6500F0CB95 /* TransactionTotalsView.xib */; };
 		FAB118F11A9FB72B0012ED5D /* tfm-m3.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FAB118EF1A9FB72B0012ED5D /* tfm-m3.xcdatamodeld */; };
 		FAB4C4C11AB719CC00E462D1 /* NSData+CocoaDevUsersAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = FAB4C4C01AB719CC00E462D1 /* NSData+CocoaDevUsersAdditions.m */; };
 		FAB4C4C31AB71B2800E462D1 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FAB4C4C21AB71B2800E462D1 /* libz.dylib */; };
@@ -124,6 +126,9 @@
 		FA0AC2791A9FB2B000CCA13A /* VendorsListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VendorsListViewController.h; sourceTree = "<group>"; };
 		FA0AC27A1A9FB2B000CCA13A /* VendorsListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VendorsListViewController.m; sourceTree = "<group>"; };
 		FA0AC2A11A9FB2E300CCA13A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		FA11AAF31AB7E05D00D4C360 /* TransactionTotalsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransactionTotalsView.h; sourceTree = "<group>"; };
+		FA11AAF41AB7E05D00D4C360 /* TransactionTotalsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransactionTotalsView.m; sourceTree = "<group>"; };
+		FA68EF511AB74E6500F0CB95 /* TransactionTotalsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TransactionTotalsView.xib; sourceTree = "<group>"; };
 		FAB118F01A9FB72B0012ED5D /* tfm-m3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "tfm-m3.xcdatamodel"; sourceTree = "<group>"; };
 		FAB4C4BF1AB719CC00E462D1 /* NSData+CocoaDevUsersAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+CocoaDevUsersAdditions.h"; sourceTree = "<group>"; };
 		FAB4C4C01AB719CC00E462D1 /* NSData+CocoaDevUsersAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+CocoaDevUsersAdditions.m"; sourceTree = "<group>"; };
@@ -374,6 +379,9 @@
 				FAF7150D1AB35D0E00D21067 /* TokenTotalsReconciliationForm.m */,
 				FAF715121AB35E0100D21067 /* TokenTotalsReconciliationFormViewController.h */,
 				FAF715131AB35E0100D21067 /* TokenTotalsReconciliationFormViewController.m */,
+				FA11AAF31AB7E05D00D4C360 /* TransactionTotalsView.h */,
+				FA11AAF41AB7E05D00D4C360 /* TransactionTotalsView.m */,
+				FA68EF511AB74E6500F0CB95 /* TransactionTotalsView.xib */,
 			);
 			path = Reconciliation;
 			sourceTree = "<group>";
@@ -448,6 +456,7 @@
 			files = (
 				FA0AC2A21A9FB2E300CCA13A /* Assets.xcassets in Resources */,
 				FA0AC2801A9FB2B000CCA13A /* MarketClosed.storyboard in Resources */,
+				FA68EF521AB74E6500F0CB95 /* TransactionTotalsView.xib in Resources */,
 				FA0AC2811A9FB2B000CCA13A /* MarketOpen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -478,6 +487,7 @@
 			files = (
 				FA0AC28D1A9FB2B000CCA13A /* MarketDayForm.m in Sources */,
 				FA0AC2991A9FB2B000CCA13A /* ReportsMenuViewController.m in Sources */,
+				FA11AAF51AB7E05D00D4C360 /* TransactionTotalsView.m in Sources */,
 				FA0AC27B1A9FB2B000CCA13A /* AppDelegate.m in Sources */,
 				FA0AC2821A9FB2B000CCA13A /* Locations.m in Sources */,
 				FA0AC2971A9FB2B000CCA13A /* RedemptionFormViewController.m in Sources */,
