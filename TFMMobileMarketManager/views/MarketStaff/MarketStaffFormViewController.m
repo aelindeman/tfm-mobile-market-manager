@@ -93,7 +93,7 @@
 		if ([self editMode])
 		{
 			[self.editObject setName:[form.name capitalizedString]];
-			[self.editObject setPhone:[self sanitizePhone:form.phone];
+			[self.editObject setPhone:[self sanitizePhone:form.phone]];
 			[self.editObject setPosition:form.position];
 		}
 		// create a new object otherwise
