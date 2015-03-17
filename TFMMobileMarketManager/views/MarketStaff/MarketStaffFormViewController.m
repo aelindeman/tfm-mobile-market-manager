@@ -93,7 +93,7 @@
 		if ([self editMode])
 		{
 			[self.editObject setName:[form.name capitalizedString]];
-			[self.editObject setPhone:form.phone];
+			[self.editObject setPhone:[self sanitizePhone:form.phone];
 			[self.editObject setPosition:form.position];
 		}
 		// create a new object otherwise
@@ -101,7 +101,7 @@
 		{
 			MarketStaff *new = [NSEntityDescription insertNewObjectForEntityForName:@"MarketStaff" inManagedObjectContext:TFM_DELEGATE.managedObjectContext];
 			new.name = [form.name capitalizedString];
-			new.phone = form.phone;
+			new.phone = [self sanitizePhone:form.phone];
 			new.position = form.position;
 		}
 		
@@ -118,6 +118,12 @@
 		[self dismissViewControllerAnimated:true completion:nil];
 		return true;
 	}
+}
+
+// removes junk from phone number before inserting into db
+- (NSString *)sanitizePhone:(NSString *)input
+{
+	return [[input componentsSeparatedByCharactersInSet:[[NSCharacterSet characterSetWithCharactersInString:@"0123456789"] invertedSet]] componentsJoinedByString:@""];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
