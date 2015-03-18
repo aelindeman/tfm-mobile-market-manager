@@ -96,8 +96,17 @@ static NSString *deleteConfirmationMessageDetails = @"It won’t be deleted, but
 	[(UILabel *)[c viewWithTag:3] setText:[NSString stringWithFormat:@"%04i", info.cust_id]];
 	
 	// transaction details
+	unsigned int transactionTotal = (info.credit_used ? info.credit_total : info.snap_used ? info.snap_total : 0);
 	[(UILabel *)[c viewWithTag:4] setText:(info.credit_used ? @"Credit" : info.snap_used ? @"SNAP" : @"None")];
-	[(UILabel *)[c viewWithTag:5] setText:[NSString stringWithFormat:@"$%i", (info.credit_used ? info.credit_total : info.snap_used ? info.snap_total : 0)]];
+	[(UILabel *)[c viewWithTag:5] setText:[NSString stringWithFormat:@"$%i", transactionTotal]];
+	
+	// point out transactions with suspiciously high amounts
+	if ((info.credit_used && transactionTotal > 100) ||
+		(info.snap_used && transactionTotal > 40))
+	{
+		[(UILabel *)[c viewWithTag:4] setTextColor:[UIColor orangeColor]];
+		[(UILabel *)[c viewWithTag:5] setTextColor:[UIColor orangeColor]];
+	}
 	
 	// strike out if marked invalid
 	if (info.markedInvalid)
