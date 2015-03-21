@@ -279,45 +279,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fcx-ic-X5s" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3226" y="-4733"/>
-        </scene>
-        <!--Terminal Totals Reconciliation Form View Controller-->
-        <scene sceneID="GFF-2n-lpF">
-            <objects>
-                <viewController id="EpR-AG-SAu" customClass="TerminalTotalsReconciliationFormViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="CtN-ww-0lw"/>
-                        <viewControllerLayoutGuide type="bottom" id="uah-br-ZmD"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="1rB-Kz-j8e">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="fZt-zX-ngs"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ixQ-eM-2uV" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3226" y="-3277"/>
-        </scene>
-        <!--Token Totals Reconciliation Form View Controller-->
-        <scene sceneID="VJ8-W7-But">
-            <objects>
-                <viewController id="zGb-lb-8hY" customClass="TokenTotalsReconciliationFormViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="oFl-Th-3hG"/>
-                        <viewControllerLayoutGuide type="bottom" id="hd4-oF-6Tc"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="pUa-5v-BT3">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="qdZ-ry-9fa"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Akb-l9-pD9" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3226" y="-2541"/>
+            <point key="canvasLocation" x="1391" y="-3757"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="lrU-Kq-YF3">
@@ -455,7 +417,7 @@
                         <segue destination="Zv5-Uh-IUN" kind="presentation" identifier="AddRedemptionSegue" modalPresentationStyle="formSheet" id="UoE-Fg-2nz"/>
                         <segue destination="TNH-HD-MlB" kind="presentation" identifier="EditMarketDaySegue" modalPresentationStyle="formSheet" id="ErB-r1-c16"/>
                         <segue destination="wIg-1A-yB2" kind="presentation" identifier="TerminalTotalsReconciliationFormSegue" modalPresentationStyle="formSheet" id="h8Z-ch-oIK"/>
-                        <segue destination="ne1-dZ-lhc" kind="presentation" identifier="TokenTotalsReconciliationFormSegue" modalPresentationStyle="formSheet" id="huu-Iu-b9t"/>
+                        <segue destination="hyY-XN-vng" kind="presentation" identifier="TokenTotalsReconciliationFormSegue" id="vCc-y8-oZW"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yQ0-YN-fEl" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -480,6 +442,92 @@
             </objects>
             <point key="canvasLocation" x="3226" y="-4002"/>
         </scene>
+        <!--Reconcile Terminal Totals-->
+        <scene sceneID="gwV-Yj-TcR">
+            <objects>
+                <tableViewController id="i3D-vT-apW" customClass="TerminalTotalsReconciliationViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="a4J-1z-owg">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="TerminalTotalsCell" id="2me-Mf-QH6" customClass="ReconciliationEntryTableViewCell">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2me-Mf-QH6" id="kza-TS-4wc">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="CalculatedTotalsCell" id="ttQ-yl-AR0" customClass="ReconciliationEntryTableViewCell">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ttQ-yl-AR0" id="jQv-5M-5KS">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="MenuOptionCell" textLabel="uMs-Vi-wvv" style="IBUITableViewCellStyleDefault" id="nbt-Ls-Drs">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nbt-Ls-Drs" id="BYp-U4-xFl">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="uMs-Vi-wvv">
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="i3D-vT-apW" id="ywT-X9-RLQ"/>
+                            <outlet property="delegate" destination="i3D-vT-apW" id="6gn-Yq-EjD"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Reconcile Terminal Totals" id="ksU-dO-zIH"/>
+                    <connections>
+                        <segue destination="lz5-vY-sR0" kind="unwind" identifier="MainMenuSegue" unwindAction="unwindToMainMenu:" id="JeQ-Ci-DVa"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rcQ-hQ-hsE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="lz5-vY-sR0" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="3226" y="-4737"/>
+        </scene>
+        <!--Reconcile Token Totals-->
+        <scene sceneID="l3a-oo-Jf1">
+            <objects>
+                <tableViewController id="Ag3-9w-CmA" customClass="TokenTotalsReconciliationViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="40k-wt-vbo">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="MenuOptionCell" textLabel="zuU-XD-CLo" style="IBUITableViewCellStyleDefault" id="r7a-am-DOD">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="r7a-am-DOD" id="Gma-Xv-uL7">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="zuU-XD-CLo">
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Ag3-9w-CmA" id="IcD-rL-QdZ"/>
+                            <outlet property="delegate" destination="Ag3-9w-CmA" id="C6T-hy-zx1"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Reconcile Token Totals" id="Zev-aT-dUU"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="n3w-V8-sTa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1391" y="-3009"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="e3S-vz-AN0">
             <objects>
@@ -496,7 +544,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cO8-ON-wHr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2390" y="-4733"/>
+            <point key="canvasLocation" x="575" y="-3757"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="GpO-ma-5W7">
@@ -509,34 +557,34 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="EpR-AG-SAu" kind="relationship" relationship="rootViewController" id="zdo-eq-hIT"/>
+                        <segue destination="i3D-vT-apW" kind="relationship" relationship="rootViewController" id="7Iu-O5-6Vf"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="27U-Vy-bi4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2390" y="-3277"/>
+            <point key="canvasLocation" x="2390" y="-4737"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="I1F-cc-NrR">
+        <scene sceneID="gXV-Ml-hzk">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ne1-dZ-lhc" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="hyY-XN-vng" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="opR-gB-0Fd">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="oak-Ki-eW2">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="zGb-lb-8hY" kind="relationship" relationship="rootViewController" id="aGh-9N-vxp"/>
+                        <segue destination="Ag3-9w-CmA" kind="relationship" relationship="rootViewController" id="ONl-Em-DJi"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="fPd-ZH-5uv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nNy-Vj-3ya" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2390" y="-2541"/>
+            <point key="canvasLocation" x="575" y="-3009"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Dxf-nq-7Fm"/>
-        <segue reference="hav-tp-KH6"/>
+        <segue reference="Ys2-Zc-Rye"/>
+        <segue reference="UoE-Fg-2nz"/>
     </inferredMetricsTieBreakers>
 </document>

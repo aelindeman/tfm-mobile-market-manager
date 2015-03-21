@@ -130,6 +130,9 @@
 			new.staff = [NSSet setWithArray:form.staff];
 			new.notes = form.notes;
 			
+			new.terminalTotals = [NSEntityDescription insertNewObjectForEntityForName:@"TerminalTotals" inManagedObjectContext:TFM_DELEGATE.managedObjectContext];
+			new.tokenTotals = [NSEntityDescription insertNewObjectForEntityForName:@"TokenTotals" inManagedObjectContext:TFM_DELEGATE.managedObjectContext];
+			
 			[self setMarketday:new];
 			[self setMarketdayID:[new objectID]];
 		}

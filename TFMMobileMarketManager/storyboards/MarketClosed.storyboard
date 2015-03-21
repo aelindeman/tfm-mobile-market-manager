@@ -1225,9 +1225,9 @@ Stephen Davies</string>
         <image name="sync" width="16" height="16"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="6RH-vK-sCl"/>
+        <segue reference="Xyf-yc-rV8"/>
+        <segue reference="TgG-lG-Acz"/>
         <segue reference="fZ2-QH-psV"/>
         <segue reference="tmR-C0-IUe"/>
-        <segue reference="TgG-lG-Acz"/>
     </inferredMetricsTieBreakers>
 </document>

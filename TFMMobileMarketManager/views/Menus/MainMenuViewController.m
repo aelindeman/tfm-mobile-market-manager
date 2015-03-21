@@ -222,7 +222,9 @@
 {
 	UINavigationController *menu = [[UIStoryboard storyboardWithName:@"MarketOpen" bundle:nil] instantiateInitialViewController];
 	[menu setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
-	[self.navigationController presentViewController:menu animated:true completion:nil];
+	[self.navigationController presentViewController:menu animated:true completion:^{
+		NSLog(@"market day opened: %@", TFM_DELEGATE.activeMarketDay);
+	}];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender

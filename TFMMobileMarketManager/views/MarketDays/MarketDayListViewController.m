@@ -130,7 +130,7 @@ static NSString *deleteConfirmationMessageDetails = @"Its associated transaction
 	[self.tableView endUpdates];
 }
 
--(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
 	if ([[alertView title] isEqualToString:deleteConfirmationMessageTitle])
 	{
@@ -142,6 +142,7 @@ static NSString *deleteConfirmationMessageDetails = @"Its associated transaction
 				
 			case 1:
 				[TFM_DELEGATE.managedObjectContext deleteObject:self.selectedObject];
+				[TFM_DELEGATE.managedObjectContext processPendingChanges];
 				break;
 		}
 	}
