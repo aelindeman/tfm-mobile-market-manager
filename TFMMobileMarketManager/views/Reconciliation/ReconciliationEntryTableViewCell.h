@@ -7,10 +7,10 @@
 
 @interface ReconciliationEntryTableViewCell : UITableViewCell
 
-@property NSString *field1Prefix;
-@property NSString *field1Suffix;
-@property NSString *field2Prefix;
-@property NSString *field2Suffix;
+@property (nonatomic) NSString *field1Prefix;
+@property (nonatomic) NSString *field1Suffix;
+@property (nonatomic) NSString *field2Prefix;
+@property (nonatomic) NSString *field2Suffix;
 
 @property (weak, nonatomic) IBOutlet UIView *leftView;
 @property (weak, nonatomic) IBOutlet UIView *centerView;
@@ -40,5 +40,10 @@
 @property (weak, nonatomic) IBOutlet UITextField *totalField2;
 - (IBAction)totalField2EditingDidBegin:(id)sender;
 - (IBAction)totalField2EditingDidEnd:(id)sender;
+
+- (void)setField1Prefix:(NSString *)prefix;
+- (void)setField1Suffix:(NSString *)suffix;
+- (void)setField2Prefix:(NSString *)prefix;
+- (void)setField2Suffix:(NSString *)suffix;
 
 @end

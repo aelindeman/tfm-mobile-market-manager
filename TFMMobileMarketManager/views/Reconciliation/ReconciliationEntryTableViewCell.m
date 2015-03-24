@@ -5,19 +5,109 @@
 
 #import "ReconciliationEntryTableViewCell.h"
 
-@implementation ReconciliationEntryTableViewCell
+// stolen (and updated for ARC) from http://stackoverflow.com/questions/12267955/
+@implementation UITextField (Additions)
 
-- (void)awakeFromNib
+- (void)setPrefixText:(NSString *)prefix
 {
-	if (!self.field1Prefix) self.field1Prefix = @"";
-	if (!self.field1Suffix) self.field1Suffix = @"";
-	if (!self.field2Prefix) self.field2Prefix = @"";
-	if (!self.field2Suffix) self.field2Suffix = @"";
+	UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
+	[label setBackgroundColor:[UIColor clearColor]];
+	[label setFont:[UIFont fontWithName:self.font.fontName size:self.font.pointSize]];
+	[label setTextColor:self.textColor];
+	[label setText:prefix];
+	
+	CGSize prefixSize = [prefix sizeWithAttributes:@{NSFontAttributeName: label.font}];
+	label.frame = CGRectMake(0, 0, prefixSize.width, self.frame.size.height);
+	
+	[self setLeftView:label];
+	[self setLeftViewMode:UITextFieldViewModeAlways];
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated
+- (void)setSuffixText:(NSString *)suffix
 {
-	[super setSelected:selected animated:animated];
+	UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
+	[label setBackgroundColor:[UIColor clearColor]];
+	[label setFont:[UIFont fontWithName:self.font.fontName size:self.font.pointSize]];
+	[label setTextColor:self.textColor];
+	[label setText:suffix];
+	
+	CGSize suffixSize = [suffix sizeWithAttributes:@{NSFontAttributeName: label.font}];
+	label.frame = CGRectMake(0, 0, suffixSize.width, self.frame.size.height);
+	
+	[self setRightView:label];
+	[self setRightViewMode:UITextFieldViewModeAlways];
+}
+
+@end
+
+@implementation ReconciliationEntryTableViewCell
+
+@synthesize field1Prefix;
+- (void)setField1Prefix:(NSString *)prefix
+{
+	if (!prefix) field1Prefix = @"";
+	else
+	{
+		field1Prefix = prefix;
+		[self.snapField1 setPrefixText:prefix];
+		[self.creditField1 setPrefixText:prefix];
+		[self.totalField1 setPrefixText:prefix];
+	}
+}
+- (NSString *)field1Prefix
+{
+	return field1Prefix ? field1Prefix : @"";
+}
+
+@synthesize field1Suffix;
+- (void)setField1Suffix:(NSString *)suffix
+{
+	if (!suffix) field1Suffix = @"";
+	else
+	{
+		field1Suffix = suffix;
+		[self.snapField1 setSuffixText:suffix];
+		[self.creditField1 setSuffixText:suffix];
+		[self.totalField1 setSuffixText:suffix];
+	}
+}
+- (NSString *)field1Suffix
+{
+	return field1Suffix ? field1Suffix : @"";
+}
+
+@synthesize field2Prefix;
+- (void)setField2Prefix:(NSString *)prefix
+{
+	if (!prefix) field2Prefix = @"";
+	else
+	{
+		field2Prefix = prefix;
+		[self.snapField2 setPrefixText:prefix];
+		[self.creditField2 setPrefixText:prefix];
+		[self.totalField2 setPrefixText:prefix];
+	}
+}
+- (NSString *)field2Prefix
+{
+	return field2Prefix ? field2Prefix : @"";
+}
+
+@synthesize field2Suffix;
+- (void)setField2Suffix:(NSString *)suffix
+{
+	if (!suffix) field2Suffix = @"";
+	else
+	{
+		field2Suffix = suffix;
+		[self.snapField2 setSuffixText:suffix];
+		[self.creditField2 setSuffixText:suffix];
+		[self.totalField2 setSuffixText:suffix];
+	}
+}
+- (NSString *)field2Suffix
+{
+	return field2Suffix ? field2Suffix : @"";
 }
 
 // removes anything that isn't a number, because the iPad is dumb and keyboard will always have letter keys
@@ -44,62 +134,55 @@
 	};
 }
 
-- (void)appendField1Units:(UITextField *)field
+// easy way to set the fields
+- (void)setData:(NSDictionary *)input
 {
-	if ([[field text] length] > 0)
-	{
-		[field setText:[self.field1Prefix stringByAppendingString:[field text]]];
-		[field setText:[[field text] stringByAppendingString:self.field1Suffix]];
-	}
-}
-- (void)removeField1Units:(UITextField *)field
-{
-	if ([field text] && [[field text] rangeOfString:self.field1Prefix].location != NSNotFound)
-		[field setText:[[field text] stringByReplacingOccurrencesOfString:self.field1Prefix withString:@""]];
-	
-	if ([field text] && [[field text] rangeOfString:self.field1Suffix].location != NSNotFound)
-		[field setText:[[field text] stringByReplacingOccurrencesOfString:self.field1Suffix withString:@""]];
+	[self.snapField1 setText:[self sanitize:[input valueForKey:@"snapField1"]]];
+	[self.snapField2 setText:[self sanitize:[input valueForKey:@"snapField2"]]];
+	[self.creditField1 setText:[self sanitize:[input valueForKey:@"creditField1"]]];
+	[self.creditField2 setText:[self sanitize:[input valueForKey:@"creditField2"]]];
+	[self.totalField1 setText:[self sanitize:[input valueForKey:@"totalField1"]]];
+	[self.totalField2 setText:[self sanitize:[input valueForKey:@"totalField2"]]];
 }
 
-- (void)appendField2Units:(UITextField *)field
+// append label Suffix and suffix
+- (void)appendUnitsTo:(UITextField *)field prefix:(NSString *)prefix suffix:(NSString *)suffix
 {
-	if ([[field text] length] > 0)
+	if ([field.text length] > 0)
 	{
-		[field setText:[self.field2Prefix stringByAppendingString:[field text]]];
-		[field setText:[[field text] stringByAppendingString:self.field2Suffix]];
+		[field setPrefixText:prefix];
+		[field setSuffixText:suffix];
 	}
 }
-- (void)removeField2Units:(UITextField *)field
+
+- (void)removeUnitsFrom:(UITextField *)field
 {
-	if ([field text] && [[field text] rangeOfString:self.field2Prefix].location != NSNotFound)
-		[field setText:[[field text] stringByReplacingOccurrencesOfString:self.field2Prefix withString:@""]];
-	
-	if ([field text] && [[field text] rangeOfString:self.field2Suffix].location != NSNotFound)
-		[field setText:[[field text] stringByReplacingOccurrencesOfString:self.field2Suffix withString:@""]];
+	[field setLeftView:nil];
+	[field setRightView:nil];
 }
 
 // snapField1
-- (IBAction)snapField1EditingDidBegin:(id)sender { [self removeField1Units:self.snapField1]; [self sanitizeField:self.snapField1]; }
-- (IBAction)snapField1EditingDidEnd:(id)sender { [self sanitizeField:self.snapField1]; [self appendField1Units:self.snapField1]; }
+- (IBAction)snapField1EditingDidBegin:(id)sender { [self removeUnitsFrom:self.snapField1]; }
+- (IBAction)snapField1EditingDidEnd:(id)sender { [self sanitizeField:self.snapField1]; [self appendUnitsTo:self.snapField1 prefix:self.field1Prefix suffix:self.field1Suffix]; }
 
 // snapField2
-- (IBAction)snapField2EditingDidBegin:(id)sender { [self removeField2Units:self.snapField2]; [self sanitizeField:self.snapField2]; }
-- (IBAction)snapField2EditingDidEnd:(id)sender { [self sanitizeField:self.snapField2]; [self appendField2Units:self.snapField2]; }
+- (IBAction)snapField2EditingDidBegin:(id)sender { [self removeUnitsFrom:self.snapField2]; }
+- (IBAction)snapField2EditingDidEnd:(id)sender { [self sanitizeField:self.snapField2]; [self appendUnitsTo:self.snapField2 prefix:self.field2Prefix suffix:self.field2Suffix]; }
 
 // creditField1
-- (IBAction)creditField1EditingDidBegin:(id)sender { [self removeField1Units:self.creditField1]; [self sanitizeField:self.creditField1]; }
-- (IBAction)creditField1EditingDidEnd:(id)sender { [self sanitizeField:self.creditField1]; [self appendField1Units:self.creditField1]; }
+- (IBAction)creditField1EditingDidBegin:(id)sender { [self removeUnitsFrom:self.creditField1]; }
+- (IBAction)creditField1EditingDidEnd:(id)sender { [self sanitizeField:self.creditField1]; [self appendUnitsTo:self.creditField1 prefix:self.field1Prefix suffix:self.field1Suffix]; }
 
 // creditField2
-- (IBAction)creditField2EditingDidBegin:(id)sender { [self removeField2Units:self.creditField2]; [self sanitizeField:self.creditField2]; }
-- (IBAction)creditField2EditingDidEnd:(id)sender { [self sanitizeField:self.creditField2]; [self appendField2Units:self.creditField2]; }
+- (IBAction)creditField2EditingDidBegin:(id)sender { [self removeUnitsFrom:self.creditField2]; }
+- (IBAction)creditField2EditingDidEnd:(id)sender { [self sanitizeField:self.creditField2]; [self appendUnitsTo:self.creditField2 prefix:self.field2Prefix suffix:self.field2Suffix]; }
 
 // totalField1
-- (IBAction)totalField1EditingDidBegin:(id)sender { [self removeField1Units:self.totalField1]; [self sanitizeField:self.totalField1]; }
-- (IBAction)totalField1EditingDidEnd:(id)sender { [self sanitizeField:self.totalField1]; [self appendField1Units:self.totalField1]; }
+- (IBAction)totalField1EditingDidBegin:(id)sender { [self removeUnitsFrom:self.totalField1]; }
+- (IBAction)totalField1EditingDidEnd:(id)sender { [self sanitizeField:self.totalField1]; [self appendUnitsTo:self.totalField1 prefix:self.field1Prefix suffix:self.field1Suffix]; }
 
 // totalField2
-- (IBAction)totalField2EditingDidBegin:(id)sender { [self removeField2Units:self.totalField2]; [self sanitizeField:self.totalField2]; }
-- (IBAction)totalField2EditingDidEnd:(id)sender { [self sanitizeField:self.totalField2]; [self appendField2Units:self.totalField2]; }
+- (IBAction)totalField2EditingDidBegin:(id)sender { [self removeUnitsFrom:self.totalField2]; }
+- (IBAction)totalField2EditingDidEnd:(id)sender { [self sanitizeField:self.totalField2]; [self appendUnitsTo:self.totalField2 prefix:self.field2Prefix suffix:self.field2Suffix]; }
 
 @end
