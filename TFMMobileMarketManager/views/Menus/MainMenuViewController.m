@@ -64,7 +64,7 @@
 {
 	if (section == [self.menuOptions count] - 1)
 	{
-		NSString *version = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"];
+		NSString *version = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
 		NSString *compileTime = [NSString stringWithFormat:@"%@ %@", [NSString stringWithUTF8String:__DATE__], [NSString stringWithUTF8String:__TIME__]];
 		
 		NSDateFormatter *interpreter = [[NSDateFormatter alloc] init];
@@ -73,7 +73,7 @@
 		NSDate *builtAt = [interpreter dateFromString:compileTime];
 		
 		NSDateFormatter *df = [[NSDateFormatter alloc] init];
-		[df setDateFormat:@"YYYY-MM-dd HH:mm a"];
+		[df setDateFormat:@"YYYY-MM-dd HH:mm:ss"];
 		
 		return [NSString stringWithFormat:@"Version info:\n\t%@\n\trev %@\n\tbuilt %@", [[NSBundle mainBundle] bundleIdentifier], version, [df stringFromDate:builtAt]];
 	}
