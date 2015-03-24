@@ -502,7 +502,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Update build number with number of git commits if in release mode\nbuildNumber=$(git rev-list HEAD | head -1 | cut -c1-12)\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${INFOPLIST_FILE}\"";
+			shellScript = "# Update short version string with revision id\nbuildNumber=$(git rev-list HEAD | head -1 | cut -c1-12)\n/usr/libexec/PlistBuddy -c \"Set :CFBundleShortVersionString $buildNumber\" \"${INFOPLIST_FILE}\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 
