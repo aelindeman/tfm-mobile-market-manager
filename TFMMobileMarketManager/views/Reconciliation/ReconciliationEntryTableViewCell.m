@@ -21,9 +21,27 @@
 }
 
 // removes anything that isn't a number, because the iPad is dumb and keyboard will always have letter keys
-- (void)sanitize:(UITextField *)field
+- (void)sanitizeField:(UITextField *)field
 {
-	if ([field text]) [field setText:[[[field text] componentsSeparatedByCharactersInSet:[[NSCharacterSet characterSetWithCharactersInString:@"0123456789"] invertedSet]] componentsJoinedByString:@""]];
+	if ([field text]) [field setText:[self sanitize:[field text]]];
+}
+
+- (NSString *)sanitize:(NSString *)string
+{
+	return [[string componentsSeparatedByCharactersInSet:[[NSCharacterSet characterSetWithCharactersInString:@"0123456789"] invertedSet]] componentsJoinedByString:@""];
+}
+
+// returns values from fields in an NSDictionary
+- (NSDictionary *)getData
+{
+	return @{
+		@"snapField1": [self sanitize:[self.snapField1 text]],
+		@"snapField2": [self sanitize:[self.snapField2 text]],
+		@"creditField1": [self sanitize:[self.creditField1 text]],
+		@"creditField2": [self sanitize:[self.creditField2 text]],
+		@"totalField1": [self sanitize:[self.totalField1 text]],
+		@"totalField2": [self sanitize:[self.totalField2 text]],
+	};
 }
 
 - (void)appendField1Units:(UITextField *)field
@@ -61,27 +79,27 @@
 }
 
 // snapField1
-- (IBAction)snapField1EditingDidBegin:(id)sender { [self removeField1Units:self.snapField1]; [self sanitize:self.snapField1]; }
-- (IBAction)snapField1EditingDidEnd:(id)sender { [self sanitize:self.snapField1]; [self appendField1Units:self.snapField1]; }
+- (IBAction)snapField1EditingDidBegin:(id)sender { [self removeField1Units:self.snapField1]; [self sanitizeField:self.snapField1]; }
+- (IBAction)snapField1EditingDidEnd:(id)sender { [self sanitizeField:self.snapField1]; [self appendField1Units:self.snapField1]; }
 
 // snapField2
-- (IBAction)snapField2EditingDidBegin:(id)sender { [self removeField2Units:self.snapField2]; [self sanitize:self.snapField2]; }
-- (IBAction)snapField2EditingDidEnd:(id)sender { [self sanitize:self.snapField2]; [self appendField2Units:self.snapField2]; }
+- (IBAction)snapField2EditingDidBegin:(id)sender { [self removeField2Units:self.snapField2]; [self sanitizeField:self.snapField2]; }
+- (IBAction)snapField2EditingDidEnd:(id)sender { [self sanitizeField:self.snapField2]; [self appendField2Units:self.snapField2]; }
 
 // creditField1
-- (IBAction)creditField1EditingDidBegin:(id)sender { [self removeField1Units:self.creditField1]; [self sanitize:self.creditField1]; }
-- (IBAction)creditField1EditingDidEnd:(id)sender { [self sanitize:self.creditField1]; [self appendField1Units:self.creditField1]; }
+- (IBAction)creditField1EditingDidBegin:(id)sender { [self removeField1Units:self.creditField1]; [self sanitizeField:self.creditField1]; }
+- (IBAction)creditField1EditingDidEnd:(id)sender { [self sanitizeField:self.creditField1]; [self appendField1Units:self.creditField1]; }
 
 // creditField2
-- (IBAction)creditField2EditingDidBegin:(id)sender { [self removeField2Units:self.creditField2]; [self sanitize:self.creditField2]; }
-- (IBAction)creditField2EditingDidEnd:(id)sender { [self sanitize:self.creditField2]; [self appendField2Units:self.creditField2]; }
+- (IBAction)creditField2EditingDidBegin:(id)sender { [self removeField2Units:self.creditField2]; [self sanitizeField:self.creditField2]; }
+- (IBAction)creditField2EditingDidEnd:(id)sender { [self sanitizeField:self.creditField2]; [self appendField2Units:self.creditField2]; }
 
 // totalField1
-- (IBAction)totalField1EditingDidBegin:(id)sender { [self removeField1Units:self.totalField1]; [self sanitize:self.totalField1]; }
-- (IBAction)totalField1EditingDidEnd:(id)sender { [self sanitize:self.totalField1]; [self appendField1Units:self.totalField1]; }
+- (IBAction)totalField1EditingDidBegin:(id)sender { [self removeField1Units:self.totalField1]; [self sanitizeField:self.totalField1]; }
+- (IBAction)totalField1EditingDidEnd:(id)sender { [self sanitizeField:self.totalField1]; [self appendField1Units:self.totalField1]; }
 
 // totalField2
-- (IBAction)totalField2EditingDidBegin:(id)sender { [self removeField2Units:self.totalField2]; [self sanitize:self.totalField2]; }
-- (IBAction)totalField2EditingDidEnd:(id)sender { [self sanitize:self.totalField2]; [self appendField2Units:self.totalField2]; }
+- (IBAction)totalField2EditingDidBegin:(id)sender { [self removeField2Units:self.totalField2]; [self sanitizeField:self.totalField2]; }
+- (IBAction)totalField2EditingDidEnd:(id)sender { [self sanitizeField:self.totalField2]; [self appendField2Units:self.totalField2]; }
 
 @end
