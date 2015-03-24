@@ -47,6 +47,8 @@
 		FA11AB001AB7EEE200D4C360 /* TokenTotalsReconciliationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA11AAFF1AB7EEE200D4C360 /* TokenTotalsReconciliationViewController.m */; };
 		FA11AB041AB7F83300D4C360 /* ReconciliationEntryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FA11AB021AB7F83300D4C360 /* ReconciliationEntryTableViewCell.m */; };
 		FA11AB051AB7F83300D4C360 /* ReconciliationEntryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA11AB031AB7F83300D4C360 /* ReconciliationEntryTableViewCell.xib */; };
+		FA77453E1AC1C03D00D9B14B /* TransactionListHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA77453D1AC1C03D00D9B14B /* TransactionListHeaderView.xib */; };
+		FA7745401AC1C04300D9B14B /* RedemptionsListHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA77453F1AC1C04300D9B14B /* RedemptionsListHeaderView.xib */; };
 		FAB118F11A9FB72B0012ED5D /* tfm-m3.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FAB118EF1A9FB72B0012ED5D /* tfm-m3.xcdatamodeld */; };
 		FAB4C4C11AB719CC00E462D1 /* NSData+CocoaDevUsersAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = FAB4C4C01AB719CC00E462D1 /* NSData+CocoaDevUsersAdditions.m */; };
 		FAB4C4C31AB71B2800E462D1 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FAB4C4C21AB71B2800E462D1 /* libz.dylib */; };
@@ -135,6 +137,8 @@
 		FA11AB011AB7F83300D4C360 /* ReconciliationEntryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReconciliationEntryTableViewCell.h; sourceTree = "<group>"; };
 		FA11AB021AB7F83300D4C360 /* ReconciliationEntryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReconciliationEntryTableViewCell.m; sourceTree = "<group>"; };
 		FA11AB031AB7F83300D4C360 /* ReconciliationEntryTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReconciliationEntryTableViewCell.xib; sourceTree = "<group>"; };
+		FA77453D1AC1C03D00D9B14B /* TransactionListHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TransactionListHeaderView.xib; sourceTree = "<group>"; };
+		FA77453F1AC1C04300D9B14B /* RedemptionsListHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RedemptionsListHeaderView.xib; sourceTree = "<group>"; };
 		FAB118F01A9FB72B0012ED5D /* tfm-m3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "tfm-m3.xcdatamodel"; sourceTree = "<group>"; };
 		FAB4C4BF1AB719CC00E462D1 /* NSData+CocoaDevUsersAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+CocoaDevUsersAdditions.h"; sourceTree = "<group>"; };
 		FAB4C4C01AB719CC00E462D1 /* NSData+CocoaDevUsersAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+CocoaDevUsersAdditions.m"; sourceTree = "<group>"; };
@@ -314,6 +318,7 @@
 				FA0AC2621A9FB2B000CCA13A /* RedemptionForm.m */,
 				FA0AC2631A9FB2B000CCA13A /* RedemptionFormViewController.h */,
 				FA0AC2641A9FB2B000CCA13A /* RedemptionFormViewController.m */,
+				FA77453F1AC1C04300D9B14B /* RedemptionsListHeaderView.xib */,
 				FA0AC2651A9FB2B000CCA13A /* RedemptionsListViewController.h */,
 				FA0AC2661A9FB2B000CCA13A /* RedemptionsListViewController.m */,
 			);
@@ -345,6 +350,7 @@
 				FA0AC26F1A9FB2B000CCA13A /* TransactionForm.m */,
 				FA0AC2701A9FB2B000CCA13A /* TransactionFormViewController.h */,
 				FA0AC2711A9FB2B000CCA13A /* TransactionFormViewController.m */,
+				FA77453D1AC1C03D00D9B14B /* TransactionListHeaderView.xib */,
 				FA0AC2721A9FB2B000CCA13A /* TransactionListViewController.h */,
 				FA0AC2731A9FB2B000CCA13A /* TransactionListViewController.m */,
 			);
@@ -472,9 +478,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA7745401AC1C04300D9B14B /* RedemptionsListHeaderView.xib in Resources */,
 				FA11AB051AB7F83300D4C360 /* ReconciliationEntryTableViewCell.xib in Resources */,
 				FA0AC2A21A9FB2E300CCA13A /* Assets.xcassets in Resources */,
 				FA0AC2801A9FB2B000CCA13A /* MarketClosed.storyboard in Resources */,
+				FA77453E1AC1C03D00D9B14B /* TransactionListHeaderView.xib in Resources */,
 				FA0AC2811A9FB2B000CCA13A /* MarketOpen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
