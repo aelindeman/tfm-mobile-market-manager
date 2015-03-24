@@ -211,8 +211,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="cWK-XZ-u9x">
-                                <rect key="frame" x="65" y="163" width="321" height="274"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="cWK-XZ-u9x">
+                                <rect key="frame" x="8" y="154" width="436" height="293"/>
                                 <attributedString key="attributedText">
                                     <fragment content="TheFarmersMarket.co">
                                         <attributes>
@@ -457,7 +457,9 @@ Cg
                                             </paragraphStyle>
                                         </attributes>
                                     </fragment>
-                                    <fragment content="NSDataAdditions - cocoabits.com">
+                                    <fragment>
+                                        <string key="content">NSDataAdditions - cocoadev.com/index.pl?NSDataCategory
+UITextFieldAdditions - stackoverflow.com/questions/12267955/</string>
                                         <attributes>
                                             <color key="NSColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
                                             <font key="NSFont" size="16" name="HelveticaNeue-Light"/>
