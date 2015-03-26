@@ -100,14 +100,6 @@ static NSString *deleteConfirmationMessageDetails = @"It won’t be deleted, but
 	[(UILabel *)[c viewWithTag:4] setText:(info.credit_used ? @"Credit" : info.snap_used ? @"SNAP" : @"None")];
 	[(UILabel *)[c viewWithTag:5] setText:[NSString stringWithFormat:@"$%i", transactionTotal]];
 	
-	// point out transactions with suspiciously high amounts
-	if ((info.credit_used && transactionTotal > 100) ||
-		(info.snap_used && transactionTotal > 40))
-	{
-		[(UILabel *)[c viewWithTag:4] setTextColor:[UIColor orangeColor]];
-		[(UILabel *)[c viewWithTag:5] setTextColor:[UIColor orangeColor]];
-	}
-	
 	// strike out if marked invalid
 	if (info.markedInvalid)
 	{
@@ -116,6 +108,19 @@ static NSString *deleteConfirmationMessageDetails = @"It won’t be deleted, but
 		{
 			[(UILabel *)[c viewWithTag:i] setTextColor:[UIColor lightGrayColor]];
 			[(UILabel *)[c viewWithTag:i] setAttributedText:[[NSAttributedString alloc] initWithString:[(UILabel *)[c viewWithTag:i] text] attributes:strike]];
+		}
+	}
+	else
+	{
+		// fix for when a transaction is unmarked invalid and stays gray
+		for (int i = 1; i <= 5; i ++) [(UILabel *)[c viewWithTag:i] setTextColor:[UIColor darkTextColor]];
+		
+		// point out transactions with suspiciously high amounts
+		if ((info.credit_used && transactionTotal > 100) ||
+			(info.snap_used && transactionTotal > 40))
+		{
+			[(UILabel *)[c viewWithTag:4] setTextColor:[UIColor orangeColor]];
+			[(UILabel *)[c viewWithTag:5] setTextColor:[UIColor orangeColor]];
 		}
 	}
 }

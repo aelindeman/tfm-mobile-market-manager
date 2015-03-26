@@ -106,6 +106,11 @@ static NSString *deleteConfirmationMessageDetails = @"It won’t be deleted, but
 			[(UILabel *)[c viewWithTag:i] setAttributedText:[[NSAttributedString alloc] initWithString:[(UILabel *)[c viewWithTag:i] text] attributes:strike]];
 		}
 	}
+	else
+	{
+		// fix for when a transaction is unmarked invalid and stays gray
+		for (int i = 1; i <= 4; i ++) [(UILabel *)[c viewWithTag:i] setTextColor:[UIColor darkTextColor]];
+	}
 }
 
 // populate the table view
