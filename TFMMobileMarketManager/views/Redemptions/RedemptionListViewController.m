@@ -93,7 +93,7 @@ static NSString *deleteConfirmationMessageDetails = @"It won’t be deleted, but
 	[(UILabel *)[c viewWithTag:4] setText:[NSString stringWithFormat:@"$%i", info.total]];
 	
 	if (info.check_number)
-		[(UILabel *)[c viewWithTag:3] setText:[NSString stringWithFormat:@"%i", info.check_number]];
+		[(UILabel *)[c viewWithTag:3] setText:[NSString stringWithFormat:@"%04i", info.check_number]];
 	else
 		[(UILabel *)[c viewWithTag:3] setText:@""];
 	
@@ -110,6 +110,14 @@ static NSString *deleteConfirmationMessageDetails = @"It won’t be deleted, but
 	{
 		// fix for when a transaction is unmarked invalid and stays gray
 		for (int i = 1; i <= 4; i ++) [(UILabel *)[c viewWithTag:i] setTextColor:[UIColor darkTextColor]];
+		
+		// highlight paid redemptions
+		if (info.check_number)
+		{
+			UIColor *highlight = [UIColor colorWithRed:0.550 green:0.760 blue:0.290 alpha:1.000];
+			[(UILabel *)[c viewWithTag:3] setTextColor:highlight];
+			[(UILabel *)[c viewWithTag:4] setTextColor:highlight];
+		}
 	}
 }
 
