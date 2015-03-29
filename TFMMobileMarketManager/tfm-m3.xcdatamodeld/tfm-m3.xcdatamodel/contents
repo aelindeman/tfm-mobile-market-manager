@@ -19,6 +19,7 @@
         <relationship name="vendors" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Vendors" inverseName="marketdays" inverseEntity="Vendors" syncable="YES"/>
     </entity>
     <entity name="MarketStaff" representedClassName="MarketStaff" syncable="YES">
+        <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="phone" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="position" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
@@ -89,7 +90,7 @@
     <elements>
         <element name="Locations" positionX="0" positionY="0" width="128" height="90"/>
         <element name="MarketDays" positionX="0" positionY="0" width="128" height="210"/>
-        <element name="MarketStaff" positionX="0" positionY="0" width="128" height="103"/>
+        <element name="MarketStaff" positionX="0" positionY="0" width="128" height="120"/>
         <element name="Redemptions" positionX="0" positionY="0" width="128" height="195"/>
         <element name="TerminalTotals" positionX="0" positionY="0" width="128" height="150"/>
         <element name="TokenTotals" positionX="0" positionY="0" width="128" height="148"/>

@@ -12,6 +12,7 @@
 
 @property (nonatomic, retain) NSString *name;
 @property (nonatomic, retain) NSString *phone;
+@property (nonatomic, retain) NSString *email;
 @property (nonatomic) int16_t position;
 @property (nonatomic, retain) NSSet *marketdays;
 

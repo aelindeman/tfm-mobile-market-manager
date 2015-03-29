@@ -11,6 +11,7 @@
 
 @dynamic name;
 @dynamic phone;
+@dynamic email;
 @dynamic position;
 @dynamic marketdays;
 

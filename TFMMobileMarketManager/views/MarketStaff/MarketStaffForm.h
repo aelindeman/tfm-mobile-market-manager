@@ -11,6 +11,7 @@
 
 @property NSString *name;
 @property NSString *phone;
+@property NSString *email;
 @property Position position;
 
 @end
