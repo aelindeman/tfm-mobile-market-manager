@@ -12,6 +12,5 @@
 
 @property (nonatomic) NSManagedObjectID *editObjectID;
 @property (nonatomic) TokenTotals *editObject;
-@property bool editMode;
 
 @end

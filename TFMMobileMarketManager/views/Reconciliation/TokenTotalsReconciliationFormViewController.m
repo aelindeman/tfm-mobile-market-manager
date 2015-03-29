@@ -14,23 +14,39 @@
 	
 	self.formController.form = [[TokenTotalsReconciliationForm alloc] init];
 	
-	[self setEditMode:([self editObjectID] != nil)];
-	if ([self editMode])
+	// grab terminal totals object from passed identifier
+	if (self.editObjectID)
 	{
-		// fetch the object we're supposed to edit
 		[self setEditObject:(TokenTotals *)[TFM_DELEGATE.managedObjectContext objectWithID:[self editObjectID]]];
-		
-		// populate form with passed data if in edit mode
-		TokenTotalsReconciliationForm *form = self.formController.form;
-		TokenTotals *data = self.editObject;
-		
-		form.marketBonusTokenCount = data.market_bonus_tokens;
-		form.marketCreditTokenCount = data.market_credit_tokens;
-		form.marketSnapTokenCount = data.market_snap_tokens;
-		form.redeemedBonusTokenCount = data.redeemed_bonus_tokens;
-		form.redeemedCreditTokenCount = data.redeemed_credit_tokens;
-		form.redeemedSnapTokenCount = data.redeemed_snap_tokens;
+		NSLog(@"handoff to TokenTotals object %@", self.editObjectID);
 	}
+	
+	// for whatever reason the terminal totals object id wasn't passed
+	// so first try to fetch it from the active market day
+	else if ([TFM_DELEGATE.activeMarketDay terminalTotals])
+	{
+		[self setEditObject:(TokenTotals *)[TFM_DELEGATE.activeMarketDay terminalTotals]];
+		NSLog(@"token totals were not passed but they were set in market day, using TokenTotals object %@", [self.editObject objectID]);
+	}
+	
+	// and if it isn't set, just make a new one
+	else
+	{
+		TokenTotals *tt = [NSEntityDescription insertNewObjectForEntityForName:@"TokenTotals" inManagedObjectContext:TFM_DELEGATE.managedObjectContext];
+		[TFM_DELEGATE.activeMarketDay setTerminalTotals:tt];
+		[self setEditObject:tt];
+		NSLog(@"token totals were not passed and were not set in market day, created new TokenTotals object %@", [tt objectID]);
+	}
+
+	// populate form
+	TokenTotalsReconciliationForm *form = self.formController.form;
+	
+	form.marketBonusTokenCount = self.editObject.market_bonus_tokens;
+	form.marketCreditTokenCount = self.editObject.market_credit_tokens;
+	form.marketSnapTokenCount = self.editObject.market_snap_tokens;
+	form.redeemedBonusTokenCount = self.editObject.redeemed_bonus_tokens;
+	form.redeemedCreditTokenCount = self.editObject.redeemed_credit_tokens;
+	form.redeemedSnapTokenCount = self.editObject.redeemed_snap_tokens;
 	
 	[self setTitle:@"Reconcile Token Totals"];
 	
@@ -41,7 +57,7 @@
 	self.navigationItem.rightBarButtonItem = saveButton;
 }
 
--(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
 	if ([[alertView title] isEqualToString:@"Cancel form entry?"])
 	{
@@ -58,19 +74,26 @@
 	}
 }
 
--(void)discard
+- (void)discard
 {
 	UIAlertView *prompt = [[UIAlertView alloc] initWithTitle:@"Cancel form entry?" message:@"Any data entered on this form will not be saved." delegate:self cancelButtonTitle:@"Don’t close" otherButtonTitles:@"Close", nil];
 	[prompt show];
 }
 
--(bool)submit
+- (bool)submit
 {
 	// validate
 	TokenTotalsReconciliationForm *form = self.formController.form;
 	NSMutableArray *errors = [[NSMutableArray alloc] init];
 	
-	// TODO: validation
+	if (form.marketCreditTokenCount != form.redeemedCreditTokenCount)
+		[errors addObject:@"Market credit token count doesn’t match redeemed credit token count"];
+		
+	if (form.marketSnapTokenCount != form.redeemedSnapTokenCount)
+		[errors addObject:@"Market SNAP token count doesn’t match redeemed SNAP token count"];
+		
+	if (form.marketBonusTokenCount != form.redeemedBonusTokenCount)
+		[errors addObject:@"Market bonus token count doesn’t match redeemed bonus token count"];
 	
 	if ([errors count] > 0)
 	{
@@ -80,28 +103,12 @@
 	}
 	else
 	{
-		if ([self editMode])
-		{
-			[self.editObject setMarket_bonus_tokens:form.marketBonusTokenCount];
-			[self.editObject setMarket_credit_tokens:form.marketCreditTokenCount];
-			[self.editObject setMarket_snap_tokens:form.marketSnapTokenCount];
-			[self.editObject setRedeemed_bonus_tokens:form.redeemedBonusTokenCount];
-			[self.editObject setRedeemed_credit_tokens:form.redeemedCreditTokenCount];
-			[self.editObject setRedeemed_snap_tokens:form.redeemedSnapTokenCount];
-		}
-		else
-		{
-			TokenTotals *new = [NSEntityDescription insertNewObjectForEntityForName:@"TokenTotals" inManagedObjectContext:TFM_DELEGATE.managedObjectContext];
-			new.market_bonus_tokens = form.marketBonusTokenCount;
-			new.market_credit_tokens = form.marketCreditTokenCount;
-			new.market_snap_tokens = form.marketSnapTokenCount;
-			new.redeemed_bonus_tokens = form.redeemedBonusTokenCount;
-			new.redeemed_credit_tokens = form.redeemedCreditTokenCount;
-			new.redeemed_snap_tokens = form.redeemedSnapTokenCount;
-			
-			// don't directly set the market day equal to the active one, in case it is changed later. fetch it fresh from the database
-			new.marketday = (MarketDays *)[TFM_DELEGATE.managedObjectContext objectWithID:[TFM_DELEGATE.activeMarketDay objectID]];
-		}
+		[self.editObject setMarket_bonus_tokens:form.marketBonusTokenCount];
+		[self.editObject setMarket_credit_tokens:form.marketCreditTokenCount];
+		[self.editObject setMarket_snap_tokens:form.marketSnapTokenCount];
+		[self.editObject setRedeemed_bonus_tokens:form.redeemedBonusTokenCount];
+		[self.editObject setRedeemed_credit_tokens:form.redeemedCreditTokenCount];
+		[self.editObject setRedeemed_snap_tokens:form.redeemedSnapTokenCount];
 	}
 	
 	// ...and save, hopefully
