@@ -46,7 +46,7 @@
         <attribute name="total_transactions" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <relationship name="marketday" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MarketDays" inverseName="terminalTotals" inverseEntity="MarketDays" syncable="YES"/>
     </entity>
-    <entity name="TokenTotals" representedClassName="TokenBankTotals" syncable="YES">
+    <entity name="TokenTotals" representedClassName="TokenTotals" syncable="YES">
         <attribute name="market_bonus_tokens" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="market_credit_tokens" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="market_snap_tokens" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
@@ -93,7 +93,7 @@
         <element name="MarketStaff" positionX="0" positionY="0" width="128" height="120"/>
         <element name="Redemptions" positionX="0" positionY="0" width="128" height="195"/>
         <element name="TerminalTotals" positionX="0" positionY="0" width="128" height="150"/>
-        <element name="TokenTotals" positionX="0" positionY="0" width="128" height="148"/>
+        <element name="TokenTotals" positionX="0" positionY="0" width="128" height="150"/>
         <element name="Transactions" positionX="0" positionY="0" width="128" height="285"/>
         <element name="Vendors" positionX="0" positionY="0" width="128" height="225"/>
     </elements>
