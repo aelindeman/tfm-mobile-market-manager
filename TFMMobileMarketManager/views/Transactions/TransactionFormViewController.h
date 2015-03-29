@@ -4,11 +4,14 @@
 //
 
 #import "AppDelegate.h"
+#import "MarketOpenMenuViewController.h"
 #import "Transactions.h"
 #import "TransactionForm.h"
 #import "FXForms.h"
 
-@interface TransactionFormViewController : FXFormViewController
+@interface TransactionFormViewController : FXFormViewController <MarketOpenDelegate>
+
+@property (nonatomic) id <MarketOpenDelegate> delegate;
 
 @property (nonatomic) NSManagedObjectID *editObjectID;
 @property (nonatomic) Transactions *editObject;

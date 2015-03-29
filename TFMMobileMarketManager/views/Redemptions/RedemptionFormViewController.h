@@ -5,12 +5,15 @@
 
 #import "AppDelegate.h"
 #import "MarketDays.h"
-#import "Vendors.h"
+#import "MarketOpenMenuViewController.h"
 #import "Redemptions.h"
 #import "RedemptionForm.h"
+#import "Vendors.h"
 #import "FXForms.h"
 
-@interface RedemptionFormViewController : FXFormViewController
+@interface RedemptionFormViewController : FXFormViewController <MarketOpenDelegate>
+
+@property (nonatomic) id <MarketOpenDelegate> delegate;
 
 @property (nonatomic) NSManagedObjectID *editObjectID;
 @property (nonatomic) Redemptions *editObject;

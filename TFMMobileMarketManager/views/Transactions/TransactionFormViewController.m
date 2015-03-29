@@ -181,7 +181,9 @@
 		}
 		
 		// unwind segue back to table view
-		[self dismissViewControllerAnimated:true completion:nil];
+		[self dismissViewControllerAnimated:true completion:^{
+			[self.delegate updateInfoLabels];
+		}];
 		return true;
 	}
 }

@@ -62,7 +62,9 @@
 				break;
 				
 			case 1:
-				[self dismissViewControllerAnimated:true completion:nil];
+				[self dismissViewControllerAnimated:true completion:^{
+					[self.delegate updateInfoLabels];
+				}];
 				break;
 		}
 	}

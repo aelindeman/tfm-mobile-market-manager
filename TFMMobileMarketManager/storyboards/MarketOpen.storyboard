@@ -201,7 +201,7 @@
                                                 <constraint firstAttribute="width" constant="70" id="YHh-YY-1Rm"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                            <color key="textColor" red="0.25098040699958801" green="0.50196081399917603" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                             <variation key="default">
                                                 <mask key="constraints">
@@ -281,6 +281,25 @@
             </objects>
             <point key="canvasLocation" x="1391" y="-3757"/>
         </scene>
+        <!--Token Totals Reconciliation Form View Controller-->
+        <scene sceneID="4fe-bw-CMR">
+            <objects>
+                <viewController id="YPD-Es-04m" customClass="TokenTotalsReconciliationFormViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="K0l-Ad-CLj"/>
+                        <viewControllerLayoutGuide type="bottom" id="kCl-2m-xta"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="xeE-OH-4xu">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="3Lx-Xy-fcs"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qHg-Sj-fNA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1391" y="-3009"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="lrU-Kq-YF3">
             <objects>
@@ -308,84 +327,77 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                        <view key="tableHeaderView" contentMode="scaleToFill" id="GR5-M2-BTz">
-                            <rect key="frame" x="0.0" y="64" width="600" height="150"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="njM-GI-uvl">
+                            <rect key="frame" x="0.0" y="64" width="600" height="111"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="%transactions%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0eC-8W-mjD">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="##t## transactions" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yBi-81-g5J">
                                     <rect key="frame" x="200" y="20" width="200" height="20"/>
                                     <constraints>
-                                        <constraint firstAttribute="width" constant="200" id="woI-JW-Je4"/>
+                                        <constraint firstAttribute="width" constant="200" id="AaB-z5-p7o"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="%vendors%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yQy-lu-GO4">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="##v## vendors" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L5d-kS-wIt">
                                     <rect key="frame" x="-8" y="21" width="200" height="18"/>
                                     <constraints>
-                                        <constraint firstAttribute="width" constant="200" id="Y1w-v8-fD3"/>
+                                        <constraint firstAttribute="width" constant="200" id="8uw-G3-FbV"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="%redemptions%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gDi-Bg-6VB">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="##r## redemptions" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ggp-lB-1jt">
                                     <rect key="frame" x="408" y="21" width="200" height="18"/>
                                     <constraints>
-                                        <constraint firstAttribute="width" constant="200" id="Rgr-ht-oEe"/>
+                                        <constraint firstAttribute="width" constant="200" id="gXH-JV-8q9"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JrM-25-WS8">
-                                    <rect key="frame" x="19" y="43" width="147" height="32"/>
-                                    <string key="text">%acceptingSNAP%
-%acceptingIncentives%</string>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hOq-pi-VBh">
+                                    <rect key="frame" x="19" y="43" width="146" height="32"/>
+                                    <string key="text">##y## accept SNAP
+##z## accept incentives</string>
                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                     <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9sA-1i-Kqw">
-                                    <rect key="frame" x="270" y="44" width="61" height="47"/>
-                                    <string key="text">%snap%
-%credit%
-%total%</string>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8oX-Ym-MaF">
+                                    <rect key="frame" x="454" y="43" width="108" height="32"/>
+                                    <string key="text">##y## paid
+$##z## redeemed</string>
                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                     <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="duu-J6-Gmj">
-                                    <rect key="frame" x="482" y="43" width="53" height="32"/>
-                                    <string key="text">%paid%
-%total%</string>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ocx-aH-HI0">
+                                    <rect key="frame" x="262" y="44" width="76" height="47"/>
+                                    <string key="text">##x## SNAP
+##y## credit
+$##z## total</string>
                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                     <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="%reconciliation%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ju6-kj-6B5">
-                                    <rect key="frame" x="239" y="109" width="122" height="18"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
                             <constraints>
-                                <constraint firstAttribute="bottom" secondItem="Ju6-kj-6B5" secondAttribute="bottom" constant="23" id="EaR-U8-VQF"/>
-                                <constraint firstItem="gDi-Bg-6VB" firstAttribute="baseline" secondItem="0eC-8W-mjD" secondAttribute="baseline" id="GPd-i0-pSi"/>
-                                <constraint firstItem="9sA-1i-Kqw" firstAttribute="top" secondItem="0eC-8W-mjD" secondAttribute="bottom" constant="4" id="MJr-nc-TfO"/>
-                                <constraint firstItem="gDi-Bg-6VB" firstAttribute="centerX" secondItem="duu-J6-Gmj" secondAttribute="centerX" id="MgM-hY-Ywz"/>
-                                <constraint firstAttribute="centerX" secondItem="0eC-8W-mjD" secondAttribute="centerX" id="NBy-NH-chR"/>
-                                <constraint firstItem="gDi-Bg-6VB" firstAttribute="baseline" secondItem="yQy-lu-GO4" secondAttribute="baseline" id="OLu-cg-pDB"/>
-                                <constraint firstItem="JrM-25-WS8" firstAttribute="centerX" secondItem="yQy-lu-GO4" secondAttribute="centerX" id="P6f-Ef-vew"/>
-                                <constraint firstItem="gDi-Bg-6VB" firstAttribute="leading" secondItem="0eC-8W-mjD" secondAttribute="trailing" constant="8" symbolic="YES" id="UdG-fa-c1x"/>
-                                <constraint firstAttribute="centerX" secondItem="9sA-1i-Kqw" secondAttribute="centerX" id="Vwz-yf-dYA"/>
-                                <constraint firstItem="duu-J6-Gmj" firstAttribute="top" secondItem="gDi-Bg-6VB" secondAttribute="bottom" constant="4" id="a8N-ku-Wpx"/>
-                                <constraint firstItem="0eC-8W-mjD" firstAttribute="leading" secondItem="yQy-lu-GO4" secondAttribute="trailing" constant="8" symbolic="YES" id="bpy-pq-uPm"/>
-                                <constraint firstItem="JrM-25-WS8" firstAttribute="top" secondItem="yQy-lu-GO4" secondAttribute="bottom" constant="4" id="tmB-s4-pMc"/>
-                                <constraint firstItem="0eC-8W-mjD" firstAttribute="top" secondItem="GR5-M2-BTz" secondAttribute="top" constant="20" symbolic="YES" id="wgh-bb-F3z"/>
-                                <constraint firstAttribute="centerX" secondItem="Ju6-kj-6B5" secondAttribute="centerX" id="yKM-hA-3Zd"/>
+                                <constraint firstItem="Ocx-aH-HI0" firstAttribute="top" secondItem="yBi-81-g5J" secondAttribute="bottom" constant="4" id="4ji-hs-Xq8"/>
+                                <constraint firstItem="Ggp-lB-1jt" firstAttribute="centerX" secondItem="8oX-Ym-MaF" secondAttribute="centerX" id="J0g-Bw-uju"/>
+                                <constraint firstAttribute="bottom" secondItem="Ocx-aH-HI0" secondAttribute="bottom" constant="20" symbolic="YES" id="LZs-LM-P4o"/>
+                                <constraint firstItem="Ggp-lB-1jt" firstAttribute="leading" secondItem="yBi-81-g5J" secondAttribute="trailing" constant="8" symbolic="YES" id="OHS-cS-z7m"/>
+                                <constraint firstItem="Ggp-lB-1jt" firstAttribute="baseline" secondItem="yBi-81-g5J" secondAttribute="baseline" id="Uyo-3c-hc2"/>
+                                <constraint firstItem="hOq-pi-VBh" firstAttribute="centerX" secondItem="L5d-kS-wIt" secondAttribute="centerX" id="VB0-ia-HHa"/>
+                                <constraint firstItem="yBi-81-g5J" firstAttribute="top" secondItem="njM-GI-uvl" secondAttribute="top" constant="20" symbolic="YES" id="aTB-QP-dQv"/>
+                                <constraint firstItem="yBi-81-g5J" firstAttribute="leading" secondItem="L5d-kS-wIt" secondAttribute="trailing" constant="8" symbolic="YES" id="feq-zF-U6z"/>
+                                <constraint firstItem="Ggp-lB-1jt" firstAttribute="baseline" secondItem="L5d-kS-wIt" secondAttribute="baseline" id="hOC-lf-SZt"/>
+                                <constraint firstItem="hOq-pi-VBh" firstAttribute="top" secondItem="L5d-kS-wIt" secondAttribute="bottom" constant="4" id="hfs-LN-5WJ"/>
+                                <constraint firstItem="8oX-Ym-MaF" firstAttribute="top" secondItem="Ggp-lB-1jt" secondAttribute="bottom" constant="4" id="lgT-98-svW"/>
+                                <constraint firstAttribute="centerX" secondItem="Ocx-aH-HI0" secondAttribute="centerX" id="lhT-V7-EEX"/>
+                                <constraint firstAttribute="centerX" secondItem="yBi-81-g5J" secondAttribute="centerX" id="uiJ-6K-aPZ"/>
                             </constraints>
                         </view>
                         <prototypes>
@@ -411,13 +423,19 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Market Menu" id="WqB-Vd-xeF"/>
                     <connections>
+                        <outlet property="redemptionDetailLabel" destination="8oX-Ym-MaF" id="kcw-d0-qox"/>
+                        <outlet property="redemptionHeaderLabel" destination="Ggp-lB-1jt" id="0JU-eO-KFC"/>
+                        <outlet property="transactionDetailLabel" destination="Ocx-aH-HI0" id="B5n-pH-RL9"/>
+                        <outlet property="transactionHeaderLabel" destination="yBi-81-g5J" id="YGJ-m6-BvD"/>
+                        <outlet property="vendorDetailLabel" destination="hOq-pi-VBh" id="Zd6-vs-daN"/>
+                        <outlet property="vendorHeaderLabel" destination="L5d-kS-wIt" id="9uw-pl-9g0"/>
                         <segue destination="cto-Bz-fbR" kind="show" identifier="TransactionsSegue" id="GVX-1i-8SN"/>
                         <segue destination="9rO-Yb-L64" kind="show" identifier="RedemptionsSegue" id="iMb-w8-pMr"/>
                         <segue destination="7qi-MW-fwa" kind="presentation" identifier="AddTransactionSegue" modalPresentationStyle="formSheet" id="Ys2-Zc-Rye"/>
                         <segue destination="Zv5-Uh-IUN" kind="presentation" identifier="AddRedemptionSegue" modalPresentationStyle="formSheet" id="UoE-Fg-2nz"/>
                         <segue destination="TNH-HD-MlB" kind="presentation" identifier="EditMarketDaySegue" modalPresentationStyle="formSheet" id="ErB-r1-c16"/>
                         <segue destination="wIg-1A-yB2" kind="presentation" identifier="TerminalTotalsReconciliationFormSegue" modalPresentationStyle="formSheet" id="h8Z-ch-oIK"/>
-                        <segue destination="hyY-XN-vng" kind="presentation" identifier="TokenTotalsReconciliationFormSegue" id="vCc-y8-oZW"/>
+                        <segue destination="hyY-XN-vng" kind="presentation" identifier="TokenTotalsReconciliationFormSegue" modalPresentationStyle="formSheet" id="vCc-y8-oZW"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yQ0-YN-fEl" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -493,41 +511,6 @@
             </objects>
             <point key="canvasLocation" x="3226" y="-4737"/>
         </scene>
-        <!--Reconcile Token Totals-->
-        <scene sceneID="l3a-oo-Jf1">
-            <objects>
-                <tableViewController id="Ag3-9w-CmA" customClass="TokenTotalsReconciliationViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="40k-wt-vbo">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="MenuOptionCell" textLabel="zuU-XD-CLo" style="IBUITableViewCellStyleDefault" id="r7a-am-DOD">
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="r7a-am-DOD" id="Gma-Xv-uL7">
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="zuU-XD-CLo">
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="Ag3-9w-CmA" id="IcD-rL-QdZ"/>
-                            <outlet property="delegate" destination="Ag3-9w-CmA" id="C6T-hy-zx1"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Reconcile Token Totals" id="Zev-aT-dUU"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="n3w-V8-sTa" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1391" y="-3009"/>
-        </scene>
         <!--Navigation Controller-->
         <scene sceneID="e3S-vz-AN0">
             <objects>
@@ -575,7 +558,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="Ag3-9w-CmA" kind="relationship" relationship="rootViewController" id="ONl-Em-DJi"/>
+                        <segue destination="YPD-Es-04m" kind="relationship" relationship="rootViewController" id="JEG-tf-3cE"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nNy-Vj-3ya" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -585,6 +568,6 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="Ys2-Zc-Rye"/>
-        <segue reference="Dxf-nq-7Fm"/>
+        <segue reference="UoE-Fg-2nz"/>
     </inferredMetricsTieBreakers>
 </document>
