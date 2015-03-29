@@ -15,9 +15,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 	// Override point for customization after application launch.
 	
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	/* NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	[defaults setInteger:1 forKey:@"com.apple.CoreData.SQLDebug"];
-	[defaults setInteger:1 forKey:@"com.apple.CoreData.SyntaxColoredLogging"];
+	[defaults setInteger:1 forKey:@"com.apple.CoreData.SyntaxColoredLogging"]; */
 	
 	return YES;
 }
@@ -76,7 +76,7 @@
     // Create the coordinator and store
     
     _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
-    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"tfm-m3.sqlite"];
+    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"tfm-m3.m3db"];
     NSError *error = nil;
     NSString *failureReason = @"There was an error creating or loading the application's saved data.";
     if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
