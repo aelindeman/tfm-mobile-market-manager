@@ -3,7 +3,36 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
-	<string>en</string>
+	<string>en_US</string>
+	<key>CFBundleDisplayName</key>
+	<string>TFM.co Mobile Market Manager</string>
+	<key>CFBundleDocumentTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeName</key>
+			<string>TFM.co Mobile Market Manager Database</string>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>LSHandlerRank</key>
+			<string>Owner</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>edu.umw.cpsc.TFMMobileMarketManager.m3db</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeName</key>
+			<string>TFM.co Mobile Market Manager Data Table</string>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>LSHandlerRank</key>
+			<string>Owner</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>edu.umw.cpsc.TFMMobileMarketManager.m3table</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIcons</key>
@@ -24,7 +53,11 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
+	<key>LSApplicationCategoryType</key>
+	<string>public.app-category.business</string>
 	<key>LSRequiresIPhoneOS</key>
+	<true/>
+	<key>UIFileSharingEnabled</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>
 	<string>MarketClosed</string>
@@ -49,6 +82,80 @@
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+	<key>UTExportedTypeDeclarations</key>
+	<array>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.data</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>TFM.co Mobile Market Manager Database</string>
+			<key>UTTypeIdentifier</key>
+			<string>edu.umw.cpsc.TFMMobileMarketManager.m3db</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<string>m3db</string>
+				<key>public.mimetype</key>
+				<string>application/x-tfmmobilemarketmanager-database</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.data</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>TFM.co Mobile Market Manager Data Table</string>
+			<key>UTTypeIdentifier</key>
+			<string>edu.umw.cpsc.TFMMobileMarketManager.m3table</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<string>m3table</string>
+				<key>public.mimetype</key>
+				<string>application/x-tfmmobilemarketmanager-datatable</string>
+			</dict>
+		</dict>
+	</array>
+	<key>UTImportedTypeDeclarations</key>
+	<array>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.data</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>TFM.co Mobile Market Manager Data Table</string>
+			<key>UTTypeIdentifier</key>
+			<string>edu.umw.cpsc.TFMMobileMarketManager.m3table</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<string>m3table</string>
+				<key>public.mimetype</key>
+				<string>application/x-tfmmobilemarketmanager-datatable</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.data</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>TFM.co Mobile Market Manager Database</string>
+			<key>UTTypeIdentifier</key>
+			<string>edu.umw.cpsc.TFMMobileMarketManager.m3db</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<string>m3db</string>
+				<key>public.mimetype</key>
+				<string>application/x-tfmmobilemarketmanager-database</string>
+			</dict>
+		</dict>
 	</array>
 </dict>
 </plist>
