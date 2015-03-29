@@ -34,7 +34,9 @@ typedef NS_ENUM(NSInteger, Ethnicity)
 typedef NS_ENUM(NSInteger, Position)
 {
 	PositionVolunteer = 0,
-	PositionManager
+	PositionManager,
+	PositionAccountant,
+	PositionAdministrator
 };
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>

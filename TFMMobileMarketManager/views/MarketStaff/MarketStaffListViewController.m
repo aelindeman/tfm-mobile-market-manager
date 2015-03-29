@@ -16,9 +16,23 @@ static NSString *deleteConfirmationMessageDetails = @"";
 static NSString *deleteFailedMessageTitle = @"Can’t delete this staff member";
 static NSString *deleteFailedMessageDetails = @"There are market days in the database that are using this staff member.";
 
+static NSDictionary *positionStrings;
+static dispatch_once_t setPositionStrings; // NSDictionary can't be set here, so dispatch at compile time
+
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
+	
+	dispatch_once(&setPositionStrings, ^{
+		// TODO: this must be updated if positions are ever changed
+		positionStrings = @{
+			[NSNumber numberWithInt:PositionVolunteer]: @"Volunteer",
+			[NSNumber numberWithInt:PositionManager]: @"Manager",
+			[NSNumber numberWithInt:PositionAccountant]: @"Accountant",
+			[NSNumber numberWithInt:PositionAdministrator]: @"Administrator"
+		};
+	});
+	
 	self.tableView.allowsMultipleSelectionDuringEditing = false;
 	[self load];
 }
@@ -86,12 +100,7 @@ static NSString *deleteFailedMessageDetails = @"There are market days in the dat
 	MarketStaff *info = [self.fetchedResultsController objectAtIndexPath:indexPath];
 	[cell.textLabel setText:info.name];
 	
-	// TODO: this must be updated if positions are ever changed
-	NSDictionary *positionNames = @{
-		[NSNumber numberWithInt:PositionVolunteer]: @"Volunteer",
-		[NSNumber numberWithInt:PositionManager]: @"Manager"
-	};
-	[cell.detailTextLabel setText:[positionNames objectForKey:[NSNumber numberWithInt:info.position]]];
+	[cell.detailTextLabel setText:[positionStrings objectForKey:[NSNumber numberWithInt:info.position]]];
 }
 
 // populate the table view
