@@ -3,8 +3,9 @@
 //  tfmco-mip
 //
 
-#import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 #import "MarketDays.h"
 
