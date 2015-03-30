@@ -559,7 +559,7 @@ Stephen Davies</string>
             </objects>
             <point key="canvasLocation" x="327.34375" y="-284.765625"/>
         </scene>
-        <!--Generate Reports-->
+        <!--Create Reports-->
         <scene sceneID="exq-ho-4ua">
             <objects>
                 <tableViewController id="KTV-OH-m7B" customClass="ReportsMenuViewController" sceneMemberID="viewController">
@@ -588,7 +588,7 @@ Stephen Davies</string>
                             <outlet property="delegate" destination="KTV-OH-m7B" id="RJO-gT-6B2"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Generate Reports" id="YkO-bz-ujA"/>
+                    <navigationItem key="navigationItem" title="Create Reports" id="YkO-bz-ujA"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aPu-RX-JRq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
