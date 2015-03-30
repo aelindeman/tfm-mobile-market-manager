@@ -10,11 +10,10 @@
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
-	self.tableView.allowsMultipleSelectionDuringEditing = false;
 	[self load];
 	
 	UIBarButtonItem *closeButton = [[UIBarButtonItem alloc] initWithTitle:@"Close" style:UIBarButtonItemStylePlain target:self action:@selector(discard)];
-	UIBarButtonItem *deselectButton = [[UIBarButtonItem alloc] initWithTitle:@"Clear selection" style:UIBarButtonItemStylePlain target:self action:@selector(deselect)];
+	UIBarButtonItem *deselectButton = [[UIBarButtonItem alloc] initWithTitle:@"Deselect" style:UIBarButtonItemStylePlain target:self action:@selector(deselect)];
 	
 	self.navigationItem.leftBarButtonItem = closeButton;
 	self.navigationItem.rightBarButtonItem = deselectButton;
