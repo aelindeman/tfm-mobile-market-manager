@@ -12,16 +12,9 @@ static NSString *marketDaySubfolder = @"Market Day %@"; // relative to reports s
 
 // relative to market day subfolder
 // replace token with timestamp of report generation
-static NSString *demographicsReportName = @"Demographics-%i.csv";
-static NSString *salesReportName = @"Sales-%i.csv";
-static NSString *redemptionsReportName = @"Redemptions-%i.csv";
-
-typedef NS_ENUM(NSInteger, ReportType)
-{
-	DemographicsReport = 0,
-	SalesReport,
-	RedemptionsReport
-};
+static NSString *demographicsReportName = @"Demographics-%.0f.csv";
+static NSString *salesReportName = @"Sales-%.0f.csv";
+static NSString *redemptionsReportName = @"Redemptions-%.0f.csv";
 
 // allow init using delegate's active market day
 - (id)init
@@ -75,7 +68,7 @@ typedef NS_ENUM(NSInteger, ReportType)
 	return [NSString pathWithComponents:@[[TFM_DELEGATE.applicationDocumentsDirectory path],
 										  reportsSubfolder,
 										  [NSString stringWithFormat:marketDaySubfolder, [self.selectedMarketDay description]],
-										  [NSString stringWithFormat:reportName, round([[NSDate date] timeIntervalSince1970])]]];
+										  [NSString stringWithFormat:reportName, [[NSDate date] timeIntervalSince1970]]]];
 }
 
 // creates demographics report at default path; returns path
