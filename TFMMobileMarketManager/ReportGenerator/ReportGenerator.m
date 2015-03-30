@@ -12,9 +12,16 @@ static NSString *marketDaySubfolder = @"Market Day %@"; // relative to reports s
 
 // relative to market day subfolder
 // replace token with timestamp of report generation
-static NSString *demographicsReportName = @"Demographics-%@.csv";
-static NSString *salesReportName = @"Sales-%@.csv";
-static NSString *redemptionsReportName = @"Redemptions-%@.csv";
+static NSString *demographicsReportName = @"Demographics-%i.csv";
+static NSString *salesReportName = @"Sales-%i.csv";
+static NSString *redemptionsReportName = @"Redemptions-%i.csv";
+
+typedef NS_ENUM(NSInteger, ReportType)
+{
+	DemographicsReport = 0,
+	SalesReport,
+	RedemptionsReport
+};
 
 // allow init using delegate's active market day
 - (id)init
@@ -85,7 +92,7 @@ static NSString *redemptionsReportName = @"Redemptions-%@.csv";
 	NSString *writeString = [[NSString alloc] init];
 	NSString *header = @"CustomerType,Credit,SNAP,Total\n";
 	writeString = [writeString stringByAppendingString:header];
-	
+
 	NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"Transactions"];
 	[request setPredicate:[NSPredicate predicateWithFormat:@"(marketday = %@) and (markedInvalid = false)", [self selectedMarketDay]]];
 
@@ -102,11 +109,11 @@ static NSString *redemptionsReportName = @"Redemptions-%@.csv";
 									 @"GenderMale":         @0,
 									 @"Seniors":            @0,
 									 @"FrequencyFirstTime": @0};
-	
+
 	NSMutableDictionary *creditTotals = [totalsTemplate mutableCopy];
 	NSMutableDictionary *snapTotals = [totalsTemplate mutableCopy];
 	NSMutableDictionary *throwawayTotals = [totalsTemplate mutableCopy]; // this isn't used except for a place to put garbage data
-	
+
 	// iter through each transaction
 	for (Transactions *tx in query)
 	{
@@ -117,15 +124,15 @@ static NSString *redemptionsReportName = @"Redemptions-%@.csv";
 		else if (tx.cust_ethnicity == EthnicityHispanic) [activeSet setValue:@([activeSet[@"EthnicityHispanic"] intValue] + 1) forKey:@"EthnicityHispanic"];
 		else if (tx.cust_ethnicity == EthnicityAsian) [activeSet setValue:@([activeSet[@"EthnicityAsian"] intValue] + 1) forKey:@"EthnicityAsian"];
 		else if (tx.cust_ethnicity == EthnicityOther) [activeSet setValue:@([activeSet[@"EthnicityOther"] intValue] + 1) forKey:@"EthnicityOther"];
-		
+
 		if (tx.cust_gender) [activeSet setValue:@([activeSet[@"GenderMale"] intValue] + 1) forKey:@"GenderMale"];
 		else [activeSet setValue:@([activeSet[@"GenderFemale"] intValue] + 1) forKey:@"GenderFemale"];
-		
+
 		if (tx.cust_senior) [activeSet setValue:@([activeSet[@"Seniors"] intValue] + 1) forKey:@"Seniors"];
-	
+
 		if (tx.cust_frequency == FrequencyFirstTime) [activeSet setValue:@([activeSet[@"FrequencyFirstTime"] intValue] + 1) forKey:@"FrequencyFirstTime"];
 	}
-	
+
 	// create the csv string
 	for (NSString *key in totalsTemplate)
 	{
@@ -176,7 +183,7 @@ static NSString *redemptionsReportName = @"Redemptions-%@.csv";
 		[totals setValue:@([totals[@"BonusValue"] intValue] + re.bonus_count) forKey:@"BonusValue"];
 		[totals setValue:@([totals[@"Total"] intValue] + re.total) forKey:@"Total"];
 
-		writeString = [writeString stringByAppendingString:[NSString stringWithFormat:@"%@,%i,%i,%i,%i,%i\n", [(Vendors *)re.vendor businessName], re.credit_count, re.credit_amount, re.snap_count, re.bonus_count, re.total]];
+		writeString = [writeString stringByAppendingString:[NSString stringWithFormat:@"'%@',%i,%i,%i,%i,%i\n", [(Vendors *)re.vendor businessName], re.credit_count, re.credit_amount, re.snap_count, re.bonus_count, re.total]];
 	}
 
 	// totals row
@@ -196,7 +203,78 @@ static NSString *redemptionsReportName = @"Redemptions-%@.csv";
 
 - (void)generateSalesReportAtPath:(NSString *)path
 {
+	NSString *writeString = [[NSString alloc] init];
+	NSString *disbursements = @"#Disbursements#\nTokenType,TransactionCount,TokensDisbursed,Value\n";
+	writeString = [writeString stringByAppendingString:disbursements];
 	
+	NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"Transactions"];
+	[request setPredicate:[NSPredicate predicateWithFormat:@"(marketday = %@) and (markedInvalid = false)", [self selectedMarketDay]]];
+	
+	NSError *error;
+	NSArray *query = [TFM_DELEGATE.managedObjectContext executeFetchRequest:request error:&error];
+	NSAssert1(!error, @"fetch request failed: %@", error);
+	
+	NSDictionary *totalsTemplate = @{@"TransactionCount": @0,
+									 @"TokensDisbursed":  @0,
+									 @"Value":            @0};
+	
+	NSMutableDictionary *snapTotals = [totalsTemplate mutableCopy];
+	NSMutableDictionary *bonusTotals = [totalsTemplate mutableCopy];
+	NSMutableDictionary *creditTotals = [totalsTemplate mutableCopy];
+	
+	unsigned int creditFeeCount = 0, creditFeeTotal = 0;
+	
+	// create disbursements table
+	for (Transactions *tx in query)
+	{
+		if (tx.credit_used)
+		{
+			[creditTotals setValue:@([creditTotals[@"TransactionCount"] intValue] + 1) forKey:@"TransactionCount"];
+			[creditTotals setValue:@([creditTotals[@"TokensDisbursed"] intValue] + ceil((tx.credit_total - tx.credit_fee) / 5)) forKey:@"TokensDisbursed"];
+			[creditTotals setValue:@([creditTotals[@"Value"] intValue] + (tx.credit_total - tx.credit_fee)) forKey:@"Value"];
+			
+			if (tx.credit_fee > 0)
+			{
+				creditFeeCount ++;
+				creditFeeTotal += tx.credit_fee;
+			}
+		}
+		if (tx.snap_used)
+		{
+			[snapTotals setValue:@([snapTotals[@"TransactionCount"] intValue] + 1) forKey:@"TransactionCount"];
+			[snapTotals setValue:@([snapTotals[@"TokensDisbursed"] intValue] + (tx.snap_total - tx.snap_bonus)) forKey:@"TokensDisbursed"];
+			[snapTotals setValue:@([snapTotals[@"Value"] intValue] + (tx.snap_total - tx.snap_bonus)) forKey:@"Value"];
+			
+			[bonusTotals setValue:@([bonusTotals[@"TransactionCount"] intValue] + 1) forKey:@"TransactionCount"];
+			[bonusTotals setValue:@([bonusTotals[@"TokensDisbursed"] intValue] + tx.snap_bonus) forKey:@"TokensDisbursed"];
+			[bonusTotals setValue:@([bonusTotals[@"Value"] intValue] + tx.snap_bonus) forKey:@"Value"];
+		}
+	}
+	
+	// create rows
+	writeString = [writeString stringByAppendingString:[NSString stringWithFormat:@"%@,%i,%i,%i\n", @"'SNAP (Blue)'", [snapTotals[@"TransactionCount"] intValue], [snapTotals[@"TokensDisbursed"] intValue], [snapTotals[@"Value"] intValue]]];
+	writeString = [writeString stringByAppendingString:[NSString stringWithFormat:@"%@,%i,%i,%i\n", @"'Bonus (Red)'", [bonusTotals[@"TransactionCount"] intValue], [bonusTotals[@"TokensDisbursed"] intValue], [bonusTotals[@"Value"] intValue]]];
+	writeString = [writeString stringByAppendingString:[NSString stringWithFormat:@"%@,%i,%i,%i\n", @"'Credit (Green)'", [creditTotals[@"TransactionCount"] intValue], [creditTotals[@"TokensDisbursed"] intValue], [creditTotals[@"Value"] intValue]]];
+	
+	writeString = [writeString stringByAppendingString:[NSString stringWithFormat:@"'Token Fee',%i,,%i\n", creditFeeCount, creditFeeTotal]];
+	
+	unsigned int transactionCount = [query count], total = ([snapTotals[@"Value"] intValue] + [bonusTotals[@"Value"] intValue] + [creditTotals[@"Value"] intValue]);
+	writeString = [writeString stringByAppendingString:[NSString stringWithFormat:@"'Total (SNAP + Credit + TokenFee)',%i,,%i\n", transactionCount, total]];
+	
+	unsigned int grandtotal = total + creditFeeTotal;
+	writeString = [writeString stringByAppendingString:[NSString stringWithFormat:@"'Grand Total (SNAP + Bonus + Credit + TokenFee)',,,%i\n", grandtotal]];
+	
+	// create transactions table
+	NSString *header = @"\n#Transactions#\nuuid,Zipcode,License,CreditAmount,CreditFee,SNAPAmount,SNAPBonus,Total\n";
+	writeString = [writeString stringByAppendingString:header];
+	
+	for (Transactions *tx in query)
+	{
+		writeString = [writeString stringByAppendingString:[NSString stringWithFormat:@"'%@','%@',%04i,%i,%i,%i,%i,%i\n", [tx objectID], tx.cust_zipcode, tx.cust_id, (tx.credit_total - tx.credit_fee), tx.credit_fee, (tx.snap_total - tx.snap_bonus), tx.snap_bonus, (tx.credit_total + tx.snap_total)]];
+	}
+	
+	NSLog(@"prepped sales report: {\n%@\n}", writeString);
+	[self writeReportToFile:path contents:writeString];
 }
 
 @end

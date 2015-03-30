@@ -590,8 +590,8 @@ Stephen Davies</string>
                     </tableView>
                     <navigationItem key="navigationItem" title="Create Reports" id="YkO-bz-ujA"/>
                     <connections>
-                        <segue destination="PaK-Hs-vhr" kind="presentation" identifier="PickMarketDaySegue" modalPresentationStyle="formSheet" id="xEb-lK-Bqb"/>
-                        <segue destination="tHu-8L-zGg" kind="presentation" identifier="OpenExistingReportSegue" modalPresentationStyle="formSheet" id="RVD-bZ-lEj"/>
+                        <segue destination="PaK-Hs-vhr" kind="presentation" identifier="SelectMarketDaySegue" modalPresentationStyle="formSheet" id="xEb-lK-Bqb"/>
+                        <segue destination="tHu-8L-zGg" kind="presentation" identifier="SelectExistingReportSegue" modalPresentationStyle="formSheet" id="RVD-bZ-lEj"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aPu-RX-JRq" userLabel="First Responder" sceneMemberID="firstResponder"/>

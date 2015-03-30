@@ -26,10 +26,12 @@ static NSString *noSelectedMarketDayWarningMessage = @"To create a report, you n
 			@{@"title": @"Select market day", @"icon": @"marketday", @"action": @"SelectMarketDaySegue"},
 			@{@"title": @"Export an existing report", @"icon": @"export", @"action": @"SelectExistingReportSegue"}
 		], @[
-			@{@"title": @"Create sales report", @"icon": @"totals", @"action": @"salesReport"},
-			@{@"title": @"Create redemptions report", @"icon": @"inbox", @"action": @"redemptionsReport"},
-			@{@"title": @"Create demographics report", @"icon": @"demographics", @"action": @"demographicsReport"}
+			@{@"title": @"Create sales report", @"icon": @"totals", @"action": @"sales"},
+			@{@"title": @"Create redemptions report", @"icon": @"inbox", @"action": @"redemptions"},
+			@{@"title": @"Create demographics report", @"icon": @"demographics", @"action": @"demographics"}
 		]];
+	
+	NSLog(@"%@", [TFM_DELEGATE.applicationDocumentsDirectory path]);
 }
 
 - (void)viewDidAppear:(BOOL)animated
