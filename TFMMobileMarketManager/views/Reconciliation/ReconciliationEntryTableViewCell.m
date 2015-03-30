@@ -160,4 +160,16 @@
 	}
 }
 
+// see if input array (which should be from -getData:) equals the values in the cell
+- (bool)reconcileWith:(NSDictionary *)inputs
+{
+	return
+		[[inputs valueForKey:@"snapField1"] isEqualToString:[self.snapField1 text]] &&
+		[[inputs valueForKey:@"snapField2"] isEqualToString:[self.snapField2 text]] &&
+		[[inputs valueForKey:@"creditField1"] isEqualToString:[self.creditField1 text]] &&
+		[[inputs valueForKey:@"creditField2"] isEqualToString:[self.creditField2 text]] &&
+		[[inputs valueForKey:@"totalField1"] isEqualToString:[self.totalField1 text]] &&
+		[[inputs valueForKey:@"totalField2"] isEqualToString:[self.totalField2 text]];
+}
+
 @end

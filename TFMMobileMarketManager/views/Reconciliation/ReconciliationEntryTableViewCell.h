@@ -37,5 +37,6 @@
 - (void)setField2Suffix:(NSString *)suffix;
 
 - (NSDictionary *)getData;
+- (bool)reconcileWith:(NSDictionary *)inputs;
 
 @end
