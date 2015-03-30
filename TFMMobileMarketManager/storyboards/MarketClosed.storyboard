@@ -176,7 +176,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PIH-Vm-RZ9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1964.0625" y="-284.765625"/>
+            <point key="canvasLocation" x="1964" y="-405"/>
         </scene>
         <!--Vendor Form View Controller-->
         <scene sceneID="xdS-TU-g2S">
@@ -197,7 +197,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r5Q-bZ-5a2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3371" y="-285"/>
+            <point key="canvasLocation" x="3371" y="-405"/>
         </scene>
         <!--About-->
         <scene sceneID="jad-Q9-9Dd">
@@ -557,7 +557,7 @@ Stephen Davies</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lsd-k9-UOE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="327.34375" y="-284.765625"/>
+            <point key="canvasLocation" x="327" y="-405"/>
         </scene>
         <!--Create Reports-->
         <scene sceneID="exq-ho-4ua">
@@ -589,10 +589,14 @@ Stephen Davies</string>
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Create Reports" id="YkO-bz-ujA"/>
+                    <connections>
+                        <segue destination="PaK-Hs-vhr" kind="presentation" identifier="PickMarketDaySegue" modalPresentationStyle="formSheet" id="xEb-lK-Bqb"/>
+                        <segue destination="tHu-8L-zGg" kind="presentation" identifier="OpenExistingReportSegue" modalPresentationStyle="formSheet" id="RVD-bZ-lEj"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aPu-RX-JRq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="327" y="389"/>
+            <point key="canvasLocation" x="1092" y="2029"/>
         </scene>
         <!--Edit Staff-->
         <scene sceneID="b0e-M0-xZv">
@@ -642,7 +646,7 @@ Stephen Davies</string>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kdq-rr-HKe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1964.0625" y="389.6484375"/>
+            <point key="canvasLocation" x="1964" y="269"/>
         </scene>
         <!--Edit Locations-->
         <scene sceneID="e0t-8f-o91">
@@ -692,7 +696,7 @@ Stephen Davies</string>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dyw-p1-myt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1964.0625" y="1071.6796875"/>
+            <point key="canvasLocation" x="1964" y="951"/>
         </scene>
         <!--Market Staff Form View Controller-->
         <scene sceneID="qxn-st-zIS">
@@ -711,7 +715,7 @@ Stephen Davies</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6da-gb-tac" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3371" y="389"/>
+            <point key="canvasLocation" x="3371" y="269"/>
         </scene>
         <!--Locations Form View Controller-->
         <scene sceneID="lcn-73-iSf">
@@ -730,7 +734,7 @@ Stephen Davies</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EeR-aj-uHy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3371" y="1071"/>
+            <point key="canvasLocation" x="3371" y="951"/>
         </scene>
         <!--Synchronize-->
         <scene sceneID="KIM-F7-Cak">
@@ -917,7 +921,7 @@ Stephen Davies</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JlG-7Q-3Nl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="327" y="1071"/>
+            <point key="canvasLocation" x="327" y="269"/>
         </scene>
         <!--Console-->
         <scene sceneID="o83-Fs-8gs">
@@ -1076,7 +1080,7 @@ Stephen Davies</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gav-jf-8hW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="327" y="1751"/>
+            <point key="canvasLocation" x="327" y="951"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="8Qd-5l-af3">
@@ -1094,7 +1098,7 @@ Stephen Davies</string>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1xt-Wc-FdF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2664.0625" y="389.6484375"/>
+            <point key="canvasLocation" x="2664" y="269"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="YNu-cu-35A">
@@ -1112,7 +1116,7 @@ Stephen Davies</string>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hCQ-dk-Kg7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2664.0625" y="-284.765625"/>
+            <point key="canvasLocation" x="2664" y="-405"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="MRA-Vm-9Hz">
@@ -1168,7 +1172,81 @@ Stephen Davies</string>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0mq-Gi-AiF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2673.4375" y="1071.6796875"/>
+            <point key="canvasLocation" x="2673" y="951"/>
+        </scene>
+        <!--Pick Market Day-->
+        <scene sceneID="aSE-bd-pCo">
+            <objects>
+                <viewController id="oUS-Pc-dTE" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="gmc-DA-pt5"/>
+                        <viewControllerLayoutGuide type="bottom" id="Dag-0b-1e2"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="s0L-ab-C6P">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Pick Market Day" id="F9o-qv-cHz"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="84v-Z6-hj8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2673" y="1671"/>
+        </scene>
+        <!--Open an Existing Report-->
+        <scene sceneID="q4e-fD-74f">
+            <objects>
+                <viewController id="CgX-0b-kEv" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Rau-B5-Rxc"/>
+                        <viewControllerLayoutGuide type="bottom" id="mn6-px-iQS"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="fEU-if-wu7">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Open an Existing Report" id="f1R-PB-r4F"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2ZR-0x-9dG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2673" y="2386"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="faa-3K-ghU">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="PaK-Hs-vhr" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="KCE-nd-e7T">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="oUS-Pc-dTE" kind="relationship" relationship="rootViewController" id="EkM-2k-GfT"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="310-5e-I6F" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1964" y="1671"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="adp-cW-mD2">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="tHu-8L-zGg" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="bZj-Ef-0g7">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="CgX-0b-kEv" kind="relationship" relationship="rootViewController" id="UNU-Gy-M7f"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hn2-mO-7KJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1964" y="2386"/>
         </scene>
     </scenes>
     <resources>
@@ -1177,9 +1255,9 @@ Stephen Davies</string>
         <image name="sync" width="16" height="16"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Xyf-yc-rV8"/>
-        <segue reference="TgG-lG-Acz"/>
-        <segue reference="fZ2-QH-psV"/>
         <segue reference="tmR-C0-IUe"/>
+        <segue reference="Xyf-yc-rV8"/>
+        <segue reference="uV5-lI-hNV"/>
+        <segue reference="BzA-eb-QoZ"/>
     </inferredMetricsTieBreakers>
 </document>
