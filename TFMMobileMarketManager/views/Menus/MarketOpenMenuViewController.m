@@ -37,7 +37,8 @@ static NSString *closeMarketDayUnreconciledWarningMessage = @"Terminal totals ha
 		], @[
 			@{@"title": @"Edit market day", @"icon": @"marketday", @"action": @"EditMarketDaySegue"},
 			@{@"title": @"Reconcile token totals", @"icon": @"tokens", @"action": @"TokenTotalsReconciliationFormSegue"},
-			@{@"title": @"Reconcile terminal totals", @"icon": @"terminal", @"action": @"TerminalTotalsReconciliationFormSegue"},
+			@{@"title": @"Reconcile terminal totals", @"icon": @"terminal", @"action": @"TerminalTotalsReconciliationFormSegue"}
+		], @[
 			@{@"title": @"Close market day", @"icon": @"exit", @"action": @"closeMarketDay"}
 		]];
 }
