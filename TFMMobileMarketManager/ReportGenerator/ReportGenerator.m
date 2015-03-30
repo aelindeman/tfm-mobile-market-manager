@@ -8,7 +8,7 @@
 @implementation ReportGenerator
 
 static NSString *reportsSubfolder = @"Reports"; // relative to application's documents directory
-static NSString *marketDaySubfolder = @"%@"; // relative to reports subfolder, replace token with market day name
+static NSString *marketDaySubfolder = @"Market Day %@"; // relative to reports subfolder, replace token with market day name
 
 // relative to market day subfolder
 // replace token with timestamp of report generation
@@ -28,19 +28,53 @@ static NSString *redemptionsReportName = @"Redemptions-%@.csv";
 {
 	if (self = [super init])
 	{
-		//NSAssert(marketDay, @"No active market day set! Use -initWithMarketDay:marketDay to specify one if not active");
+		NSAssert(marketDay, @"No active market day set! Use -initWithMarketDay:marketDay to specify one if not active");
 		_selectedMarketDay = marketDay;
 	}
 	return self;
 }
 
+// writes contents to file, creating the file and path on the way
+- (void)writeReportToFile:(NSString *)path contents:(NSString *)contents
+{
+	NSFileHandle *fh;
+	@try
+	{
+		// create report directory and csv file
+		NSFileManager *fm = [NSFileManager defaultManager];
+		[fm createDirectoryAtPath:[path stringByDeletingLastPathComponent] withIntermediateDirectories:true attributes:nil error:nil];
+		[fm createFileAtPath:path contents:nil attributes:nil];
+
+		// open the file for writing
+		fh = [NSFileHandle fileHandleForWritingAtPath:path];
+		[fh truncateFileAtOffset:[fh seekToEndOfFile]];
+		[fh writeData:[contents dataUsingEncoding:NSUTF8StringEncoding]];
+
+		NSLog(@"wrote report to %@", path);
+	}
+	@catch (NSException *exception)
+	{
+		NSLog(@"couldn’t write report: %@", [exception reason]);
+	}
+	@finally
+	{
+		[fh closeFile];
+	}
+}
+
+// creates the reports path
+- (NSString *)getReportsPathForReportType:(NSString*)reportName
+{
+	return [NSString pathWithComponents:@[[TFM_DELEGATE.applicationDocumentsDirectory path],
+										  reportsSubfolder,
+										  [NSString stringWithFormat:marketDaySubfolder, [self.selectedMarketDay description]],
+										  [NSString stringWithFormat:reportName, round(NSTimeIntervalSince1970)]]];
+}
+
 // creates demographics report at default path; returns path
 - (NSString *)generateDemographicsReport
 {
-	NSString *path = [NSString pathWithComponents:@[[TFM_DELEGATE.applicationDocumentsDirectory path],
-													reportsSubfolder,
-													[NSString stringWithFormat:marketDaySubfolder, [self.selectedMarketDay description]],
-													[NSString stringWithFormat:demographicsReportName, round(NSTimeIntervalSince1970)]]];
+	NSString *path = [self getReportsPathForReportType:demographicsReportName];
 	[self generateDemographicsReportAtPath:path];
 	return path;
 }
@@ -53,13 +87,12 @@ static NSString *redemptionsReportName = @"Redemptions-%@.csv";
 	writeString = [writeString stringByAppendingString:header];
 	
 	NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"Transactions"];
-	//[request setPredicate:[NSPredicate predicateWithFormat:@"(marketday = %@) and (markedInvalid = false)", [self selectedMarketDay]]];
-	
+	[request setPredicate:[NSPredicate predicateWithFormat:@"(marketday = %@) and (markedInvalid = false)", [self selectedMarketDay]]];
+
 	NSError *error;
 	NSArray *query = [TFM_DELEGATE.managedObjectContext executeFetchRequest:request error:&error];
 	NSAssert1(!error, @"fetch request failed: %@", error);
-	
-	// NSDictionary maybe isn't the best data type for this but I don't feel like making a new one just yet
+
 	NSDictionary *totalsTemplate = @{@"EthnicityWhite":     @0,
 									 @"EthnicityBlack":     @0,
 									 @"EthnicityAsian":     @0,
@@ -99,61 +132,64 @@ static NSString *redemptionsReportName = @"Redemptions-%@.csv";
 		int creditValue = [[creditTotals objectForKey:key] intValue];
 		int snapValue = [[snapTotals objectForKey:key] intValue];
 		int totalValue = creditValue + snapValue;
-		
+
 		writeString = [writeString stringByAppendingString:[NSString stringWithFormat:@"%@,%i,%i,%i\n", key, creditValue, snapValue, totalValue]];
 	}
-	
+
 	NSLog(@"prepped demographics report: {\n%@\n}", writeString);
-	
-	// write the csv
-	NSFileHandle *fh;
-	@try
-	{
-		// create demographics report directory and csv file
-		NSFileManager *fm = [NSFileManager defaultManager];
-		[fm createDirectoryAtPath:[path stringByDeletingLastPathComponent] withIntermediateDirectories:true attributes:nil error:nil];
-		[fm createFileAtPath:path contents:nil attributes:nil];
-		
-		// open the file for writing
-		fh = [NSFileHandle fileHandleForWritingAtPath:path];
-		[fh truncateFileAtOffset:[fh seekToEndOfFile]];
-		[fh writeData:[writeString dataUsingEncoding:NSUTF8StringEncoding]];
-		
-		//NSLog(@"wrote demographics report to %@", path);
-	}
-	@catch (NSException *exception)
-	{
-		NSLog(@"couldn’t write demographics report: %@", [exception reason]);
-	}
-	@finally
-	{
-		[fh closeFile];
-	}
+	[self writeReportToFile:path contents:writeString];
 }
 
 // redemptions
 - (NSString *)generateRedemptionsReport
 {
-	NSString *path = [NSString pathWithComponents:@[[TFM_DELEGATE.applicationDocumentsDirectory path],
-													reportsSubfolder,
-													[NSString stringWithFormat:marketDaySubfolder, [self.selectedMarketDay description]],
-													[NSString stringWithFormat:redemptionsReportName, round(NSTimeIntervalSince1970)]]];
+	NSString *path = [self getReportsPathForReportType:redemptionsReportName];
 	[self generateRedemptionsReportAtPath:path];
 	return path;
 }
 
 - (void)generateRedemptionsReportAtPath:(NSString *)path
 {
+	NSString *writeString = [[NSString alloc] init];
+	NSString *header = @"VendorName,CreditTokenCount,CreditValue,SNAPValue,BonusValue,Total\n";
+	writeString = [writeString stringByAppendingString:header];
 
+	NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"Redemptions"];
+	[request setPredicate:[NSPredicate predicateWithFormat:@"(marketday = %@) and (markedInvalid = false)", [self selectedMarketDay]]];
+
+	NSError *error;
+	NSArray *query = [TFM_DELEGATE.managedObjectContext executeFetchRequest:request error:&error];
+	NSAssert1(!error, @"fetch request failed: %@", error);
+
+	NSDictionary *totals = [@{@"CreditTokenCount": @0,
+							  @"CreditValue":      @0,
+							  @"SNAPValue":        @0,
+							  @"BonusValue":       @0,
+							  @"Total":            @0} mutableCopy];
+
+	// iter through each redemption
+	for (Redemptions *re in query)
+	{
+		[totals setValue:@([totals[@"CreditTokenCount"] intValue] + re.credit_count) forKey:@"CreditTokenCount"];
+		[totals setValue:@([totals[@"CreditValue"] intValue] + re.credit_amount) forKey:@"CreditValue"];
+		[totals setValue:@([totals[@"SNAPValue"] intValue] + re.snap_count) forKey:@"SNAPValue"];
+		[totals setValue:@([totals[@"BonusValue"] intValue] + re.bonus_count) forKey:@"BonusValue"];
+		[totals setValue:@([totals[@"Total"] intValue] + re.total) forKey:@"Total"];
+
+		writeString = [writeString stringByAppendingString:[NSString stringWithFormat:@"%@,%i,%i,%i,%i,%i\n", [(Vendors *)re.vendor businessName], re.credit_count, re.credit_amount, re.snap_count, re.bonus_count, re.total]];
+	}
+
+	// totals row
+	writeString = [writeString stringByAppendingString:[NSString stringWithFormat:@"\n#totals#,%i,%i,%i,%i,%i\n", [totals[@"CreditTokenCount"] intValue], [totals[@"CreditValue"] intValue], [totals[@"SNAPValue"] intValue], [totals[@"BonusValue"] intValue], [totals[@"Total"] intValue]]];
+
+	NSLog(@"prepped redemptions report: {\n%@\n}", writeString);
+	[self writeReportToFile:path contents:writeString];
 }
 
 // sales
 - (NSString *)generateSalesReport
 {
-	NSString *path = [NSString pathWithComponents:@[[TFM_DELEGATE.applicationDocumentsDirectory path],
-													reportsSubfolder,
-													[NSString stringWithFormat:marketDaySubfolder, [self.selectedMarketDay description]],
-													[NSString stringWithFormat:salesReportName, round(NSTimeIntervalSince1970)]]];
+	NSString *path = [self getReportsPathForReportType:salesReportName];
 	[self generateSalesReportAtPath:path];
 	return path;
 }
