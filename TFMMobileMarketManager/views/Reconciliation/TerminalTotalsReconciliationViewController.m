@@ -16,14 +16,45 @@ static NSString *calculatedTotalsCellIdentifier = @"CalculatedTotalsCell";
 static NSString *menuOptionCellIdentifier = @"MenuOptionCell";
 
 static NSString *helpText =	@"If the totals do not match, it is usually an error involving:\n\t- the terminal not processing a transaction\n\t- a transaction incorrectly marked or not marked as invalid\n\t- a typo either on this device or the terminal";
-static NSString *closureText = @"The market day will be closed upon successful reconcilation.";
 
 static NSString *skipMessageTitle = @"Skip terminal total reconciliation?";
 static NSString *skipMessageDetails = @"Reconciliation must be completed before synchronization or generating a report for this market day.";
 
+static NSString *validationFailedTitle = @"Reconciliation failed";
+static NSString *validationFailedMessage = @"There is a discrepancy between the terminal’s totals and this device’s transaction totals.";
+
+unsigned int deviceCreditAmount, deviceCreditTransactionCount,
+deviceSnapAmount, deviceSnapTransactionCount,
+deviceTotalAmount, deviceTotalTransactionCount;
+
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
+	NSAssert([TFM_DELEGATE activeMarketDay], @"No active market day set!");
+	
+	// grab terminal totals object from passed identifier
+	if (self.editObjectID)
+	{
+		[self setEditObject:(TerminalTotals *)[TFM_DELEGATE.managedObjectContext objectWithID:[self editObjectID]]];
+		NSLog(@"handoff to TerminalTotals object %@", self.editObjectID);
+	}
+	
+	// for whatever reason the terminal totals object id wasn't passed
+	// so first try to fetch it from the active market day
+	else if ([TFM_DELEGATE.activeMarketDay terminalTotals])
+	{
+		[self setEditObject:(TerminalTotals *)[TFM_DELEGATE.activeMarketDay terminalTotals]];
+		NSLog(@"terminal totals were not passed but they were set in market day, using TerminalTotals object %@", [self.editObject objectID]);
+	}
+	
+	// and if it isn't set, just make a new one
+	else
+	{
+		TerminalTotals *tt = [NSEntityDescription insertNewObjectForEntityForName:@"TerminalTotals" inManagedObjectContext:TFM_DELEGATE.managedObjectContext];
+		[TFM_DELEGATE.activeMarketDay setTerminalTotals:tt];
+		[self setEditObject:tt];
+		NSLog(@"terminal totals were not passed and were not set in market day, created new TerminalTotals object %@", [tt objectID]);
+	}
 	
 	// populate the menu
 	self.menuSectionHeaders = @[@"On terminal", @"On this device", @""];
@@ -33,15 +64,49 @@ static NSString *skipMessageDetails = @"Reconciliation must be completed before 
 		], @[
 			@{@"title": calculatedTotalsCellIdentifier}
 		], @[
-			@{@"title": @"Verify", @"icon": @"check", @"action": @"closeMarketDay"}
+			@{@"title": @"Verify", @"icon": @"check", @"action": @"verify"}
 		]];
 	
+	// calculate totals from transactions
+	NSError *error;
+	NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Transactions"];
+	[request setPredicate:[NSPredicate predicateWithFormat:@"(marketday = %@) and (markedInvalid = false)", [TFM_DELEGATE activeMarketDay]]];
+	NSArray *tx = [TFM_DELEGATE.managedObjectContext executeFetchRequest:request error:&error];
+	
+	if (error)
+	{
+		[[[UIAlertView alloc] initWithTitle:@"Database error" message:[error localizedDescription] delegate:self cancelButtonTitle:nil otherButtonTitles:@"Dismiss", nil] show];
+		[self discard];
+	}
+	
+	deviceCreditAmount = 0, deviceCreditTransactionCount = 0,
+	deviceSnapAmount = 0, deviceSnapTransactionCount = 0,
+	deviceTotalAmount = 0, deviceTotalTransactionCount = [tx count];
+	
+	for (Transactions *t in tx)
+	{
+		if ([t credit_used])
+		{
+			deviceCreditTransactionCount ++;
+			deviceCreditAmount += [t credit_total];
+			deviceTotalAmount += [t credit_total];
+		}
+		if ([t snap_used])
+		{
+			deviceSnapTransactionCount ++;
+			deviceSnapAmount += [t snap_total];
+			deviceTotalAmount += [t snap_total];
+		}
+	}
+	
+	// make totals prettier
 	[self.tableView registerNib:[UINib nibWithNibName:@"ReconciliationEntryTableViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:terminalTotalsCellIdentifier];
 	[self.tableView registerNib:[UINib nibWithNibName:@"ReconciliationEntryTableViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:calculatedTotalsCellIdentifier];
 	
 	UIBarButtonItem *closeButton = [[UIBarButtonItem alloc] initWithTitle:@"Close" style:UIBarButtonItemStylePlain target:self action:@selector(discard)];
 	self.navigationItem.leftBarButtonItem = closeButton;
 	
+	// TODO: fix reconcilation able to be skipped - only available for debug
 	UIBarButtonItem *skipButton = [[UIBarButtonItem alloc] initWithTitle:@"Skip" style:UIBarButtonItemStylePlain target:self action:@selector(skip)];
 	self.navigationItem.rightBarButtonItem = skipButton;
 }
@@ -73,7 +138,6 @@ static NSString *skipMessageDetails = @"Reconciliation must be completed before 
 	switch (section)
 	{
 		case 1: return helpText;
-		case 2: return closureText;
 		default: return nil;
 	}
 }
@@ -81,66 +145,54 @@ static NSString *skipMessageDetails = @"Reconciliation must be completed before 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	NSDictionary *option = [[self.menuOptions objectAtIndex:[indexPath section]] objectAtIndex:[indexPath row]];
-	UITableViewCell *cell;
 	
 	if ([[option valueForKey:@"title"] isEqualToString:terminalTotalsCellIdentifier])
 	{
-		cell = [tableView dequeueReusableCellWithIdentifier:terminalTotalsCellIdentifier forIndexPath:indexPath];
+		ReconciliationEntryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:terminalTotalsCellIdentifier forIndexPath:indexPath];
+		[self setInputCell:cell];
 		
-		// TODO: lazy type casting
-		[(ReconciliationEntryTableViewCell *)cell setField1Prefix:@"$"];
-		[(ReconciliationEntryTableViewCell *)cell setField1Suffix:@".00"];
-		[(ReconciliationEntryTableViewCell *)cell setField2Suffix:@" transactions"];
+		[cell removePlaceholders];
+		
+		[cell setField1Prefix:@"Value ($)"];
+		[cell setField2Prefix:@"Transactions"];
+		
+		// populate the data
+		if ([self.editObject snap_amount]) [cell.snapField1 setText:[NSString stringWithFormat:@"%i", [self.editObject snap_amount]]];
+		if ([self.editObject snap_transactions]) [cell.snapField2 setText:[NSString stringWithFormat:@"%i", [self.editObject snap_transactions]]];
+		if ([self.editObject credit_amount]) [cell.creditField1 setText:[NSString stringWithFormat:@"%i", [self.editObject credit_amount]]];
+		if ([self.editObject credit_transactions]) [cell.creditField2 setText:[NSString stringWithFormat:@"%i", [self.editObject credit_transactions]]];
+		if ([self.editObject total_amount]) [cell.totalField1 setText:[NSString stringWithFormat:@"%i", [self.editObject total_amount]]];
+		if ([self.editObject total_transactions]) [cell.totalField2 setText:[NSString stringWithFormat:@"%i", [self.editObject total_transactions]]];
+		
+		return cell;
 	}
 	else if ([[option valueForKey:@"title"] isEqualToString:calculatedTotalsCellIdentifier])
 	{
-		cell = [tableView dequeueReusableCellWithIdentifier:calculatedTotalsCellIdentifier forIndexPath:indexPath];
+		ReconciliationEntryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:calculatedTotalsCellIdentifier forIndexPath:indexPath];
+		[self setDeviceCell:cell];
 		
-		// TODO: fix lazy type casting
-		[[(ReconciliationEntryTableViewCell *)cell snapField1] setUserInteractionEnabled:false];
-		[[(ReconciliationEntryTableViewCell *)cell snapField2] setUserInteractionEnabled:false];
-		[[(ReconciliationEntryTableViewCell *)cell creditField1] setUserInteractionEnabled:false];
-		[[(ReconciliationEntryTableViewCell *)cell creditField2] setUserInteractionEnabled:false];
-		[[(ReconciliationEntryTableViewCell *)cell totalField1] setUserInteractionEnabled:false];
-		[[(ReconciliationEntryTableViewCell *)cell totalField2] setUserInteractionEnabled:false];
+		[cell setField1Prefix:@"Value ($)"];
+		[cell setField2Prefix:@"Transactions"];
+		
+		[cell setUserInteractionEnabled:false];
 		
 		// distinction between the two cells, two with blue things on the right might be confusing
-		[[(ReconciliationEntryTableViewCell *)cell rightView] setBackgroundColor:[UIColor colorWithRed:0.129 green:0.129 blue:0.129 alpha:1.000]];
-
-		// calculate totals from transactions
-		NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Transactions"];
-		[request setPredicate:[NSPredicate predicateWithFormat:@"marketday = %@ and markedInvalid = false", [TFM_DELEGATE activeMarketDay]]];
-		NSArray *tx = [TFM_DELEGATE.managedObjectContext executeFetchRequest:request error:nil];
+		[cell.rightView setBackgroundColor:[UIColor colorWithRed:0.329 green:0.329 blue:0.329 alpha:1.000]];
 		
-		unsigned int deviceCreditAmount = 0, deviceCreditTransactionCount = 0, deviceSnapAmount = 0, deviceSnapTransactionCount = 0, deviceTotalAmount = 0;
-		for (Transactions *t in tx)
-		{
-			if ([t credit_used])
-			{
-				deviceCreditTransactionCount ++;
-				deviceCreditAmount += [t credit_total];
-				deviceTotalAmount += [t credit_total];
-			}
-			if ([t snap_used])
-			{
-				deviceSnapTransactionCount ++;
-				deviceSnapAmount += [t snap_total];
-				deviceTotalAmount += [t snap_total];
-			}
-		}
+		[cell.snapField1 setText:[NSString stringWithFormat:@"%i", deviceSnapAmount]];
+		[cell.snapField2 setText:[NSString stringWithFormat:@"%i", deviceSnapTransactionCount]];
 		
-		[[(ReconciliationEntryTableViewCell *)cell snapField1] setText:[NSString stringWithFormat:@"$%i.00", deviceSnapAmount]];
-		[[(ReconciliationEntryTableViewCell *)cell snapField2] setText:[NSString stringWithFormat:@"%i transaction%@", deviceSnapTransactionCount, (deviceSnapTransactionCount == 1) ? @"" : @"s"]];
-
-		[[(ReconciliationEntryTableViewCell *)cell creditField1] setText:[NSString stringWithFormat:@"$%i.00", deviceCreditAmount]];
-		[[(ReconciliationEntryTableViewCell *)cell creditField2] setText:[NSString stringWithFormat:@"%i transaction%@", deviceCreditTransactionCount, (deviceCreditTransactionCount == 1) ? @"" : @"s"]];
-
-		[[(ReconciliationEntryTableViewCell *)cell totalField1] setText:[NSString stringWithFormat:@"$%i.00", deviceTotalAmount]];
-		[[(ReconciliationEntryTableViewCell *)cell totalField2] setText:[NSString stringWithFormat:@"%i transaction%@", [tx count], ([tx count] == 1) ? @"" : @"s"]];
+		[cell.creditField1 setText:[NSString stringWithFormat:@"%i", deviceCreditAmount]];
+		[cell.creditField2 setText:[NSString stringWithFormat:@"%i", deviceCreditTransactionCount]];
+		
+		[cell.totalField1 setText:[NSString stringWithFormat:@"%i", deviceTotalAmount]];
+		[cell.totalField2 setText:[NSString stringWithFormat:@"%i", deviceTotalTransactionCount]];
+		
+		return cell;
 	}
 	else
 	{
-		cell = [tableView dequeueReusableCellWithIdentifier:menuOptionCellIdentifier forIndexPath:indexPath];
+		UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:menuOptionCellIdentifier forIndexPath:indexPath];
 		[cell.textLabel setText:[option valueForKey:@"title"]];
 		[cell setAccessoryType:[[option valueForKey:@"action"] hasSuffix:@"Segue"] ? UITableViewCellAccessoryDisclosureIndicator : UITableViewCellAccessoryNone];
 		
@@ -149,9 +201,9 @@ static NSString *skipMessageDetails = @"Reconciliation must be completed before 
 		
 		if ([option valueForKey:@"bold"])
 			[cell.textLabel setFont:[UIFont boldSystemFontOfSize:[cell.textLabel.font pointSize]]];
+		
+		return cell;
 	}
-	
-	return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -164,15 +216,15 @@ static NSString *skipMessageDetails = @"Reconciliation must be completed before 
 		[self performSegueWithIdentifier:action sender:self];
 	
 	// or do functions
-	else if ([action isEqualToString:@"closeMarketDay"])
+	else if ([action isEqualToString:@"verify"])
 		[self submit];
 	
 	else NSLog(@"nothing to do for “%@”", [selected valueForKey:@"title"]);
 	
-	[tableView deselectRowAtIndexPath:indexPath animated:YES];
+	[tableView deselectRowAtIndexPath:indexPath animated:true];
 }
 
--(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
 	if ([[alertView title] isEqualToString:skipMessageTitle])
 	{
@@ -184,8 +236,21 @@ static NSString *skipMessageDetails = @"Reconciliation must be completed before 
 				
 			case 1:
 				NSLog(@"market day about to close with user skipping reconciliation!");
-				[self dismissViewControllerAnimated:true completion:nil];
+				[self dismissViewControllerAnimated:false completion:nil];
 				[self performSegueWithIdentifier:@"MainMenuSegue" sender:self];
+				break;
+		}
+	}
+	if ([[alertView title] isEqualToString:@"Cancel form entry?"])
+	{
+		switch (buttonIndex)
+		{
+			case 0:
+				// canceled
+				break;
+				
+			case 1:
+				[self dismissViewControllerAnimated:true completion:nil];
 				break;
 		}
 	}
@@ -193,7 +258,8 @@ static NSString *skipMessageDetails = @"Reconciliation must be completed before 
 
 - (void)discard
 {
-	[self dismissViewControllerAnimated:true completion:nil];
+	UIAlertView *prompt = [[UIAlertView alloc] initWithTitle:@"Cancel form entry?" message:@"Any data entered on this form will not be saved." delegate:self cancelButtonTitle:@"Don’t close" otherButtonTitles:@"Close", nil];
+	[prompt show];
 }
 
 - (void)skip
@@ -201,13 +267,39 @@ static NSString *skipMessageDetails = @"Reconciliation must be completed before 
 	[[[UIAlertView alloc] initWithTitle:skipMessageTitle message:skipMessageDetails delegate:self cancelButtonTitle:@"Don’t skip" otherButtonTitles:@"Skip", nil] show];
 }
 
-- (void)submit
+- (bool)submit
 {
-	// verify totals match
-	
-	// then perform unwind segue
-	[self dismissViewControllerAnimated:true completion:nil];
-	[self performSegueWithIdentifier:@"MainMenuSegue" sender:self];
+	// validate
+	if ([self.inputCell reconcileWith:[self.deviceCell getData]])
+	{
+		// set terminal totals in db
+		[self.editObject setSnap_amount:[self.inputCell.snapField1.text intValue]];
+		[self.editObject setSnap_transactions:[self.inputCell.snapField2.text intValue]];
+		[self.editObject setCredit_amount:[self.inputCell.creditField1.text intValue]];
+		[self.editObject setCredit_transactions:[self.inputCell.creditField2.text intValue]];
+		[self.editObject setTotal_amount:[self.inputCell.totalField1.text intValue]];
+		[self.editObject setTotal_transactions:[self.inputCell.totalField2.text intValue]];
+		
+		NSError *error;
+		if (![TFM_DELEGATE.managedObjectContext save:&error])
+		{
+			NSLog(@"couldn't save: %@", [error localizedDescription]);
+			[[[UIAlertView alloc] initWithTitle:@"Error saving:" message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Dismiss", nil] show];
+			return false;
+		}
+		
+		// dismiss
+		[self.delegate updateTerminalReconcilationStatus:true];
+		[self dismissViewControllerAnimated:true completion:^{
+			[self.delegate updateInfoLabels];
+		}];
+		return true;
+	}
+	else
+	{
+		[[[UIAlertView alloc] initWithTitle:validationFailedTitle message:validationFailedMessage delegate:self cancelButtonTitle:nil otherButtonTitles:@"Dismiss", nil] show];
+		return false;
+	}
 }
 
 @end

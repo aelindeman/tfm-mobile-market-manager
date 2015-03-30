@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en_US</string>
 	<key>CFBundleDisplayName</key>
-	<string>TFM.co Mobile Market Manager</string>
+	<string>Mobile Market Manager</string>
 	<key>CFBundleDocumentTypes</key>
 	<array>
 		<dict>
@@ -48,7 +48,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>00deadbeef00</string>
+	<string>6d5c674c1ad6</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>

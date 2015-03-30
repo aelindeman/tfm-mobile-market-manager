@@ -13,18 +13,13 @@
 
 @synthesize delegate = _delegate;
 
-static NSString *infoCellIdentifier = @"MarketDayInfoCell";
 static NSString *optionCellIdentifier = @"MenuOptionCell";
 
-// strings shown when reconciliation isn't yet complete
-static NSString *terminalTotalsNotDoneWarningTitle = @"Terminal reconcilation has not been completed";
-static NSString *terminalTotalsNotDoneWarningMessage = @"There may be a discrepancy between values of the transactions recorded on this device and the card reader.";
-static NSString *tokenTotalsNotDoneWarningTitle = @"";
-static NSString *tokenTotalsNotDoneWarningMessage = @"";
+static NSString *closeMarketDayWarningTitle = @"Close market day?";
+static NSString *closeMarketDayWarningMessage = @"All information will be saved. You can return to this screen later.";
 
-// strings shown when reconciliation is complete, but isn't correct
-static NSString *reconciliationFailureTitle = @"";
-static NSString *reconciliationFailureMessage = @"";
+static NSString *closeMarketDayUnreconciledWarningTitle = @"Can’t close market day";
+static NSString *closeMarketDayUnreconciledWarningMessage = @"Terminal totals have not been reconciled yet. This must be done before closing the market day.";
 
 - (void)viewDidLoad
 {
@@ -42,7 +37,8 @@ static NSString *reconciliationFailureMessage = @"";
 		], @[
 			@{@"title": @"Edit market day", @"icon": @"marketday", @"action": @"EditMarketDaySegue"},
 			@{@"title": @"Reconcile token totals", @"icon": @"tokens", @"action": @"TokenTotalsReconciliationFormSegue"},
-			@{@"title": @"Reconcile terminal totals and close market day", @"icon": @"reconcile", @"action": @"TerminalTotalsReconciliationFormSegue"},
+			@{@"title": @"Reconcile terminal totals", @"icon": @"terminal", @"action": @"TerminalTotalsReconciliationFormSegue"},
+			@{@"title": @"Close market day", @"icon": @"exit", @"action": @"closeMarketDay"}
 		]];
 }
 
@@ -89,6 +85,16 @@ static NSString *reconciliationFailureMessage = @"";
 	if ([option valueForKey:@"bold"])
 		[cell.textLabel setFont:[UIFont boldSystemFontOfSize:[cell.textLabel.font pointSize]]];
 	
+	// show reconciliation status on menu options
+	if ([[option valueForKey:@"action"] isEqualToString:@"TerminalTotalsReconciliationFormSegue"])
+		[cell.textLabel setFont:(self.terminalTotalsReconciled ? [UIFont systemFontOfSize:[cell.textLabel.font pointSize]] : [UIFont boldSystemFontOfSize:[cell.textLabel.font pointSize]])];
+	
+	if ([[option valueForKey:@"action"] isEqualToString:@"closeMarketDay"])
+	{
+		[cell.textLabel setTextColor:(self.terminalTotalsReconciled ? [UIColor darkTextColor] : [UIColor lightGrayColor])];
+		[cell setUserInteractionEnabled:self.terminalTotalsReconciled];
+	}
+	
 	return cell;
 }
 
@@ -102,11 +108,28 @@ static NSString *reconciliationFailureMessage = @"";
 		[self performSegueWithIdentifier:action sender:self];
 	
 	else if ([action isEqualToString:@"closeMarketDay"])
-		[[[UIAlertView alloc] initWithTitle:terminalTotalsNotDoneWarningTitle message:terminalTotalsNotDoneWarningMessage delegate:self cancelButtonTitle:@"Return" otherButtonTitles:@"Force close", nil] show];
+		[self verifyClosure];
 	
 	else NSLog(@"nothing to do for “%@”", [selected valueForKey:@"title"]);
 	
 	[tableView deselectRowAtIndexPath:indexPath animated:true];
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+	if ([[alertView title] isEqualToString:closeMarketDayWarningTitle])
+	{
+		switch (buttonIndex)
+		{
+			case 0:
+				// canceled
+				break;
+				
+			case 1:
+				[self closeMarketDay];
+				break;
+		}
+	}
 }
 
 - (void)updateInfoLabels
@@ -168,8 +191,31 @@ static NSString *reconciliationFailureMessage = @"";
 	
 	[self.redemptionDetailLabel setText:[NSString stringWithFormat:@"%i paid\n$%i total", r_paid, r_total]];
 	
+	[self.tableView reloadData];
+	
 	// TODO: report all label errors to the console and not just the last one
 	if (error) NSLog(@"error updating info labels: %@", error);
+}
+
+- (void)updateTerminalReconcilationStatus:(bool)status
+{
+	[self setTerminalTotalsReconciled:status];
+	[self.tableView reloadData];
+}
+
+- (void)updateTokenReconcilationStatus:(bool)status
+{
+	[self setTokenTotalsReconciled:status];
+	[self.tableView reloadData];
+
+}
+
+- (void)verifyClosure
+{
+	if (!self.terminalTotalsReconciled)
+		[[[UIAlertView alloc] initWithTitle:closeMarketDayUnreconciledWarningTitle message:closeMarketDayUnreconciledWarningMessage delegate:self cancelButtonTitle:nil otherButtonTitles:@"Dismiss", nil] show];
+	else
+		[[[UIAlertView alloc] initWithTitle:closeMarketDayWarningTitle message:closeMarketDayWarningMessage delegate:self cancelButtonTitle:@"Don’t close" otherButtonTitles:@"Close", nil] show];
 }
 
 // closes the market day gracefully and returns to the main menu
@@ -183,27 +229,39 @@ static NSString *reconciliationFailureMessage = @"";
 	}];
 }
 
+- (IBAction)unwindToMainMenu:(UIStoryboardSegue *)segue
+{
+	[self closeMarketDay];
+}
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
 	if ([segue.identifier isEqualToString:@"EditMarketDaySegue"])
 	{
-		MarketDayFormViewController *mdfvc = [[[segue destinationViewController] viewControllers] objectAtIndex:0];
+		MarketDayFormViewController *mdfvc = [[[segue destinationViewController] viewControllers] firstObject];
+		[mdfvc setDelegate:self];
 		[mdfvc setMarketdayID:[TFM_DELEGATE.activeMarketDay objectID]];
 	}
-	if ([segue.identifier isEqualToString:@"AddTransactionSegue"])
-	{
-		[[[[segue destinationViewController] viewControllers] objectAtIndex:0] setDelegate:self];
-	}
+	
 	if ([segue.identifier isEqualToString:@"TerminalTotalsReconciliationFormSegue"])
 	{
-		TerminalTotalsReconciliationViewController *term = [[[segue destinationViewController] viewControllers] objectAtIndex:0];
+		TerminalTotalsReconciliationViewController *term = [[[segue destinationViewController] viewControllers] firstObject];
+		[term setDelegate:self];
 		[term setEditObjectID:[[TFM_DELEGATE.activeMarketDay terminalTotals] objectID]];
 	}
+	
 	if ([segue.identifier isEqualToString:@"TokenTotalsReconciliationFormSegue"])
 	{
-		TokenTotalsReconciliationFormViewController *tok = [[[segue destinationViewController] viewControllers] objectAtIndex:0];
+		TokenTotalsReconciliationFormViewController *tok = [[[segue destinationViewController] viewControllers] firstObject];
+		// [tok setDelegate:self];
 		[tok setEditObjectID:[[TFM_DELEGATE.activeMarketDay tokenTotals] objectID]];
 	}
+	
+	if ([segue.identifier isEqualToString:@"AddRedemptionSegue"])
+		[(RedemptionFormViewController *)[[[segue destinationViewController] viewControllers] firstObject] setDelegate:self];
+	
+	if ([segue.identifier isEqualToString:@"AddTransactionSegue"])
+		[(TransactionFormViewController *)[[[segue destinationViewController] viewControllers] firstObject] setDelegate:self];
 }
 
 @end

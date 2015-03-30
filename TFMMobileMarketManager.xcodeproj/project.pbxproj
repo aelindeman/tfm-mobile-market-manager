@@ -44,7 +44,6 @@
 		FA0AC2A01A9FB2B000CCA13A /* VendorsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0AC27A1A9FB2B000CCA13A /* VendorsListViewController.m */; };
 		FA0AC2A21A9FB2E300CCA13A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA0AC2A11A9FB2E300CCA13A /* Assets.xcassets */; };
 		FA11AAFB1AB7EEBC00D4C360 /* TerminalTotalsReconciliationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA11AAFA1AB7EEBC00D4C360 /* TerminalTotalsReconciliationViewController.m */; };
-		FA11AB001AB7EEE200D4C360 /* TokenTotalsReconciliationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA11AAFF1AB7EEE200D4C360 /* TokenTotalsReconciliationViewController.m */; };
 		FA11AB041AB7F83300D4C360 /* ReconciliationEntryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FA11AB021AB7F83300D4C360 /* ReconciliationEntryTableViewCell.m */; };
 		FA11AB051AB7F83300D4C360 /* ReconciliationEntryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA11AB031AB7F83300D4C360 /* ReconciliationEntryTableViewCell.xib */; };
 		FA77453E1AC1C03D00D9B14B /* TransactionListHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA77453D1AC1C03D00D9B14B /* TransactionListHeaderView.xib */; };
@@ -52,11 +51,10 @@
 		FAB118F11A9FB72B0012ED5D /* tfm-m3.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FAB118EF1A9FB72B0012ED5D /* tfm-m3.xcdatamodeld */; };
 		FAB4C4C11AB719CC00E462D1 /* NSData+CocoaDevUsersAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = FAB4C4C01AB719CC00E462D1 /* NSData+CocoaDevUsersAdditions.m */; };
 		FAB4C4C31AB71B2800E462D1 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FAB4C4C21AB71B2800E462D1 /* libz.dylib */; };
-		FAF7150B1AB35CA900D21067 /* TerminalTotalsReconciliationForm.m in Sources */ = {isa = PBXBuildFile; fileRef = FAF7150A1AB35CA900D21067 /* TerminalTotalsReconciliationForm.m */; };
 		FAF7150E1AB35D0E00D21067 /* TokenTotalsReconciliationForm.m in Sources */ = {isa = PBXBuildFile; fileRef = FAF7150D1AB35D0E00D21067 /* TokenTotalsReconciliationForm.m */; };
-		FAF715111AB35DEA00D21067 /* TerminalTotalsReconciliationFormViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FAF715101AB35DEA00D21067 /* TerminalTotalsReconciliationFormViewController.m */; };
 		FAF715141AB35E0100D21067 /* TokenTotalsReconciliationFormViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FAF715131AB35E0100D21067 /* TokenTotalsReconciliationFormViewController.m */; };
 		FAF84A6A1AB6046E00012B06 /* ConsoleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FAF84A691AB6046E00012B06 /* ConsoleViewController.m */; };
+		FAFE4A6F1AC85A7D009935EC /* ReportGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = FAFE4A6E1AC85A7D009935EC /* ReportGenerator.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -132,8 +130,6 @@
 		FA0AC2A11A9FB2E300CCA13A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FA11AAF91AB7EEBC00D4C360 /* TerminalTotalsReconciliationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TerminalTotalsReconciliationViewController.h; sourceTree = "<group>"; };
 		FA11AAFA1AB7EEBC00D4C360 /* TerminalTotalsReconciliationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TerminalTotalsReconciliationViewController.m; sourceTree = "<group>"; };
-		FA11AAFE1AB7EEE200D4C360 /* TokenTotalsReconciliationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TokenTotalsReconciliationViewController.h; sourceTree = "<group>"; };
-		FA11AAFF1AB7EEE200D4C360 /* TokenTotalsReconciliationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TokenTotalsReconciliationViewController.m; sourceTree = "<group>"; };
 		FA11AB011AB7F83300D4C360 /* ReconciliationEntryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReconciliationEntryTableViewCell.h; sourceTree = "<group>"; };
 		FA11AB021AB7F83300D4C360 /* ReconciliationEntryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReconciliationEntryTableViewCell.m; sourceTree = "<group>"; };
 		FA11AB031AB7F83300D4C360 /* ReconciliationEntryTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReconciliationEntryTableViewCell.xib; sourceTree = "<group>"; };
@@ -143,16 +139,14 @@
 		FAB4C4BF1AB719CC00E462D1 /* NSData+CocoaDevUsersAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+CocoaDevUsersAdditions.h"; sourceTree = "<group>"; };
 		FAB4C4C01AB719CC00E462D1 /* NSData+CocoaDevUsersAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+CocoaDevUsersAdditions.m"; sourceTree = "<group>"; };
 		FAB4C4C21AB71B2800E462D1 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.2.sdk/usr/lib/libz.dylib; sourceTree = DEVELOPER_DIR; };
-		FAF715091AB35CA900D21067 /* TerminalTotalsReconciliationForm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TerminalTotalsReconciliationForm.h; sourceTree = "<group>"; };
-		FAF7150A1AB35CA900D21067 /* TerminalTotalsReconciliationForm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TerminalTotalsReconciliationForm.m; sourceTree = "<group>"; };
 		FAF7150C1AB35D0E00D21067 /* TokenTotalsReconciliationForm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TokenTotalsReconciliationForm.h; sourceTree = "<group>"; };
 		FAF7150D1AB35D0E00D21067 /* TokenTotalsReconciliationForm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TokenTotalsReconciliationForm.m; sourceTree = "<group>"; };
-		FAF7150F1AB35DEA00D21067 /* TerminalTotalsReconciliationFormViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TerminalTotalsReconciliationFormViewController.h; sourceTree = "<group>"; };
-		FAF715101AB35DEA00D21067 /* TerminalTotalsReconciliationFormViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TerminalTotalsReconciliationFormViewController.m; sourceTree = "<group>"; };
 		FAF715121AB35E0100D21067 /* TokenTotalsReconciliationFormViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TokenTotalsReconciliationFormViewController.h; sourceTree = "<group>"; };
 		FAF715131AB35E0100D21067 /* TokenTotalsReconciliationFormViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TokenTotalsReconciliationFormViewController.m; sourceTree = "<group>"; };
 		FAF84A681AB6046E00012B06 /* ConsoleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConsoleViewController.h; sourceTree = "<group>"; };
 		FAF84A691AB6046E00012B06 /* ConsoleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConsoleViewController.m; sourceTree = "<group>"; };
+		FAFE4A6D1AC85A7D009935EC /* ReportGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ReportGenerator.h; path = TFMMobileMarketManager/ReportGenerator/ReportGenerator.h; sourceTree = SOURCE_ROOT; };
+		FAFE4A6E1AC85A7D009935EC /* ReportGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ReportGenerator.m; path = TFMMobileMarketManager/ReportGenerator/ReportGenerator.m; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -328,6 +322,8 @@
 		FA0AC2671A9FB2B000CCA13A /* Reports */ = {
 			isa = PBXGroup;
 			children = (
+				FAFE4A6D1AC85A7D009935EC /* ReportGenerator.h */,
+				FAFE4A6E1AC85A7D009935EC /* ReportGenerator.m */,
 				FA0AC2681A9FB2B000CCA13A /* ReportsMenuViewController.h */,
 				FA0AC2691A9FB2B000CCA13A /* ReportsMenuViewController.m */,
 			);
@@ -370,21 +366,6 @@
 			path = Vendors;
 			sourceTree = "<group>";
 		};
-		FA11AAFD1AB7EECA00D4C360 /* old */ = {
-			isa = PBXGroup;
-			children = (
-				FAF715091AB35CA900D21067 /* TerminalTotalsReconciliationForm.h */,
-				FAF7150A1AB35CA900D21067 /* TerminalTotalsReconciliationForm.m */,
-				FAF7150F1AB35DEA00D21067 /* TerminalTotalsReconciliationFormViewController.h */,
-				FAF715101AB35DEA00D21067 /* TerminalTotalsReconciliationFormViewController.m */,
-				FAF7150C1AB35D0E00D21067 /* TokenTotalsReconciliationForm.h */,
-				FAF7150D1AB35D0E00D21067 /* TokenTotalsReconciliationForm.m */,
-				FAF715121AB35E0100D21067 /* TokenTotalsReconciliationFormViewController.h */,
-				FAF715131AB35E0100D21067 /* TokenTotalsReconciliationFormViewController.m */,
-			);
-			name = old;
-			sourceTree = "<group>";
-		};
 		FAB4C4BE1AB719CC00E462D1 /* NSDataAdditions */ = {
 			isa = PBXGroup;
 			children = (
@@ -398,14 +379,11 @@
 		FAF714FF1AB34E1C00D21067 /* Reconciliation */ = {
 			isa = PBXGroup;
 			children = (
-				FA11AAFD1AB7EECA00D4C360 /* old */,
-				FA11AAF91AB7EEBC00D4C360 /* TerminalTotalsReconciliationViewController.h */,
-				FA11AAFA1AB7EEBC00D4C360 /* TerminalTotalsReconciliationViewController.m */,
-				FA11AAFE1AB7EEE200D4C360 /* TokenTotalsReconciliationViewController.h */,
-				FA11AAFF1AB7EEE200D4C360 /* TokenTotalsReconciliationViewController.m */,
 				FA11AB011AB7F83300D4C360 /* ReconciliationEntryTableViewCell.h */,
 				FA11AB021AB7F83300D4C360 /* ReconciliationEntryTableViewCell.m */,
 				FA11AB031AB7F83300D4C360 /* ReconciliationEntryTableViewCell.xib */,
+				FAFE4A721AC88FB8009935EC /* TerminalTotals */,
+				FAFE4A711AC88FB2009935EC /* TokenTotals */,
 			);
 			path = Reconciliation;
 			sourceTree = "<group>";
@@ -417,6 +395,26 @@
 				FAF84A691AB6046E00012B06 /* ConsoleViewController.m */,
 			);
 			path = Console;
+			sourceTree = "<group>";
+		};
+		FAFE4A711AC88FB2009935EC /* TokenTotals */ = {
+			isa = PBXGroup;
+			children = (
+				FAF7150C1AB35D0E00D21067 /* TokenTotalsReconciliationForm.h */,
+				FAF7150D1AB35D0E00D21067 /* TokenTotalsReconciliationForm.m */,
+				FAF715121AB35E0100D21067 /* TokenTotalsReconciliationFormViewController.h */,
+				FAF715131AB35E0100D21067 /* TokenTotalsReconciliationFormViewController.m */,
+			);
+			name = TokenTotals;
+			sourceTree = "<group>";
+		};
+		FAFE4A721AC88FB8009935EC /* TerminalTotals */ = {
+			isa = PBXGroup;
+			children = (
+				FA11AAF91AB7EEBC00D4C360 /* TerminalTotalsReconciliationViewController.h */,
+				FA11AAFA1AB7EEBC00D4C360 /* TerminalTotalsReconciliationViewController.m */,
+			);
+			name = TerminalTotals;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -536,7 +534,6 @@
 				FA0AC2941A9FB2B000CCA13A /* MainMenuViewController.m in Sources */,
 				FA0AC27C1A9FB2B000CCA13A /* FXForms.m in Sources */,
 				FAF715141AB35E0100D21067 /* TokenTotalsReconciliationFormViewController.m in Sources */,
-				FAF7150B1AB35CA900D21067 /* TerminalTotalsReconciliationForm.m in Sources */,
 				FA11AAFB1AB7EEBC00D4C360 /* TerminalTotalsReconciliationViewController.m in Sources */,
 				FA0AC2A01A9FB2B000CCA13A /* VendorsListViewController.m in Sources */,
 				FA0AC29C1A9FB2B000CCA13A /* TransactionFormViewController.m in Sources */,
@@ -548,11 +545,10 @@
 				FA0AC2841A9FB2B000CCA13A /* MarketStaff.m in Sources */,
 				FA0AC29D1A9FB2B000CCA13A /* TransactionListViewController.m in Sources */,
 				FA0AC28E1A9FB2B000CCA13A /* MarketDayFormViewController.m in Sources */,
-				FAF715111AB35DEA00D21067 /* TerminalTotalsReconciliationFormViewController.m in Sources */,
 				FA0AC29F1A9FB2B000CCA13A /* VendorFormViewController.m in Sources */,
+				FAFE4A6F1AC85A7D009935EC /* ReportGenerator.m in Sources */,
 				FA0AC2961A9FB2B000CCA13A /* RedemptionForm.m in Sources */,
 				FA0AC28B1A9FB2B000CCA13A /* LocationsFormViewController.m in Sources */,
-				FA11AB001AB7EEE200D4C360 /* TokenTotalsReconciliationViewController.m in Sources */,
 				FAB118F11A9FB72B0012ED5D /* tfm-m3.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -51,7 +51,7 @@
 	self.navigationItem.rightBarButtonItem = saveButton;
 }
 
--(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
 	if ([[alertView title] isEqualToString:@"Cancel form entry?"])
 	{
@@ -70,13 +70,13 @@
 	}
 }
 
--(void)discard
+- (void)discard
 {
 	UIAlertView *prompt = [[UIAlertView alloc] initWithTitle:@"Cancel form entry?" message:@"Any data entered on this form will not be saved." delegate:self cancelButtonTitle:@"Don’t close" otherButtonTitles:@"Close", nil];
 	[prompt show];
 }
 
--(bool)submit
+- (bool)submit
 {
 	// validate
 	RedemptionForm *form = self.formController.form;
@@ -127,20 +127,24 @@
 			// don't directly set the market day equal to the active one, in case it is changed later. fetch it fresh from the database
 			new.marketday = (MarketDays *)[TFM_DELEGATE.managedObjectContext objectWithID:[TFM_DELEGATE.activeMarketDay objectID]];
 		}
+		
+		// ...and save, hopefully
+		NSError *error;
+		if (![TFM_DELEGATE.managedObjectContext save:&error])
+		{
+			NSLog(@"couldn't save: %@", [error localizedDescription]);
+			[[[UIAlertView alloc] initWithTitle:@"Error saving:" message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Dismiss", nil] show];
+			return false;
+		}
+		
+		// unwind segue back to table view
+		[self.delegate updateTerminalReconcilationStatus:false];
+		[self dismissViewControllerAnimated:true completion:^{
+			[self.delegate updateInfoLabels];
+		}];
+		
+		return true;
 	}
-	
-	// ...and save, hopefully
-	NSError *error;
-	if (![TFM_DELEGATE.managedObjectContext save:&error])
-	{
-		NSLog(@"couldn't save: %@", [error localizedDescription]);
-		[[[UIAlertView alloc] initWithTitle:@"Error saving:" message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Dismiss", nil] show];
-		return false;
-	}
-	
-	// unwind segue back to table view
-	[self dismissViewControllerAnimated:true completion:nil];
-	return true;
 }
 
 - (void)updateTokenTotals:(UITableViewCell<FXFormFieldCell> *)cell

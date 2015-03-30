@@ -386,6 +386,7 @@ $##z## total</string>
                             </subviews>
                             <constraints>
                                 <constraint firstItem="Ocx-aH-HI0" firstAttribute="top" secondItem="yBi-81-g5J" secondAttribute="bottom" constant="4" id="4ji-hs-Xq8"/>
+                                <constraint firstAttribute="bottom" secondItem="Ocx-aH-HI0" secondAttribute="bottom" constant="20" symbolic="YES" id="E7B-I7-bgw"/>
                                 <constraint firstItem="Ggp-lB-1jt" firstAttribute="centerX" secondItem="8oX-Ym-MaF" secondAttribute="centerX" id="J0g-Bw-uju"/>
                                 <constraint firstAttribute="bottom" secondItem="Ocx-aH-HI0" secondAttribute="bottom" constant="20" symbolic="YES" id="LZs-LM-P4o"/>
                                 <constraint firstItem="Ggp-lB-1jt" firstAttribute="leading" secondItem="yBi-81-g5J" secondAttribute="trailing" constant="8" symbolic="YES" id="OHS-cS-z7m"/>
@@ -399,6 +400,11 @@ $##z## total</string>
                                 <constraint firstAttribute="centerX" secondItem="Ocx-aH-HI0" secondAttribute="centerX" id="lhT-V7-EEX"/>
                                 <constraint firstAttribute="centerX" secondItem="yBi-81-g5J" secondAttribute="centerX" id="uiJ-6K-aPZ"/>
                             </constraints>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="LZs-LM-P4o"/>
+                                </mask>
+                            </variation>
                         </view>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="MenuOptionCell" textLabel="90e-xl-54P" style="IBUITableViewCellStyleDefault" id="XgZ-10-7Se">

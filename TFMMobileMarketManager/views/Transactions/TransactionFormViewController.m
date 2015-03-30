@@ -181,6 +181,7 @@
 		}
 		
 		// unwind segue back to table view
+		[self.delegate updateTerminalReconcilationStatus:false];
 		[self dismissViewControllerAnimated:true completion:^{
 			[self.delegate updateInfoLabels];
 		}];

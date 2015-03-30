@@ -145,7 +145,9 @@
 			[[[UIAlertView alloc] initWithTitle:@"Error saving:" message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Dismiss", nil] show];
 		}
 		
-		[self dismissViewControllerAnimated:true completion:nil];
+		[self dismissViewControllerAnimated:true completion:^{
+			if (self.delegate) [self.delegate updateInfoLabels];
+		}];
 		return true;
 	}
 }

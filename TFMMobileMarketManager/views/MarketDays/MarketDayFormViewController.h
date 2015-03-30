@@ -7,9 +7,12 @@
 #import "MarketDays.h"
 #import "MarketDayForm.h"
 #import "MainMenuViewController.h"
+#import "MarketOpenMenuViewController.h"
 #import "FXForms.h"
 
-@interface MarketDayFormViewController : FXFormViewController
+@interface MarketDayFormViewController : FXFormViewController <MarketOpenDelegate>
+
+@property (nonatomic, assign) id <MarketOpenDelegate> delegate;
 
 @property (nonatomic) NSManagedObjectID *marketdayID;
 @property (nonatomic) MarketDays *marketday;
