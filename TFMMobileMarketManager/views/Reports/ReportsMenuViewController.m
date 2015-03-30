@@ -36,7 +36,7 @@ static NSString *noSelectedMarketDayWarningMessage = @"To create a report, you n
 {
 	[super viewDidAppear:animated];
 	
-	if (self.selectedMarketDay) [self.navigationItem setPrompt:[@"Will generate reports for " stringByAppendingString:[self.selectedMarketDay description]]];
+	if (self.selectedMarketDay) [self.navigationItem setPrompt:[self.selectedMarketDay description]];
 	else [self.navigationItem setPrompt:@"No market day selected"];
 }
 
@@ -75,6 +75,13 @@ static NSString *noSelectedMarketDayWarningMessage = @"To create a report, you n
 	
 	if ([option valueForKey:@"bold"])
 		[cell.textLabel setFont:[UIFont boldSystemFontOfSize:[cell.textLabel.font pointSize]]];
+	
+	// disable report creation buttons if there's no market day
+	if (indexPath.section == 1)
+	{
+		[cell setUserInteractionEnabled:!!self.selectedMarketDay];
+		[cell.textLabel setTextColor:(self.selectedMarketDay) ? [UIColor darkTextColor] : [UIColor lightGrayColor]];
+	}
 	
 	return cell;
 }
@@ -116,6 +123,7 @@ static NSString *noSelectedMarketDayWarningMessage = @"To create a report, you n
 	else [self setSelectedMarketDay:(MarketDays *)[TFM_DELEGATE.managedObjectContext objectWithID:objectID]];
 	
 	[self viewDidAppear:false];
+	[self.tableView reloadData];
 	NSLog(@"reports using market day %@", self.selectedMarketDay);
 }
 
