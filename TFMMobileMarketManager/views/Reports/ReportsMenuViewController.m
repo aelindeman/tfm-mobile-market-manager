@@ -24,14 +24,12 @@ static NSString *noSelectedMarketDayWarningMessage = @"To create a report, you n
 	self.menuOptions = @[
 		@[
 			@{@"title": @"Select market day", @"icon": @"marketday", @"action": @"SelectMarketDaySegue"},
-			@{@"title": @"Export an existing report", @"icon": @"export", @"action": @"SelectExistingReportSegue"}
+			@{@"title": @"Open an existing report", @"icon": @"export", @"action": @"SelectExistingReportSegue"}
 		], @[
 			@{@"title": @"Create sales report", @"icon": @"totals", @"action": @"sales"},
 			@{@"title": @"Create redemptions report", @"icon": @"inbox", @"action": @"redemptions"},
 			@{@"title": @"Create demographics report", @"icon": @"demographics", @"action": @"demographics"}
 		]];
-	
-	NSLog(@"%@", [TFM_DELEGATE.applicationDocumentsDirectory path]);
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -112,6 +110,15 @@ static NSString *noSelectedMarketDayWarningMessage = @"To create a report, you n
 	}
 }
 
+- (void)setMarketDayFromID:(NSManagedObjectID *)objectID
+{
+	if (objectID == nil) [self setSelectedMarketDay:false];
+	else [self setSelectedMarketDay:(MarketDays *)[TFM_DELEGATE.managedObjectContext objectWithID:objectID]];
+	
+	[self viewDidAppear:false];
+	NSLog(@"reports using market day %@", self.selectedMarketDay);
+}
+
 // creates a report and returns where it is located
 - (NSString *)createReport:(NSString *)type
 {
@@ -124,18 +131,9 @@ static NSString *noSelectedMarketDayWarningMessage = @"To create a report, you n
 	ReportGenerator *rg = [[ReportGenerator alloc] initWithMarketDay:self.selectedMarketDay];
 	NSString *path;
 	
-	if ([type isEqualToString:@"sales"])
-	{
-		path = [rg generateSalesReport];
-	}
-	else if ([type isEqualToString:@"redemptions"])
-	{
-		path = [rg generateRedemptionsReport];
-	}
-	else if ([type isEqualToString:@"demographics"])
-	{
-		path = [rg generateDemographicsReport];
-	}
+	if ([type isEqualToString:@"sales"]) path = [rg generateSalesReport];
+	else if ([type isEqualToString:@"redemptions"]) path = [rg generateRedemptionsReport];
+	else if ([type isEqualToString:@"demographics"]) path = [rg generateDemographicsReport];
 	else
 	{
 		NSLog (@"no action set for “%@”", type);
@@ -147,7 +145,10 @@ static NSString *noSelectedMarketDayWarningMessage = @"To create a report, you n
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-	
+	if ([segue.identifier isEqualToString:@"SelectMarketDaySegue"])
+	{
+		[(SelectMarketDayViewController *)[[segue.destinationViewController viewControllers] firstObject] setDelegate:self];
+	}
 }
 
 @end

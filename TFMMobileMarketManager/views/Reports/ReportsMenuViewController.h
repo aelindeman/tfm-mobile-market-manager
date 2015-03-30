@@ -8,17 +8,21 @@
 
 @protocol ReportsMenuDelegate
 
-- (void)updateStatus;
+@optional
+- (void)setMarketDayFromID:(NSManagedObjectID *)objectID;
 
 @end
 
-@interface ReportsMenuViewController : UITableViewController
+#import "SelectMarketDayViewController.h"
+
+@interface ReportsMenuViewController : UITableViewController <ReportsMenuDelegate>
 
 @property (nonatomic, assign) id <ReportsMenuDelegate> delegate;
 
 @property NSArray *menuOptions;
 @property NSArray *menuSectionHeaders;
 
+@property (nonatomic) NSManagedObjectID *selectedMarketDayID;
 @property (nonatomic) MarketDays *selectedMarketDay;
 
 @end

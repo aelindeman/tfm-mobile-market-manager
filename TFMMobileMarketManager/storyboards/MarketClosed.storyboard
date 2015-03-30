@@ -590,8 +590,8 @@ Stephen Davies</string>
                     </tableView>
                     <navigationItem key="navigationItem" title="Create Reports" id="YkO-bz-ujA"/>
                     <connections>
-                        <segue destination="PaK-Hs-vhr" kind="presentation" identifier="SelectMarketDaySegue" modalPresentationStyle="formSheet" id="xEb-lK-Bqb"/>
-                        <segue destination="tHu-8L-zGg" kind="presentation" identifier="SelectExistingReportSegue" modalPresentationStyle="formSheet" id="RVD-bZ-lEj"/>
+                        <segue destination="uey-mc-gsu" kind="presentation" identifier="SelectMarketDaySegue" modalPresentationStyle="formSheet" id="cdq-NT-cSy"/>
+                        <segue destination="Bx8-nn-nS2" kind="presentation" identifier="SelectExistingReportSegue" modalPresentationStyle="formSheet" id="sTd-BY-ona"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aPu-RX-JRq" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1174,79 +1174,117 @@ Stephen Davies</string>
             </objects>
             <point key="canvasLocation" x="2673" y="951"/>
         </scene>
-        <!--Pick Market Day-->
-        <scene sceneID="aSE-bd-pCo">
+        <!--Select Market Day-->
+        <scene sceneID="2nn-BN-Phe">
             <objects>
-                <viewController id="oUS-Pc-dTE" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="gmc-DA-pt5"/>
-                        <viewControllerLayoutGuide type="bottom" id="Dag-0b-1e2"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="s0L-ab-C6P">
+                <tableViewController id="Ufh-Kd-D6x" customClass="SelectMarketDayViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="7lP-gO-rtb">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="Pick Market Day" id="F9o-qv-cHz"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="84v-Z6-hj8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MarketDayCell" textLabel="Qri-VH-Gxy" style="IBUITableViewCellStyleDefault" id="pm6-0f-gks">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pm6-0f-gks" id="MWs-RJ-z98">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Qri-VH-Gxy">
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Ufh-Kd-D6x" id="EtX-9h-zkg"/>
+                            <outlet property="delegate" destination="Ufh-Kd-D6x" id="fSm-gV-dfB"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Select Market Day" id="sPU-nO-bwv"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Wji-ES-dTa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2673" y="1671"/>
+            <point key="canvasLocation" x="2673" y="1676"/>
         </scene>
         <!--Open an Existing Report-->
-        <scene sceneID="q4e-fD-74f">
+        <scene sceneID="hHQ-Ss-8W9">
             <objects>
-                <viewController id="CgX-0b-kEv" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Rau-B5-Rxc"/>
-                        <viewControllerLayoutGuide type="bottom" id="mn6-px-iQS"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="fEU-if-wu7">
+                <tableViewController id="Av6-bQ-viV" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="NOR-au-J1A">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="Open an Existing Report" id="f1R-PB-r4F"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="2ZR-0x-9dG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ReportCell" textLabel="VLh-CR-0m8" detailTextLabel="gMa-U5-f6z" style="IBUITableViewCellStyleValue1" id="pf8-YL-GxN">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pf8-YL-GxN" id="g2p-mL-jSi">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="VLh-CR-0m8">
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gMa-U5-f6z">
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Av6-bQ-viV" id="p48-36-V89"/>
+                            <outlet property="delegate" destination="Av6-bQ-viV" id="sl6-a3-wqg"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Open an Existing Report" id="NfH-1Z-sji"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dZQ-1d-LdM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2673" y="2386"/>
+            <point key="canvasLocation" x="2673" y="2404"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="faa-3K-ghU">
+        <scene sceneID="cX9-2U-chd">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="PaK-Hs-vhr" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="uey-mc-gsu" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="KCE-nd-e7T">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="kmo-gx-Ir6">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="oUS-Pc-dTE" kind="relationship" relationship="rootViewController" id="EkM-2k-GfT"/>
+                        <segue destination="Ufh-Kd-D6x" kind="relationship" relationship="rootViewController" id="PmB-WV-al5"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="310-5e-I6F" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2fQ-tQ-Gml" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1964" y="1671"/>
+            <point key="canvasLocation" x="1964" y="1676"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="adp-cW-mD2">
+        <scene sceneID="uvk-GQ-DWV">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="tHu-8L-zGg" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Bx8-nn-nS2" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="bZj-Ef-0g7">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="dPP-kZ-2fg">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="CgX-0b-kEv" kind="relationship" relationship="rootViewController" id="UNU-Gy-M7f"/>
+                        <segue destination="Av6-bQ-viV" kind="relationship" relationship="rootViewController" id="aFQ-Oo-Ijc"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="hn2-mO-7KJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vcv-Bf-Wuh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1964" y="2386"/>
+            <point key="canvasLocation" x="1964" y="2404"/>
         </scene>
     </scenes>
     <resources>

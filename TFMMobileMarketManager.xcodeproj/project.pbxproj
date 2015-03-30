@@ -46,6 +46,7 @@
 		FA11AAFB1AB7EEBC00D4C360 /* TerminalTotalsReconciliationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA11AAFA1AB7EEBC00D4C360 /* TerminalTotalsReconciliationViewController.m */; };
 		FA11AB041AB7F83300D4C360 /* ReconciliationEntryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FA11AB021AB7F83300D4C360 /* ReconciliationEntryTableViewCell.m */; };
 		FA11AB051AB7F83300D4C360 /* ReconciliationEntryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA11AB031AB7F83300D4C360 /* ReconciliationEntryTableViewCell.xib */; };
+		FA7115AD1AC9E2FF00A396FC /* SelectMarketDayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA7115AC1AC9E2FF00A396FC /* SelectMarketDayViewController.m */; };
 		FA77453E1AC1C03D00D9B14B /* TransactionListHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA77453D1AC1C03D00D9B14B /* TransactionListHeaderView.xib */; };
 		FA7745401AC1C04300D9B14B /* RedemptionListHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA77453F1AC1C04300D9B14B /* RedemptionListHeaderView.xib */; };
 		FAB118F11A9FB72B0012ED5D /* tfm-m3.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FAB118EF1A9FB72B0012ED5D /* tfm-m3.xcdatamodeld */; };
@@ -133,6 +134,8 @@
 		FA11AB011AB7F83300D4C360 /* ReconciliationEntryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReconciliationEntryTableViewCell.h; sourceTree = "<group>"; };
 		FA11AB021AB7F83300D4C360 /* ReconciliationEntryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReconciliationEntryTableViewCell.m; sourceTree = "<group>"; };
 		FA11AB031AB7F83300D4C360 /* ReconciliationEntryTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReconciliationEntryTableViewCell.xib; sourceTree = "<group>"; };
+		FA7115AB1AC9E2FF00A396FC /* SelectMarketDayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectMarketDayViewController.h; sourceTree = "<group>"; };
+		FA7115AC1AC9E2FF00A396FC /* SelectMarketDayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectMarketDayViewController.m; sourceTree = "<group>"; };
 		FA77453D1AC1C03D00D9B14B /* TransactionListHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TransactionListHeaderView.xib; sourceTree = "<group>"; };
 		FA77453F1AC1C04300D9B14B /* RedemptionListHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RedemptionListHeaderView.xib; sourceTree = "<group>"; };
 		FAB118F01A9FB72B0012ED5D /* tfm-m3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "tfm-m3.xcdatamodel"; sourceTree = "<group>"; };
@@ -326,6 +329,8 @@
 				FAFE4A6E1AC85A7D009935EC /* ReportGenerator.m */,
 				FA0AC2681A9FB2B000CCA13A /* ReportsMenuViewController.h */,
 				FA0AC2691A9FB2B000CCA13A /* ReportsMenuViewController.m */,
+				FA7115AB1AC9E2FF00A396FC /* SelectMarketDayViewController.h */,
+				FA7115AC1AC9E2FF00A396FC /* SelectMarketDayViewController.m */,
 			);
 			path = Reports;
 			sourceTree = "<group>";
@@ -548,6 +553,7 @@
 				FA0AC29F1A9FB2B000CCA13A /* VendorFormViewController.m in Sources */,
 				FAFE4A6F1AC85A7D009935EC /* ReportGenerator.m in Sources */,
 				FA0AC2961A9FB2B000CCA13A /* RedemptionForm.m in Sources */,
+				FA7115AD1AC9E2FF00A396FC /* SelectMarketDayViewController.m in Sources */,
 				FA0AC28B1A9FB2B000CCA13A /* LocationsFormViewController.m in Sources */,
 				FAB118F11A9FB72B0012ED5D /* tfm-m3.xcdatamodeld in Sources */,
 			);
