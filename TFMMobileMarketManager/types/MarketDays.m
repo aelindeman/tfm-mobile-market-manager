@@ -26,7 +26,7 @@
 	[dateFormatter setDateStyle:NSDateFormatterLongStyle];
 	NSString *date = [dateFormatter stringFromDate:self.date];
 	
-	return [NSString stringWithFormat:@"%@ – %@", [self.location description], date];
+	return [NSString stringWithFormat:@"%@ - %@", [self.location description], date];
 }
 
 - (NSString *)fieldDescription
