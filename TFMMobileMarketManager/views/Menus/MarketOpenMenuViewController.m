@@ -90,7 +90,6 @@ static NSString *closeMarketDayUnreconciledWarningMessage = @"Terminal totals ha
 	if ([[option valueForKey:@"action"] isEqualToString:@"TerminalTotalsReconciliationFormSegue"])
 	{
 		[cell.textLabel setFont:(self.terminalTotalsReconciled ? [UIFont systemFontOfSize:[cell.textLabel.font pointSize]] : [UIFont boldSystemFontOfSize:[cell.textLabel.font pointSize]])];
-		[cell.textLabel setTextColor:(self.terminalTotalsReconciled ? [UIColor colorWithRed:0.550 green:0.760 blue:0.290 alpha:1.000] : [UIColor darkTextColor])];
 		[cell.imageView setImage:[UIImage imageNamed:(self.terminalTotalsReconciled ? @"check" : [option valueForKey:@"icon"])]];
 	}
 	
