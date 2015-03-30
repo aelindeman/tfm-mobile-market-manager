@@ -75,7 +75,7 @@ typedef NS_ENUM(NSInteger, ReportType)
 	return [NSString pathWithComponents:@[[TFM_DELEGATE.applicationDocumentsDirectory path],
 										  reportsSubfolder,
 										  [NSString stringWithFormat:marketDaySubfolder, [self.selectedMarketDay description]],
-										  [NSString stringWithFormat:reportName, round(NSTimeIntervalSince1970)]]];
+										  [NSString stringWithFormat:reportName, round([[NSDate date] timeIntervalSince1970])]]];
 }
 
 // creates demographics report at default path; returns path
