@@ -36,7 +36,7 @@ deviceTotalAmount, deviceTotalTransactionCount;
 	if (self.editObjectID)
 	{
 		[self setEditObject:(TerminalTotals *)[TFM_DELEGATE.managedObjectContext objectWithID:[self editObjectID]]];
-		NSLog(@"handoff to TerminalTotals object %@", self.editObjectID);
+		//NSLog(@"handoff to TerminalTotals object %@", self.editObjectID);
 	}
 	
 	// for whatever reason the terminal totals object id wasn't passed
@@ -44,7 +44,7 @@ deviceTotalAmount, deviceTotalTransactionCount;
 	else if ([TFM_DELEGATE.activeMarketDay terminalTotals])
 	{
 		[self setEditObject:(TerminalTotals *)[TFM_DELEGATE.activeMarketDay terminalTotals]];
-		NSLog(@"terminal totals were not passed but they were set in market day, using TerminalTotals object %@", [self.editObject objectID]);
+		//NSLog(@"terminal totals were not passed but they were set in market day, using TerminalTotals object %@", [self.editObject objectID]);
 	}
 	
 	// and if it isn't set, just make a new one
@@ -53,7 +53,7 @@ deviceTotalAmount, deviceTotalTransactionCount;
 		TerminalTotals *tt = [NSEntityDescription insertNewObjectForEntityForName:@"TerminalTotals" inManagedObjectContext:TFM_DELEGATE.managedObjectContext];
 		[TFM_DELEGATE.activeMarketDay setTerminalTotals:tt];
 		[self setEditObject:tt];
-		NSLog(@"terminal totals were not passed and were not set in market day, created new TerminalTotals object %@", [tt objectID]);
+		//NSLog(@"terminal totals were not passed and were not set in market day, created new TerminalTotals object %@", [tt objectID]);
 	}
 	
 	// populate the menu

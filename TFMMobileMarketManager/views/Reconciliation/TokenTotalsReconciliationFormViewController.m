@@ -18,7 +18,7 @@
 	if (self.editObjectID)
 	{
 		[self setEditObject:(TokenTotals *)[TFM_DELEGATE.managedObjectContext objectWithID:[self editObjectID]]];
-		NSLog(@"handoff to TokenTotals object %@", self.editObjectID);
+		//NSLog(@"handoff to TokenTotals object %@", self.editObjectID);
 	}
 	
 	// for whatever reason the terminal totals object id wasn't passed
@@ -26,7 +26,7 @@
 	else if ([TFM_DELEGATE.activeMarketDay terminalTotals])
 	{
 		[self setEditObject:(TokenTotals *)[TFM_DELEGATE.activeMarketDay terminalTotals]];
-		NSLog(@"token totals were not passed but they were set in market day, using TokenTotals object %@", [self.editObject objectID]);
+		//NSLog(@"token totals were not passed but they were set in market day, using TokenTotals object %@", [self.editObject objectID]);
 	}
 	
 	// and if it isn't set, just make a new one
@@ -35,7 +35,7 @@
 		TokenTotals *tt = [NSEntityDescription insertNewObjectForEntityForName:@"TokenTotals" inManagedObjectContext:TFM_DELEGATE.managedObjectContext];
 		[TFM_DELEGATE.activeMarketDay setTerminalTotals:tt];
 		[self setEditObject:tt];
-		NSLog(@"token totals were not passed and were not set in market day, created new TokenTotals object %@", [tt objectID]);
+		//NSLog(@"token totals were not passed and were not set in market day, created new TokenTotals object %@", [tt objectID]);
 	}
 
 	// populate form
