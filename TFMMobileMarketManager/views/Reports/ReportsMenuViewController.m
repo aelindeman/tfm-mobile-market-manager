@@ -11,6 +11,11 @@
 
 @implementation ReportsMenuViewController
 
+@synthesize delegate;
+
+static NSString *noSelectedMarketDayWarningTitle = @"No market day selected";
+static NSString *noSelectedMarketDayWarningMessage = @"To create a report, you need to select a market day first.";
+
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
@@ -18,10 +23,21 @@
 	// populate the menu
 	self.menuOptions = @[
 		@[
-			@{@"title": @"Create sales report", @"icon": @"totals", @"action": @""},
-			@{@"title": @"Create redemptions report", @"icon": @"inbox", @"action": @""},
-			@{@"title": @"Create demographics report", @"icon": @"demographics", @"action": @""}
+			@{@"title": @"Select market day", @"icon": @"marketday", @"action": @"SelectMarketDaySegue"},
+			@{@"title": @"Export an existing report", @"icon": @"export", @"action": @"SelectExistingReportSegue"}
+		], @[
+			@{@"title": @"Create sales report", @"icon": @"totals", @"action": @"salesReport"},
+			@{@"title": @"Create redemptions report", @"icon": @"inbox", @"action": @"redemptionsReport"},
+			@{@"title": @"Create demographics report", @"icon": @"demographics", @"action": @"demographicsReport"}
 		]];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+	[super viewDidAppear:animated];
+	
+	if (self.selectedMarketDay) [self.navigationItem setPrompt:[@"Will generate reports for " stringByAppendingString:[self.selectedMarketDay description]]];
+	else [self.navigationItem setPrompt:@"No market day selected"];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -73,10 +89,7 @@
 		[self performSegueWithIdentifier:action sender:self];
 	
 	// or do functions
-	else if ([action isEqualToString:@"null"])
-		return;
-	
-	else NSLog(@"no action set for “%@”", [selected valueForKey:@"title"]);
+	else [self createReport:action];
 	
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
@@ -95,6 +108,39 @@
 				break;
 		}
 	}
+}
+
+// creates a report and returns where it is located
+- (NSString *)createReport:(NSString *)type
+{
+	if (!self.selectedMarketDay)
+	{
+		[[[UIAlertView alloc] initWithTitle:noSelectedMarketDayWarningTitle message:noSelectedMarketDayWarningMessage delegate:self cancelButtonTitle:nil otherButtonTitles:@"Dismiss", nil] show];
+		return false;
+	}
+
+	ReportGenerator *rg = [[ReportGenerator alloc] initWithMarketDay:self.selectedMarketDay];
+	NSString *path;
+	
+	if ([type isEqualToString:@"sales"])
+	{
+		path = [rg generateSalesReport];
+	}
+	else if ([type isEqualToString:@"redemptions"])
+	{
+		path = [rg generateRedemptionsReport];
+	}
+	else if ([type isEqualToString:@"demographics"])
+	{
+		path = [rg generateDemographicsReport];
+	}
+	else
+	{
+		NSLog (@"no action set for “%@”", type);
+		return false;
+	}
+	
+	return path;
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
