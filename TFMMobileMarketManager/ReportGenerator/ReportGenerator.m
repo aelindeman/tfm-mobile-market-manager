@@ -8,7 +8,7 @@
 @implementation ReportGenerator
 
 static NSString *reportsSubfolder = @"Reports"; // relative to application's documents directory
-static NSString *marketDaySubfolder = @"Market Day %@"; // relative to reports subfolder, replace token with market day name
+static NSString *marketDaySubfolder = @"%@"; // relative to reports subfolder, replace token with market day name
 
 // relative to market day subfolder
 // replace token with timestamp of report generation
