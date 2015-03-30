@@ -13,6 +13,7 @@
 
 @end
 
+#import "SelectExistingReportViewController.h"
 #import "SelectMarketDayViewController.h"
 
 @interface ReportsMenuViewController : UITableViewController <ReportsMenuDelegate>

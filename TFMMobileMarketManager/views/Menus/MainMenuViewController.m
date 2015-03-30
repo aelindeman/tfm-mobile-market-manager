@@ -27,7 +27,7 @@
 			@{@"title": @"Edit staff", @"icon": @"staff", @"action": @"MarketStaffSegue"},
 			@{@"title": @"Edit locations", @"icon": @"locations", @"action": @"LocationsSegue"}
 		], @[
-			@{@"title": @"Create reports", @"icon": @"reports", @"action": @"ReportsSegue"},
+			@{@"title": @"Reports", @"icon": @"reports", @"action": @"ReportsSegue"},
 			@{@"title": @"Synchronize database with a PC", @"icon": @"sync", @"action": @"SyncSegue"},
 			@{@"title": @"Console", @"icon": @"console", @"action": @"ConsoleSegue"},
 			@{@"title": @"Destroy database", @"icon": @"reset", @"action": @"resetDatabasePrompt"}

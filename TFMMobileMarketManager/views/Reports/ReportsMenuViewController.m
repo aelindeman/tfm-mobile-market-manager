@@ -146,9 +146,10 @@ static NSString *noSelectedMarketDayWarningMessage = @"To create a report, you n
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
 	if ([segue.identifier isEqualToString:@"SelectMarketDaySegue"])
-	{
 		[(SelectMarketDayViewController *)[[segue.destinationViewController viewControllers] firstObject] setDelegate:self];
-	}
+
+	if ([segue.identifier isEqualToString:@"SelectExistingReportSegue"])
+		[(SelectExistingReportViewController *)[[segue.destinationViewController viewControllers] firstObject] setDelegate:self];
 }
 
 @end

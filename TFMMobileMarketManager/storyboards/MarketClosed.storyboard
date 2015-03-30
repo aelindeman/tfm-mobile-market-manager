@@ -559,7 +559,7 @@ Stephen Davies</string>
             </objects>
             <point key="canvasLocation" x="327" y="-405"/>
         </scene>
-        <!--Create Reports-->
+        <!--Reports-->
         <scene sceneID="exq-ho-4ua">
             <objects>
                 <tableViewController id="KTV-OH-m7B" customClass="ReportsMenuViewController" sceneMemberID="viewController">
@@ -588,10 +588,10 @@ Stephen Davies</string>
                             <outlet property="delegate" destination="KTV-OH-m7B" id="RJO-gT-6B2"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Create Reports" id="YkO-bz-ujA"/>
+                    <navigationItem key="navigationItem" title="Reports" id="YkO-bz-ujA"/>
                     <connections>
                         <segue destination="uey-mc-gsu" kind="presentation" identifier="SelectMarketDaySegue" modalPresentationStyle="formSheet" id="cdq-NT-cSy"/>
-                        <segue destination="Bx8-nn-nS2" kind="presentation" identifier="SelectExistingReportSegue" modalPresentationStyle="formSheet" id="sTd-BY-ona"/>
+                        <segue destination="Bx8-nn-nS2" kind="show" identifier="SelectExistingReportSegue" id="sTd-BY-ona"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aPu-RX-JRq" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1212,7 +1212,7 @@ Stephen Davies</string>
         <!--Open an Existing Report-->
         <scene sceneID="hHQ-Ss-8W9">
             <objects>
-                <tableViewController id="Av6-bQ-viV" sceneMemberID="viewController">
+                <tableViewController id="Av6-bQ-viV" customClass="SelectExistingReportViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="NOR-au-J1A">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
