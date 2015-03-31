@@ -63,8 +63,6 @@ deviceTotalAmount, deviceTotalTransactionCount;
 			@{@"title": terminalTotalsCellIdentifier}
 		], @[
 			@{@"title": calculatedTotalsCellIdentifier}
-		], @[
-			@{@"title": @"Verify", @"icon": @"check", @"action": @"verify"}
 		]];
 	
 	// calculate totals from transactions
@@ -106,9 +104,12 @@ deviceTotalAmount, deviceTotalTransactionCount;
 	UIBarButtonItem *closeButton = [[UIBarButtonItem alloc] initWithTitle:@"Close" style:UIBarButtonItemStylePlain target:self action:@selector(discard)];
 	self.navigationItem.leftBarButtonItem = closeButton;
 	
-	// TODO: fix reconcilation able to be skipped - only available for debug
+	UIBarButtonItem *verifyButton = [[UIBarButtonItem alloc] initWithTitle:@"Verify" style:UIBarButtonItemStylePlain target:self action:@selector(submit)];
+	self.navigationItem.rightBarButtonItem = verifyButton;
+	
+	/* // TODO: fix reconcilation able to be skipped - only available for debug
 	UIBarButtonItem *skipButton = [[UIBarButtonItem alloc] initWithTitle:@"Skip" style:UIBarButtonItemStylePlain target:self action:@selector(skip)];
-	self.navigationItem.rightBarButtonItem = skipButton;
+	self.navigationItem.rightBarButtonItem = skipButton; */
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
