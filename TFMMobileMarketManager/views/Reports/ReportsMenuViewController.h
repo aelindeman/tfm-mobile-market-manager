@@ -13,6 +13,7 @@
 
 @end
 
+#import "ReportViewerViewController.h"
 #import "SelectExistingReportViewController.h"
 #import "SelectMarketDayViewController.h"
 
@@ -22,6 +23,8 @@
 
 @property NSArray *menuOptions;
 @property NSArray *menuSectionHeaders;
+
+@property NSString *mostRecentReportPath;
 
 @property (nonatomic) NSManagedObjectID *selectedMarketDayID;
 @property (nonatomic) MarketDays *selectedMarketDay;

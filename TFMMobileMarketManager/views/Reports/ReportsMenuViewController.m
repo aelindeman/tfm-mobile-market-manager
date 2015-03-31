@@ -16,6 +16,9 @@
 static NSString *noSelectedMarketDayWarningTitle = @"No market day selected";
 static NSString *noSelectedMarketDayWarningMessage = @"To create a report, you need to select a market day first.";
 
+static NSString *reportCreatedTitle = @"Report created";
+static NSString *reportCreatedMessage = @"The %@ report was created successfully. Do you want to view it?";
+
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
@@ -23,21 +26,20 @@ static NSString *noSelectedMarketDayWarningMessage = @"To create a report, you n
 	// populate the menu
 	self.menuOptions = @[
 		@[
-			@{@"title": @"Select market day", @"icon": @"marketday", @"action": @"SelectMarketDaySegue"},
 			@{@"title": @"Open an existing report", @"icon": @"export", @"action": @"SelectExistingReportSegue"}
 		], @[
+			@{@"title": @"Select market day", @"icon": @"marketday", @"action": @"SelectMarketDaySegue"},
 			@{@"title": @"Create sales report", @"icon": @"totals", @"action": @"sales"},
 			@{@"title": @"Create redemptions report", @"icon": @"inbox", @"action": @"redemptions"},
 			@{@"title": @"Create demographics report", @"icon": @"demographics", @"action": @"demographics"}
 		]];
+	[self updatePrompt];
 }
 
-- (void)viewDidAppear:(BOOL)animated
+- (void)updatePrompt
 {
-	[super viewDidAppear:animated];
-	
-	if (self.selectedMarketDay) [self.navigationItem setPrompt:[self.selectedMarketDay description]];
-	else [self.navigationItem setPrompt:@"No market day selected"];
+	[self.navigationItem setPrompt:(self.selectedMarketDay) ? [self.selectedMarketDay description] : nil];
+	[self.tableView reloadData];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -77,7 +79,7 @@ static NSString *noSelectedMarketDayWarningMessage = @"To create a report, you n
 		[cell.textLabel setFont:[UIFont boldSystemFontOfSize:[cell.textLabel.font pointSize]]];
 	
 	// disable report creation buttons if there's no market day
-	if (indexPath.section == 1)
+	if (indexPath.section == 1 && ![[option valueForKey:@"action"] isEqualToString:@"SelectMarketDaySegue"])
 	{
 		[cell setUserInteractionEnabled:!!self.selectedMarketDay];
 		[cell.textLabel setTextColor:(self.selectedMarketDay) ? [UIColor darkTextColor] : [UIColor lightGrayColor]];
@@ -96,14 +98,22 @@ static NSString *noSelectedMarketDayWarningMessage = @"To create a report, you n
 		[self performSegueWithIdentifier:action sender:self];
 	
 	// or do functions
-	else [self createReport:action];
+	else
+	{
+		NSString *path = [self createReport:action];
+		if (path)
+		{
+			[self setMostRecentReportPath:path];
+			[[[UIAlertView alloc] initWithTitle:reportCreatedTitle message:[NSString stringWithFormat:reportCreatedMessage, [action lowercaseString]] delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil] show];
+		}
+	}
 	
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-	if ([[alertView title] isEqualToString:@""])
+	if ([[alertView title] isEqualToString:reportCreatedTitle])
 	{
 		switch (buttonIndex)
 		{
@@ -112,6 +122,7 @@ static NSString *noSelectedMarketDayWarningMessage = @"To create a report, you n
 				break;
 				
 			case 1:
+				[self performSegueWithIdentifier:@"ReportViewerSegue" sender:nil];
 				break;
 		}
 	}
@@ -121,9 +132,7 @@ static NSString *noSelectedMarketDayWarningMessage = @"To create a report, you n
 {
 	if (objectID == nil) [self setSelectedMarketDay:false];
 	else [self setSelectedMarketDay:(MarketDays *)[TFM_DELEGATE.managedObjectContext objectWithID:objectID]];
-	
-	[self viewDidAppear:false];
-	[self.tableView reloadData];
+	[self updatePrompt];
 	NSLog(@"reports using market day %@", self.selectedMarketDay);
 }
 
@@ -158,6 +167,9 @@ static NSString *noSelectedMarketDayWarningMessage = @"To create a report, you n
 
 	if ([segue.identifier isEqualToString:@"SelectExistingReportSegue"])
 		[(SelectExistingReportViewController *)[[segue.destinationViewController viewControllers] firstObject] setDelegate:self];
+	
+	if ([segue.identifier isEqualToString:@"ReportViewerSegue"])
+		[(ReportViewerViewController *)segue.destinationViewController setFilePath:self.mostRecentReportPath];
 }
 
 @end
