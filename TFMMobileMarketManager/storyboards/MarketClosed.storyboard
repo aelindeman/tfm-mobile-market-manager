@@ -1210,7 +1210,7 @@ Stephen Davies</string>
             </objects>
             <point key="canvasLocation" x="2673" y="1676"/>
         </scene>
-        <!--Open an Existing Report-->
+        <!--Open Report-->
         <scene sceneID="hHQ-Ss-8W9">
             <objects>
                 <tableViewController id="Av6-bQ-viV" customClass="SelectExistingReportViewController" sceneMemberID="viewController">
@@ -1239,7 +1239,7 @@ Stephen Davies</string>
                             <outlet property="delegate" destination="Av6-bQ-viV" id="sl6-a3-wqg"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Open an Existing Report" id="NfH-1Z-sji"/>
+                    <navigationItem key="navigationItem" title="Open Report" id="NfH-1Z-sji"/>
                     <connections>
                         <segue destination="68n-oZ-GRF" kind="show" identifier="ReportViewerSegue" id="K4W-5C-2Df"/>
                     </connections>
