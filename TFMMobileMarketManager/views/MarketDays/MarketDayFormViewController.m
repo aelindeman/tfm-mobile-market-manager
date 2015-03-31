@@ -9,6 +9,15 @@
 
 @end
 
+@implementation NSArray (WithFieldDescription)
+
+- (NSString *)fieldDescription
+{
+	return [NSString stringWithFormat:@"%i selected", [self count]];
+}
+
+@end
+
 @implementation MarketDayFormViewController
 
 - (void)viewDidLoad
