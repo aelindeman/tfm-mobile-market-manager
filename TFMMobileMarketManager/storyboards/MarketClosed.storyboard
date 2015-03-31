@@ -1219,7 +1219,7 @@ Stephen Davies</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ReportCell" textLabel="VLh-CR-0m8" detailTextLabel="gMa-U5-f6z" style="IBUITableViewCellStyleValue1" id="pf8-YL-GxN">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ReportCell" textLabel="VLh-CR-0m8" style="IBUITableViewCellStyleDefault" id="pf8-YL-GxN">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pf8-YL-GxN" id="g2p-mL-jSi">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -1228,12 +1228,6 @@ Stephen Davies</string>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gMa-U5-f6z">
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -1338,10 +1332,10 @@ Stephen Davies</string>
         <image name="sync" width="16" height="16"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="tmR-C0-IUe"/>
-        <segue reference="BzA-eb-QoZ"/>
         <segue reference="Xyf-yc-rV8"/>
         <segue reference="uV5-lI-hNV"/>
-        <segue reference="ppS-Gl-77t"/>
+        <segue reference="tmR-C0-IUe"/>
+        <segue reference="BzA-eb-QoZ"/>
+        <segue reference="K4W-5C-2Df"/>
     </inferredMetricsTieBreakers>
 </document>
