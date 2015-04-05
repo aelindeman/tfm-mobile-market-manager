@@ -10,11 +10,13 @@
 static NSString *reportsSubfolder = @"Reports"; // relative to application's documents directory
 static NSString *marketDaySubfolder = @"%@"; // relative to reports subfolder, replace token with market day name
 
-// relative to market day subfolder
-// replace token with timestamp of report generation
-static NSString *demographicsReportName = @"Demographics-%.0f.csv";
-static NSString *salesReportName = @"Sales-%.0f.csv";
-static NSString *redemptionsReportName = @"Redemptions-%.0f.csv";
+// replace first token with report type, second token with market day name, third token with timestamp of report generation
+static NSString *reportFormat = @"%@ %@ Created%@.csv"; // relative to market day subfolder
+
+// report names
+static NSString *demographicsReportName = @"Demographics";
+static NSString *salesReportName = @"Sales";
+static NSString *redemptionsReportName = @"Redemptions";
 
 // allow init using delegate's active market day
 - (id)init
@@ -65,10 +67,21 @@ static NSString *redemptionsReportName = @"Redemptions-%.0f.csv";
 // creates the reports path
 - (NSString *)getReportsPathForReportType:(NSString*)reportName
 {
+	// need a consistent way of returning the market day name by its name then the date. don't rely on -description
+	NSDateFormatter *mdDateFormat = [[NSDateFormatter alloc] init];
+	[mdDateFormat setDateFormat:@"yyyy-MM-dd"];
+	NSString *md = [NSString stringWithFormat:@"%@ %@", [(Locations *)[self.selectedMarketDay location] name], [mdDateFormat stringFromDate:[self.selectedMarketDay date]]];
+
+	// create a report generation time
+	NSDateFormatter *reportTimeFormat = [[NSDateFormatter alloc] init];
+	[reportTimeFormat setDateFormat:@"yyyy-MM-dd-HH-mm-ss"];
+	NSString *gentime = [reportTimeFormat stringFromDate:[NSDate date]];
+	
+	// return path string
 	return [NSString pathWithComponents:@[[TFM_DELEGATE.applicationDocumentsDirectory path],
 										  reportsSubfolder,
-										  [NSString stringWithFormat:marketDaySubfolder, [self.selectedMarketDay description]],
-										  [NSString stringWithFormat:reportName, [[NSDate date] timeIntervalSince1970]]]];
+										  [NSString stringWithFormat:marketDaySubfolder, md],
+										  [NSString stringWithFormat:reportFormat, reportName, md, gentime]]];
 }
 
 // creates demographics report at default path; returns path
