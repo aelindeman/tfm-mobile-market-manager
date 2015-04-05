@@ -5,13 +5,7 @@
 
 #import "ReportsMenuViewController.h"
 
-@interface ReportsMenuViewController ()
-
-@end
-
 @implementation ReportsMenuViewController
-
-@synthesize delegate;
 
 static NSString *noSelectedMarketDayWarningTitle = @"No market day selected";
 static NSString *noSelectedMarketDayWarningMessage = @"To create a report, you need to select a market day first.";
@@ -22,6 +16,9 @@ static NSString *reportCreatedMessage = @"The %@ report was created successfully
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
+	
+	self.previewer = [[QLPreviewController alloc] init];
+	[self.previewer setDataSource:self];
 	
 	// populate the menu
 	self.menuOptions = @[
@@ -111,6 +108,18 @@ static NSString *reportCreatedMessage = @"The %@ report was created successfully
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
+// set data path for previewer
+- (id <QLPreviewItem>)previewController: (QLPreviewController *)controller previewItemAtIndex:(NSInteger)index
+{
+	return self.mostRecentReportPath ? [NSURL fileURLWithPath:self.mostRecentReportPath] : nil;
+}
+
+// set number of objects in previewer - should only be 1
+- (NSInteger) numberOfPreviewItemsInPreviewController: (QLPreviewController *) controller
+{
+	return !!self.mostRecentReportPath;
+}
+
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
 	if ([[alertView title] isEqualToString:reportCreatedTitle])
@@ -122,8 +131,10 @@ static NSString *reportCreatedMessage = @"The %@ report was created successfully
 				break;
 				
 			case 1:
-				[self performSegueWithIdentifier:@"ReportViewerSegue" sender:nil];
+			{
+				[self presentViewController:self.previewer animated:true completion:nil];
 				break;
+			}
 		}
 	}
 }
@@ -164,12 +175,6 @@ static NSString *reportCreatedMessage = @"The %@ report was created successfully
 {
 	if ([segue.identifier isEqualToString:@"SelectMarketDaySegue"])
 		[(SelectMarketDayViewController *)[[segue.destinationViewController viewControllers] firstObject] setDelegate:self];
-
-	if ([segue.identifier isEqualToString:@"SelectExistingReportSegue"])
-		[(SelectExistingReportViewController *)[[segue.destinationViewController viewControllers] firstObject] setDelegate:self];
-	
-	if ([segue.identifier isEqualToString:@"ReportViewerSegue"])
-		[(ReportViewerViewController *)segue.destinationViewController setFilePath:self.mostRecentReportPath];
 }
 
 @end

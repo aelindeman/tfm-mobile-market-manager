@@ -3,6 +3,7 @@
 //  tfmco-mip
 //
 
+#import <QuickLook/QuickLook.h>
 #import "AppDelegate.h"
 #import "ReportGenerator.h"
 
@@ -13,11 +14,10 @@
 
 @end
 
-#import "ReportViewerViewController.h"
 #import "SelectExistingReportViewController.h"
 #import "SelectMarketDayViewController.h"
 
-@interface ReportsMenuViewController : UITableViewController <ReportsMenuDelegate>
+@interface ReportsMenuViewController : UITableViewController <QLPreviewControllerDataSource, ReportsMenuDelegate>
 
 @property (nonatomic, assign) id <ReportsMenuDelegate> delegate;
 
@@ -28,5 +28,7 @@
 
 @property (nonatomic) NSManagedObjectID *selectedMarketDayID;
 @property (nonatomic) MarketDays *selectedMarketDay;
+
+@property (nonatomic) QLPreviewController *previewer;
 
 @end

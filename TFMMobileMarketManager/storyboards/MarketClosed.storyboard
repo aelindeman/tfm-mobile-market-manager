@@ -592,7 +592,6 @@ Stephen Davies</string>
                     <connections>
                         <segue destination="uey-mc-gsu" kind="presentation" identifier="SelectMarketDaySegue" modalPresentationStyle="formSheet" id="cdq-NT-cSy"/>
                         <segue destination="Bx8-nn-nS2" kind="show" identifier="SelectExistingReportSegue" id="sTd-BY-ona"/>
-                        <segue destination="68n-oZ-GRF" kind="show" identifier="ReportViewerSegue" id="ppS-Gl-77t"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aPu-RX-JRq" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1240,54 +1239,10 @@ Stephen Davies</string>
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Open Report" id="NfH-1Z-sji"/>
-                    <connections>
-                        <segue destination="68n-oZ-GRF" kind="show" identifier="ReportViewerSegue" id="K4W-5C-2Df"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dZQ-1d-LdM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2673" y="2404"/>
-        </scene>
-        <!--View Report-->
-        <scene sceneID="Hgj-c2-LEh">
-            <objects>
-                <viewController id="68n-oZ-GRF" customClass="ReportViewerViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="8rl-bu-2bx"/>
-                        <viewControllerLayoutGuide type="bottom" id="2ta-NK-ds2"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="t35-8r-UNN">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" maximumZoomScale="2" keyboardDismissMode="onDrag" editable="NO" text="No data." translatesAutoresizingMaskIntoConstraints="NO" id="EkY-Ng-6ja">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="13"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" spellCheckingType="no"/>
-                                <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES"/>
-                            </textView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="EkY-Ng-6ja" firstAttribute="leading" secondItem="t35-8r-UNN" secondAttribute="leading" id="838-Rd-ZYe"/>
-                            <constraint firstItem="EkY-Ng-6ja" firstAttribute="top" secondItem="t35-8r-UNN" secondAttribute="top" id="A0C-iF-Ziy"/>
-                            <constraint firstItem="2ta-NK-ds2" firstAttribute="top" secondItem="EkY-Ng-6ja" secondAttribute="bottom" id="U3G-mt-fgp"/>
-                            <constraint firstAttribute="trailing" secondItem="EkY-Ng-6ja" secondAttribute="trailing" id="iN8-k6-OGl"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" title="View Report" id="acl-jj-PwZ">
-                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="iDf-o3-xGe"/>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="exportButton" destination="iDf-o3-xGe" id="PeV-GJ-w02"/>
-                        <outlet property="textView" destination="EkY-Ng-6ja" id="p8K-JB-8vT"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="OQc-d6-Zih" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1964" y="3151"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="cX9-2U-chd">
@@ -1333,9 +1288,8 @@ Stephen Davies</string>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Xyf-yc-rV8"/>
-        <segue reference="uV5-lI-hNV"/>
         <segue reference="tmR-C0-IUe"/>
         <segue reference="BzA-eb-QoZ"/>
-        <segue reference="K4W-5C-2Df"/>
+        <segue reference="uV5-lI-hNV"/>
     </inferredMetricsTieBreakers>
 </document>

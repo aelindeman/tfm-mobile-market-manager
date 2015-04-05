@@ -20,7 +20,12 @@ static NSString *deleteConfirmationMessageDetails = @"";
 - (void)load
 {
 	NSAssert(self.basePath, @"self.basePath must be set");
+	
+	// init preview window
+	self.previewer = [[QLPreviewController alloc] init];
+	[self.previewer setDataSource:self];
 
+	// walk report directories on disk and list CSVs
 	NSError *error;
 	NSFileManager *fm = [NSFileManager defaultManager];
 	NSArray *subs = [fm contentsOfDirectoryAtPath:self.basePath error:&error];
@@ -60,6 +65,18 @@ static NSString *deleteConfirmationMessageDetails = @"";
 	return cell;
 }
 
+// set data path for previewer
+- (id <QLPreviewItem>)previewController: (QLPreviewController *)controller previewItemAtIndex:(NSInteger)index
+{
+	return self.selectedObject ? [NSURL fileURLWithPath:self.selectedObject] : nil;
+}
+
+// set number of objects in previewer - should only be 1
+- (NSInteger) numberOfPreviewItemsInPreviewController: (QLPreviewController *) controller
+{
+	return !!self.selectedObject;
+}
+
 // trigger segue on selection
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -67,16 +84,15 @@ static NSString *deleteConfirmationMessageDetails = @"";
 	NSString *name = [[[self.items objectAtIndex:indexPath.section] objectForKey:@"items"] objectAtIndex:indexPath.row];
 	
 	NSString *resolvedPath = [NSString pathWithComponents:@[self.basePath, marketday, name]];
-	NSLog(@"opening report at %@", resolvedPath);
+	[self setSelectedObject:resolvedPath];
+	[self presentViewController:self.previewer animated:true completion:nil];
 	
-	[self performSegueWithIdentifier:@"ReportViewerSegue" sender:resolvedPath];
 	[tableView deselectRowAtIndexPath:indexPath animated:true];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-	if ([segue.identifier isEqualToString:@"ReportViewerSegue"])
-		[(ReportViewerViewController *)segue.destinationViewController setFilePath:sender];
+
 }
 
 @end
