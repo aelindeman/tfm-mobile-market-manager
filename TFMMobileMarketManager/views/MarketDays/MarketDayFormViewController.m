@@ -51,7 +51,7 @@
 	
 	UIBarButtonItem *closeButton = [[UIBarButtonItem alloc] initWithTitle:@"Close" style:UIBarButtonItemStylePlain target:self action:@selector(discard)];
 	UIBarButtonItem *openButton = [[UIBarButtonItem alloc] initWithTitle:@"Open" style:UIBarButtonItemStylePlain target:self action:@selector(startMarketDay)];
-	UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(submit)];
+	UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(submit:)];
 	
 	self.navigationItem.leftBarButtonItem = closeButton;
 	self.navigationItem.rightBarButtonItems = [self editMode] ? [TFM_DELEGATE activeMarketDay] ? @[saveButton] : @[openButton, saveButton] : @[openButton];
@@ -68,7 +68,7 @@
 				break;
 				
 			case 1:
-				[self dismissViewControllerAnimated:true completion:nil];
+				[self dismiss:false];
 				break;
 		}
 	}
@@ -80,7 +80,21 @@
 	[prompt show];
 }
 
-- (bool)submit
+- (void)dismiss:(bool)thenOpenMarketDay
+{
+	if (thenOpenMarketDay)
+	{
+		[self performSegueWithIdentifier:@"MarketOpenMenuSegue" sender:self.marketday];
+	}
+	else
+	{
+		[self dismissViewControllerAnimated:true completion:^{
+			if (self.delegate) [self.delegate updateInfoLabels];
+		}];
+	}
+}
+
+- (bool)submit:(bool)andOpenMarketDay
 {
 	// validate form
 	MarketDayForm *form = self.formController.form;
@@ -154,21 +168,14 @@
 			[[[UIAlertView alloc] initWithTitle:@"Error saving:" message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Dismiss", nil] show];
 		}
 		
-		[self dismissViewControllerAnimated:true completion:^{
-			if (self.delegate) [self.delegate updateInfoLabels];
-		}];
+		[self dismiss:andOpenMarketDay];
 		return true;
 	}
 }
 
 - (void)startMarketDay
 {
-	if ([self submit])
-	{
-		NSAssert([self marketday] != nil, @"Don't know which market day to set as active");
-		[TFM_DELEGATE setActiveMarketDay:self.marketday];
-		[self performSegueWithIdentifier:@"MarketOpenMenuSegue" sender:self];
-	}
+	[self submit:true];
 }
 
 - (void)updateVendorCountLabel:(UITableViewCell<FXFormFieldCell> *)cell
@@ -182,7 +189,15 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+	if ([segue.identifier isEqualToString:@"MarketOpenMenuSegue"])
+	{
+		NSAssert([self marketday] != nil, @"Don't know which market day to set as active");
 
+		NSLog(@"prepareForSegue MarketOpenMenuSeuge");
+		[self dismissViewControllerAnimated:false completion:^{
+			[TFM_DELEGATE setActiveMarketDay:self.marketday];
+		}];
+	}
 }
 
 @end
