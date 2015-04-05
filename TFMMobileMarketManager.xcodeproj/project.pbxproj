@@ -337,10 +337,7 @@
 				FA0AC2691A9FB2B000CCA13A /* ReportsMenuViewController.m */,
 				FA01DDEC1ACA2834009F5ECE /* ReportViewerViewController.h */,
 				FA01DDED1ACA2834009F5ECE /* ReportViewerViewController.m */,
-				FA7115AE1ACA0D9700A396FC /* SelectExistingReportViewController.h */,
-				FA7115AF1ACA0D9700A396FC /* SelectExistingReportViewController.m */,
-				FA7115AB1AC9E2FF00A396FC /* SelectMarketDayViewController.h */,
-				FA7115AC1AC9E2FF00A396FC /* SelectMarketDayViewController.m */,
+				FAFA37801ACAE99C002902FB /* Select */,
 			);
 			path = Reports;
 			sourceTree = "<group>";
@@ -410,6 +407,17 @@
 				FAF84A691AB6046E00012B06 /* ConsoleViewController.m */,
 			);
 			path = Console;
+			sourceTree = "<group>";
+		};
+		FAFA37801ACAE99C002902FB /* Select */ = {
+			isa = PBXGroup;
+			children = (
+				FA7115AE1ACA0D9700A396FC /* SelectExistingReportViewController.h */,
+				FA7115AF1ACA0D9700A396FC /* SelectExistingReportViewController.m */,
+				FA7115AB1AC9E2FF00A396FC /* SelectMarketDayViewController.h */,
+				FA7115AC1AC9E2FF00A396FC /* SelectMarketDayViewController.m */,
+			);
+			name = Select;
 			sourceTree = "<group>";
 		};
 		FAFE4A711AC88FB2009935EC /* TokenTotals */ = {
