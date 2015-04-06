@@ -23,10 +23,10 @@ static NSString *deleteAllConfirmationMessageDetails = @"All reports on this dev
 	self.previewer = [[QLPreviewController alloc] init];
 	[self.previewer setDataSource:self];
 	
-	UIBarButtonItem *closeButton = [[UIBarButtonItem alloc] initWithTitle:@"Close" style:UIBarButtonItemStyleDone target:self action:@selector(discard)];
+	UIBarButtonItem *closeButton = [[UIBarButtonItem alloc] initWithTitle:@"Close" style:UIBarButtonItemStylePlain target:self action:@selector(discard)];
 	self.navigationItem.leftBarButtonItem = closeButton;
 	
-	UIBarButtonItem *deleteAllButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(confirmDeleteAll)];
+	UIBarButtonItem *deleteAllButton = [[UIBarButtonItem alloc] initWithTitle:@"Delete All" style:UIBarButtonItemStylePlain target:self action:@selector(confirmDeleteAll)];
 	self.navigationItem.rightBarButtonItem = deleteAllButton;
 }
 
@@ -69,12 +69,16 @@ static NSString *deleteAllConfirmationMessageDetails = @"All reports on this dev
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ReportCell"];
-	NSString *name = [[[self.items objectAtIndex:indexPath.section] objectForKey:@"items"] objectAtIndex:indexPath.row];
+	// make the report type stand out, the rest of the filename is not as important while on the device
+	NSMutableAttributedString *name = [[NSMutableAttributedString alloc] initWithString:[[[self.items objectAtIndex:indexPath.section] objectForKey:@"items"] objectAtIndex:indexPath.row]];
 	
-	[cell.textLabel setText:name];
+	for (NSString *i in @[@"Demographics", @"Redemptions", @"Sales"])
+		[name setAttributes:@{NSFontAttributeName: [UIFont boldSystemFontOfSize:[cell.textLabel.font pointSize]], NSForegroundColorAttributeName: [UIColor purpleColor]} range:[[name string] rangeOfString:i]];
+	[cell.textLabel setAttributedText:name];
 	
+	// TODO: fix so detail label is not dependent on label text - may have to change inner items NSArray to NSDictionary
 	// set detail label to report creation date
-	NSDictionary* fileAttribs = [[NSFileManager defaultManager] attributesOfItemAtPath:[NSString pathWithComponents:@[self.basePath, [[self.items objectAtIndex:indexPath.section] objectForKey:@"name"], name]] error:nil];
+	NSDictionary* fileAttribs = [[NSFileManager defaultManager] attributesOfItemAtPath:[NSString pathWithComponents:@[self.basePath, [[self.items objectAtIndex:indexPath.section] objectForKey:@"name"], [name string]]] error:nil];
 	NSDateFormatter *reportTimeFormat = [[NSDateFormatter alloc] init];
 	[reportTimeFormat setDateFormat:@"'Created' yyyy-MM-dd HH:mm:ss"];
 	NSString *gentime = [reportTimeFormat stringFromDate:[fileAttribs objectForKey:NSFileCreationDate]];
