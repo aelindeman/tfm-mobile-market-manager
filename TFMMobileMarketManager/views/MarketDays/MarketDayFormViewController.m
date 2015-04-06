@@ -178,22 +178,11 @@
 	[self submit:true];
 }
 
-- (void)updateVendorCountLabel:(UITableViewCell<FXFormFieldCell> *)cell
-{
-	MarketDayForm *form = self.formController.form;
-	form.vendorsCount = [form.vendors count];
-	[self.tableView reloadData];
-	
-	NSLog(@"%@", [self.formController class]);
-}
-
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
 	if ([segue.identifier isEqualToString:@"MarketOpenMenuSegue"])
 	{
 		NSAssert([self marketday] != nil, @"Don't know which market day to set as active");
-
-		NSLog(@"prepareForSegue MarketOpenMenuSeuge");
 		[self dismissViewControllerAnimated:false completion:^{
 			[TFM_DELEGATE setActiveMarketDay:self.marketday];
 		}];
