@@ -635,6 +635,7 @@ Stephen Davies</string>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="importButton" destination="aAh-ft-kFC" id="XCI-nC-i6N"/>
                         <outlet property="importDestination" destination="b2X-Hq-RFZ" id="17T-8i-dv2"/>
                         <outlet property="textView" destination="GL0-jI-6Cj" id="yfO-Q9-48q"/>
                     </connections>
