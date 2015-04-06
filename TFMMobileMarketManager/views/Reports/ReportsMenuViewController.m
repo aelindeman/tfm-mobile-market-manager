@@ -101,6 +101,7 @@ static NSString *reportCreatedMessage = @"The %@ report was created successfully
 		if (path)
 		{
 			[self setMostRecentReportPath:path];
+			[self.previewer reloadData];
 			[[[UIAlertView alloc] initWithTitle:reportCreatedTitle message:[NSString stringWithFormat:reportCreatedMessage, [action lowercaseString]] delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil] show];
 		}
 	}
@@ -132,7 +133,6 @@ static NSString *reportCreatedMessage = @"The %@ report was created successfully
 				
 			case 1:
 			{
-				[self.previewer reloadData];
 				[self presentViewController:self.previewer animated:true completion:nil];
 				break;
 			}
