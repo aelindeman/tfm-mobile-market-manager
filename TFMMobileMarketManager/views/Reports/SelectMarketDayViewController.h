@@ -12,6 +12,6 @@
 @property (nonatomic, assign) id <ReportsMenuDelegate> delegate;
 
 @property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
-@property (nonatomic) MarketDays *selectedObject;
+@property (nonatomic) NSManagedObjectID *selectedObjectID;
 
 @end

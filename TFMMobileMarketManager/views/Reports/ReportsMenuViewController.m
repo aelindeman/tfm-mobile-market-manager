@@ -168,14 +168,18 @@ static NSString *reportCreatedMessage = @"The %@ report was created successfully
 		NSLog (@"no action set for “%@”", type);
 		return false;
 	}
-	
+	 
 	return path;
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
 	if ([segue.identifier isEqualToString:@"SelectMarketDaySegue"])
-		[(SelectMarketDayViewController *)[[segue.destinationViewController viewControllers] firstObject] setDelegate:self];
+	{
+		SelectMarketDayViewController *smdvc = [[segue.destinationViewController viewControllers] firstObject];
+		[smdvc setDelegate:self];
+		if (self.selectedMarketDay) [smdvc setSelectedObjectID:[self.selectedMarketDay objectID]];
+	}
 }
 
 @end

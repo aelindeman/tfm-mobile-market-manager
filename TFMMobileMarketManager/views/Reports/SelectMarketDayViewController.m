@@ -48,6 +48,10 @@
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MarketDayCell"];
 	MarketDays *info = [self.fetchedResultsController objectAtIndexPath:indexPath];
 	[cell.textLabel setText:[info fieldDescription]];
+	
+	if ([info objectID] == self.selectedObjectID)
+		[cell setAccessoryType:UITableViewCellAccessoryCheckmark];
+	
 	return cell;
 }
 
