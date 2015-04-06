@@ -60,7 +60,7 @@ static NSString *importConfirmationMessage = @"%i entr%@ will be imported."; // 
 // Fills the database with some sample data
 - (void)prepopulate
 {
-	NSString *results;
+	NSString *results = [[NSString alloc] init];
 
 	NSError *error;
 	NSFetchRequest *locations = [NSFetchRequest fetchRequestWithEntityName:@"Locations"];
