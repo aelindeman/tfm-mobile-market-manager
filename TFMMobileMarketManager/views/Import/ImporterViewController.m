@@ -14,6 +14,9 @@
 static NSString *prepopulateConfirmationTitle = @"Add sample data to the database?";
 static NSString *prepopulateConfirmationMessage = @"This will add a small sample set of locations, staff, and vendors to use for testing.\n\nRecords will only be added if the database is empty.";
 
+static NSString *importConfirmationTitle = @"Import data?";
+static NSString *importConfirmationMessage = @"%i entr%@ will be imported."; // first token: entry count, second token: pluralize -> (entryCount == 1) ? @"y" : @"ies"
+
 - (void)viewDidLoad
 {
 	[super viewDidLoad];	
