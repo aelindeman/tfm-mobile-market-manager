@@ -15,7 +15,7 @@
 @property NSURL *fileToImport;
 
 @property (weak, nonatomic) IBOutlet UISegmentedControl *importDestination;
-@property (weak, nonatomic) IBOutlet UITextView *importData;
+@property (weak, nonatomic) IBOutlet UITextView *textView;
 
 - (void)handleOpenURL:(NSURL *)url;
 - (IBAction)prepopulatePrompt:(id)sender;

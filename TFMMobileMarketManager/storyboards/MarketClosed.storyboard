@@ -572,13 +572,13 @@ Stephen Davies</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Destination" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="elq-wB-jiL">
-                                <rect key="frame" x="16" y="75" width="87" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <rect key="frame" x="16" y="77" width="78" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="b2X-Hq-RFZ">
-                                <rect key="frame" x="111" y="72" width="410" height="29"/>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="b2X-Hq-RFZ">
+                                <rect key="frame" x="102" y="72" width="427" height="29"/>
                                 <segments>
                                     <segment title="Staff"/>
                                     <segment title="Vendors"/>
@@ -594,7 +594,7 @@ Stephen Davies</string>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aAh-ft-kFC">
-                                <rect key="frame" x="529" y="71" width="47" height="30"/>
+                                <rect key="frame" x="537" y="71" width="47" height="30"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="Import">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -613,7 +613,7 @@ Stephen Davies</string>
                             <constraint firstItem="GL0-jI-6Cj" firstAttribute="leading" secondItem="QRz-C3-57k" secondAttribute="leading" id="UfN-Z3-JLX"/>
                             <constraint firstItem="hJ2-tU-AxI" firstAttribute="top" secondItem="GL0-jI-6Cj" secondAttribute="bottom" id="W8y-1H-t1U"/>
                             <constraint firstAttribute="trailingMargin" secondItem="b2X-Hq-RFZ" secondAttribute="trailing" constant="8" id="c0O-1a-vOr"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="aAh-ft-kFC" secondAttribute="trailing" constant="8" id="etS-W2-DK6"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="aAh-ft-kFC" secondAttribute="trailing" id="etS-W2-DK6"/>
                             <constraint firstAttribute="trailing" secondItem="GL0-jI-6Cj" secondAttribute="trailing" id="gBD-rf-dYL"/>
                             <constraint firstItem="elq-wB-jiL" firstAttribute="top" secondItem="BSh-4d-F4r" secondAttribute="bottom" constant="8" id="iWa-NG-Geg"/>
                             <constraint firstItem="b2X-Hq-RFZ" firstAttribute="top" secondItem="BSh-4d-F4r" secondAttribute="bottom" constant="8" symbolic="YES" id="j1A-Bw-SWI"/>
@@ -635,8 +635,8 @@ Stephen Davies</string>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="importData" destination="GL0-jI-6Cj" id="z5K-eb-ndK"/>
                         <outlet property="importDestination" destination="b2X-Hq-RFZ" id="17T-8i-dv2"/>
+                        <outlet property="textView" destination="GL0-jI-6Cj" id="yfO-Q9-48q"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YR8-qG-AuL" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1377,9 +1377,9 @@ Stephen Davies</string>
         <image name="sync" width="16" height="16"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Xyf-yc-rV8"/>
+        <segue reference="6RH-vK-sCl"/>
+        <segue reference="uV5-lI-hNV"/>
         <segue reference="tmR-C0-IUe"/>
         <segue reference="BzA-eb-QoZ"/>
-        <segue reference="uV5-lI-hNV"/>
     </inferredMetricsTieBreakers>
 </document>
