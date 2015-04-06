@@ -10,8 +10,8 @@
 static NSString *reportsSubfolder = @"Reports"; // relative to application's documents directory
 static NSString *marketDaySubfolder = @"%@"; // relative to reports subfolder, replace token with market day name
 
-// replace first token with report type, second token with market day name, third token with timestamp of report generation
-static NSString *reportFormat = @"%@ %@ Created%@.csv"; // relative to market day subfolder
+// replace first token with market day name, second token with report type, third token with uuid
+static NSString *reportFormat = @"%@ %@ %@.csv"; // relative to market day subfolder
 
 // report names
 static NSString *demographicsReportName = @"Demographics";
@@ -70,18 +70,18 @@ static NSString *redemptionsReportName = @"Redemptions";
 	// need a consistent way of returning the market day name by its name then the date. don't rely on -description
 	NSDateFormatter *mdDateFormat = [[NSDateFormatter alloc] init];
 	[mdDateFormat setDateFormat:@"yyyy-MM-dd"];
-	NSString *md = [NSString stringWithFormat:@"%@ %@", [(Locations *)[self.selectedMarketDay location] name], [mdDateFormat stringFromDate:[self.selectedMarketDay date]]];
+	NSString *md = [NSString stringWithFormat:@"%@ %@", [mdDateFormat stringFromDate:[self.selectedMarketDay date]], [(Locations *)[self.selectedMarketDay location] name]];
 
-	// create a report generation time
-	NSDateFormatter *reportTimeFormat = [[NSDateFormatter alloc] init];
-	[reportTimeFormat setDateFormat:@"yyyy-MM-dd-HH-mm-ss"];
-	NSString *gentime = [reportTimeFormat stringFromDate:[NSDate date]];
+	// create a report generation uuid
+	CFUUIDRef uuid = CFUUIDCreate(nil);
+	NSString *uuidString = [(NSString *)CFBridgingRelease(CFUUIDCreateString(nil, uuid)) substringToIndex:8]; // only use first 8 chars
+	CFRelease(uuid);
 	
 	// return path string
 	return [NSString pathWithComponents:@[[TFM_DELEGATE.applicationDocumentsDirectory path],
 										  reportsSubfolder,
 										  [NSString stringWithFormat:marketDaySubfolder, md],
-										  [NSString stringWithFormat:reportFormat, reportName, md, gentime]]];
+										  [NSString stringWithFormat:reportFormat, md, reportName, uuidString]]];
 }
 
 // creates demographics report at default path; returns path
@@ -271,12 +271,12 @@ static NSString *redemptionsReportName = @"Redemptions";
 	writeString = [writeString stringByAppendingString:[NSString stringWithFormat:@"'Grand Total (SNAP + Bonus + Credit + TokenFee)',,,%i\n", grandtotal]];
 	
 	// create transactions table
-	NSString *header = @"\n#Transactions#\nuuid,Zipcode,License,CreditAmount,CreditFee,SNAPAmount,SNAPBonus,Total\n";
+	NSString *header = @"\n#Transactions#\nZipcode,License,CreditAmount,CreditFee,SNAPAmount,SNAPBonus,Total\n";
 	writeString = [writeString stringByAppendingString:header];
 	
 	for (Transactions *tx in query)
 	{
-		writeString = [writeString stringByAppendingString:[NSString stringWithFormat:@"'%@','%@',%04i,%i,%i,%i,%i,%i\n", [tx objectID], tx.cust_zipcode, tx.cust_id, (tx.credit_total - tx.credit_fee), tx.credit_fee, (tx.snap_total - tx.snap_bonus), tx.snap_bonus, (tx.credit_total + tx.snap_total)]];
+		writeString = [writeString stringByAppendingString:[NSString stringWithFormat:@"'%@',%04i,%i,%i,%i,%i,%i\n", tx.cust_zipcode, tx.cust_id, (tx.credit_total - tx.credit_fee), tx.credit_fee, (tx.snap_total - tx.snap_bonus), tx.snap_bonus, (tx.credit_total + tx.snap_total)]];
 	}
 	
 	NSLog(@"prepped sales report: {\n%@\n}", writeString);
