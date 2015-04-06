@@ -570,9 +570,74 @@ Stephen Davies</string>
                     <view key="view" contentMode="scaleToFill" id="QRz-C3-57k">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Destination" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="elq-wB-jiL">
+                                <rect key="frame" x="16" y="75" width="87" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="b2X-Hq-RFZ">
+                                <rect key="frame" x="111" y="72" width="410" height="29"/>
+                                <segments>
+                                    <segment title="Staff"/>
+                                    <segment title="Vendors"/>
+                                    <segment title="Locations"/>
+                                </segments>
+                            </segmentedControl>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" indicatorStyle="white" keyboardDismissMode="interactive" text="No data." translatesAutoresizingMaskIntoConstraints="NO" id="GL0-jI-6Cj">
+                                <rect key="frame" x="0.0" y="108" width="600" height="492"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="13"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aAh-ft-kFC">
+                                <rect key="frame" x="529" y="71" width="47" height="30"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Import">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="importData:" destination="7gL-Gt-FjR" eventType="touchUpInside" id="4OH-Fk-RlR"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="elq-wB-jiL" firstAttribute="leading" secondItem="QRz-C3-57k" secondAttribute="leadingMargin" id="Blf-sF-kz7"/>
+                            <constraint firstItem="aAh-ft-kFC" firstAttribute="centerY" secondItem="b2X-Hq-RFZ" secondAttribute="centerY" id="Djf-mb-Xaz"/>
+                            <constraint firstItem="b2X-Hq-RFZ" firstAttribute="leading" secondItem="elq-wB-jiL" secondAttribute="trailing" constant="8" symbolic="YES" id="Mr2-00-nse"/>
+                            <constraint firstItem="aAh-ft-kFC" firstAttribute="leading" secondItem="b2X-Hq-RFZ" secondAttribute="trailing" constant="8" symbolic="YES" id="TxZ-e6-KIZ"/>
+                            <constraint firstItem="GL0-jI-6Cj" firstAttribute="leading" secondItem="QRz-C3-57k" secondAttribute="leading" id="UfN-Z3-JLX"/>
+                            <constraint firstItem="hJ2-tU-AxI" firstAttribute="top" secondItem="GL0-jI-6Cj" secondAttribute="bottom" id="W8y-1H-t1U"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="b2X-Hq-RFZ" secondAttribute="trailing" constant="8" id="c0O-1a-vOr"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="aAh-ft-kFC" secondAttribute="trailing" constant="8" id="etS-W2-DK6"/>
+                            <constraint firstAttribute="trailing" secondItem="GL0-jI-6Cj" secondAttribute="trailing" id="gBD-rf-dYL"/>
+                            <constraint firstItem="elq-wB-jiL" firstAttribute="top" secondItem="BSh-4d-F4r" secondAttribute="bottom" constant="8" id="iWa-NG-Geg"/>
+                            <constraint firstItem="b2X-Hq-RFZ" firstAttribute="top" secondItem="BSh-4d-F4r" secondAttribute="bottom" constant="8" symbolic="YES" id="j1A-Bw-SWI"/>
+                            <constraint firstItem="GL0-jI-6Cj" firstAttribute="top" secondItem="b2X-Hq-RFZ" secondAttribute="bottom" constant="8" symbolic="YES" id="pNV-lu-YiQ"/>
+                            <constraint firstItem="b2X-Hq-RFZ" firstAttribute="centerY" secondItem="elq-wB-jiL" secondAttribute="centerY" id="xbx-2u-sBk"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="iWa-NG-Geg"/>
+                                <exclude reference="c0O-1a-vOr"/>
+                            </mask>
+                        </variation>
                     </view>
-                    <navigationItem key="navigationItem" title="Import" id="4Ua-Gj-KMS"/>
+                    <navigationItem key="navigationItem" title="Import" id="4Ua-Gj-KMS">
+                        <barButtonItem key="rightBarButtonItem" title="Add Sample Data" id="nly-cF-BUe">
+                            <connections>
+                                <action selector="prepopulatePrompt:" destination="7gL-Gt-FjR" id="bTo-9D-koI"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="importData" destination="GL0-jI-6Cj" id="z5K-eb-ndK"/>
+                        <outlet property="importDestination" destination="b2X-Hq-RFZ" id="17T-8i-dv2"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YR8-qG-AuL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1022,7 +1087,7 @@ Stephen Davies</string>
                                     <action selector="executeButtonPressed:" destination="nO0-u0-KKk" eventType="touchUpInside" id="dFx-cT-1p3"/>
                                 </connections>
                             </button>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="interactive" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sFS-53-wCG">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" indicatorStyle="white" keyboardDismissMode="interactive" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sFS-53-wCG">
                                 <rect key="frame" x="0.0" y="224" width="600" height="376"/>
                                 <color key="backgroundColor" red="0.12156862745098039" green="0.12941176470588237" blue="0.14117647058823529" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1080,7 +1145,7 @@ Stephen Davies</string>
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Console" id="eFN-d0-zPy">
-                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="rWm-7I-gOr">
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" systemItem="action" id="rWm-7I-gOr">
                             <connections>
                                 <action selector="exportButtonPressed:" destination="nO0-u0-KKk" id="6d1-nd-nk1"/>
                             </connections>

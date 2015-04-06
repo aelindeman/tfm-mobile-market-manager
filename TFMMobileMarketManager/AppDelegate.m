@@ -11,6 +11,7 @@
 
 @implementation AppDelegate
 
+// TODO: save market day state when entering background, and reopen active market day on entering foreground
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 	// Override point for customization after application launch.
@@ -18,6 +19,11 @@
 	/* NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	[defaults setInteger:1 forKey:@"com.apple.CoreData.SQLDebug"];
 	[defaults setInteger:1 forKey:@"com.apple.CoreData.SyntaxColoredLogging"]; */
+	
+	// handle opening files
+	NSURL *url = (NSURL *)[launchOptions valueForKey:UIApplicationLaunchOptionsURLKey];
+	if (url != nil && [url isFileURL])
+		[self handleOpenURL:url];
 	
 	return YES;
 }
@@ -48,6 +54,22 @@
 
 #pragma mark - Import/export support
 
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+	if (url != nil && [url isFileURL])
+	{
+		[self handleOpenURL:url];
+	}
+	return YES;
+}
+
+- (void)handleOpenURL:(NSURL *)url
+{
+	NSAssert1([self.window.rootViewController class] == [UINavigationController class], @"root view controller wasn't a UINavigationController, it was a %@", [self.window.rootViewController class]);
+	
+	// go to import view
+	[[[(UINavigationController *)self.window.rootViewController viewControllers] firstObject] performSegueWithIdentifier:@"ImportSegue" sender:url];
+}
 
 #pragma mark - Core Data stack
 

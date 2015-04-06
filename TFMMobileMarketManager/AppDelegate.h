@@ -51,5 +51,7 @@ typedef NS_ENUM(NSInteger, Position)
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;
 
+- (void)handleOpenURL:(NSURL *)url;
+
 @end
 
