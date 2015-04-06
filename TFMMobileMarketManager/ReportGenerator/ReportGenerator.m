@@ -189,7 +189,7 @@ static NSString *redemptionsReportName = @"Redemptions";
 		[totals setValue:@([totals[@"BonusValue"] intValue] + re.bonus_count) forKey:@"BonusValue"];
 		[totals setValue:@([totals[@"Total"] intValue] + re.total) forKey:@"Total"];
 
-		writeString = [writeString stringByAppendingString:[NSString stringWithFormat:@"'%@',%i,%i,%i,%i,%i\n", [(Vendors *)re.vendor businessName], re.credit_count, re.credit_amount, re.snap_count, re.bonus_count, re.total]];
+		writeString = [writeString stringByAppendingString:[NSString stringWithFormat:@"\"%@\",%i,%i,%i,%i,%i\n", [(Vendors *)re.vendor businessName], re.credit_count, re.credit_amount, re.snap_count, re.bonus_count, re.total]];
 	}
 
 	// totals row
@@ -258,17 +258,17 @@ static NSString *redemptionsReportName = @"Redemptions";
 	}
 	
 	// create rows
-	writeString = [writeString stringByAppendingString:[NSString stringWithFormat:@"%@,%i,%i,%i\n", @"'SNAP (Blue)'", [snapTotals[@"TransactionCount"] intValue], [snapTotals[@"TokensDisbursed"] intValue], [snapTotals[@"Value"] intValue]]];
-	writeString = [writeString stringByAppendingString:[NSString stringWithFormat:@"%@,%i,%i,%i\n", @"'Bonus (Red)'", [bonusTotals[@"TransactionCount"] intValue], [bonusTotals[@"TokensDisbursed"] intValue], [bonusTotals[@"Value"] intValue]]];
-	writeString = [writeString stringByAppendingString:[NSString stringWithFormat:@"%@,%i,%i,%i\n", @"'Credit (Green)'", [creditTotals[@"TransactionCount"] intValue], [creditTotals[@"TokensDisbursed"] intValue], [creditTotals[@"Value"] intValue]]];
+	writeString = [writeString stringByAppendingString:[NSString stringWithFormat:@"%@,%i,%i,%i\n", @"\"SNAP (Blue)\"", [snapTotals[@"TransactionCount"] intValue], [snapTotals[@"TokensDisbursed"] intValue], [snapTotals[@"Value"] intValue]]];
+	writeString = [writeString stringByAppendingString:[NSString stringWithFormat:@"%@,%i,%i,%i\n", @"\"Bonus (Red)\"", [bonusTotals[@"TransactionCount"] intValue], [bonusTotals[@"TokensDisbursed"] intValue], [bonusTotals[@"Value"] intValue]]];
+	writeString = [writeString stringByAppendingString:[NSString stringWithFormat:@"%@,%i,%i,%i\n", @"\"Credit (Green)\"", [creditTotals[@"TransactionCount"] intValue], [creditTotals[@"TokensDisbursed"] intValue], [creditTotals[@"Value"] intValue]]];
 	
-	writeString = [writeString stringByAppendingString:[NSString stringWithFormat:@"'Token Fee',%i,,%i\n", creditFeeCount, creditFeeTotal]];
+	writeString = [writeString stringByAppendingString:[NSString stringWithFormat:@"\"Token Fee\",%i,,%i\n", creditFeeCount, creditFeeTotal]];
 	
 	unsigned int transactionCount = [query count], total = ([snapTotals[@"Value"] intValue] + [bonusTotals[@"Value"] intValue] + [creditTotals[@"Value"] intValue]);
-	writeString = [writeString stringByAppendingString:[NSString stringWithFormat:@"'Total (SNAP + Credit + TokenFee)',%i,,%i\n", transactionCount, total]];
+	writeString = [writeString stringByAppendingString:[NSString stringWithFormat:@"\"Total (SNAP + Credit + TokenFee)\",%i,,%i\n", transactionCount, total]];
 	
 	unsigned int grandtotal = total + creditFeeTotal;
-	writeString = [writeString stringByAppendingString:[NSString stringWithFormat:@"'Grand Total (SNAP + Bonus + Credit + TokenFee)',,,%i\n", grandtotal]];
+	writeString = [writeString stringByAppendingString:[NSString stringWithFormat:@"\"Grand Total (SNAP + Bonus + Credit + TokenFee)\",,,%i\n", grandtotal]];
 	
 	// create transactions table
 	NSString *header = @"\n#Transactions#\nZipcode,License,CreditAmount,CreditFee,SNAPAmount,SNAPBonus,Total\n";
@@ -276,7 +276,7 @@ static NSString *redemptionsReportName = @"Redemptions";
 	
 	for (Transactions *tx in query)
 	{
-		writeString = [writeString stringByAppendingString:[NSString stringWithFormat:@"'%@',%04i,%i,%i,%i,%i,%i\n", tx.cust_zipcode, tx.cust_id, (tx.credit_total - tx.credit_fee), tx.credit_fee, (tx.snap_total - tx.snap_bonus), tx.snap_bonus, (tx.credit_total + tx.snap_total)]];
+		writeString = [writeString stringByAppendingString:[NSString stringWithFormat:@"\"%@\",%04i,%i,%i,%i,%i,%i\n", tx.cust_zipcode, tx.cust_id, (tx.credit_total - tx.credit_fee), tx.credit_fee, (tx.snap_total - tx.snap_bonus), tx.snap_bonus, (tx.credit_total + tx.snap_total)]];
 	}
 	
 	NSLog(@"prepped sales report: {\n%@\n}", writeString);
