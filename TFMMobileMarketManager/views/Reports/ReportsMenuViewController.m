@@ -132,6 +132,7 @@ static NSString *reportCreatedMessage = @"The %@ report was created successfully
 				
 			case 1:
 			{
+				[self.previewer reloadData];
 				[self presentViewController:self.previewer animated:true completion:nil];
 				break;
 			}

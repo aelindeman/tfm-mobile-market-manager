@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="bUb-qd-0mY">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -592,7 +591,7 @@ Stephen Davies</string>
                     <navigationItem key="navigationItem" title="Reports" id="YkO-bz-ujA"/>
                     <connections>
                         <segue destination="uey-mc-gsu" kind="presentation" identifier="SelectMarketDaySegue" modalPresentationStyle="formSheet" id="cdq-NT-cSy"/>
-                        <segue destination="Bx8-nn-nS2" kind="show" identifier="SelectExistingReportSegue" id="sTd-BY-ona"/>
+                        <segue destination="Bx8-nn-nS2" kind="presentation" identifier="SelectExistingReportSegue" modalPresentationStyle="formSheet" id="sTd-BY-ona"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aPu-RX-JRq" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1219,7 +1218,7 @@ Stephen Davies</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ReportCell" textLabel="VLh-CR-0m8" style="IBUITableViewCellStyleDefault" id="pf8-YL-GxN">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ReportCell" textLabel="VLh-CR-0m8" detailTextLabel="Dxw-Dt-unl" style="IBUITableViewCellStyleSubtitle" id="pf8-YL-GxN">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pf8-YL-GxN" id="g2p-mL-jSi">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -1228,6 +1227,12 @@ Stephen Davies</string>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Dxw-Dt-unl">
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
