@@ -167,7 +167,13 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-	
+	if ([segue.identifier isEqualToString:@"ImportSegue"] && [sender class] == [NSURL class])
+	{
+		// TODO: implement handleOpenURL in MainMenuViewController and call segue from there, instead of doing that in the app delegate
+		// forward handleOpenURL
+		NSLog(@"handoff handleOpenURL to importer view");
+		[segue.destinationViewController handleOpenURL:sender];
+	}
 }
 
 @end
