@@ -14,14 +14,43 @@
 static NSString *prepopulateConfirmationTitle = @"Add sample data to the database?";
 static NSString *prepopulateConfirmationMessage = @"This will add a small sample set of locations, staff, and vendors to use for testing.\n\nRecords will only be added if the database is empty.";
 
+static NSString *noDestinationSelectedTitle = @"No destination selected";
+static NSString *noDestinationSelectedMessage = @"";
+
 static NSString *importConfirmationTitle = @"Import data?";
 static NSString *importConfirmationMessage = @"%i entr%@ will be imported."; // first token: entry count, second token: pluralize -> (entryCount == 1) ? @"y" : @"ies"
 
 - (void)viewDidLoad
 {
-	[super viewDidLoad];	
+	[super viewDidLoad];
+	
+	if (self.fileToImport)
+	{
+		// simple determine type of import based on filename
+		NSDictionary *types = @{@"marketstaff": @0, @"staff": @0, @"employee": @0, @"vendor": @1, @"business": @1, @"location": @2, @"market": @2};
+		for (NSString *key in types)
+		{
+			NSRange range = [[[[self.fileToImport pathComponents] lastObject] lowercaseString] rangeOfString:[key lowercaseString]];
+			if (range.length > 0)
+			{
+				NSLog(@"assuming import type is %i because filename “%@” contained “%@”", [[types valueForKey: key] intValue], [[self.fileToImport pathComponents] lastObject], key);
+				[self.importDestination setSelectedSegmentIndex:[[types valueForKey:key] intValue]];
+				[self.importButton setEnabled:true];
+				break;
+			}
+		}
+		
+		// load file into main text view
+		NSError *error;
+		[self.textView setText:[NSString stringWithContentsOfFile:[self.fileToImport path] encoding:NSUTF8StringEncoding error:&error]];
+		if (error) NSLog(@"error while loading url: %@", error);
+		
+		// prevent editing opened data
+		[self.textView setEditable:false];
+	}
 }
 
+// loads file into text view
 - (void)handleOpenURL:(NSURL *)url
 {
 	[self setFileToImport:url];
@@ -32,6 +61,8 @@ static NSString *importConfirmationMessage = @"%i entr%@ will be imported."; // 
 // Fills the database with some sample data
 - (void)prepopulate
 {
+	NSString *results;
+
 	NSError *error;
 	NSFetchRequest *locations = [NSFetchRequest fetchRequestWithEntityName:@"Locations"];
 	if ([[TFM_DELEGATE.managedObjectContext executeFetchRequest:locations error:&error] count] == 0)
@@ -46,6 +77,7 @@ static NSString *importConfirmationMessage = @"%i entr%@ will be imported."; // 
 		
 		if (![TFM_DELEGATE.managedObjectContext save:&error]) NSLog(@"couldn't save: %@", error);
 		NSLog(@"prepopulated locations");
+		results = [results stringByAppendingString:@"Added sample locations\n"];
 	}
 	
 	NSFetchRequest *marketStaff = [NSFetchRequest fetchRequestWithEntityName:@"MarketStaff"];
@@ -69,6 +101,7 @@ static NSString *importConfirmationMessage = @"%i entr%@ will be imported."; // 
 		
 		if (![TFM_DELEGATE.managedObjectContext save:&error]) NSLog(@"couldn't save: %@", error);
 		NSLog(@"prepopulated staff");
+		results = [results stringByAppendingString:@"Added sample staff\n"];
 	}
 	
 	NSFetchRequest *vendors = [NSFetchRequest fetchRequestWithEntityName:@"Vendors"];
@@ -88,15 +121,15 @@ static NSString *importConfirmationMessage = @"%i entr%@ will be imported."; // 
 		
 		if (![TFM_DELEGATE.managedObjectContext save:&error]) NSLog(@"couldn't save: %@", error);
 		NSLog(@"prepopulated vendors");
+		results = [results stringByAppendingString:@"Added sample vendors\n"];
 	}
+	
+	if (results) [self.textView setText:results];
 }
 
 - (IBAction)prepopulatePrompt:(id)sender
 {
 	[[[UIAlertView alloc] initWithTitle:prepopulateConfirmationTitle message:prepopulateConfirmationMessage delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil] show];
-}
-
-- (IBAction)importData:(UIButton *)sender {
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -116,6 +149,17 @@ static NSString *importConfirmationMessage = @"%i entr%@ will be imported."; // 
 			}
 		}
 	}
+}
+
+// heavy lifting
+- (IBAction)importData:(UIButton *)sender
+{
+	if (self.importDestination.selectedSegmentIndex < 0)
+	{
+		[[[UIAlertView alloc] initWithTitle:noDestinationSelectedTitle message:noDestinationSelectedMessage delegate:self cancelButtonTitle:nil otherButtonTitles:@"Dismiss", nil] show];
+		return;
+	}
+	NSLog(@"attempting to import data");
 }
 
 @end
