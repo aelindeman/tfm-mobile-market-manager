@@ -43,6 +43,7 @@
 		FA0AC29F1A9FB2B000CCA13A /* VendorFormViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0AC2781A9FB2B000CCA13A /* VendorFormViewController.m */; };
 		FA0AC2A01A9FB2B000CCA13A /* VendorsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0AC27A1A9FB2B000CCA13A /* VendorsListViewController.m */; };
 		FA0AC2A21A9FB2E300CCA13A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA0AC2A11A9FB2E300CCA13A /* Assets.xcassets */; };
+		FA0CAC011AD213500009D2A8 /* ImporterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0CAC001AD213500009D2A8 /* ImporterViewController.m */; };
 		FA11AAFB1AB7EEBC00D4C360 /* TerminalTotalsReconciliationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA11AAFA1AB7EEBC00D4C360 /* TerminalTotalsReconciliationViewController.m */; };
 		FA11AB041AB7F83300D4C360 /* ReconciliationEntryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FA11AB021AB7F83300D4C360 /* ReconciliationEntryTableViewCell.m */; };
 		FA11AB051AB7F83300D4C360 /* ReconciliationEntryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA11AB031AB7F83300D4C360 /* ReconciliationEntryTableViewCell.xib */; };
@@ -130,6 +131,8 @@
 		FA0AC2791A9FB2B000CCA13A /* VendorsListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VendorsListViewController.h; sourceTree = "<group>"; };
 		FA0AC27A1A9FB2B000CCA13A /* VendorsListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VendorsListViewController.m; sourceTree = "<group>"; };
 		FA0AC2A11A9FB2E300CCA13A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		FA0CABFF1AD213500009D2A8 /* ImporterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImporterViewController.h; sourceTree = "<group>"; };
+		FA0CAC001AD213500009D2A8 /* ImporterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImporterViewController.m; sourceTree = "<group>"; };
 		FA11AAF91AB7EEBC00D4C360 /* TerminalTotalsReconciliationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TerminalTotalsReconciliationViewController.h; sourceTree = "<group>"; };
 		FA11AAFA1AB7EEBC00D4C360 /* TerminalTotalsReconciliationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TerminalTotalsReconciliationViewController.m; sourceTree = "<group>"; };
 		FA11AB011AB7F83300D4C360 /* ReconciliationEntryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReconciliationEntryTableViewCell.h; sourceTree = "<group>"; };
@@ -247,11 +250,12 @@
 			isa = PBXGroup;
 			children = (
 				FAF84A641AB6032100012B06 /* Console */,
-				FAF714FF1AB34E1C00D21067 /* Reconciliation */,
+				FA0CABFE1AD213060009D2A8 /* Import */,
 				FA0AC2441A9FB2B000CCA13A /* Locations */,
 				FA0AC24B1A9FB2B000CCA13A /* MarketDays */,
 				FA0AC2521A9FB2B000CCA13A /* MarketStaff */,
 				FA0AC2591A9FB2B000CCA13A /* Menus */,
+				FAF714FF1AB34E1C00D21067 /* Reconciliation */,
 				FA0AC2601A9FB2B000CCA13A /* Redemptions */,
 				FA0AC2671A9FB2B000CCA13A /* Reports */,
 				FA0AC26A1A9FB2B000CCA13A /* Sync */,
@@ -371,6 +375,15 @@
 				FA0AC27A1A9FB2B000CCA13A /* VendorsListViewController.m */,
 			);
 			path = Vendors;
+			sourceTree = "<group>";
+		};
+		FA0CABFE1AD213060009D2A8 /* Import */ = {
+			isa = PBXGroup;
+			children = (
+				FA0CABFF1AD213500009D2A8 /* ImporterViewController.h */,
+				FA0CAC001AD213500009D2A8 /* ImporterViewController.m */,
+			);
+			path = Import;
 			sourceTree = "<group>";
 		};
 		FAB4C4BE1AB719CC00E462D1 /* NSDataAdditions */ = {
@@ -535,6 +548,7 @@
 				FAB4C4C11AB719CC00E462D1 /* NSData+CocoaDevUsersAdditions.m in Sources */,
 				FA0AC29E1A9FB2B000CCA13A /* VendorForm.m in Sources */,
 				FA0AC2981A9FB2B000CCA13A /* RedemptionListViewController.m in Sources */,
+				FA0CAC011AD213500009D2A8 /* ImporterViewController.m in Sources */,
 				FA0AC2851A9FB2B000CCA13A /* Redemptions.m in Sources */,
 				FA0AC2831A9FB2B000CCA13A /* MarketDays.m in Sources */,
 				FA0AC29B1A9FB2B000CCA13A /* TransactionForm.m in Sources */,

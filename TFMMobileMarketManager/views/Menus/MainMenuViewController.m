@@ -28,7 +28,8 @@
 			@{@"title": @"Edit locations", @"icon": @"locations", @"action": @"LocationsSegue"}
 		], @[
 			@{@"title": @"Reports", @"icon": @"reports", @"action": @"ReportsSegue"},
-			@{@"title": @"Synchronize database with a PC", @"icon": @"sync", @"action": @"SyncSegue"},
+			// @{@"title": @"Synchronize database with a PC", @"icon": @"sync", @"action": @"SyncSegue"},
+			@{@"title": @"Import from spreadsheet", @"icon": @"put", @"action": @"ImportSegue"},
 			@{@"title": @"Console", @"icon": @"console", @"action": @"ConsoleSegue"},
 			@{@"title": @"Destroy database", @"icon": @"reset", @"action": @"resetDatabasePrompt"}
 		], @[

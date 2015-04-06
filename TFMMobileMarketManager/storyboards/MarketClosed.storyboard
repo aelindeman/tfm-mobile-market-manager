@@ -47,6 +47,7 @@
                         <segue destination="tiF-zW-WZB" kind="presentation" identifier="NewMarketDayFromMainMenuSegue" modalPresentationStyle="formSheet" id="6RH-vK-sCl"/>
                         <segue destination="KTV-OH-m7B" kind="show" identifier="ReportsSegue" id="P2X-Md-yyO"/>
                         <segue destination="nO0-u0-KKk" kind="show" identifier="ConsoleSegue" id="fIc-Nt-25e"/>
+                        <segue destination="7gL-Gt-FjR" kind="show" identifier="ImportSegue" id="my8-eF-tTS"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3S6-P9-zRm" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -558,6 +559,25 @@ Stephen Davies</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lsd-k9-UOE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="327" y="-405"/>
+        </scene>
+        <!--Import-->
+        <scene sceneID="BZb-Nv-Xxp">
+            <objects>
+                <viewController id="7gL-Gt-FjR" customClass="ImporterViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="BSh-4d-F4r"/>
+                        <viewControllerLayoutGuide type="bottom" id="hJ2-tU-AxI"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="QRz-C3-57k">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Import" id="4Ua-Gj-KMS"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YR8-qG-AuL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="327" y="1676"/>
         </scene>
         <!--Reports-->
         <scene sceneID="exq-ho-4ua">
