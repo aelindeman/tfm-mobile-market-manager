@@ -27,7 +27,7 @@ static NSString *importConfirmationMessage = @"%i entr%@ will be imported."; // 
 	if (self.fileToImport)
 	{
 		// simple determine type of import based on filename
-		NSDictionary *types = @{@"marketstaff": @0, @"staff": @0, @"employee": @0, @"vendor": @1, @"business": @1, @"location": @2, @"market": @2};
+		NSDictionary *types = @{@"staff": @0, @"employee": @0, @"vendor": @1, @"business": @1, @"location": @2, @"market": @2, @"marketstaff": @0};
 		for (NSString *key in types)
 		{
 			NSRange range = [[[[self.fileToImport pathComponents] lastObject] lowercaseString] rangeOfString:[key lowercaseString]];
@@ -35,7 +35,6 @@ static NSString *importConfirmationMessage = @"%i entr%@ will be imported."; // 
 			{
 				NSLog(@"assuming import type is %i because filename “%@” contained “%@”", [[types valueForKey: key] intValue], [[self.fileToImport pathComponents] lastObject], key);
 				[self.importDestination setSelectedSegmentIndex:[[types valueForKey:key] intValue]];
-				[self.importButton setEnabled:true];
 				break;
 			}
 		}
