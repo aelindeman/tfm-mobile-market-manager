@@ -37,7 +37,7 @@
 		
 		@{FXFormFieldKey: @"date", FXFormFieldDefaultValue: [NSDate date], FXFormFieldHeader: @""},
 		@{FXFormFieldTitle: @"Start time", FXFormFieldDefaultValue: [NSDate date], FXFormFieldKey: @"start_time", FXFormFieldType: FXFormFieldTypeTime},
-		@{FXFormFieldTitle: @"End time", FXFormFieldKey: @"end_time", FXFormFieldType: FXFormFieldTypeTime},
+		@{FXFormFieldTitle: @"End time", FXFormFieldDefaultValue: [NSDate date], FXFormFieldKey: @"end_time", FXFormFieldType: FXFormFieldTypeTime},
 		
 		@{FXFormFieldKey: @"staff", FXFormFieldType: FXFormFieldTypeBitfield, FXFormFieldOptions: [self loadStaff], FXFormFieldHeader: @""},
 		@{FXFormFieldKey: @"notes", FXFormFieldType: FXFormFieldTypeLongText}
