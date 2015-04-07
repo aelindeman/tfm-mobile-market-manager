@@ -72,7 +72,7 @@ static NSString *deleteAllConfirmationMessageDetails = @"All reports on this dev
 	// make the report type stand out, the rest of the filename is not as important while on the device
 	NSMutableAttributedString *name = [[NSMutableAttributedString alloc] initWithString:[[[self.items objectAtIndex:indexPath.section] objectForKey:@"items"] objectAtIndex:indexPath.row]];
 	
-	for (NSString *i in @[@"Demographics", @"Redemptions", @"Sales"])
+	for (NSString *i in TFMM3_REPORT_TYPES_ALL)
 		[name setAttributes:@{NSFontAttributeName: [UIFont boldSystemFontOfSize:[cell.textLabel.font pointSize]], NSForegroundColorAttributeName: [UIColor purpleColor]} range:[[name string] rangeOfString:i]];
 	[cell.textLabel setAttributedText:name];
 	

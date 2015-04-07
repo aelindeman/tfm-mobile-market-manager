@@ -24,7 +24,7 @@ static NSString *reportCreatedMessage = @"The %@ report was created successfully
 	self.menuSectionHeaders = @[@"", @"Reports", @"Raw Data"];
 	self.menuOptions = @[
 		@[
-			@{@"title": @"Open an existing report", @"icon": @"export", @"action": @"SelectExistingReportSegue"},
+			@{@"title": @"Open an existing report", @"icon": @"report", @"action": @"SelectExistingReportSegue"},
 			@{@"title": @"Select market day", @"icon": @"marketday", @"action": @"SelectMarketDaySegue"}
 		], @[
 			@{@"title": @"Create sales report", @"icon": @"totals", @"action": TFMM3_REPORT_TYPE_SALES},

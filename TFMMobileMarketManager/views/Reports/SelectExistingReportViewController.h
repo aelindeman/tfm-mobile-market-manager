@@ -5,6 +5,7 @@
 
 #import <QuickLook/QuickLook.h>
 #import "AppDelegate.h"
+#import "ReportGenerator.h"
 
 @interface SelectExistingReportViewController : UITableViewController <QLPreviewControllerDataSource>
 
