@@ -4,6 +4,7 @@
 //
 
 #import "AppDelegate.h"
+#import "ImportTool.h"
 
 // needed for database prepopulation
 #import "MarketStaff.h"

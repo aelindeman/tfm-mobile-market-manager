@@ -51,6 +51,8 @@
 		FA7115B01ACA0D9700A396FC /* SelectExistingReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA7115AF1ACA0D9700A396FC /* SelectExistingReportViewController.m */; };
 		FA77453E1AC1C03D00D9B14B /* TransactionListHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA77453D1AC1C03D00D9B14B /* TransactionListHeaderView.xib */; };
 		FA7745401AC1C04300D9B14B /* RedemptionListHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA77453F1AC1C04300D9B14B /* RedemptionListHeaderView.xib */; };
+		FA8FAA8D1AD36E60001CA886 /* ImportTool.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8FAA8C1AD36E60001CA886 /* ImportTool.m */; };
+		FA8FAA931AD36F9F001CA886 /* CHCSVParser.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8FAA921AD36F9F001CA886 /* CHCSVParser.m */; };
 		FAB118F11A9FB72B0012ED5D /* tfm-m3.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FAB118EF1A9FB72B0012ED5D /* tfm-m3.xcdatamodeld */; };
 		FAF7150E1AB35D0E00D21067 /* TokenTotalsReconciliationForm.m in Sources */ = {isa = PBXBuildFile; fileRef = FAF7150D1AB35D0E00D21067 /* TokenTotalsReconciliationForm.m */; };
 		FAF715141AB35E0100D21067 /* TokenTotalsReconciliationFormViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FAF715131AB35E0100D21067 /* TokenTotalsReconciliationFormViewController.m */; };
@@ -142,6 +144,10 @@
 		FA7115AF1ACA0D9700A396FC /* SelectExistingReportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectExistingReportViewController.m; sourceTree = "<group>"; };
 		FA77453D1AC1C03D00D9B14B /* TransactionListHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TransactionListHeaderView.xib; sourceTree = "<group>"; };
 		FA77453F1AC1C04300D9B14B /* RedemptionListHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RedemptionListHeaderView.xib; sourceTree = "<group>"; };
+		FA8FAA8B1AD36E60001CA886 /* ImportTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImportTool.h; sourceTree = "<group>"; };
+		FA8FAA8C1AD36E60001CA886 /* ImportTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImportTool.m; sourceTree = "<group>"; };
+		FA8FAA911AD36F9F001CA886 /* CHCSVParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHCSVParser.h; sourceTree = "<group>"; };
+		FA8FAA921AD36F9F001CA886 /* CHCSVParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHCSVParser.m; sourceTree = "<group>"; };
 		FAB118F01A9FB72B0012ED5D /* tfm-m3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "tfm-m3.xcdatamodel"; sourceTree = "<group>"; };
 		FAF7150C1AB35D0E00D21067 /* TokenTotalsReconciliationForm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TokenTotalsReconciliationForm.h; sourceTree = "<group>"; };
 		FAF7150D1AB35D0E00D21067 /* TokenTotalsReconciliationForm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TokenTotalsReconciliationForm.m; sourceTree = "<group>"; };
@@ -149,8 +155,8 @@
 		FAF715131AB35E0100D21067 /* TokenTotalsReconciliationFormViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TokenTotalsReconciliationFormViewController.m; sourceTree = "<group>"; };
 		FAF84A681AB6046E00012B06 /* ConsoleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConsoleViewController.h; sourceTree = "<group>"; };
 		FAF84A691AB6046E00012B06 /* ConsoleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConsoleViewController.m; sourceTree = "<group>"; };
-		FAFE4A6D1AC85A7D009935EC /* ReportGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ReportGenerator.h; path = TFMMobileMarketManager/ReportGenerator/ReportGenerator.h; sourceTree = SOURCE_ROOT; };
-		FAFE4A6E1AC85A7D009935EC /* ReportGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ReportGenerator.m; path = TFMMobileMarketManager/ReportGenerator/ReportGenerator.m; sourceTree = SOURCE_ROOT; };
+		FAFE4A6D1AC85A7D009935EC /* ReportGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReportGenerator.h; sourceTree = "<group>"; };
+		FAFE4A6E1AC85A7D009935EC /* ReportGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReportGenerator.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -186,9 +192,12 @@
 				FA0AC2271A9FB2B000CCA13A /* AppDelegate.h */,
 				FA0AC2281A9FB2B000CCA13A /* AppDelegate.m */,
 				FA0AC2A11A9FB2E300CCA13A /* Assets.xcassets */,
+				FA8FAA901AD36F9F001CA886 /* CHCSVParser */,
 				FA0AC2291A9FB2B000CCA13A /* FXForms */,
+				FA8FAA8A1AD36E24001CA886 /* ImportTool */,
 				FA0AC22D1A9FB2B000CCA13A /* Info.plist */,
 				FA0AC22E1A9FB2B000CCA13A /* main.m */,
+				FA8FAA871AD36C28001CA886 /* ReportGenerator */,
 				FA0AC22F1A9FB2B000CCA13A /* storyboards */,
 				FAB118EF1A9FB72B0012ED5D /* tfm-m3.xcdatamodeld */,
 				FA0AC2321A9FB2B000CCA13A /* types */,
@@ -325,11 +334,12 @@
 		FA0AC2671A9FB2B000CCA13A /* Reports */ = {
 			isa = PBXGroup;
 			children = (
-				FAFE4A6D1AC85A7D009935EC /* ReportGenerator.h */,
-				FAFE4A6E1AC85A7D009935EC /* ReportGenerator.m */,
 				FA0AC2681A9FB2B000CCA13A /* ReportsMenuViewController.h */,
 				FA0AC2691A9FB2B000CCA13A /* ReportsMenuViewController.m */,
-				FAFA37801ACAE99C002902FB /* Select */,
+				FA7115AE1ACA0D9700A396FC /* SelectExistingReportViewController.h */,
+				FA7115AF1ACA0D9700A396FC /* SelectExistingReportViewController.m */,
+				FA7115AB1AC9E2FF00A396FC /* SelectMarketDayViewController.h */,
+				FA7115AC1AC9E2FF00A396FC /* SelectMarketDayViewController.m */,
 			);
 			path = Reports;
 			sourceTree = "<group>";
@@ -379,6 +389,34 @@
 			path = Import;
 			sourceTree = "<group>";
 		};
+		FA8FAA871AD36C28001CA886 /* ReportGenerator */ = {
+			isa = PBXGroup;
+			children = (
+				FAFE4A6D1AC85A7D009935EC /* ReportGenerator.h */,
+				FAFE4A6E1AC85A7D009935EC /* ReportGenerator.m */,
+			);
+			name = ReportGenerator;
+			path = TFMMobileMarketManager/ReportGenerator;
+			sourceTree = SOURCE_ROOT;
+		};
+		FA8FAA8A1AD36E24001CA886 /* ImportTool */ = {
+			isa = PBXGroup;
+			children = (
+				FA8FAA8B1AD36E60001CA886 /* ImportTool.h */,
+				FA8FAA8C1AD36E60001CA886 /* ImportTool.m */,
+			);
+			path = ImportTool;
+			sourceTree = "<group>";
+		};
+		FA8FAA901AD36F9F001CA886 /* CHCSVParser */ = {
+			isa = PBXGroup;
+			children = (
+				FA8FAA911AD36F9F001CA886 /* CHCSVParser.h */,
+				FA8FAA921AD36F9F001CA886 /* CHCSVParser.m */,
+			);
+			path = CHCSVParser;
+			sourceTree = "<group>";
+		};
 		FAF714FF1AB34E1C00D21067 /* Reconciliation */ = {
 			isa = PBXGroup;
 			children = (
@@ -398,17 +436,6 @@
 				FAF84A691AB6046E00012B06 /* ConsoleViewController.m */,
 			);
 			path = Console;
-			sourceTree = "<group>";
-		};
-		FAFA37801ACAE99C002902FB /* Select */ = {
-			isa = PBXGroup;
-			children = (
-				FA7115AE1ACA0D9700A396FC /* SelectExistingReportViewController.h */,
-				FA7115AF1ACA0D9700A396FC /* SelectExistingReportViewController.m */,
-				FA7115AB1AC9E2FF00A396FC /* SelectMarketDayViewController.h */,
-				FA7115AC1AC9E2FF00A396FC /* SelectMarketDayViewController.m */,
-			);
-			name = Select;
 			sourceTree = "<group>";
 		};
 		FAFE4A711AC88FB2009935EC /* TokenTotals */ = {
@@ -531,6 +558,7 @@
 				FA0AC29E1A9FB2B000CCA13A /* VendorForm.m in Sources */,
 				FA0AC2981A9FB2B000CCA13A /* RedemptionListViewController.m in Sources */,
 				FA0CAC011AD213500009D2A8 /* ImporterViewController.m in Sources */,
+				FA8FAA931AD36F9F001CA886 /* CHCSVParser.m in Sources */,
 				FA0AC2851A9FB2B000CCA13A /* Redemptions.m in Sources */,
 				FA0AC2831A9FB2B000CCA13A /* MarketDays.m in Sources */,
 				FA0AC29B1A9FB2B000CCA13A /* TransactionForm.m in Sources */,
@@ -555,6 +583,7 @@
 				FA0AC2911A9FB2B000CCA13A /* MarketStaffFormViewController.m in Sources */,
 				FA0AC2871A9FB2B000CCA13A /* TokenTotals.m in Sources */,
 				FA0AC27F1A9FB2B000CCA13A /* main.m in Sources */,
+				FA8FAA8D1AD36E60001CA886 /* ImportTool.m in Sources */,
 				FAF7150E1AB35D0E00D21067 /* TokenTotalsReconciliationForm.m in Sources */,
 				FA0AC2951A9FB2B000CCA13A /* MarketOpenMenuViewController.m in Sources */,
 				FA0AC2841A9FB2B000CCA13A /* MarketStaff.m in Sources */,
