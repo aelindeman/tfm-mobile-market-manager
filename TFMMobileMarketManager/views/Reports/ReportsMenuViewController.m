@@ -168,6 +168,9 @@ static NSString *reportCreatedMessage = @"The %@ report was created successfully
 	if ([type isEqualToString:TFMM3_REPORT_TYPE_SALES]) path = [rg generateSalesReport];
 	else if ([type isEqualToString:TFMM3_REPORT_TYPE_REDEMPTIONS]) path = [rg generateRedemptionsReport];
 	else if ([type isEqualToString:TFMM3_REPORT_TYPE_DEMOGRAPHICS]) path = [rg generateDemographicsReport];
+	else if ([type isEqualToString:TFMM3_REPORT_TYPE_VENDORS]) path = [rg generateVendorsReport];
+	else if ([type isEqualToString:TFMM3_REPORT_TYPE_STAFF]) path = [rg generateStaffReport];
+	else if ([type isEqualToString:TFMM3_REPORT_TYPE_LOCATIONS]) path = [rg generateLocationsReport];
 	else
 	{
 		NSLog (@"no action set for “%@”", type);

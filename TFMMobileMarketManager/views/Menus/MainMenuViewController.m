@@ -26,9 +26,9 @@
 			@{@"title": @"Edit staff", @"icon": @"staff", @"action": @"MarketStaffSegue"},
 			@{@"title": @"Edit locations", @"icon": @"locations", @"action": @"LocationsSegue"}
 		], @[
-			@{@"title": @"Reports", @"icon": @"reports", @"action": @"ReportsSegue"},
+			@{@"title": @"Create and view reports", @"icon": @"reports", @"action": @"ReportsSegue"},
 			// @{@"title": @"Synchronize database with a PC", @"icon": @"sync", @"action": @"SyncSegue"},
-			@{@"title": @"Import from spreadsheet", @"icon": @"put", @"action": @"ImportSegue"},
+			@{@"title": @"Import data from spreadsheet", @"icon": @"put", @"action": @"ImportSegue"},
 			@{@"title": @"Console", @"icon": @"console", @"action": @"ConsoleSegue"},
 			@{@"title": @"Destroy database", @"icon": @"reset", @"action": @"resetDatabasePrompt"}
 		], @[

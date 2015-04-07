@@ -9,6 +9,7 @@
 
 static NSString *reportsSubfolder = @"Reports"; // relative to application's documents directory
 static NSString *marketDaySubfolder = @"%@"; // relative to reports subfolder, replace token with market day name
+static NSString *exportsSubfolder = @"Raw Data"; // relative to reports subfolder, contains reports that don't need market day to create
 
 // replace first token with market day name, second token with report type, third token with uuid
 static NSString *reportFormat = @"%@ %@ %@.csv"; // relative to market day subfolder
@@ -77,21 +78,25 @@ static NSString *locationsExportName = TFMM3_REPORT_TYPE_LOCATIONS;
 // creates the reports path
 - (NSString *)getReportsPathForReportType:(NSString*)reportName
 {
-	// need a consistent way of returning the market day name by its name then the date. don't rely on -description
-	NSDateFormatter *mdDateFormat = [[NSDateFormatter alloc] init];
-	[mdDateFormat setDateFormat:@"yyyy-MM-dd"];
-	NSString *md = [NSString stringWithFormat:@"%@ %@", [mdDateFormat stringFromDate:[self.selectedMarketDay date]], [(Locations *)[self.selectedMarketDay location] name]];
-
+	NSString *path = [NSString pathWithComponents:@[[TFMM3_APP_DELEGATE.applicationDocumentsDirectory path], reportsSubfolder]];
+	
 	// create a report generation uuid
 	CFUUIDRef uuid = CFUUIDCreate(nil);
 	NSString *uuidString = [(NSString *)CFBridgingRelease(CFUUIDCreateString(nil, uuid)) substringToIndex:8]; // only use first 8 chars
 	CFRelease(uuid);
 	
-	// return path string
-	return [NSString pathWithComponents:@[[TFMM3_APP_DELEGATE.applicationDocumentsDirectory path],
-										  reportsSubfolder,
-										  [NSString stringWithFormat:marketDaySubfolder, md],
-										  [NSString stringWithFormat:reportFormat, md, reportName, uuidString]]];
+	if ([TFMM3_REPORT_TYPES_MARKETDAY containsObject:reportName])
+	{
+		// need a consistent way of returning the market day name by its name then the date. don't rely on -description
+		NSDateFormatter *mdDateFormat = [[NSDateFormatter alloc] init];
+		[mdDateFormat setDateFormat:@"yyyy-MM-dd"];
+		NSString *md = [NSString stringWithFormat:@"%@ %@", [mdDateFormat stringFromDate:[self.selectedMarketDay date]], [(Locations *)[self.selectedMarketDay location] name]];
+		
+		// return path string
+		return [NSString pathWithComponents:@[path, [NSString stringWithFormat:marketDaySubfolder, md], [NSString stringWithFormat:reportFormat, md, reportName, uuidString]]];
+	}
+	
+	else return [NSString pathWithComponents:@[path, exportsSubfolder, [NSString stringWithFormat:reportFormat, [[UIDevice currentDevice] name], reportName, uuidString]]];
 }
 
 // creates demographics report at default path; returns path
@@ -305,6 +310,99 @@ static NSString *locationsExportName = TFMM3_REPORT_TYPE_LOCATIONS;
 	}
 	
 	NSLog(@"prepped sales report: {\n%@\n}", writeString);
+	return [self writeReportToFile:path contents:writeString];
+}
+
+// vendors
+- (NSString *)generateVendorsReport
+{
+	NSString *path = [self getReportsPathForReportType:vendorsExportName];
+	return [self generateVendorsReportAtPath:path] ? path : false;
+}
+
+- (bool)generateVendorsReportAtPath:(NSString *)path
+{
+	NSString *writeString = [[NSString alloc] init];
+	NSString *header = @"BusinessName,ProductTypes,OperatorName,Address,Phone,Email,AcceptsSNAP,AcceptsIncentives,StateTaxID,FederalTaxID\n";
+	writeString = [writeString stringByAppendingString:header];
+	
+	NSError *error;
+	NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"Vendors"];
+	[request setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"businessName" ascending:false]]];
+	NSArray *query = [TFMM3_APP_DELEGATE.managedObjectContext executeFetchRequest:request error:&error];
+	
+	for (Vendors *v in query)
+	{
+		writeString = [writeString stringByAppendingString:[NSString stringWithFormat:@"\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",%i,%i,\"%@\",\"%@\"\n", v.businessName, v.productTypes, v.name, v.address, v.phone, v.email, v.acceptsSNAP, v.acceptsIncentives, v.stateTaxID, v.federalTaxID]];
+	}
+	
+	// TODO: strip null values before they are inserted
+	// strip null values
+	writeString = [writeString stringByReplacingOccurrencesOfString:@"\"(null)\"" withString:@""];
+	
+	NSLog(@"prepped vendors export: {\n%@\n}", writeString);
+	return [self writeReportToFile:path contents:writeString];
+}
+
+// staff
+- (NSString *)generateStaffReport
+{
+	NSString *path = [self getReportsPathForReportType:staffExportName];
+	return [self generateStaffReportAtPath:path] ? path : false;
+}
+
+- (bool)generateStaffReportAtPath:(NSString *)path
+{
+	NSString *writeString = [[NSString alloc] init];
+	NSString *header = @"Name,Phone,Email,Position\n";
+	writeString = [writeString stringByAppendingString:header];
+	
+	NSError *error;
+	NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"MarketStaff"];
+	[request setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"position" ascending:false], [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:true]]];
+	NSArray *query = [TFMM3_APP_DELEGATE.managedObjectContext executeFetchRequest:request error:&error];
+	
+	for (MarketStaff *s in query)
+	{
+		writeString = [writeString stringByAppendingString:[NSString stringWithFormat:@"\"%@\",\"%@\",\"%@\",%i\n", s.name, s.phone, s.email, s.position]];
+	}
+	
+	// TODO: strip null values before they are inserted
+	// strip null values
+	writeString = [writeString stringByReplacingOccurrencesOfString:@"\"(null)\"" withString:@""];
+	
+	NSLog(@"prepped staff export: {\n%@\n}", writeString);
+	return [self writeReportToFile:path contents:writeString];
+}
+
+// locations
+- (NSString *)generateLocationsReport
+{
+	NSString *path = [self getReportsPathForReportType:locationsExportName];
+	return [self generateLocationsReportAtPath:path] ? path : false;
+}
+
+- (bool)generateLocationsReportAtPath:(NSString *)path
+{
+	NSString *writeString = [[NSString alloc] init];
+	NSString *header = @"Name,Address\n";
+	writeString = [writeString stringByAppendingString:header];
+	
+	NSError *error;
+	NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"Locations"];
+	[request setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:true]]];
+	NSArray *query = [TFMM3_APP_DELEGATE.managedObjectContext executeFetchRequest:request error:&error];
+	
+	for (Locations *l in query)
+	{
+		writeString = [writeString stringByAppendingString:[NSString stringWithFormat:@"\"%@\",\"%@\"\n", l.name, l.address]];
+	}
+	
+	// TODO: strip null values before they are inserted
+	// strip null values
+	writeString = [writeString stringByReplacingOccurrencesOfString:@"\"(null)\"" withString:@""];
+	
+	NSLog(@"prepped locations export: {\n%@\n}", writeString);
 	return [self writeReportToFile:path contents:writeString];
 }
 

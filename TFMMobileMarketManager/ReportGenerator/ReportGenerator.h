@@ -38,6 +38,15 @@
 - (NSString *)generateSalesReport;
 - (bool)generateSalesReportAtPath:(NSString *)path;
 
+- (NSString *)generateVendorsReport;
+- (bool)generateVendorsReportAtPath:(NSString *)path;
+
+- (NSString *)generateStaffReport;
+- (bool)generateStaffReportAtPath:(NSString *)path;
+
+- (NSString *)generateLocationsReport;
+- (bool)generateLocationsReportAtPath:(NSString *)path;
+
 @property (nonatomic) NSManagedObjectID *selectedMarketDayID;
 @property (nonatomic) MarketDays *selectedMarketDay;
 
