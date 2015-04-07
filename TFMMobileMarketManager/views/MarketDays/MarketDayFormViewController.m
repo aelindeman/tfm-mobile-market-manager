@@ -29,7 +29,7 @@
 	if ([self editMode])
 	{
 		// fetch the object we're supposed to edit
-		[self setMarketday:(MarketDays *)[TFM_DELEGATE.managedObjectContext objectWithID:[self marketdayID]]];
+		[self setMarketday:(MarketDays *)[TFMM3_APP_DELEGATE.managedObjectContext objectWithID:[self marketdayID]]];
 		[self setTitle:@"Edit Market Day"];
 		
 		// populate form with passed data if in edit mode
@@ -54,7 +54,7 @@
 	UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(submit:)];
 	
 	self.navigationItem.leftBarButtonItem = closeButton;
-	self.navigationItem.rightBarButtonItems = [self editMode] ? [TFM_DELEGATE activeMarketDay] ? @[saveButton] : @[openButton, saveButton] : @[openButton];
+	self.navigationItem.rightBarButtonItems = [self editMode] ? [TFMM3_APP_DELEGATE activeMarketDay] ? @[saveButton] : @[openButton, saveButton] : @[openButton];
 }
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -140,7 +140,7 @@
 		}
 		else
 		{
-			MarketDays *new = [NSEntityDescription insertNewObjectForEntityForName:@"MarketDays" inManagedObjectContext:TFM_DELEGATE.managedObjectContext];
+			MarketDays *new = [NSEntityDescription insertNewObjectForEntityForName:@"MarketDays" inManagedObjectContext:TFMM3_APP_DELEGATE.managedObjectContext];
 			
 			new.location = form.location;
 			
@@ -153,8 +153,8 @@
 			new.staff = [NSSet setWithArray:form.staff];
 			new.notes = form.notes;
 			
-			new.terminalTotals = [NSEntityDescription insertNewObjectForEntityForName:@"TerminalTotals" inManagedObjectContext:TFM_DELEGATE.managedObjectContext];
-			new.tokenTotals = [NSEntityDescription insertNewObjectForEntityForName:@"TokenTotals" inManagedObjectContext:TFM_DELEGATE.managedObjectContext];
+			new.terminalTotals = [NSEntityDescription insertNewObjectForEntityForName:@"TerminalTotals" inManagedObjectContext:TFMM3_APP_DELEGATE.managedObjectContext];
+			new.tokenTotals = [NSEntityDescription insertNewObjectForEntityForName:@"TokenTotals" inManagedObjectContext:TFMM3_APP_DELEGATE.managedObjectContext];
 			
 			[self setMarketday:new];
 			[self setMarketdayID:[new objectID]];
@@ -162,7 +162,7 @@
 		
 		// ...and save, hopefully
 		NSError *error;
-		if (![TFM_DELEGATE.managedObjectContext save:&error])
+		if (![TFMM3_APP_DELEGATE.managedObjectContext save:&error])
 		{
 			NSLog(@"couldn't save: %@", [error localizedDescription]);
 			[[[UIAlertView alloc] initWithTitle:@"Error saving:" message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Dismiss", nil] show];
@@ -184,7 +184,7 @@
 	{
 		NSAssert([self marketday] != nil, @"Don't know which market day to set as active");
 		[self dismissViewControllerAnimated:false completion:^{
-			[TFM_DELEGATE setActiveMarketDay:self.marketday];
+			[TFMM3_APP_DELEGATE setActiveMarketDay:self.marketday];
 		}];
 	}
 }

@@ -24,7 +24,7 @@ static NSString *closeMarketDayUnreconciledWarningMessage = @"Terminal totals ha
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
-	NSAssert([TFM_DELEGATE activeMarketDay] != nil, @"No active market day set!");
+	NSAssert([TFMM3_APP_DELEGATE activeMarketDay] != nil, @"No active market day set!");
 	
 	// populate the menu
 	self.menuOptions = @[
@@ -140,58 +140,58 @@ static NSString *closeMarketDayUnreconciledWarningMessage = @"Terminal totals ha
 - (void)updateInfoLabels
 {
 	// also update the prompt text
-	[self.navigationItem setPrompt:[TFM_DELEGATE.activeMarketDay description]];
+	[self.navigationItem setPrompt:[TFMM3_APP_DELEGATE.activeMarketDay description]];
 	
 	// TODO: this feels really lazy having only one NSError
 	NSError *error;
 	
 	// vendors header
 	NSFetchRequest *vendors = [NSFetchRequest fetchRequestWithEntityName:@"Vendors"];
-	[vendors setPredicate:[NSPredicate predicateWithFormat:@"%@ in marketdays", [TFM_DELEGATE activeMarketDay]]];
-	unsigned int v = [[TFM_DELEGATE.managedObjectContext executeFetchRequest:vendors error:&error] count];
+	[vendors setPredicate:[NSPredicate predicateWithFormat:@"%@ in marketdays", [TFMM3_APP_DELEGATE activeMarketDay]]];
+	unsigned int v = [[TFMM3_APP_DELEGATE.managedObjectContext executeFetchRequest:vendors error:&error] count];
 	[self.vendorHeaderLabel setText:[NSString stringWithFormat:@"%i vendor%@", v, (v == 1) ? @"" : @"s"]];
 	
 	// vendors detail
-	[vendors setPredicate:[NSPredicate predicateWithFormat:@"(%@ in marketdays) and (acceptsSNAP = true)", [TFM_DELEGATE activeMarketDay]]];
-	unsigned int v_snap = [[TFM_DELEGATE.managedObjectContext executeFetchRequest:vendors error:&error] count];
-	[vendors setPredicate:[NSPredicate predicateWithFormat:@"(%@ in marketdays) and (acceptsIncentives = true)", [TFM_DELEGATE activeMarketDay]]];
+	[vendors setPredicate:[NSPredicate predicateWithFormat:@"(%@ in marketdays) and (acceptsSNAP = true)", [TFMM3_APP_DELEGATE activeMarketDay]]];
+	unsigned int v_snap = [[TFMM3_APP_DELEGATE.managedObjectContext executeFetchRequest:vendors error:&error] count];
+	[vendors setPredicate:[NSPredicate predicateWithFormat:@"(%@ in marketdays) and (acceptsIncentives = true)", [TFMM3_APP_DELEGATE activeMarketDay]]];
 	
-	unsigned int v_inc = [[TFM_DELEGATE.managedObjectContext executeFetchRequest:vendors error:&error] count];
+	unsigned int v_inc = [[TFMM3_APP_DELEGATE.managedObjectContext executeFetchRequest:vendors error:&error] count];
 	[self.vendorDetailLabel setText:[NSString stringWithFormat:@"%i accept SNAP\n%i accept incentives", v_snap, v_inc]];
 	
 	// transactions header
 	NSFetchRequest *transactions = [NSFetchRequest fetchRequestWithEntityName:@"Transactions"];
-	[transactions setPredicate:[NSPredicate predicateWithFormat:@"marketday = %@", [TFM_DELEGATE activeMarketDay]]];
+	[transactions setPredicate:[NSPredicate predicateWithFormat:@"marketday = %@", [TFMM3_APP_DELEGATE activeMarketDay]]];
 	
-	unsigned int t = [[TFM_DELEGATE.managedObjectContext executeFetchRequest:transactions error:&error] count];
+	unsigned int t = [[TFMM3_APP_DELEGATE.managedObjectContext executeFetchRequest:transactions error:&error] count];
 	[self.transactionHeaderLabel setText:[NSString stringWithFormat:@"%i transaction%@", t, (t == 1) ? @"" : @"s"]];
 	
 	// transactions detail
-	[transactions setPredicate:[NSPredicate predicateWithFormat:@"((marketday = %@) and (markedInvalid = false)) and (snap_used = true)", [TFM_DELEGATE activeMarketDay]]];
-	unsigned int t_snap = [[TFM_DELEGATE.managedObjectContext executeFetchRequest:transactions error:&error] count];
+	[transactions setPredicate:[NSPredicate predicateWithFormat:@"((marketday = %@) and (markedInvalid = false)) and (snap_used = true)", [TFMM3_APP_DELEGATE activeMarketDay]]];
+	unsigned int t_snap = [[TFMM3_APP_DELEGATE.managedObjectContext executeFetchRequest:transactions error:&error] count];
 	
-	[transactions setPredicate:[NSPredicate predicateWithFormat:@"((marketday = %@) and (markedInvalid = false)) and (credit_used = true)", [TFM_DELEGATE activeMarketDay]]];
-	unsigned int t_credit = [[TFM_DELEGATE.managedObjectContext executeFetchRequest:transactions error:&error] count];
+	[transactions setPredicate:[NSPredicate predicateWithFormat:@"((marketday = %@) and (markedInvalid = false)) and (credit_used = true)", [TFMM3_APP_DELEGATE activeMarketDay]]];
+	unsigned int t_credit = [[TFMM3_APP_DELEGATE.managedObjectContext executeFetchRequest:transactions error:&error] count];
 	
-	[transactions setPredicate:[NSPredicate predicateWithFormat:@"(marketday = %@) and (markedInvalid = false)", [TFM_DELEGATE activeMarketDay]]];
+	[transactions setPredicate:[NSPredicate predicateWithFormat:@"(marketday = %@) and (markedInvalid = false)", [TFMM3_APP_DELEGATE activeMarketDay]]];
 	unsigned int t_total = 0;
-	for (Transactions *tx in [TFM_DELEGATE.managedObjectContext executeFetchRequest:transactions error:&error])
+	for (Transactions *tx in [TFMM3_APP_DELEGATE.managedObjectContext executeFetchRequest:transactions error:&error])
 		t_total += (tx.credit_used ? tx.credit_total : tx.snap_used ? tx.snap_total : 0);
 	
 	[self.transactionDetailLabel setText:[NSString stringWithFormat:@"%i SNAP\n%i credit\n$%i total", t_snap, t_credit, t_total]];
 
 	// redemptions header
 	NSFetchRequest *redemptions = [NSFetchRequest fetchRequestWithEntityName:@"Redemptions"];
-	[redemptions setPredicate:[NSPredicate predicateWithFormat:@"marketday = %@", [TFM_DELEGATE activeMarketDay]]];
-	unsigned int r = [[TFM_DELEGATE.managedObjectContext executeFetchRequest:redemptions error:&error] count];
+	[redemptions setPredicate:[NSPredicate predicateWithFormat:@"marketday = %@", [TFMM3_APP_DELEGATE activeMarketDay]]];
+	unsigned int r = [[TFMM3_APP_DELEGATE.managedObjectContext executeFetchRequest:redemptions error:&error] count];
 	[self.redemptionHeaderLabel setText:[NSString stringWithFormat:@"%i redemption%@", r, (r == 1) ? @"" : @"s"]];
 	
 	// redemptions detail
-	[redemptions setPredicate:[NSPredicate predicateWithFormat:@"((marketday = %@) and (markedInvalid = false)) and (check_number > 0)", [TFM_DELEGATE activeMarketDay]]];
-	unsigned int r_paid = [[TFM_DELEGATE.managedObjectContext executeFetchRequest:redemptions error:&error] count];
+	[redemptions setPredicate:[NSPredicate predicateWithFormat:@"((marketday = %@) and (markedInvalid = false)) and (check_number > 0)", [TFMM3_APP_DELEGATE activeMarketDay]]];
+	unsigned int r_paid = [[TFMM3_APP_DELEGATE.managedObjectContext executeFetchRequest:redemptions error:&error] count];
 
 	unsigned int r_total = 0;
-	for (Redemptions *rd in [TFM_DELEGATE.managedObjectContext executeFetchRequest:redemptions error:&error])
+	for (Redemptions *rd in [TFMM3_APP_DELEGATE.managedObjectContext executeFetchRequest:redemptions error:&error])
 		r_total += rd.total;
 	
 	[self.redemptionDetailLabel setText:[NSString stringWithFormat:@"%i paid\n$%i total", r_paid, r_total]];
@@ -228,8 +228,8 @@ static NSString *closeMarketDayUnreconciledWarningMessage = @"Terminal totals ha
 {
 	// what the fuck
 	[self dismissViewControllerAnimated:true completion:^{
-		[TFM_DELEGATE setActiveMarketDay:false];
-		[TFM_DELEGATE.managedObjectContext processPendingChanges];
+		[TFMM3_APP_DELEGATE setActiveMarketDay:false];
+		[TFMM3_APP_DELEGATE.managedObjectContext processPendingChanges];
 		NSLog(@"market day closed");
 	}];
 }
@@ -245,21 +245,21 @@ static NSString *closeMarketDayUnreconciledWarningMessage = @"Terminal totals ha
 	{
 		MarketDayFormViewController *mdfvc = [[[segue destinationViewController] viewControllers] firstObject];
 		[mdfvc setDelegate:self];
-		[mdfvc setMarketdayID:[TFM_DELEGATE.activeMarketDay objectID]];
+		[mdfvc setMarketdayID:[TFMM3_APP_DELEGATE.activeMarketDay objectID]];
 	}
 	
 	if ([segue.identifier isEqualToString:@"TerminalTotalsReconciliationFormSegue"])
 	{
 		TerminalTotalsReconciliationViewController *term = [[[segue destinationViewController] viewControllers] firstObject];
 		[term setDelegate:self];
-		[term setEditObjectID:[[TFM_DELEGATE.activeMarketDay terminalTotals] objectID]];
+		[term setEditObjectID:[[TFMM3_APP_DELEGATE.activeMarketDay terminalTotals] objectID]];
 	}
 	
 	if ([segue.identifier isEqualToString:@"TokenTotalsReconciliationFormSegue"])
 	{
 		TokenTotalsReconciliationFormViewController *tok = [[[segue destinationViewController] viewControllers] firstObject];
 		// [tok setDelegate:self];
-		[tok setEditObjectID:[[TFM_DELEGATE.activeMarketDay tokenTotals] objectID]];
+		[tok setEditObjectID:[[TFMM3_APP_DELEGATE.activeMarketDay tokenTotals] objectID]];
 	}
 	
 	if ([segue.identifier isEqualToString:@"AddRedemptionSegue"])

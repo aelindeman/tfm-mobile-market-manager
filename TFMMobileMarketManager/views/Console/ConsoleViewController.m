@@ -46,7 +46,7 @@
 		if ([[self.sortField text] length] > 0)
 			[request setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:[self.sortField text] ascending:([self.sortOrderPicker selectedSegmentIndex] == 0)]]];
 
-		NSArray *result = [TFM_DELEGATE.managedObjectContext executeFetchRequest:request error:&error];
+		NSArray *result = [TFMM3_APP_DELEGATE.managedObjectContext executeFetchRequest:request error:&error];
 		if (error) [NSException raise:@"Core Data error" format:@"%@", error];
 		else [self.output setText:[NSString stringWithFormat:@"Request returned %i rows:\n\n%@", [result count], result]];
 	}

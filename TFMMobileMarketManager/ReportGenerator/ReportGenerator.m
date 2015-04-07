@@ -24,7 +24,7 @@ static NSString *locationsExportName = TFMM3_REPORT_TYPE_LOCATIONS;
 // allow init using delegate's active market day
 - (id)init
 {
-	return [self initWithMarketDay:[TFM_DELEGATE activeMarketDay]];
+	return [self initWithMarketDay:[TFMM3_APP_DELEGATE activeMarketDay]];
 }
 
 // market day needs to be specified before generating a report
@@ -88,7 +88,7 @@ static NSString *locationsExportName = TFMM3_REPORT_TYPE_LOCATIONS;
 	CFRelease(uuid);
 	
 	// return path string
-	return [NSString pathWithComponents:@[[TFM_DELEGATE.applicationDocumentsDirectory path],
+	return [NSString pathWithComponents:@[[TFMM3_APP_DELEGATE.applicationDocumentsDirectory path],
 										  reportsSubfolder,
 										  [NSString stringWithFormat:marketDaySubfolder, md],
 										  [NSString stringWithFormat:reportFormat, md, reportName, uuidString]]];
@@ -118,7 +118,7 @@ static NSString *locationsExportName = TFMM3_REPORT_TYPE_LOCATIONS;
 	[request setPredicate:[NSPredicate predicateWithFormat:@"(marketday = %@) and (markedInvalid = false)", [self selectedMarketDay]]];
 
 	NSError *error;
-	NSArray *query = [TFM_DELEGATE.managedObjectContext executeFetchRequest:request error:&error];
+	NSArray *query = [TFMM3_APP_DELEGATE.managedObjectContext executeFetchRequest:request error:&error];
 	NSAssert1(!error, @"fetch request failed: %@", error);
 
 	NSDictionary *totalsTemplate = @{@"EthnicityWhite":     @0,
@@ -191,7 +191,7 @@ static NSString *locationsExportName = TFMM3_REPORT_TYPE_LOCATIONS;
 	[request setPredicate:[NSPredicate predicateWithFormat:@"(marketday = %@) and (markedInvalid = false)", [self selectedMarketDay]]];
 
 	NSError *error;
-	NSArray *query = [TFM_DELEGATE.managedObjectContext executeFetchRequest:request error:&error];
+	NSArray *query = [TFMM3_APP_DELEGATE.managedObjectContext executeFetchRequest:request error:&error];
 	NSAssert1(!error, @"fetch request failed: %@", error);
 
 	NSDictionary *totals = [@{@"CreditTokenCount": @0,
@@ -242,7 +242,7 @@ static NSString *locationsExportName = TFMM3_REPORT_TYPE_LOCATIONS;
 	[request setPredicate:[NSPredicate predicateWithFormat:@"(marketday = %@) and (markedInvalid = false)", [self selectedMarketDay]]];
 	
 	NSError *error;
-	NSArray *query = [TFM_DELEGATE.managedObjectContext executeFetchRequest:request error:&error];
+	NSArray *query = [TFMM3_APP_DELEGATE.managedObjectContext executeFetchRequest:request error:&error];
 	NSAssert1(!error, @"fetch request failed: %@", error);
 	
 	NSDictionary *totalsTemplate = @{@"TransactionCount": @0,

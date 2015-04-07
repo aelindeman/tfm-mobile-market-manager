@@ -125,15 +125,15 @@
 - (void)resetDatabase
 {
 	// reset the database
-	NSPersistentStore *store = [TFM_DELEGATE.persistentStoreCoordinator.persistentStores lastObject];
+	NSPersistentStore *store = [TFMM3_APP_DELEGATE.persistentStoreCoordinator.persistentStores lastObject];
 	
 	NSError *error;
-	[TFM_DELEGATE.persistentStoreCoordinator removePersistentStore:store error:&error];
+	[TFMM3_APP_DELEGATE.persistentStoreCoordinator removePersistentStore:store error:&error];
 	[[NSFileManager defaultManager] removeItemAtURL:store.URL error:&error];
 	
 	if (error) NSLog(@"database couldn’t be destroyed: %@", error);
 	NSLog(@"destroyed the database, starting fresh...");
-	if (![TFM_DELEGATE.persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:store.URL options:nil error:&error])
+	if (![TFMM3_APP_DELEGATE.persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:store.URL options:nil error:&error])
 		NSLog(@"couldn’t recreate database: %@", error);
 	
 	[[[UIAlertView alloc] initWithTitle:@"Database cleared." message:nil delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Dismiss", nil] show];
@@ -161,7 +161,7 @@
 	UINavigationController *menu = [[UIStoryboard storyboardWithName:@"MarketOpen" bundle:nil] instantiateInitialViewController];
 	[menu setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
 	[self.navigationController presentViewController:menu animated:true completion:^{
-		NSLog(@"market day opened: %@", TFM_DELEGATE.activeMarketDay);
+		NSLog(@"market day opened: %@", TFMM3_APP_DELEGATE.activeMarketDay);
 	}];
 }
 

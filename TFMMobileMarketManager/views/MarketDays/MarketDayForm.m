@@ -11,21 +11,21 @@
 {
 	NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Locations"];
 	[request setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:true]]];
-	return [TFM_DELEGATE.managedObjectContext executeFetchRequest:request error:nil];
+	return [TFMM3_APP_DELEGATE.managedObjectContext executeFetchRequest:request error:nil];
 }
 
 - (NSArray *)loadStaff
 {
 	NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MarketStaff"];
 	[request setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:true]]];
-	return [TFM_DELEGATE.managedObjectContext executeFetchRequest:request error:nil];
+	return [TFMM3_APP_DELEGATE.managedObjectContext executeFetchRequest:request error:nil];
 }
 
 - (NSArray *)loadVendors
 {
 	NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Vendors"];
 	[request setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"businessName" ascending:true]]];
-	return [TFM_DELEGATE.managedObjectContext executeFetchRequest:request error:nil];
+	return [TFMM3_APP_DELEGATE.managedObjectContext executeFetchRequest:request error:nil];
 }
 
 - (NSArray *)fields

@@ -28,7 +28,7 @@ static NSString *deleteFailedMessageDetails = @"There are market days or redempt
 	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Vendors"];
 	[fetchRequest setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"businessName" ascending:true]]];
 	
-	self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:TFM_DELEGATE.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
+	self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:TFMM3_APP_DELEGATE.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
 	[self.fetchedResultsController setDelegate:self];
 	
 	NSError *error;
@@ -127,7 +127,7 @@ static NSString *deleteFailedMessageDetails = @"There are market days or redempt
 			NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Vendors"];
 			[request setPredicate:[NSPredicate predicateWithFormat:@"(SELF == %@) and ((marketdays.@count > 0) or (redemptions.@count > 0))", self.selectedObject]];
 			
-			if ([[TFM_DELEGATE.managedObjectContext executeFetchRequest:request error:nil] count] > 0)
+			if ([[TFMM3_APP_DELEGATE.managedObjectContext executeFetchRequest:request error:nil] count] > 0)
 			{
 				[[[UIAlertView alloc] initWithTitle:deleteFailedMessageTitle message:deleteFailedMessageDetails delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:nil] show];
 			}
@@ -139,7 +139,7 @@ static NSString *deleteFailedMessageDetails = @"There are market days or redempt
 	}
 	
 	NSError *error;
-	if (![TFM_DELEGATE.managedObjectContext save:&error]) NSLog(@"error committing edit: %@", error);
+	if (![TFMM3_APP_DELEGATE.managedObjectContext save:&error]) NSLog(@"error committing edit: %@", error);
 	
 	[self.tableView endUpdates];
 }
@@ -156,7 +156,7 @@ static NSString *deleteFailedMessageDetails = @"There are market days or redempt
 				
 			case 1:
 			{
-				[TFM_DELEGATE.managedObjectContext deleteObject:self.selectedObject];
+				[TFMM3_APP_DELEGATE.managedObjectContext deleteObject:self.selectedObject];
 				break;
 			}
 		}

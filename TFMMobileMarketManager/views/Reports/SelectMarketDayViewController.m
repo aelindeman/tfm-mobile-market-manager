@@ -24,7 +24,7 @@
 	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"MarketDays"];
 	[fetchRequest setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"date" ascending:false],[NSSortDescriptor sortDescriptorWithKey:@"location.name" ascending:true]]];
 	
-	self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:TFM_DELEGATE.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
+	self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:TFMM3_APP_DELEGATE.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
 	[self.fetchedResultsController setDelegate:self];
 	
 	NSError *error;

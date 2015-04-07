@@ -9,7 +9,7 @@
 
 #import "MarketDays.h"
 
-#define TFM_DELEGATE ((AppDelegate *)[[UIApplication sharedApplication] delegate])
+#define TFMM3_APP_DELEGATE ((AppDelegate *)[[UIApplication sharedApplication] delegate])
 
 typedef NS_ENUM(NSInteger, Frequency)
 {

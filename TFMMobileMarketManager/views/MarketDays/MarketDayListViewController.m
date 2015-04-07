@@ -26,7 +26,7 @@ static NSString *deleteConfirmationMessageDetails = @"Its associated transaction
 	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"MarketDays"];
 	[fetchRequest setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"date" ascending:false],[NSSortDescriptor sortDescriptorWithKey:@"location.name" ascending:true]]];
 	
-	self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:TFM_DELEGATE.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
+	self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:TFMM3_APP_DELEGATE.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
 	[self.fetchedResultsController setDelegate:self];
 	
 	NSError *error;
@@ -125,7 +125,7 @@ static NSString *deleteConfirmationMessageDetails = @"Its associated transaction
 	}
 	
 	NSError *error;
-	if (![TFM_DELEGATE.managedObjectContext save:&error]) NSLog(@"error committing edit: %@", error);
+	if (![TFMM3_APP_DELEGATE.managedObjectContext save:&error]) NSLog(@"error committing edit: %@", error);
 	
 	[self.tableView endUpdates];
 }
@@ -141,8 +141,8 @@ static NSString *deleteConfirmationMessageDetails = @"Its associated transaction
 				break;
 				
 			case 1:
-				[TFM_DELEGATE.managedObjectContext deleteObject:self.selectedObject];
-				[TFM_DELEGATE.managedObjectContext processPendingChanges];
+				[TFMM3_APP_DELEGATE.managedObjectContext deleteObject:self.selectedObject];
+				[TFMM3_APP_DELEGATE.managedObjectContext processPendingChanges];
 				break;
 		}
 	}

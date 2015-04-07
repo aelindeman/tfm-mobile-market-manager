@@ -20,7 +20,7 @@
 	if ([self editMode])
 	{
 		// fetch the object we're supposed to edit
-		[self setEditObject:(Locations *)[TFM_DELEGATE.managedObjectContext objectWithID:[self editObjectID]]];
+		[self setEditObject:(Locations *)[TFMM3_APP_DELEGATE.managedObjectContext objectWithID:[self editObjectID]]];
 		[self setTitle:[NSString stringWithFormat:@"Edit “%@”", [self.editObject name]]];
 		
 		// populate form with passed data if in edit mode
@@ -89,14 +89,14 @@
 		}
 		else
 		{
-			Locations *new = [NSEntityDescription insertNewObjectForEntityForName:@"Locations" inManagedObjectContext:TFM_DELEGATE.managedObjectContext];
+			Locations *new = [NSEntityDescription insertNewObjectForEntityForName:@"Locations" inManagedObjectContext:TFMM3_APP_DELEGATE.managedObjectContext];
 			new.name = form.name;
 			new.address = form.address;
 		}
 		
 		// ...and save, hopefully
 		NSError *error;
-		if (![TFM_DELEGATE.managedObjectContext save:&error])
+		if (![TFMM3_APP_DELEGATE.managedObjectContext save:&error])
 		{
 			NSLog(@"couldn't save: %@", [error localizedDescription]);
 			[[[UIAlertView alloc] initWithTitle:@"Error saving:" message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Dismiss", nil] show];

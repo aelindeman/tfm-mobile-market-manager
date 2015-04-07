@@ -148,7 +148,7 @@ static NSString *reportCreatedMessage = @"The %@ report was created successfully
 - (void)setMarketDayFromID:(NSManagedObjectID *)objectID
 {
 	if (objectID == nil) [self setSelectedMarketDay:false];
-	else [self setSelectedMarketDay:(MarketDays *)[TFM_DELEGATE.managedObjectContext objectWithID:objectID]];
+	else [self setSelectedMarketDay:(MarketDays *)[TFMM3_APP_DELEGATE.managedObjectContext objectWithID:objectID]];
 	[self updatePrompt];
 	NSLog(@"reports using market day %@", self.selectedMarketDay);
 }

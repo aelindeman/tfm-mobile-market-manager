@@ -17,8 +17,8 @@ static NSString *deleteConfirmationMessageDetails = @"It won’t be deleted, but
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
-	NSAssert([TFM_DELEGATE activeMarketDay], @"No active market day set!");
-	[self.navigationItem setPrompt:[TFM_DELEGATE.activeMarketDay description]];
+	NSAssert([TFMM3_APP_DELEGATE activeMarketDay], @"No active market day set!");
+	[self.navigationItem setPrompt:[TFMM3_APP_DELEGATE.activeMarketDay description]];
 	self.tableView.allowsMultipleSelectionDuringEditing = false;
 	[self load];
 }
@@ -26,10 +26,10 @@ static NSString *deleteConfirmationMessageDetails = @"It won’t be deleted, but
 - (void)load
 {
 	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Transactions"];
-	[fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"(marketday == %@)", [TFM_DELEGATE activeMarketDay]]];
+	[fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"(marketday == %@)", [TFMM3_APP_DELEGATE activeMarketDay]]];
 	[fetchRequest setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"time" ascending:false]]];
 	
-	self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:TFM_DELEGATE.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
+	self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:TFMM3_APP_DELEGATE.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
 	[self.fetchedResultsController setDelegate:self];
 	
 	NSError *error;
@@ -175,7 +175,7 @@ static NSString *deleteConfirmationMessageDetails = @"It won’t be deleted, but
 	}
 	
 	NSError *error;
-	if (![TFM_DELEGATE.managedObjectContext save:&error]) NSLog(@"error committing edit: %@", error);
+	if (![TFMM3_APP_DELEGATE.managedObjectContext save:&error]) NSLog(@"error committing edit: %@", error);
 	
 	[self.tableView endUpdates];
 }

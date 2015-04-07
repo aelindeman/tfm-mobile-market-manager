@@ -16,7 +16,7 @@ static NSString *deleteAllConfirmationMessageDetails = @"All reports on this dev
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
-	if (!self.basePath) [self setBasePath:[NSString pathWithComponents:@[[TFM_DELEGATE.applicationDocumentsDirectory path], @"Reports"]]];
+	if (!self.basePath) [self setBasePath:[NSString pathWithComponents:@[[TFMM3_APP_DELEGATE.applicationDocumentsDirectory path], @"Reports"]]];
 	[self load];
 	
 	// init preview window

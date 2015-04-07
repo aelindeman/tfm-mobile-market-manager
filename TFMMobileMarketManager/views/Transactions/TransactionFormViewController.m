@@ -14,7 +14,7 @@
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
-	NSAssert([TFM_DELEGATE activeMarketDay], @"No active market day set!");
+	NSAssert([TFMM3_APP_DELEGATE activeMarketDay], @"No active market day set!");
 
 	self.formController.form = [[TransactionForm alloc] init];
 
@@ -22,7 +22,7 @@
 	if ([self editMode])
 	{
 		// fetch the object we're supposed to edit
-		[self setEditObject:(Transactions *)[TFM_DELEGATE.managedObjectContext objectWithID:[self editObjectID]]];
+		[self setEditObject:(Transactions *)[TFMM3_APP_DELEGATE.managedObjectContext objectWithID:[self editObjectID]]];
 		[self setTitle:@"Edit Transaction"];
 		
 		// populate form with passed data if in edit mode
@@ -144,7 +144,7 @@
 		else
 		{
 			// load it up
-			Transactions *new = [NSEntityDescription insertNewObjectForEntityForName:@"Transactions" inManagedObjectContext:TFM_DELEGATE.managedObjectContext];
+			Transactions *new = [NSEntityDescription insertNewObjectForEntityForName:@"Transactions" inManagedObjectContext:TFMM3_APP_DELEGATE.managedObjectContext];
 			
 			new.time = [NSDate date];
 			
@@ -168,12 +168,12 @@
 			new.markedInvalid = form.markedInvalid;
 		
 			// don't directly set the market day equal to the active one, in case it is changed later. fetch it fresh from the database
-			new.marketday = (MarketDays *)[TFM_DELEGATE.managedObjectContext objectWithID:[TFM_DELEGATE.activeMarketDay objectID]];
+			new.marketday = (MarketDays *)[TFMM3_APP_DELEGATE.managedObjectContext objectWithID:[TFMM3_APP_DELEGATE.activeMarketDay objectID]];
 		}
 		
 		// ...and save, hopefully
 		NSError *error;
-		if (![TFM_DELEGATE.managedObjectContext save:&error])
+		if (![TFMM3_APP_DELEGATE.managedObjectContext save:&error])
 		{
 			NSLog(@"couldn't save: %@", [error localizedDescription]);
 			[[[UIAlertView alloc] initWithTitle:@"Error saving:" message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Dismiss", nil] show];

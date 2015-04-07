@@ -20,7 +20,7 @@
 	if ([self editMode])
 	{
 		// fetch the object we're supposed to edit
-		[self setEditObject:(MarketStaff *)[TFM_DELEGATE.managedObjectContext objectWithID:[self editObjectID]]];
+		[self setEditObject:(MarketStaff *)[TFMM3_APP_DELEGATE.managedObjectContext objectWithID:[self editObjectID]]];
 		[self setTitle:[NSString stringWithFormat:@"Edit “%@”", [self.editObject name]]];
 		
 		// populate form with passed data if in edit mode
@@ -99,7 +99,7 @@
 		// create a new object otherwise
 		else
 		{
-			MarketStaff *new = [NSEntityDescription insertNewObjectForEntityForName:@"MarketStaff" inManagedObjectContext:TFM_DELEGATE.managedObjectContext];
+			MarketStaff *new = [NSEntityDescription insertNewObjectForEntityForName:@"MarketStaff" inManagedObjectContext:TFMM3_APP_DELEGATE.managedObjectContext];
 			new.name = [form.name capitalizedString];
 			new.phone = [self sanitizePhone:form.phone];
 			new.position = form.position;
@@ -107,7 +107,7 @@
 		
 		// ...and save, hopefully
 		NSError *error;
-		if (![TFM_DELEGATE.managedObjectContext save:&error])
+		if (![TFMM3_APP_DELEGATE.managedObjectContext save:&error])
 		{
 			NSLog(@"couldn't save: %@", [error localizedDescription]);
 			[[[UIAlertView alloc] initWithTitle:@"Error saving:" message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Dismiss", nil] show];

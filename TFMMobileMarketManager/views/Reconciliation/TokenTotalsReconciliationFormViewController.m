@@ -10,30 +10,30 @@
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
-	NSAssert([TFM_DELEGATE activeMarketDay], @"No active market day set!");
+	NSAssert([TFMM3_APP_DELEGATE activeMarketDay], @"No active market day set!");
 	
 	self.formController.form = [[TokenTotalsReconciliationForm alloc] init];
 	
 	// grab terminal totals object from passed identifier
 	if (self.editObjectID)
 	{
-		[self setEditObject:(TokenTotals *)[TFM_DELEGATE.managedObjectContext objectWithID:[self editObjectID]]];
+		[self setEditObject:(TokenTotals *)[TFMM3_APP_DELEGATE.managedObjectContext objectWithID:[self editObjectID]]];
 		//NSLog(@"handoff to TokenTotals object %@", self.editObjectID);
 	}
 	
 	// for whatever reason the terminal totals object id wasn't passed
 	// so first try to fetch it from the active market day
-	else if ([TFM_DELEGATE.activeMarketDay terminalTotals])
+	else if ([TFMM3_APP_DELEGATE.activeMarketDay terminalTotals])
 	{
-		[self setEditObject:(TokenTotals *)[TFM_DELEGATE.activeMarketDay terminalTotals]];
+		[self setEditObject:(TokenTotals *)[TFMM3_APP_DELEGATE.activeMarketDay terminalTotals]];
 		//NSLog(@"token totals were not passed but they were set in market day, using TokenTotals object %@", [self.editObject objectID]);
 	}
 	
 	// and if it isn't set, just make a new one
 	else
 	{
-		TokenTotals *tt = [NSEntityDescription insertNewObjectForEntityForName:@"TokenTotals" inManagedObjectContext:TFM_DELEGATE.managedObjectContext];
-		[TFM_DELEGATE.activeMarketDay setTerminalTotals:tt];
+		TokenTotals *tt = [NSEntityDescription insertNewObjectForEntityForName:@"TokenTotals" inManagedObjectContext:TFMM3_APP_DELEGATE.managedObjectContext];
+		[TFMM3_APP_DELEGATE.activeMarketDay setTerminalTotals:tt];
 		[self setEditObject:tt];
 		//NSLog(@"token totals were not passed and were not set in market day, created new TokenTotals object %@", [tt objectID]);
 	}
@@ -113,7 +113,7 @@
 	
 	// ...and save, hopefully
 	NSError *error;
-	if (![TFM_DELEGATE.managedObjectContext save:&error])
+	if (![TFMM3_APP_DELEGATE.managedObjectContext save:&error])
 	{
 		NSLog(@"couldn't save: %@", [error localizedDescription]);
 		[[[UIAlertView alloc] initWithTitle:@"Error saving:" message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Dismiss", nil] show];
