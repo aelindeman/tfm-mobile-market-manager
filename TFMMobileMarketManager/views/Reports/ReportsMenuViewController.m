@@ -21,14 +21,19 @@ static NSString *reportCreatedMessage = @"The %@ report was created successfully
 	[self.previewer setDataSource:self];
 	
 	// populate the menu
+	self.menuSectionHeaders = @[@"", @"Reports", @"Raw Data"];
 	self.menuOptions = @[
 		@[
-			@{@"title": @"Open an existing report", @"icon": @"export", @"action": @"SelectExistingReportSegue"}
+			@{@"title": @"Open an existing report", @"icon": @"export", @"action": @"SelectExistingReportSegue"},
+			@{@"title": @"Select market day", @"icon": @"marketday", @"action": @"SelectMarketDaySegue"}
 		], @[
-			@{@"title": @"Select market day", @"icon": @"marketday", @"action": @"SelectMarketDaySegue"},
-			@{@"title": @"Create sales report", @"icon": @"totals", @"action": @"sales"},
-			@{@"title": @"Create redemptions report", @"icon": @"inbox", @"action": @"redemptions"},
-			@{@"title": @"Create demographics report", @"icon": @"demographics", @"action": @"demographics"}
+			@{@"title": @"Create sales report", @"icon": @"totals", @"action": TFMM3_REPORT_TYPE_SALES},
+			@{@"title": @"Create redemptions report", @"icon": @"inbox", @"action": TFMM3_REPORT_TYPE_REDEMPTIONS},
+			@{@"title": @"Create demographics report", @"icon": @"demographics", @"action": TFMM3_REPORT_TYPE_DEMOGRAPHICS}
+		], @[
+			@{@"title": @"Export vendors", @"icon": @"vendors", @"action": TFMM3_REPORT_TYPE_VENDORS},
+			@{@"title": @"Export staff", @"icon": @"staff", @"action": TFMM3_REPORT_TYPE_STAFF},
+			@{@"title": @"Export locations", @"icon": @"locations", @"action": TFMM3_REPORT_TYPE_LOCATIONS},
 		]];
 	[self updatePrompt];
 }
@@ -76,7 +81,7 @@ static NSString *reportCreatedMessage = @"The %@ report was created successfully
 		[cell.textLabel setFont:[UIFont boldSystemFontOfSize:[cell.textLabel.font pointSize]]];
 	
 	// disable report creation buttons if there's no market day
-	if (indexPath.section == 1 && ![[option valueForKey:@"action"] isEqualToString:@"SelectMarketDaySegue"])
+	if (indexPath.section == [self.menuSectionHeaders indexOfObject:@"Reports"] && ![[option valueForKey:@"action"] isEqualToString:@"SelectMarketDaySegue"])
 	{
 		[cell setUserInteractionEnabled:!!self.selectedMarketDay];
 		[cell.textLabel setTextColor:(self.selectedMarketDay) ? [UIColor darkTextColor] : [UIColor lightGrayColor]];
@@ -151,7 +156,7 @@ static NSString *reportCreatedMessage = @"The %@ report was created successfully
 // creates a report and returns where it is located
 - (NSString *)createReport:(NSString *)type
 {
-	if (!self.selectedMarketDay)
+	if ([TFMM3_REPORT_TYPES_MARKETDAY containsObject:type] && !self.selectedMarketDay)
 	{
 		[[[UIAlertView alloc] initWithTitle:noSelectedMarketDayWarningTitle message:noSelectedMarketDayWarningMessage delegate:self cancelButtonTitle:nil otherButtonTitles:@"Dismiss", nil] show];
 		return false;
@@ -160,9 +165,9 @@ static NSString *reportCreatedMessage = @"The %@ report was created successfully
 	ReportGenerator *rg = [[ReportGenerator alloc] initWithMarketDay:self.selectedMarketDay];
 	NSString *path;
 	
-	if ([type isEqualToString:@"sales"]) path = [rg generateSalesReport];
-	else if ([type isEqualToString:@"redemptions"]) path = [rg generateRedemptionsReport];
-	else if ([type isEqualToString:@"demographics"]) path = [rg generateDemographicsReport];
+	if ([type isEqualToString:TFMM3_REPORT_TYPE_SALES]) path = [rg generateSalesReport];
+	else if ([type isEqualToString:TFMM3_REPORT_TYPE_REDEMPTIONS]) path = [rg generateRedemptionsReport];
+	else if ([type isEqualToString:TFMM3_REPORT_TYPE_DEMOGRAPHICS]) path = [rg generateDemographicsReport];
 	else
 	{
 		NSLog (@"no action set for “%@”", type);

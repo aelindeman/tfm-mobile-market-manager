@@ -14,14 +14,16 @@ static NSString *marketDaySubfolder = @"%@"; // relative to reports subfolder, r
 static NSString *reportFormat = @"%@ %@ %@.csv"; // relative to market day subfolder
 
 // report names
-static NSString *demographicsReportName = @"Demographics";
-static NSString *salesReportName = @"Sales";
-static NSString *redemptionsReportName = @"Redemptions";
+static NSString *demographicsReportName = TFMM3_REPORT_TYPE_DEMOGRAPHICS;
+static NSString *redemptionsReportName = TFMM3_REPORT_TYPE_REDEMPTIONS;
+static NSString *salesReportName = TFMM3_REPORT_TYPE_SALES;
+static NSString *vendorsExportName = TFMM3_REPORT_TYPE_VENDORS;
+static NSString *staffExportName = TFMM3_REPORT_TYPE_STAFF;
+static NSString *locationsExportName = TFMM3_REPORT_TYPE_LOCATIONS;
 
 // allow init using delegate's active market day
 - (id)init
 {
-	NSAssert([TFM_DELEGATE activeMarketDay], @"No active market day set! Use -initWithMarketDay:marketDay to specify one if not active");
 	return [self initWithMarketDay:[TFM_DELEGATE activeMarketDay]];
 }
 
@@ -30,20 +32,20 @@ static NSString *redemptionsReportName = @"Redemptions";
 {
 	if (self = [super init])
 	{
-		NSAssert(marketDay, @"No active market day set! Use -initWithMarketDay:marketDay to specify one if not active");
 		_selectedMarketDay = marketDay;
 	}
 	return self;
 }
 
-// writes contents to file, creating the file and path on the way
-- (void)writeReportToFile:(NSString *)path contents:(NSString *)contents
+// writes contents to file, creating the file and path on the way. returns true on success
+- (bool)writeReportToFile:(NSString *)path contents:(NSString *)contents
 {
 	NSFileHandle *fh;
+	NSFileManager *fm = [NSFileManager defaultManager];
+	
 	@try
 	{
 		// create report directory and csv file
-		NSFileManager *fm = [NSFileManager defaultManager];
 		[fm createDirectoryAtPath:[path stringByDeletingLastPathComponent] withIntermediateDirectories:true attributes:nil error:nil];
 		[fm createFileAtPath:path contents:nil attributes:nil];
 
@@ -62,6 +64,14 @@ static NSString *redemptionsReportName = @"Redemptions";
 	{
 		[fh closeFile];
 	}
+	
+	// return true if file was created and isn't empty, return false otherwise
+	if ([fm fileExistsAtPath:path])
+	{
+		NSDictionary *attribs = [fm attributesOfItemAtPath:path error:nil];
+		return [attribs fileSize] > 0;
+	}
+	else return false;
 }
 
 // creates the reports path
@@ -88,13 +98,18 @@ static NSString *redemptionsReportName = @"Redemptions";
 - (NSString *)generateDemographicsReport
 {
 	NSString *path = [self getReportsPathForReportType:demographicsReportName];
-	[self generateDemographicsReportAtPath:path];
-	return path;
+	return [self generateDemographicsReportAtPath:path] ? path : false;
 }
 
 // creates demographics report at specific path
-- (void)generateDemographicsReportAtPath:(NSString *)path
+- (bool)generateDemographicsReportAtPath:(NSString *)path
 {
+	if (!self.selectedMarketDay)
+	{
+		NSLog(@"can't create report: no active market day set");
+		return false;
+	}
+	
 	NSString *writeString = [[NSString alloc] init];
 	NSString *header = @"CustomerType,Credit,SNAP,Total\n";
 	writeString = [writeString stringByAppendingString:header];
@@ -150,19 +165,24 @@ static NSString *redemptionsReportName = @"Redemptions";
 	}
 
 	NSLog(@"prepped demographics report: {\n%@\n}", writeString);
-	[self writeReportToFile:path contents:writeString];
+	return [self writeReportToFile:path contents:writeString];
 }
 
 // redemptions
 - (NSString *)generateRedemptionsReport
 {
 	NSString *path = [self getReportsPathForReportType:redemptionsReportName];
-	[self generateRedemptionsReportAtPath:path];
-	return path;
+	return [self generateRedemptionsReportAtPath:path] ? path : false;
 }
 
-- (void)generateRedemptionsReportAtPath:(NSString *)path
+- (bool)generateRedemptionsReportAtPath:(NSString *)path
 {
+	if (!self.selectedMarketDay)
+	{
+		NSLog(@"can't create report: no active market day set");
+		return false;
+	}
+
 	NSString *writeString = [[NSString alloc] init];
 	NSString *header = @"VendorName,CreditTokenCount,CreditValue,SNAPValue,BonusValue,Total\n";
 	writeString = [writeString stringByAppendingString:header];
@@ -196,19 +216,24 @@ static NSString *redemptionsReportName = @"Redemptions";
 	writeString = [writeString stringByAppendingString:[NSString stringWithFormat:@"\n#totals#,%i,%i,%i,%i,%i\n", [totals[@"CreditTokenCount"] intValue], [totals[@"CreditValue"] intValue], [totals[@"SNAPValue"] intValue], [totals[@"BonusValue"] intValue], [totals[@"Total"] intValue]]];
 
 	NSLog(@"prepped redemptions report: {\n%@\n}", writeString);
-	[self writeReportToFile:path contents:writeString];
+	return [self writeReportToFile:path contents:writeString];
 }
 
 // sales
 - (NSString *)generateSalesReport
 {
 	NSString *path = [self getReportsPathForReportType:salesReportName];
-	[self generateSalesReportAtPath:path];
-	return path;
+	return [self generateSalesReportAtPath:path] ? path : false;
 }
 
-- (void)generateSalesReportAtPath:(NSString *)path
+- (bool)generateSalesReportAtPath:(NSString *)path
 {
+	if (!self.selectedMarketDay)
+	{
+		NSLog(@"can't create report: no active market day set");
+		return false;
+	}
+	
 	NSString *writeString = [[NSString alloc] init];
 	NSString *disbursements = @"#Disbursements#\nTokenType,TransactionCount,TokensDisbursed,Value\n";
 	writeString = [writeString stringByAppendingString:disbursements];
@@ -280,7 +305,7 @@ static NSString *redemptionsReportName = @"Redemptions";
 	}
 	
 	NSLog(@"prepped sales report: {\n%@\n}", writeString);
-	[self writeReportToFile:path contents:writeString];
+	return [self writeReportToFile:path contents:writeString];
 }
 
 @end
