@@ -161,6 +161,9 @@ static NSString *deleteFailedMessageDetails = @"There are market days in the dat
 			}
 		}
 	}
+	
+	NSError *error;
+	if (![TFMM3_APP_DELEGATE.managedObjectContext save:&error]) NSLog(@"error committing edit: %@", error);
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender

@@ -175,6 +175,9 @@ static dispatch_once_t setPositionStrings; // NSDictionary can't be set here, so
 			}
 		}
 	}
+	
+	NSError *error;
+	if (![TFMM3_APP_DELEGATE.managedObjectContext save:&error]) NSLog(@"error committing edit: %@", error);
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender

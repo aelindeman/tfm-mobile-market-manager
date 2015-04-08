@@ -142,10 +142,12 @@ static NSString *deleteConfirmationMessageDetails = @"Its associated transaction
 				
 			case 1:
 				[TFMM3_APP_DELEGATE.managedObjectContext deleteObject:self.selectedObject];
-				[TFMM3_APP_DELEGATE.managedObjectContext processPendingChanges];
 				break;
 		}
 	}
+	
+	NSError *error;
+	if (![TFMM3_APP_DELEGATE.managedObjectContext save:&error]) NSLog(@"error committing edit: %@", error);
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender

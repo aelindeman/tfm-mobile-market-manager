@@ -191,6 +191,9 @@ static NSString *deleteConfirmationMessageDetails = @"It won’t be deleted, but
 				break;
 		}
 	}
+	
+	NSError *error;
+	if (![TFMM3_APP_DELEGATE.managedObjectContext save:&error]) NSLog(@"error committing edit: %@", error);
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender

@@ -228,8 +228,9 @@ static NSString *closeMarketDayUnreconciledWarningMessage = @"Terminal totals ha
 {
 	// what the fuck
 	[self dismissViewControllerAnimated:true completion:^{
+		NSError *error;
 		[TFMM3_APP_DELEGATE setActiveMarketDay:false];
-		[TFMM3_APP_DELEGATE.managedObjectContext processPendingChanges];
+		if (![TFMM3_APP_DELEGATE.managedObjectContext save:&error]) NSLog(@"error committing edit: %@", error);
 		NSLog(@"market day closed");
 	}];
 }
