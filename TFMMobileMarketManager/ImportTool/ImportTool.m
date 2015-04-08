@@ -35,7 +35,7 @@ static NSUInteger parseSettings = CHCSVParserOptionsRecognizesBackslashesAsEscap
 			new.name = row[0];
 			new.phone = row[1];
 			new.email = row[2];
-			new.position = [row[2] integerValue];
+			new.position = [row[3] integerValue];
 			
 			importCount ++;
 		}
