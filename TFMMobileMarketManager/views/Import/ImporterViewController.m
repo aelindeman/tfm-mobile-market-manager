@@ -154,7 +154,7 @@ static NSString *importSuccessMessage = @"%i entr%@ imported."; // first token: 
 }
 
 // heavy lifting
-- (IBAction)importData:(UIButton *)sender
+- (IBAction)importData:(id)sender
 {
 	if (self.importDestination.selectedSegmentIndex < 0)
 	{
@@ -172,15 +172,15 @@ static NSString *importSuccessMessage = @"%i entr%@ imported."; // first token: 
 		switch (self.importDestination.selectedSegmentIndex)
 		{
 			case 0: // vendors
-				count = [[[ImportTool alloc] init] importVendorsFromCSV:self.fileToImport];
+				count = [[[ImportTool alloc] initWithSkipSetting:self.firstRowSkipSwitch.on] importVendorsFromCSV:self.fileToImport];
 				break;
 				
 			case 1: // staff
-				count = [[[ImportTool alloc] init] importStaffFromCSV:self.fileToImport];
+				count = [[[ImportTool alloc] initWithSkipSetting:self.firstRowSkipSwitch.on] importStaffFromCSV:self.fileToImport];
 				break;
 				
 			case 2: // locations
-				count = [[[ImportTool alloc] init] importLocationsFromCSV:self.fileToImport];
+				count = [[[ImportTool alloc] initWithSkipSetting:self.firstRowSkipSwitch.on] importLocationsFromCSV:self.fileToImport];
 				break;
 		}
 		

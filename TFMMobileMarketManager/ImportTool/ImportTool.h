@@ -13,6 +13,10 @@
 
 @interface ImportTool : NSObject
 
+@property bool skipFirstRow;
+
+- (id)initWithSkipSetting:(bool)skipFirstRow;
+
 - (NSUInteger)importStaffFromCSV:(NSURL *)url;
 - (NSUInteger)importVendorsFromCSV:(NSURL *)url;
 - (NSUInteger)importLocationsFromCSV:(NSURL *)url;
