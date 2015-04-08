@@ -30,5 +30,6 @@
 @property (nonatomic) MarketDays *selectedMarketDay;
 
 @property (nonatomic) QLPreviewController *previewer;
+@property (weak, nonatomic) IBOutlet UILabel *creatingReportStatusLabel;
 
 @end

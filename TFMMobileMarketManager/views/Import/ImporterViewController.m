@@ -156,37 +156,42 @@ static NSString *importSuccessMessage = @"%i entr%@ imported."; // first token: 
 // heavy lifting
 - (IBAction)importData:(id)sender
 {
+	[self.activityIndicator startAnimating];
+
 	if (self.importDestination.selectedSegmentIndex < 0)
 	{
 		[[[UIAlertView alloc] initWithTitle:noDestinationSelectedTitle message:noDestinationSelectedMessage delegate:self cancelButtonTitle:nil otherButtonTitles:@"Dismiss", nil] show];
-		return;
-	}
-	
-	if (!self.fileToImport)
-	{
-		[[[UIAlertView alloc] initWithTitle:@"Not supported" message:@"Can’t import using direct input yet." delegate:self cancelButtonTitle:nil otherButtonTitles:@"Dismiss", nil] show];
 	}
 	else
 	{
-		NSUInteger count = 0;
-		switch (self.importDestination.selectedSegmentIndex)
+		if (!self.fileToImport)
 		{
-			case 0: // vendors
-				count = [[[ImportTool alloc] initWithSkipSetting:self.firstRowSkipSwitch.on] importVendorsFromCSV:self.fileToImport];
-				break;
-				
-			case 1: // staff
-				count = [[[ImportTool alloc] initWithSkipSetting:self.firstRowSkipSwitch.on] importStaffFromCSV:self.fileToImport];
-				break;
-				
-			case 2: // locations
-				count = [[[ImportTool alloc] initWithSkipSetting:self.firstRowSkipSwitch.on] importLocationsFromCSV:self.fileToImport];
-				break;
+			[[[UIAlertView alloc] initWithTitle:@"Not supported" message:@"Can’t import using direct input yet." delegate:self cancelButtonTitle:nil otherButtonTitles:@"Dismiss", nil] show];
 		}
-		
-		if (count > 0)
-			[[[UIAlertView alloc] initWithTitle:importSuccessTitle message:[NSString stringWithFormat:importSuccessMessage, count, (count == 1) ? @"y was" : @"ies were"] delegate:self cancelButtonTitle:nil otherButtonTitles:@"Dismiss", nil] show];
+		else
+		{
+			NSUInteger count = 0;
+			switch (self.importDestination.selectedSegmentIndex)
+			{
+				case 0: // vendors
+					count = [[[ImportTool alloc] initWithSkipSetting:self.firstRowSkipSwitch.on] importVendorsFromCSV:self.fileToImport];
+					break;
+					
+				case 1: // staff
+					count = [[[ImportTool alloc] initWithSkipSetting:self.firstRowSkipSwitch.on] importStaffFromCSV:self.fileToImport];
+					break;
+					
+				case 2: // locations
+					count = [[[ImportTool alloc] initWithSkipSetting:self.firstRowSkipSwitch.on] importLocationsFromCSV:self.fileToImport];
+					break;
+			}
+			
+			if (count > 0)
+				[[[UIAlertView alloc] initWithTitle:importSuccessTitle message:[NSString stringWithFormat:importSuccessMessage, count, (count == 1) ? @"y was" : @"ies were"] delegate:self cancelButtonTitle:nil otherButtonTitles:@"Dismiss", nil] show];
+		}
 	}
+	
+	[self.activityIndicator stopAnimating];
 }
 
 @end
