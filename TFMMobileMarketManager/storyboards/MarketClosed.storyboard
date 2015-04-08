@@ -950,8 +950,8 @@ Stephen Davies</string>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="b2X-Hq-RFZ">
                                 <rect key="frame" x="102" y="72" width="427" height="29"/>
                                 <segments>
-                                    <segment title="Staff"/>
                                     <segment title="Vendors"/>
+                                    <segment title="Staff"/>
                                     <segment title="Locations"/>
                                 </segments>
                             </segmentedControl>

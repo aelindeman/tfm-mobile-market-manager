@@ -4,6 +4,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "AppDelegate.h"
+#import "CHCSVParser.h"
 
 #import "MarketStaff.h"
 #import "Vendors.h"
@@ -11,8 +13,8 @@
 
 @interface ImportTool : NSObject
 
-- (void)importStaffFromCSV:(NSURL *)url;
-- (void)importVendorsFromCSV:(NSURL *)url;
-- (void)importLocationsFromCSV:(NSURL *)url;
+- (NSUInteger)importStaffFromCSV:(NSURL *)url;
+- (NSUInteger)importVendorsFromCSV:(NSURL *)url;
+- (NSUInteger)importLocationsFromCSV:(NSURL *)url;
 
 @end

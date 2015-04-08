@@ -18,7 +18,10 @@ static NSString *noDestinationSelectedTitle = @"No destination selected";
 static NSString *noDestinationSelectedMessage = @"";
 
 static NSString *importConfirmationTitle = @"Import data?";
-static NSString *importConfirmationMessage = @"%i entr%@ will be imported."; // first token: entry count, second token: pluralize -> (entryCount == 1) ? @"y" : @"ies"
+static NSString *importConfirmationMessage = @"%i entr%@ will be imported."; // first token: entry count, second token: pluralize -> (count == 1) ? @"y" : @"ies"
+
+static NSString *importSuccessTitle = @"Data imported successfully";
+static NSString *importSuccessMessage = @"%i entr%@ imported."; // first token: entry count, second token: pluralize -> (count == 1) ? @"y was" : @"ies were"
 
 - (void)viewDidLoad
 {
@@ -27,7 +30,7 @@ static NSString *importConfirmationMessage = @"%i entr%@ will be imported."; // 
 	if (self.fileToImport)
 	{
 		// simple determine type of import based on filename
-		NSDictionary *types = @{@"staff": @0, @"employee": @0, @"vendor": @1, @"business": @1, @"location": @2, @"market": @2, @"marketstaff": @0};
+		NSDictionary *types = @{@"staff": @1, @"employee": @1, @"vendor": @0, @"business": @0, @"location": @2, @"market": @2, @"marketstaff": @1};
 		for (NSString *key in types)
 		{
 			NSRange range = [[[[self.fileToImport pathComponents] lastObject] lowercaseString] rangeOfString:[key lowercaseString]];
@@ -158,7 +161,32 @@ static NSString *importConfirmationMessage = @"%i entr%@ will be imported."; // 
 		[[[UIAlertView alloc] initWithTitle:noDestinationSelectedTitle message:noDestinationSelectedMessage delegate:self cancelButtonTitle:nil otherButtonTitles:@"Dismiss", nil] show];
 		return;
 	}
-	NSLog(@"attempting to import data");
+	
+	if (!self.fileToImport)
+	{
+		[[[UIAlertView alloc] initWithTitle:@"Not supported" message:@"Can’t import using direct input yet." delegate:self cancelButtonTitle:nil otherButtonTitles:@"Dismiss", nil] show];
+	}
+	else
+	{
+		NSUInteger count = 0;
+		switch (self.importDestination.selectedSegmentIndex)
+		{
+			case 0: // vendors
+				count = [[[ImportTool alloc] init] importVendorsFromCSV:self.fileToImport];
+				break;
+				
+			case 1: // staff
+				count = [[[ImportTool alloc] init] importStaffFromCSV:self.fileToImport];
+				break;
+				
+			case 2: // locations
+				count = [[[ImportTool alloc] init] importLocationsFromCSV:self.fileToImport];
+				break;
+		}
+		
+		if (count > 0)
+			[[[UIAlertView alloc] initWithTitle:importSuccessTitle message:[NSString stringWithFormat:importSuccessMessage, count, (count == 1) ? @"y was" : @"ies were"] delegate:self cancelButtonTitle:nil otherButtonTitles:@"Dismiss", nil] show];
+	}
 }
 
 @end
