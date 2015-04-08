@@ -7,7 +7,7 @@
 
 @implementation ImportTool
 
-static NSUInteger parseSettings = CHCSVParserOptionsRecognizesBackslashesAsEscapes | CHCSVParserOptionsSanitizesFields | CHCSVParserOptionsTrimsWhitespace;
+static unsigned int parseSettings = CHCSVParserOptionsRecognizesBackslashesAsEscapes | CHCSVParserOptionsSanitizesFields | CHCSVParserOptionsTrimsWhitespace;
 
 - (id)initWithSkipSetting:(bool)skipFirstRow
 {
@@ -18,10 +18,10 @@ static NSUInteger parseSettings = CHCSVParserOptionsRecognizesBackslashesAsEscap
 	return self;
 }
 
-- (NSUInteger)importStaffFromCSV:(NSURL *)url
+- (unsigned int)importStaffFromCSV:(NSURL *)url
 {
 	NSError *error;
-	NSUInteger importCount = 0;
+	unsigned int importCount = 0;
 	NSArray *rows = [NSArray arrayWithContentsOfCSVURL:url options:parseSettings];
 
 	if (rows == nil)
@@ -32,12 +32,14 @@ static NSUInteger parseSettings = CHCSVParserOptionsRecognizesBackslashesAsEscap
 	
 	@try
 	{
-		for (NSUInteger i = 0; i < [rows count]; i ++)
+		for (unsigned int i = 0; i < [rows count]; i ++)
 		{
+			NSArray *row = rows[i];
 			if (self.skipFirstRow && i == 0) continue; // skip header row
 			if ([rows count] != 4) continue; // skip if not the right length
 			
-			NSArray *row = rows[i];
+			// absolutely need name
+			if ([row[0] length] == 0) continue;
 			
 			MarketStaff *new = [NSEntityDescription insertNewObjectForEntityForName:@"MarketStaff" inManagedObjectContext:TFMM3_APP_DELEGATE.managedObjectContext];
 		
@@ -63,11 +65,11 @@ static NSUInteger parseSettings = CHCSVParserOptionsRecognizesBackslashesAsEscap
 		return importCount;
 	}
 
-- (NSUInteger)importVendorsFromCSV:(NSURL *)url
+- (unsigned int)importVendorsFromCSV:(NSURL *)url
 {
 	NSError *error;
 	NSArray *rows = [NSArray arrayWithContentsOfCSVURL:url options:parseSettings];
-	NSUInteger importCount = 0;
+	unsigned int importCount = 0;
 	
 	if (rows == nil)
 	{
@@ -77,11 +79,14 @@ static NSUInteger parseSettings = CHCSVParserOptionsRecognizesBackslashesAsEscap
 	
 	@try
 	{
-		for (NSUInteger i = 0; i < [rows count]; i ++)
+		for (unsigned int i = 0; i < [rows count]; i ++)
 		{
 			NSArray *row = rows[i];
 			if (self.skipFirstRow && i == 0) continue; // skip header row
 			if ([row count] != 10) continue; // skip if not the right length
+			
+			// absolutely need business name and operator name, skip if they are not set
+			if ([row[0] length] == 0 || [row[2] length] == 0) continue;
 			
 			Vendors *new = [NSEntityDescription insertNewObjectForEntityForName:@"Vendors" inManagedObjectContext:TFMM3_APP_DELEGATE.managedObjectContext];
 			
@@ -91,7 +96,7 @@ static NSUInteger parseSettings = CHCSVParserOptionsRecognizesBackslashesAsEscap
 			
 			new.name = row[2];
 			new.address = row[3];
-			new.phone = row[4];
+			new.phone = [self sanitizePhone:row[4]];
 			new.email = row[5];
 			
 			new.acceptsSNAP = [row[6] integerValue] == 1;
@@ -116,11 +121,11 @@ static NSUInteger parseSettings = CHCSVParserOptionsRecognizesBackslashesAsEscap
 	return importCount;
 }
 
-- (NSUInteger)importLocationsFromCSV:(NSURL *)url
+- (unsigned int)importLocationsFromCSV:(NSURL *)url
 {
 	NSError *error;
 	NSArray *rows = [NSArray arrayWithContentsOfCSVURL:url options:parseSettings];
-	NSUInteger importCount = 0;
+	unsigned int importCount = 0;
 	
 	if (rows == nil)
 	{
@@ -130,11 +135,14 @@ static NSUInteger parseSettings = CHCSVParserOptionsRecognizesBackslashesAsEscap
 	
 	@try
 	{
-		for (NSUInteger i = 0; i < [rows count]; i ++)
+		for (unsigned int i = 0; i < [rows count]; i ++)
 		{
 			NSArray *row = rows[i];
 			if (self.skipFirstRow && i == 0) continue; // skip header row
 			if ([row count] != 2) continue; // skip if not the right length
+			
+			// require both fields
+			if ([row[0] length] == 0 || [row[1] length] == 0) continue;
 			
 			Locations *new = [NSEntityDescription insertNewObjectForEntityForName:@"Locations" inManagedObjectContext:TFMM3_APP_DELEGATE.managedObjectContext];
 			

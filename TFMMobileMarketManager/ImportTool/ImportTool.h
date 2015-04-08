@@ -17,8 +17,8 @@
 
 - (id)initWithSkipSetting:(bool)skipFirstRow;
 
-- (NSUInteger)importStaffFromCSV:(NSURL *)url;
-- (NSUInteger)importVendorsFromCSV:(NSURL *)url;
-- (NSUInteger)importLocationsFromCSV:(NSURL *)url;
+- (unsigned int)importStaffFromCSV:(NSURL *)url;
+- (unsigned int)importVendorsFromCSV:(NSURL *)url;
+- (unsigned int)importLocationsFromCSV:(NSURL *)url;
 
 @end
