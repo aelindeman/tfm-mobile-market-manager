@@ -1030,7 +1030,7 @@ Stephen Davies</string>
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Import" id="4Ua-Gj-KMS">
-                        <barButtonItem key="rightBarButtonItem" image="put" style="done" id="YMT-Rr-wqa">
+                        <barButtonItem key="rightBarButtonItem" title="Import" style="done" id="YMT-Rr-wqa">
                             <connections>
                                 <action selector="importData:" destination="7gL-Gt-FjR" id="SJk-qO-k0s"/>
                             </connections>
@@ -1815,7 +1815,6 @@ Stephen Davies</string>
     <resources>
         <image name="cable" width="16" height="16"/>
         <image name="download" width="16" height="16"/>
-        <image name="put" width="16" height="16"/>
         <image name="sync" width="16" height="16"/>
     </resources>
     <inferredMetricsTieBreakers>
