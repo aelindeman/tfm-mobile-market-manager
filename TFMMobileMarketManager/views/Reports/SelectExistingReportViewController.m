@@ -8,7 +8,7 @@
 @implementation SelectExistingReportViewController
 
 static NSString *deleteConfirmationMessageTitle = @"Delete this report?";
-static NSString *deleteConfirmationMessageDetails = @"The report will be deleted permanently.";
+static NSString *deleteConfirmationMessageDetails = @"“%@” report will be deleted permanently."; // token is report name
 
 static NSString *deleteAllConfirmationMessageTitle = @"Delete all reports?";
 static NSString *deleteAllConfirmationMessageDetails = @"All reports on this device will be deleted permanently.";
@@ -112,11 +112,11 @@ static NSString *deleteAllConfirmationMessageDetails = @"All reports on this dev
 			else
 			{
 				// delete the item
-				[self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationLeft];
+				[self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
 				
 				// delete the section too if it was the last item
 				if ([[[self.items objectAtIndex:indexPath.section] objectForKey:@"items"] count] == 1)
-					[self.tableView deleteSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationLeft];
+					[self.tableView deleteSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationFade];
 				
 				// reload the table
 				[self load];
@@ -186,8 +186,6 @@ static NSString *deleteAllConfirmationMessageDetails = @"All reports on this dev
 				
 			case 1:
 				[self deleteAll];
-				[self load];
-				[self.tableView reloadData];
 				break;
 		}
 	}
@@ -200,26 +198,28 @@ static NSString *deleteAllConfirmationMessageDetails = @"All reports on this dev
 
 - (void)deleteAll
 {
+	[self.tableView beginUpdates];
+
+	// delete the reports
 	NSError *error;
-	NSFileManager *fm = [NSFileManager defaultManager];
-	NSArray *subs = [fm contentsOfDirectoryAtPath:self.basePath error:&error];
-	if (error) NSLog(@"error traversing directory: %@", error);
-	
-	for (NSString *subfolder in subs)
+	for (NSString *subfolder in [[NSFileManager defaultManager] contentsOfDirectoryAtPath:self.basePath error:&error])
 	{
-		NSArray *contents = [[fm contentsOfDirectoryAtPath:[NSString pathWithComponents:@[self.basePath, subfolder]] error:&error] filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"self endswith '.csv'"]];
-		for (NSString *r in contents)
-		{
-			[[NSFileManager defaultManager] removeItemAtPath:[NSString pathWithComponents:@[self.basePath, subfolder, r]] error:&error];
-			if (error) NSLog(@"error deleting report: %@", error);
-		}
-		
-		// delete folders too if empty
-		if ([contents count] < 1)
-		{
-			[[NSFileManager defaultManager] removeItemAtPath:[NSString pathWithComponents:@[self.basePath, subfolder]] error:&error];
-		}
+		[[NSFileManager defaultManager] removeItemAtPath:[NSString pathWithComponents:@[self.basePath, subfolder]] error:&error];
+		if (error) NSLog(@"error deleting report: %@", error);
 	}
+	
+	// update the table rows and sections
+	for (NSUInteger section = 0; section < [self.items count]; section ++)
+	{
+		for (NSUInteger row = 0; row < [[[self.items objectAtIndex:section] objectForKey:@"items"] count]; row ++)
+		{
+			[self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:row inSection:section]] withRowAnimation:UITableViewRowAnimationFade];
+		}
+		[self.tableView deleteSections:[NSIndexSet indexSetWithIndex:section] withRowAnimation:UITableViewRowAnimationFade];
+	}
+	
+	[self load];
+	[self.tableView endUpdates];
 }
 
 - (void)discard

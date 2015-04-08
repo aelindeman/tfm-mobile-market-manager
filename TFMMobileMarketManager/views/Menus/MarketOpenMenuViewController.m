@@ -20,6 +20,7 @@ static NSString *closeMarketDayWarningMessage = @"All information will be saved.
 
 static NSString *closeMarketDayUnreconciledWarningTitle = @"Can’t close market day";
 static NSString *closeMarketDayUnreconciledWarningMessage = @"Terminal totals have not been reconciled yet. This must be done before closing the market day.";
+static NSString *closeMarketDayUnreconciledWarningLabel = @"Terminal totals need to be reconciled before closing the market day";
 
 - (void)viewDidLoad
 {
@@ -72,6 +73,11 @@ static NSString *closeMarketDayUnreconciledWarningMessage = @"Terminal totals ha
 	}
 }
 
+- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
+{
+	return ((section == [self.menuOptions count] - 1) && !self.terminalTotalsReconciled) ? closeMarketDayUnreconciledWarningLabel : @"";
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	NSDictionary *option = [[self.menuOptions objectAtIndex:[indexPath section]] objectAtIndex:[indexPath row]];
@@ -90,7 +96,7 @@ static NSString *closeMarketDayUnreconciledWarningMessage = @"Terminal totals ha
 	if ([[option valueForKey:@"action"] isEqualToString:@"TerminalTotalsReconciliationFormSegue"])
 	{
 		[cell.textLabel setFont:(self.terminalTotalsReconciled ? [UIFont systemFontOfSize:[cell.textLabel.font pointSize]] : [UIFont boldSystemFontOfSize:[cell.textLabel.font pointSize]])];
-		[cell.imageView setImage:[UIImage imageNamed:(self.terminalTotalsReconciled ? @"check" : [option valueForKey:@"icon"])]];
+		if (self.terminalTotalsReconciled) [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
 	}
 	
 	// disable close market day button if reconciliation hasn't been completed
