@@ -96,7 +96,7 @@ static NSString *deleteAllConfirmationMessageDetails = @"All reports on this dev
 // handle edit commits (delete only for this table view)
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	//[self.tableView beginUpdates];
+	[self.tableView beginUpdates];
 
 	switch (editingStyle)
 	{
@@ -111,10 +111,15 @@ static NSString *deleteAllConfirmationMessageDetails = @"All reports on this dev
 			if (error) [[[UIAlertView alloc] initWithTitle:@"Error deleting report:" message:[error localizedDescription] delegate:self cancelButtonTitle:nil otherButtonTitles:@"Dismiss", nil] show];
 			else
 			{
+				// delete the item
+				[self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationLeft];
+				
+				// delete the section too if it was the last item
+				if ([[[self.items objectAtIndex:indexPath.section] objectForKey:@"items"] count] == 1)
+					[self.tableView deleteSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationLeft];
+				
+				// reload the table
 				[self load];
-				[self.tableView reloadData];
-				// TODO: use -beginUpdates and -deleteRowsAtIndexPaths instead
-				//[self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
 			}
 			
 			break;
@@ -125,7 +130,7 @@ static NSString *deleteAllConfirmationMessageDetails = @"All reports on this dev
 			break;
 	}
 	
-	//[self.tableView endUpdates];
+	[self.tableView endUpdates];
 }
 
 // trigger segue on selection
