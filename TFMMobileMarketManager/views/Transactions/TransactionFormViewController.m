@@ -63,6 +63,7 @@
 		form.cust_gender = GenderFemale;
 		form.cust_senior = false;
 		form.cust_ethnicity = EthnicityWhite;
+		form.credit_fee = 2;
 	}
 	
 	UIBarButtonItem *closeButton = [[UIBarButtonItem alloc] initWithTitle:@"Close" style:UIBarButtonItemStylePlain target:self action:@selector(discard)];
@@ -218,7 +219,7 @@
 	
 	// hide unrelated cells
 	self.formController.form = form;
-	[self.tableView reloadSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(updateAnchor, 2)] withRowAnimation:UITableViewRowAnimationFade];
+	[self.tableView reloadSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(updateAnchor, 2)] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
 - (void)updateCreditTotal:(UITableViewCell<FXFormFieldCell> *)cell
