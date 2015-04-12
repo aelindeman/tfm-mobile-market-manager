@@ -31,6 +31,14 @@ typedef NS_ENUM(NSInteger, Ethnicity)
 	EthnicityOther
 };
 
+typedef NS_ENUM(NSInteger, Gender)
+{
+	GenderNone = 0,
+	GenderMale,
+	GenderFemale,
+	GenderOther
+};
+
 typedef NS_ENUM(NSInteger, Position)
 {
 	PositionVolunteer = 0,
@@ -44,14 +52,16 @@ typedef NS_ENUM(NSInteger, Position)
 @property (strong, nonatomic) UIWindow *window;
 @property MarketDays *activeMarketDay;
 
+- (void)handleOpenURL:(NSURL *)url;
+
+#pragma mark - Core Data stack
+
 @property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;
-
-- (void)handleOpenURL:(NSURL *)url;
 
 @end
 
