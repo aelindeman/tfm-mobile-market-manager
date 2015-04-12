@@ -13,8 +13,7 @@
 
 typedef NS_ENUM(NSInteger, Frequency)
 {
-	FrequencyNone = 0,
-	FrequencyFirstTime,
+	FrequencyFirstTime = 0,
 	FrequencySeason,
 	FrequencyMonthly,
 	FrequencyNQWeekly,
@@ -23,8 +22,7 @@ typedef NS_ENUM(NSInteger, Frequency)
 
 typedef NS_ENUM(NSInteger, Ethnicity)
 {
-	EthnicityNone = 0,
-	EthnicityWhite,
+	EthnicityWhite = 0,
 	EthnicityBlack,
 	EthnicityHispanic,
 	EthnicityAsian,
@@ -33,8 +31,7 @@ typedef NS_ENUM(NSInteger, Ethnicity)
 
 typedef NS_ENUM(NSInteger, Gender)
 {
-	GenderNone = 0,
-	GenderMale,
+	GenderMale = 0,
 	GenderFemale,
 	GenderOther
 };
