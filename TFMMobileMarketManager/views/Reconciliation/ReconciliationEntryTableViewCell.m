@@ -4,41 +4,7 @@
 //
 
 #import "ReconciliationEntryTableViewCell.h"
-
-// stolen (and updated for ARC) from http://stackoverflow.com/questions/12267955/
-@implementation UITextField (Additions)
-
-- (void)setPrefixText:(NSString *)prefix
-{
-	UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
-	[label setBackgroundColor:[UIColor clearColor]];
-	[label setFont:[UIFont fontWithName:self.font.fontName size:self.font.pointSize]];
-	[label setTextColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.33]];
-	[label setText:prefix];
-	
-	CGSize prefixSize = [prefix sizeWithAttributes:@{NSFontAttributeName: label.font}];
-	label.frame = CGRectMake(0, 0, prefixSize.width, self.frame.size.height);
-	
-	[self setLeftView:label];
-	[self setLeftViewMode:UITextFieldViewModeAlways];
-}
-
-- (void)setSuffixText:(NSString *)suffix
-{
-	UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
-	[label setBackgroundColor:[UIColor clearColor]];
-	[label setFont:[UIFont fontWithName:self.font.fontName size:self.font.pointSize]];
-	[label setTextColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.33]];
-	[label setText:suffix];
-	
-	CGSize suffixSize = [suffix sizeWithAttributes:@{NSFontAttributeName: label.font}];
-	label.frame = CGRectMake(0, 0, suffixSize.width, self.frame.size.height);
-	
-	[self setRightView:label];
-	[self setRightViewMode:UITextFieldViewModeAlways];
-}
-
-@end
+#import "UITextField+PrefixSuffix.h"
 
 @implementation ReconciliationEntryTableViewCell
 
