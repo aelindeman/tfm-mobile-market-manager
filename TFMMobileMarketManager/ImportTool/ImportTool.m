@@ -166,6 +166,19 @@ static unsigned int parseSettings = CHCSVParserOptionsRecognizesBackslashesAsEsc
 	return importCount;
 }
 
+- (bool)importDump:(NSURL *)url
+{
+	NSFileManager *fm = [NSFileManager defaultManager];
+	NSURL *dbAt = [[TFMM3_APP_DELEGATE applicationDocumentsDirectory] URLByAppendingPathComponent:@"tfm-m3.m3db"];
+	NSError *error;
+	if ([fm removeItemAtURL:dbAt error:&error])
+		if (!error && [fm copyItemAtURL:url toURL:dbAt error:&error])
+			return true;
+	
+	NSLog(@"couldn't import database dump: %@", error);
+	return false;
+}
+
 #pragma mark - helper functions
 
 - (NSString *)sanitizePhone:(NSString *)input

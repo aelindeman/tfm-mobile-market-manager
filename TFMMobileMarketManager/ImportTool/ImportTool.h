@@ -21,4 +21,7 @@
 - (unsigned int)importVendorsFromCSV:(NSURL *)url;
 - (unsigned int)importLocationsFromCSV:(NSURL *)url;
 
+- (bool)importDump:(NSURL *)url;
+// - (bool)importTable:(NSURL *)url;
+
 @end
