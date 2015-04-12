@@ -16,7 +16,7 @@
 	[super viewDidLoad];
 	NSAssert([TFMM3_APP_DELEGATE activeMarketDay], @"No active market day set!");
 
-	self.formController.form = [[TransactionForm alloc] init];
+	TransactionForm *form = self.formController.form = [[TransactionForm alloc] init];
 
 	[self setEditMode:([self editObjectID] != nil)];
 	if ([self editMode])
@@ -26,7 +26,6 @@
 		[self setTitle:@"Edit Transaction"];
 		
 		// populate form with passed data if in edit mode
-		TransactionForm *form = self.formController.form;
 		Transactions *data = self.editObject;
 		
 		form.cust_zipcode = data.cust_zipcode;
@@ -49,8 +48,22 @@
 		form.snap_total = data.snap_total;
 		
 		form.markedInvalid = data.markedInvalid;
+		
+		// need to update the form after loading data to show/hide credit/snap fields
+		self.formController.form = form;
+		[self.tableView reloadData];
 	}
-	else [self setTitle:@"Add Transaction"];
+	else
+	{
+		[self setTitle:@"Add Transaction"];
+		
+		// set default values here; FXFormFieldDefaultValue isn't very reliable
+		// TODO: move default value settings to an options window somewhere else in the app
+		form.cust_frequency = FrequencyWeekly;
+		form.cust_gender = GenderFemale;
+		form.cust_senior = false;
+		form.cust_ethnicity = EthnicityWhite;
+	}
 	
 	UIBarButtonItem *closeButton = [[UIBarButtonItem alloc] initWithTitle:@"Close" style:UIBarButtonItemStylePlain target:self action:@selector(discard)];
 	self.navigationItem.leftBarButtonItem = closeButton;
@@ -93,14 +106,6 @@
 		
 	if (form.cust_id > 9999)
 		[errors addObject:@"ID must be the last 4 digits on their driver’s license"];
-		
-	if (form.cust_frequency == FrequencyNone)
-		[errors addObject:@"Choose a visit frequency"];
-	
-	// Referral information isn't required
-	
-	if (form.cust_ethnicity == EthnicityNone)
-		[errors addObject:@"Choose an ethnicity"];
 	
 	if (!form.credit_used && !form.snap_used)
 		[errors addObject:@"Transaction must have payment information"];
@@ -157,13 +162,19 @@
 			new.cust_senior = form.cust_senior;
 			new.cust_ethnicity = form.cust_ethnicity;
 			
-			new.credit_used = form.credit_used;
-			new.credit_fee = form.credit_fee;
-			new.credit_total = form.credit_total;
+			if (form.credit_used)
+			{
+				new.credit_used = form.credit_used;
+				new.credit_fee = form.credit_fee;
+				new.credit_total = form.credit_total;
+			}
 			
-			new.snap_used = form.snap_used;
-			new.snap_bonus = form.snap_bonus;
-			new.snap_total = form.snap_total;
+			if (form.snap_used)
+			{
+				new.snap_used = form.snap_used;
+				new.snap_bonus = form.snap_bonus;
+				new.snap_total = form.snap_total;
+			}
 			
 			new.markedInvalid = form.markedInvalid;
 		
@@ -189,41 +200,39 @@
 	}
 }
 
--(void)toggleSnapOrCredit:(UITableViewCell<FXFormFieldCell> *)cell
+- (void)toggleSnapOrCredit:(UITableViewCell<FXFormFieldCell> *)cell
 {
 	TransactionForm *form = self.formController.form;
+	NSInteger updateAnchor = [[self.tableView indexPathForCell:cell] section];
+	
+	// allow only one transaction type
 	if ([cell.field.key isEqualToString:@"credit_used"] && [form snap_used])
 	{
-		// disable snap_used and associated fields
 		[form setSnap_used:false];
-		[form setSnap_amount:0];
-		[form setSnap_bonus:0];
-		[form setSnap_total:0];
-		[self.formController.tableView reloadData];
 	}
 	if ([cell.field.key isEqualToString:@"snap_used"] && [form credit_used])
 	{
-		//should disable credit_used and associated fields
 		[form setCredit_used:false];
-		[form setCredit_amount:0];
-		[form setCredit_fee:0];
-		[form setCredit_total:0];
-		[self.formController.tableView reloadData];
+		updateAnchor --;
 	}
+	
+	// hide unrelated cells
+	self.formController.form = form;
+	[self.tableView reloadSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(updateAnchor, 2)] withRowAnimation:UITableViewRowAnimationFade];
 }
 
 - (void)updateCreditTotal:(UITableViewCell<FXFormFieldCell> *)cell
 {
 	TransactionForm *form = self.formController.form;
 	[form setCredit_total:form.credit_amount + form.credit_fee];
-	[self.formController.tableView reloadData];
+	[self.tableView reloadData];
 }
 
 - (void)updateSnapTotal:(UITableViewCell<FXFormFieldCell> *)cell
 {
 	TransactionForm *form = self.formController.form;
 	[form setSnap_total:form.snap_amount + form.snap_bonus];
-	[self.formController.tableView reloadData];
+	[self.tableView reloadData];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender

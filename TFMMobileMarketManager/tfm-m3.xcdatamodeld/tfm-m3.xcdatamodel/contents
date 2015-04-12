@@ -61,7 +61,7 @@
         <attribute name="credit_used" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="cust_ethnicity" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="cust_frequency" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="cust_gender" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="cust_gender" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="cust_id" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="cust_referral" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="cust_senior" optional="YES" attributeType="Boolean" syncable="YES"/>

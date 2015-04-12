@@ -15,7 +15,7 @@
 
 @property Frequency cust_frequency;
 @property NSString *cust_referral;
-@property BOOL cust_gender;
+@property Gender cust_gender;
 @property BOOL cust_senior;
 @property Ethnicity cust_ethnicity;
 
