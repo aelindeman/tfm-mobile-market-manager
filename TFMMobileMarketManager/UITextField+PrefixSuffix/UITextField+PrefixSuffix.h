@@ -9,9 +9,6 @@
 
 @interface UITextField (PrefixSuffix)
 
-@property UIColor *prefixLabelColor;
-@property UIColor *suffixLabelColor;
-
 - (void)setPrefixText:(NSString *)prefix;
 - (void)setSuffixText:(NSString *)suffix;
 

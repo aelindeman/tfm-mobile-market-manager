@@ -9,15 +9,12 @@
 
 @implementation UITextField (PrefixSuffix)
 
-@dynamic prefixLabelColor;
-@dynamic suffixLabelColor;
-
 - (void)setPrefixText:(NSString *)prefix
 {
 	UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
 	[label setBackgroundColor:[UIColor clearColor]];
 	[label setFont:[UIFont fontWithName:self.font.fontName size:self.font.pointSize]];
-	[label setTextColor:[self prefixLabelColor] ?: [self textColor]];
+	[label setTextColor:self.textColor];
 	[label setText:prefix];
 	
 	CGSize prefixSize = [prefix sizeWithAttributes:@{NSFontAttributeName: label.font}];
@@ -32,7 +29,7 @@
 	UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
 	[label setBackgroundColor:[UIColor clearColor]];
 	[label setFont:[UIFont fontWithName:self.font.fontName size:self.font.pointSize]];
-	[label setTextColor:[self suffixLabelColor] ?: [self textColor]];
+	[label setTextColor:self.textColor];
 	[label setText:suffix];
 	
 	CGSize suffixSize = [suffix sizeWithAttributes:@{NSFontAttributeName: label.font}];
