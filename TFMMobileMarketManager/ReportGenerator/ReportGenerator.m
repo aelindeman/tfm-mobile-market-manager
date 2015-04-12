@@ -22,6 +22,9 @@ static NSString *vendorsExportName = TFMM3_REPORT_TYPE_VENDORS;
 static NSString *staffExportName = TFMM3_REPORT_TYPE_STAFF;
 static NSString *locationsExportName = TFMM3_REPORT_TYPE_LOCATIONS;
 
+static NSString *dumpName = TFMM3_REPORT_TYPE_DUMP;
+static NSString *dumpFormat = @"%@ %@ %@.m3db"; // device name, dumpName, uuid
+
 // allow init using delegate's active market day
 - (id)init
 {
@@ -95,6 +98,9 @@ static NSString *locationsExportName = TFMM3_REPORT_TYPE_LOCATIONS;
 		// return path string
 		return [NSString pathWithComponents:@[path, [NSString stringWithFormat:marketDaySubfolder, md], [NSString stringWithFormat:reportFormat, md, reportName, uuidString]]];
 	}
+	
+	else if ([[reportName lowercaseString] containsString:[TFMM3_REPORT_TYPE_DUMP lowercaseString]])
+		return [NSString pathWithComponents:@[path, exportsSubfolder, [NSString stringWithFormat:dumpFormat, [[UIDevice currentDevice] name], reportName, uuidString]]];
 	
 	else return [NSString pathWithComponents:@[path, exportsSubfolder, [NSString stringWithFormat:reportFormat, [[UIDevice currentDevice] name], reportName, uuidString]]];
 }
@@ -404,6 +410,39 @@ static NSString *locationsExportName = TFMM3_REPORT_TYPE_LOCATIONS;
 	
 	NSLog(@"prepped locations export: {\n%@\n}", writeString);
 	return [self writeReportToFile:path contents:writeString];
+}
+
+- (NSString *)dump
+{
+	NSString *path = [self getReportsPathForReportType:dumpName];
+	return [self dumpAtPath:path] ? path : false;
+}
+
+- (bool)dumpAtPath:(NSString *)path
+{
+	NSFileManager *fm = [NSFileManager defaultManager];
+	
+	@try
+	{
+		[fm createDirectoryAtPath:[path stringByDeletingLastPathComponent] withIntermediateDirectories:true attributes:nil error:nil];
+		NSString *dbAt = [[[TFMM3_APP_DELEGATE applicationDocumentsDirectory] URLByAppendingPathComponent:@"tfm-m3.m3db"] path];
+		
+		bool did = [fm copyItemAtPath:dbAt toPath:path error:nil];
+		
+		NSLog(@"wrote report to %@", path);
+		return did;
+	}
+	@catch (NSException *exception)
+	{
+		NSLog(@"couldn’t write report: %@", [exception reason]);
+	}
+	
+	if ([fm fileExistsAtPath:path])
+	{
+		NSDictionary *attribs = [fm attributesOfItemAtPath:path error:nil];
+		return [attribs fileSize] > 0;
+	}
+	else return false;
 }
 
 @end

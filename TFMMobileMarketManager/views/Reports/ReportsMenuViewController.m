@@ -21,7 +21,7 @@ static NSString *reportCreatedMessage = @"The %@ report was created successfully
 	[self.previewer setDataSource:self];
 	
 	// populate the menu
-	self.menuSectionHeaders = @[@"", @"Reports", @"Raw Data"];
+	self.menuSectionHeaders = @[@"", @"Reports", @"Raw Data", @"Database"];
 	self.menuOptions = @[
 		@[
 			@{@"title": @"Open an existing report", @"icon": @"report", @"action": @"SelectExistingReportSegue"},
@@ -34,6 +34,8 @@ static NSString *reportCreatedMessage = @"The %@ report was created successfully
 			@{@"title": @"Export vendors", @"icon": @"vendors", @"action": TFMM3_REPORT_TYPE_VENDORS},
 			@{@"title": @"Export staff", @"icon": @"staff", @"action": TFMM3_REPORT_TYPE_STAFF},
 			@{@"title": @"Export locations", @"icon": @"locations", @"action": TFMM3_REPORT_TYPE_LOCATIONS},
+		], @[
+			@{@"title": @"Dump entire database", @"icon": @"database", @"action": @"dump"}
 		]];
 	[self updatePrompt];
 }
@@ -171,6 +173,7 @@ static NSString *reportCreatedMessage = @"The %@ report was created successfully
 	else if ([type isEqualToString:TFMM3_REPORT_TYPE_VENDORS]) path = [rg generateVendorsReport];
 	else if ([type isEqualToString:TFMM3_REPORT_TYPE_STAFF]) path = [rg generateStaffReport];
 	else if ([type isEqualToString:TFMM3_REPORT_TYPE_LOCATIONS]) path = [rg generateLocationsReport];
+	else if ([type isEqualToString:@"dump"]) path = [rg dump];
 	else
 	{
 		NSLog (@"no action set for “%@”", type);

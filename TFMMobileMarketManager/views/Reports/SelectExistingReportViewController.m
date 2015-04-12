@@ -42,7 +42,7 @@ static NSString *deleteAllConfirmationMessageDetails = @"All reports on this dev
 	NSMutableArray *items = [[NSMutableArray alloc] init];
 	for (NSString *subfolder in subs)
 	{
-		NSArray *contents = [[fm contentsOfDirectoryAtPath:[NSString pathWithComponents:@[self.basePath, subfolder]] error:&error] filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"self endswith '.csv'"]];
+		NSArray *contents = [[fm contentsOfDirectoryAtPath:[NSString pathWithComponents:@[self.basePath, subfolder]] error:&error] filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"self endswith '.csv' or self endswith '.m3db' or self endswith '.m3table'"]];
 		if ([contents count] > 0)
 			[items addObject:@{ @"name": subfolder, @"items": contents }];
 	}
