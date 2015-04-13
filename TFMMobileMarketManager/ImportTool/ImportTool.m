@@ -169,7 +169,7 @@ static unsigned int parseSettings = CHCSVParserOptionsRecognizesBackslashesAsEsc
 - (bool)importDump:(NSURL *)url
 {
 	NSFileManager *fm = [NSFileManager defaultManager];
-	NSURL *dbAt = [[TFMM3_APP_DELEGATE applicationDocumentsDirectory] URLByAppendingPathComponent:@"tfm-m3.m3db"];
+	NSURL *dbAt = [[[TFMM3_APP_DELEGATE.persistentStoreCoordinator persistentStores] lastObject] url];
 	NSError *error;
 	if ([fm removeItemAtURL:dbAt error:&error])
 		if (!error && [fm copyItemAtURL:url toURL:dbAt error:&error])
