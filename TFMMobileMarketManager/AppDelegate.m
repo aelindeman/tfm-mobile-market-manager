@@ -63,23 +63,13 @@
 	return YES;
 }
 
-// TODO: fix logic for files that may not have the correct extension - see http://stackoverflow.com/q/1363813/
+// TODO: cannot rely on ImportSegue - if the user isn't on a menu that isn't the main menu, importing won't work correctly
 - (void)handleOpenURL:(NSURL *)url
 {
 	NSAssert1([self.window.rootViewController class] == [UINavigationController class], @"root view controller wasn't a UINavigationController, it was a %@", [self.window.rootViewController class]);
+	[[[(UINavigationController *)self.window.rootViewController viewControllers] firstObject] performSegueWithIdentifier:@"ImportSegue" sender:url];
 	
-	if ([[url pathExtension] isEqualToString:@"m3db"])
-		NSLog(@"handleOpenURL - merge/replace for database - unhandled");
-	
-	else if ([[url pathExtension] isEqualToString:@"m3table"])
-		NSLog(@"handleOpenURL - merge/replace for table - unhandled");
-	
-	// if the file is a csv, go to import view
-	else if ([[url pathExtension] isEqualToString:@"csv"])
-		[[[(UINavigationController *)self.window.rootViewController viewControllers] firstObject] performSegueWithIdentifier:@"ImportSegue" sender:url];
-	
-	else
-		NSAssert1(0, @"The application was passed a file type it is registered to handle, but it did not have the proper extension, and the application does not have the logic to determine its filetype. (url: %@)", url);
+	NSLog(@"handleOpenURL for %@", [url lastPathComponent]);
 }
 
 #pragma mark - Core Data stack
