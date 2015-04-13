@@ -977,17 +977,18 @@ Stephen Davies</string>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="b2X-Hq-RFZ">
-                                <rect key="frame" x="92" y="72" width="221" height="29"/>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" apportionsSegmentWidthsByContent="YES" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="b2X-Hq-RFZ">
+                                <rect key="frame" x="92" y="72" width="295" height="29"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="295" id="aQX-LA-LsZ"/>
+                                </constraints>
                                 <segments>
                                     <segment title="Vendors"/>
                                     <segment title="Staff"/>
                                     <segment title="Locations"/>
+                                    <segment title="Entire database" enabled="NO"/>
                                 </segments>
                             </segmentedControl>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="zgK-s0-qgJ">
-                                <rect key="frame" x="282" y="355" width="37" height="37"/>
-                            </activityIndicatorView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ddA-Ab-rPb">
                                 <rect key="frame" x="478" y="72" width="106" height="28"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -998,30 +999,37 @@ Stephen Davies</string>
                                     <action selector="prepopulatePrompt:" destination="7gL-Gt-FjR" eventType="touchUpInside" id="mrZ-x4-5U1"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Filename" textAlignment="right" lineBreakMode="headTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DkU-2g-wAU">
+                                <rect key="frame" x="522" y="115" width="62" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="GL0-jI-6Cj" firstAttribute="leading" secondItem="QRz-C3-57k" secondAttribute="leading" id="1JG-kV-gbl"/>
                             <constraint firstItem="ddA-Ab-rPb" firstAttribute="top" secondItem="BSh-4d-F4r" secondAttribute="bottom" constant="8" symbolic="YES" id="1Y9-TK-ghu"/>
                             <constraint firstItem="840-ao-Vo9" firstAttribute="leading" secondItem="RWj-2v-5fe" secondAttribute="trailing" constant="16" id="8YS-md-a5k"/>
-                            <constraint firstItem="mof-ef-grl" firstAttribute="top" secondItem="b2X-Hq-RFZ" secondAttribute="bottom" constant="8" symbolic="YES" id="BkD-7W-Tsc"/>
+                            <constraint firstItem="b2X-Hq-RFZ" firstAttribute="leading" secondItem="elq-wB-jiL" secondAttribute="trailing" constant="8" symbolic="YES" id="A8S-em-qVQ"/>
+                            <constraint firstItem="mof-ef-grl" firstAttribute="top" secondItem="b2X-Hq-RFZ" secondAttribute="bottom" constant="8" symbolic="YES" id="DJl-Uc-HUd"/>
                             <constraint firstItem="yhw-G6-Dg9" firstAttribute="leading" secondItem="elq-wB-jiL" secondAttribute="leading" id="GUF-jd-6SC"/>
                             <constraint firstItem="GL0-jI-6Cj" firstAttribute="top" secondItem="mof-ef-grl" secondAttribute="bottom" constant="8" symbolic="YES" id="J3I-3S-ZTT"/>
                             <constraint firstItem="ddA-Ab-rPb" firstAttribute="trailing" secondItem="QRz-C3-57k" secondAttribute="trailingMargin" id="NBE-7b-KYX"/>
                             <constraint firstAttribute="trailing" secondItem="GL0-jI-6Cj" secondAttribute="trailing" id="NKh-Eb-b7i"/>
-                            <constraint firstItem="b2X-Hq-RFZ" firstAttribute="leading" secondItem="elq-wB-jiL" secondAttribute="trailing" constant="8" symbolic="YES" id="Req-zM-skP"/>
                             <constraint firstItem="yhw-G6-Dg9" firstAttribute="width" secondItem="elq-wB-jiL" secondAttribute="width" id="Ry8-9W-M0D"/>
+                            <constraint firstItem="DkU-2g-wAU" firstAttribute="trailing" secondItem="QRz-C3-57k" secondAttribute="trailingMargin" id="UrF-68-lPS"/>
                             <constraint firstItem="RWj-2v-5fe" firstAttribute="centerY" secondItem="mof-ef-grl" secondAttribute="centerY" id="VAV-9z-aDc"/>
                             <constraint firstItem="hJ2-tU-AxI" firstAttribute="top" secondItem="GL0-jI-6Cj" secondAttribute="bottom" id="YSN-5j-Jzb"/>
                             <constraint firstItem="840-ao-Vo9" firstAttribute="centerY" secondItem="mof-ef-grl" secondAttribute="centerY" id="YcT-iS-OhU"/>
+                            <constraint firstItem="b2X-Hq-RFZ" firstAttribute="top" secondItem="ddA-Ab-rPb" secondAttribute="top" id="bn7-ov-22I"/>
                             <constraint firstItem="elq-wB-jiL" firstAttribute="leading" secondItem="QRz-C3-57k" secondAttribute="leadingMargin" id="eNq-Lj-uQ3"/>
+                            <constraint firstItem="b2X-Hq-RFZ" firstAttribute="centerY" secondItem="elq-wB-jiL" secondAttribute="centerY" id="gK5-f5-Kva"/>
                             <constraint firstItem="RWj-2v-5fe" firstAttribute="leading" secondItem="yhw-G6-Dg9" secondAttribute="trailing" constant="8" symbolic="YES" id="guE-AR-aXB"/>
                             <constraint firstItem="mof-ef-grl" firstAttribute="leading" secondItem="840-ao-Vo9" secondAttribute="trailing" constant="8" symbolic="YES" id="hZV-Oo-aod"/>
-                            <constraint firstItem="zgK-s0-qgJ" firstAttribute="centerX" secondItem="GL0-jI-6Cj" secondAttribute="centerX" id="iZG-RE-s38"/>
-                            <constraint firstItem="b2X-Hq-RFZ" firstAttribute="top" secondItem="BSh-4d-F4r" secondAttribute="bottom" constant="8" symbolic="YES" id="kba-2d-4tE"/>
-                            <constraint firstItem="zgK-s0-qgJ" firstAttribute="centerY" secondItem="GL0-jI-6Cj" secondAttribute="centerY" id="kua-Gt-RrL"/>
+                            <constraint firstItem="DkU-2g-wAU" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="mof-ef-grl" secondAttribute="trailing" constant="8" symbolic="YES" id="l1g-au-TQd"/>
+                            <constraint firstItem="840-ao-Vo9" firstAttribute="centerY" secondItem="DkU-2g-wAU" secondAttribute="centerY" id="nD3-ia-hcf"/>
                             <constraint firstItem="RWj-2v-5fe" firstAttribute="centerY" secondItem="yhw-G6-Dg9" secondAttribute="centerY" id="sia-Mz-9UD"/>
-                            <constraint firstItem="b2X-Hq-RFZ" firstAttribute="centerY" secondItem="elq-wB-jiL" secondAttribute="centerY" id="yfk-8u-cWl"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -1032,12 +1040,12 @@ Stephen Davies</string>
                     <navigationItem key="navigationItem" title="Import" id="4Ua-Gj-KMS">
                         <barButtonItem key="rightBarButtonItem" title="Import" style="done" id="YMT-Rr-wqa">
                             <connections>
-                                <action selector="importData:" destination="7gL-Gt-FjR" id="SJk-qO-k0s"/>
+                                <action selector="confirmImportData:" destination="7gL-Gt-FjR" id="CkN-PW-hmm"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="activityIndicator" destination="zgK-s0-qgJ" id="CEa-ke-Fv3"/>
+                        <outlet property="filenameLabel" destination="DkU-2g-wAU" id="1zS-2Z-86U"/>
                         <outlet property="firstRowSkipSwitch" destination="mof-ef-grl" id="6Sb-bx-j7K"/>
                         <outlet property="importButton" destination="YMT-Rr-wqa" id="lA8-oM-UhV"/>
                         <outlet property="importDestination" destination="b2X-Hq-RFZ" id="17T-8i-dv2"/>

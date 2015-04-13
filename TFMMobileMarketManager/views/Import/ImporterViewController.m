@@ -17,8 +17,14 @@ static NSString *prepopulateConfirmationMessage = @"This will add a small sample
 static NSString *noDestinationSelectedTitle = @"No destination selected";
 static NSString *noDestinationSelectedMessage = @"";
 
+static NSString *dumpImportConfirmationTitle = @"Import this database dump?";
+static NSString *dumpImportConfirmationMessage = @"The current database will be destroyed permanently, and the database you opened will become the current database.";
+
+static NSString *cantImportDumpFromInputTitle = @"Can’t import database dump from text input";
+static NSString *cantImportDumpFromInputMessage = @"Database dumps can only be imported from SQLite dump files with the extension “m3db”.";
+
 static NSString *importConfirmationTitle = @"Import data?";
-static NSString *importConfirmationMessage = @"%i entr%@ will be imported."; // first token: entry count, second token: pluralize -> (count == 1) ? @"y" : @"ies"
+static NSString *importConfirmationMessage = @"";
 
 static NSString *importSuccessTitle = @"Data imported successfully";
 static NSString *importSuccessMessage = @"%i entr%@ imported."; // first token: entry count, second token: pluralize -> (count == 1) ? @"y was" : @"ies were"
@@ -30,10 +36,10 @@ static NSString *importSuccessMessage = @"%i entr%@ imported."; // first token: 
 	if (self.fileToImport)
 	{
 		// simple determine type of import based on filename
-		NSDictionary *types = @{@"staff": @1, @"employee": @1, @"vendor": @0, @"business": @0, @"location": @2, @"market": @2, @"marketstaff": @1};
+		NSDictionary *types = @{@"staff": @1, @"employee": @1, @"vendor": @0, @"business": @0, @"location": @2, @"market": @2, @"marketstaff": @1, @"dump": @3, @"database": @3};
 		for (NSString *key in types)
 		{
-			NSRange range = [[[[self.fileToImport pathComponents] lastObject] lowercaseString] rangeOfString:[key lowercaseString]];
+			NSRange range = [[[self.fileToImport lastPathComponent] lowercaseString] rangeOfString:[key lowercaseString]];
 			if (range.length > 0)
 			{
 				NSLog(@"assuming import type is %i because filename “%@” contained “%@”", [[types valueForKey: key] intValue], [[self.fileToImport pathComponents] lastObject], key);
@@ -42,13 +48,30 @@ static NSString *importSuccessMessage = @"%i entr%@ imported."; // first token: 
 			}
 		}
 		
-		// load file into main text view
 		NSError *error;
-		[self.textView setText:[NSString stringWithContentsOfFile:[self.fileToImport path] encoding:NSUTF8StringEncoding error:&error]];
+		if ([[[self.fileToImport pathExtension] lowercaseString] isEqualToString:@"csv"])
+		{
+			[self.textView setText:[NSString stringWithContentsOfFile:[self.fileToImport path] encoding:NSUTF8StringEncoding error:&error]];
+		}
+		else
+		{
+			for (unsigned int i = 0; i < self.importDestination.numberOfSegments - 1; i ++)
+				[self.importDestination setEnabled:false forSegmentAtIndex:i];
+			[self.importDestination setEnabled:true forSegmentAtIndex:3];
+			[self.importDestination setSelectedSegmentIndex:3];
+			[self.textView setText:[NSString stringWithFormat:@"Can’t display <%@> as text", [self.fileToImport lastPathComponent]]];
+		}
+		
 		if (error) NSLog(@"error while loading url: %@", error);
 		
 		// prevent editing opened data
 		[self.textView setEditable:false];
+		[self.filenameLabel setText:[@"Ready to import " stringByAppendingString:[self.fileToImport lastPathComponent]]];
+	}
+	else
+	{
+		// TODO: enable input import
+		[self.importButton setEnabled:false];
 	}
 }
 
@@ -56,7 +79,7 @@ static NSString *importSuccessMessage = @"%i entr%@ imported."; // first token: 
 - (void)handleOpenURL:(NSURL *)url
 {
 	[self setFileToImport:url];
-	[self.navigationItem setPrompt:[@"Importing " stringByAppendingString:[[self.fileToImport pathComponents] lastObject]]];
+	[self.filenameLabel setText:[self.fileToImport lastPathComponent]];
 	NSLog(@"importer loaded url %@", url);
 }
 
@@ -131,67 +154,87 @@ static NSString *importSuccessMessage = @"%i entr%@ imported."; // first token: 
 
 - (IBAction)prepopulatePrompt:(id)sender
 {
-	[[[UIAlertView alloc] initWithTitle:prepopulateConfirmationTitle message:prepopulateConfirmationMessage delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil] show];
+	UIAlertController *prepopulatePrompt = [UIAlertController alertControllerWithTitle:prepopulateConfirmationTitle message:prepopulateConfirmationMessage preferredStyle:UIAlertControllerStyleAlert];
+	[prepopulatePrompt addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil]];
+	[prepopulatePrompt addAction:[UIAlertAction actionWithTitle:@"Prepopulate" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+		[self prepopulate];
+	}]];
+	[self presentViewController:prepopulatePrompt animated:true completion:nil];
 }
 
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+// TODO: don't depend on switch on file extension on import type, use mimetype or something better
+- (IBAction)confirmImportData:(id)sender
 {
-	if ([[alertView title] isEqualToString:prepopulateConfirmationTitle])
-	{
-		switch (buttonIndex)
-		{
-			case 0:
-				// canceled
-				break;
-				
-			case 1:
-			{
-				[self prepopulate];
-				break;
-			}
-		}
-	}
-}
-
-// heavy lifting
-- (IBAction)importData:(id)sender
-{
-	[self.activityIndicator startAnimating];
-
 	if (self.importDestination.selectedSegmentIndex < 0)
 	{
-		[[[UIAlertView alloc] initWithTitle:noDestinationSelectedTitle message:noDestinationSelectedMessage delegate:self cancelButtonTitle:nil otherButtonTitles:@"Dismiss", nil] show];
+		// flash the picker and do nothing
+		CABasicAnimation *notifyAnimation = [CABasicAnimation animationWithKeyPath:@"backgroundColor"];
+		[notifyAnimation setFromValue:(id)[[UIColor colorWithRed:1 green:0.848 blue:0.452 alpha:1] CGColor]];
+		[notifyAnimation setDuration:1.0f];
+		[notifyAnimation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn]];
+		[self.importDestination.layer addAnimation:notifyAnimation forKey:@"NotifyAnimation"];
+		return;
+	}
+	
+	if (!self.fileToImport && self.importDestination.selectedSegmentIndex == 3)
+	{
+		UIAlertController *deny = [UIAlertController alertControllerWithTitle:importConfirmationTitle message:nil preferredStyle:UIAlertControllerStyleAlert];
+		[deny setTitle:cantImportDumpFromInputTitle];
+		[deny setMessage:cantImportDumpFromInputMessage];
+		[deny addAction:[UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleCancel handler:nil]];
+		[self presentViewController:deny animated:true completion:nil];
+		return;
+	}
+	
+	UIAlertController *confirm = [UIAlertController alertControllerWithTitle:importConfirmationTitle message:nil preferredStyle:UIAlertControllerStyleAlert];
+	[confirm addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil]];
+	
+	if ([[[self.fileToImport pathExtension] lowercaseString] isEqualToString:@"m3db"])
+	{
+		[confirm setTitle:dumpImportConfirmationTitle];
+		[confirm setMessage:dumpImportConfirmationMessage];
+		[confirm addAction:[UIAlertAction actionWithTitle:@"Merge" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+			NSLog(@"not implemented");
+		}]];
+		[confirm addAction:[UIAlertAction actionWithTitle:@"Replace" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+			[self importData];
+		}]];
 	}
 	else
 	{
-		if (!self.fileToImport)
-		{
-			[[[UIAlertView alloc] initWithTitle:@"Not supported" message:@"Can’t import using direct input yet." delegate:self cancelButtonTitle:nil otherButtonTitles:@"Dismiss", nil] show];
-		}
-		else
-		{
-			NSUInteger count = 0;
-			switch (self.importDestination.selectedSegmentIndex)
-			{
-				case 0: // vendors
-					count = [[[ImportTool alloc] initWithSkipSetting:self.firstRowSkipSwitch.on] importVendorsFromCSV:self.fileToImport];
-					break;
-					
-				case 1: // staff
-					count = [[[ImportTool alloc] initWithSkipSetting:self.firstRowSkipSwitch.on] importStaffFromCSV:self.fileToImport];
-					break;
-					
-				case 2: // locations
-					count = [[[ImportTool alloc] initWithSkipSetting:self.firstRowSkipSwitch.on] importLocationsFromCSV:self.fileToImport];
-					break;
-			}
+		[confirm addAction:[UIAlertAction actionWithTitle:@"Import" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+			[self importData];
+		}]];
+	}
+
+	[self presentViewController:confirm animated:true completion:nil];
+}
+
+// heavy lifting
+- (void)importData
+{
+	NSUInteger count = 0;
+	switch (self.importDestination.selectedSegmentIndex)
+	{
+		case 0: // vendors
+			count = [[[ImportTool alloc] initWithSkipSetting:self.firstRowSkipSwitch.on] importVendorsFromCSV:self.fileToImport];
+			break;
 			
-			if (count > 0)
-				[[[UIAlertView alloc] initWithTitle:importSuccessTitle message:[NSString stringWithFormat:importSuccessMessage, count, (count == 1) ? @"y was" : @"ies were"] delegate:self cancelButtonTitle:nil otherButtonTitles:@"Dismiss", nil] show];
-		}
+		case 1: // staff
+			count = [[[ImportTool alloc] initWithSkipSetting:self.firstRowSkipSwitch.on] importStaffFromCSV:self.fileToImport];
+			break;
+			
+		case 2: // locations
+			count = [[[ImportTool alloc] initWithSkipSetting:self.firstRowSkipSwitch.on] importLocationsFromCSV:self.fileToImport];
+			break;
+		
+		case 3: // dump
+			count = [[[ImportTool alloc] initWithSkipSetting:false] importDump:self.fileToImport];
+			break;
 	}
 	
-	[self.activityIndicator stopAnimating];
+	if (count > 0)
+		[[[UIAlertView alloc] initWithTitle:importSuccessTitle message:[NSString stringWithFormat:importSuccessMessage, count, (count == 1) ? @"y was" : @"ies were"] delegate:self cancelButtonTitle:nil otherButtonTitles:@"Dismiss", nil] show];
 }
 
 @end

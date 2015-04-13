@@ -166,17 +166,31 @@ static unsigned int parseSettings = CHCSVParserOptionsRecognizesBackslashesAsEsc
 	return importCount;
 }
 
+// !!!: replaces entire database
+// TODO: implement option for merging rather than a drop-in replacement db - http://stackoverflow.com/a/10038331/262640
 - (bool)importDump:(NSURL *)url
 {
-	NSFileManager *fm = [NSFileManager defaultManager];
-	NSURL *dbAt = [[[TFMM3_APP_DELEGATE.persistentStoreCoordinator persistentStores] lastObject] url];
-	NSError *error;
-	if ([fm removeItemAtURL:dbAt error:&error])
-		if (!error && [fm copyItemAtURL:url toURL:dbAt error:&error])
-			return true;
-	
-	NSLog(@"couldn't import database dump: %@", error);
-	return false;
+	@try
+	{
+		// delete existing database
+		NSPersistentStore *store = [[TFMM3_APP_DELEGATE.persistentStoreCoordinator persistentStores] lastObject];
+		[TFMM3_APP_DELEGATE.persistentStoreCoordinator removePersistentStore:store error:nil];
+		
+		// copy over new database
+		[[NSFileManager defaultManager] removeItemAtURL:store.URL error:nil];
+		[[NSFileManager defaultManager] copyItemAtURL:url toURL:store.URL error:nil];
+		
+		// restart persistent store coordinator using new database
+		[TFMM3_APP_DELEGATE.persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:store.URL options:nil error:nil];
+		
+		NSLog(@"using drop-in replacement for database from %@", [url path]);
+		return true;
+	}
+	@catch (NSException *exception)
+	{
+		NSLog(@"drop-in replacement for database failed: %@", [exception reason]);
+		return false;
+	}
 }
 
 #pragma mark - helper functions

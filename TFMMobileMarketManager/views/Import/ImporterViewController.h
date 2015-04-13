@@ -19,10 +19,12 @@
 @property (weak, nonatomic) IBOutlet UISwitch *firstRowSkipSwitch;
 @property (weak, nonatomic) IBOutlet UITextView *textView;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *importButton;
-@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property (weak, nonatomic) IBOutlet UILabel *filenameLabel;
 
 - (void)handleOpenURL:(NSURL *)url;
 - (IBAction)prepopulatePrompt:(id)sender;
-- (IBAction)importData:(id)sender;
+- (IBAction)confirmImportData:(id)sender;
+
+- (void)importData;
 
 @end
