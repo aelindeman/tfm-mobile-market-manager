@@ -8,7 +8,7 @@
 @implementation SelectExistingReportViewController
 
 static NSString *deleteConfirmationMessageTitle = @"Delete this report?";
-static NSString *deleteConfirmationMessageDetails = @"“%@” report will be deleted permanently."; // token is report name
+static NSString *deleteConfirmationMessageDetails = @"“%@” will be deleted permanently."; // token is report name
 
 static NSString *deleteAllConfirmationMessageTitle = @"Delete all reports?";
 static NSString *deleteAllConfirmationMessageDetails = @"All reports on this device will be deleted permanently.";
@@ -102,31 +102,26 @@ static NSString *deleteAllConfirmationMessageDetails = @"All reports on this dev
 	{
 		case UITableViewCellEditingStyleDelete:
 		{
-			UIAlertController *deletePrompt = [UIAlertController alertControllerWithTitle:deleteAllConfirmationMessageTitle message:deleteAllConfirmationMessageDetails preferredStyle:UIAlertControllerStyleAlert];
-			[deletePrompt addAction:[UIAlertAction actionWithTitle:@"Don’t delete" style:UIAlertActionStyleCancel handler:nil]];
-			[deletePrompt addAction:[UIAlertAction actionWithTitle:@"Delete" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action)
+			NSString *name = [[[self.items objectAtIndex:indexPath.section] objectForKey:@"items"] objectAtIndex:indexPath.row];
+			NSString *marketday = [[self.items objectAtIndex:indexPath.section] valueForKey:@"name"];
+			NSString *resolvedPath = [NSString pathWithComponents:@[self.basePath, marketday, name]];
+			
+			NSError *error;
+			[[NSFileManager defaultManager] removeItemAtPath:resolvedPath error:&error];
+			if (error) NSLog(@"error deleting report: %@", error);
+			else
 			{
-				NSString *marketday = [[self.items objectAtIndex:indexPath.section] valueForKey:@"name"];
-				NSString *name = [[[self.items objectAtIndex:indexPath.section] objectForKey:@"items"] objectAtIndex:indexPath.row];
-				NSString *resolvedPath = [NSString pathWithComponents:@[self.basePath, marketday, name]];
+				// delete the item
+				[self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
 				
-				NSError *error;
-				[[NSFileManager defaultManager] removeItemAtPath:resolvedPath error:&error];
-				if (error) NSLog(@"error deleting report: %@", error);
-				else
-				{
-					// delete the item
-					[self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-					
-					// delete the section too if it was the last item
-					if ([[[self.items objectAtIndex:indexPath.section] objectForKey:@"items"] count] == 1)
-						[self.tableView deleteSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationFade];
-					
-					// reload the table
-					[self load];
-				}
-			}]];
-			[self presentViewController:deletePrompt animated:true completion:nil];
+				// delete the section too if it was the last item
+				if ([[[self.items objectAtIndex:indexPath.section] objectForKey:@"items"] count] == 1)
+					[self.tableView deleteSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationFade];
+				
+				// reload the table
+				[self load];
+			}
+			
 			break;
 		}
 		

@@ -9,9 +9,13 @@
 
 static NSString *noSelectedMarketDayWarningTitle = @"No market day selected";
 static NSString *noSelectedMarketDayWarningMessage = @"To create a report, you need to select a market day first.";
+static NSString *noSelectedMarketDayWarningLabel = @"Sales, redemptions, and demographics reports need a market day selected before they can be created";
 
-static NSString *reportCreatedTitle = @"Report created";
-static NSString *reportCreatedMessage = @"The %@ report was created successfully. Do you want to view it?";
+static NSString *reportCreatedTitle = @"%@ created";
+static NSString *reportCreatedMessage = @"The %@ was created successfully.";
+
+static NSString *reportFailedTitle = @"Couldn’t create report";
+static NSString *reportFailedMessage = @"An error occured while making the report: %@";
 
 - (void)viewDidLoad
 {
@@ -43,7 +47,7 @@ static NSString *reportCreatedMessage = @"The %@ report was created successfully
 - (void)updatePrompt
 {
 	[self.navigationItem setPrompt:(self.selectedMarketDay) ? [self.selectedMarketDay description] : nil];
-	[self.tableView reloadData];
+	[self.tableView reloadSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, [self.menuOptions count] - 1)] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -68,12 +72,18 @@ static NSString *reportCreatedMessage = @"The %@ report was created successfully
 	}
 }
 
+- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
+{
+	return (section == 1 && !self.selectedMarketDay) ? noSelectedMarketDayWarningLabel : @"";
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MenuOptionCell" forIndexPath:indexPath];
 	NSDictionary *option = [[self.menuOptions objectAtIndex:[indexPath section]] objectAtIndex:[indexPath row]];
 	
 	[cell.textLabel setText:[option valueForKey:@"title"]];
+	[cell.detailTextLabel setHidden:true];
 	[cell setAccessoryType:[[option valueForKey:@"action"] hasSuffix:@"Segue"] ? UITableViewCellAccessoryDisclosureIndicator : UITableViewCellAccessoryNone];
 	
 	if ([option valueForKey:@"icon"])
@@ -81,6 +91,13 @@ static NSString *reportCreatedMessage = @"The %@ report was created successfully
 	
 	if ([option valueForKey:@"bold"])
 		[cell.textLabel setFont:[UIFont boldSystemFontOfSize:[cell.textLabel.font pointSize]]];
+	
+	// show market day name in market day selection menu item
+	if ([[option valueForKey:@"action"] isEqualToString:@"SelectMarketDaySegue"])
+	{
+		[cell.detailTextLabel setHidden:!self.selectedMarketDay];
+		[cell.detailTextLabel setText:self.selectedMarketDay ? [self.selectedMarketDay description] : @""];
+	}
 	
 	// disable report creation buttons if there's no market day
 	if (indexPath.section == [self.menuSectionHeaders indexOfObject:@"Reports"] && ![[option valueForKey:@"action"] isEqualToString:@"SelectMarketDaySegue"])
@@ -110,22 +127,14 @@ static NSString *reportCreatedMessage = @"The %@ report was created successfully
 			[self setMostRecentReportPath:path];
 			[self.previewer reloadData];
 			
-			NSString *promptMessage = ([action isEqualToString:TFMM3_REPORT_TYPE_DUMP]) ? @"The dump was created successfully." : [NSString stringWithFormat:reportCreatedMessage, [action lowercaseString]];
+			NSString *reportType = ([action isEqualToString:TFMM3_REPORT_TYPE_DUMP]) ? @"dump" : @"report";
+			NSString *message = [NSString stringWithFormat:reportCreatedMessage, ([action isEqualToString:TFMM3_REPORT_TYPE_DUMP]) ? reportType : [@[[action lowercaseString], reportType] componentsJoinedByString:@" "]];
 			
-			UIAlertController *openReportPrompt = [UIAlertController alertControllerWithTitle:reportCreatedTitle message:promptMessage preferredStyle:UIAlertControllerStyleAlert];
-			
-			if ([action isEqualToString:TFMM3_REPORT_TYPE_DUMP])
-			{
-				[openReportPrompt addAction:[UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleCancel handler:nil]];
-			}
-			else
-			{
-				[openReportPrompt addAction:[UIAlertAction actionWithTitle:@"Close" style:UIAlertActionStyleCancel handler:nil]];
-				[openReportPrompt addAction:[UIAlertAction actionWithTitle:@"Open report" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-					[self presentViewController:self.previewer animated:true completion:nil];
-				}]];
-			}
-			
+			UIAlertController *openReportPrompt = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:reportCreatedTitle, [reportType capitalizedString]] message:message preferredStyle:UIAlertControllerStyleAlert];
+			[openReportPrompt addAction:[UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleCancel handler:nil]];
+			[openReportPrompt addAction:[UIAlertAction actionWithTitle:[NSString stringWithFormat:@"View %@", reportType] style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+				[self presentViewController:self.previewer animated:true completion:nil];
+			}]];
 			[self presentViewController:openReportPrompt animated:true completion:nil];
 		}
 	}
@@ -156,6 +165,14 @@ static NSString *reportCreatedMessage = @"The %@ report was created successfully
 // creates a report and returns where it is located
 - (NSString *)createReport:(NSString *)type
 {
+	// make sure this is an actual report type
+	if (![TFMM3_REPORT_TYPES_ALL containsObject:type])
+	{
+		NSLog (@"unknown report type “%@”", type);
+		return false;
+	}
+	
+	// require market days for certain reports; don't rely on greyed-out menu options
 	if ([TFMM3_REPORT_TYPES_MARKETDAY containsObject:type] && !self.selectedMarketDay)
 	{
 		UIAlertController *message = [UIAlertController alertControllerWithTitle:noSelectedMarketDayWarningTitle message:noSelectedMarketDayWarningMessage preferredStyle:UIAlertControllerStyleAlert];
@@ -164,22 +181,28 @@ static NSString *reportCreatedMessage = @"The %@ report was created successfully
 		return false;
 	}
 
+	// create the report
 	ReportGenerator *rg = [[ReportGenerator alloc] initWithMarketDay:self.selectedMarketDay];
-	NSString *path;
+	NSString *path =
+		[type isEqualToString:TFMM3_REPORT_TYPE_SALES] ? [rg generateSalesReport] :
+		[type isEqualToString:TFMM3_REPORT_TYPE_REDEMPTIONS] ? [rg generateRedemptionsReport] :
+		[type isEqualToString:TFMM3_REPORT_TYPE_DEMOGRAPHICS] ? [rg generateDemographicsReport] :
+		[type isEqualToString:TFMM3_REPORT_TYPE_VENDORS] ? [rg generateVendorsReport] :
+		[type isEqualToString:TFMM3_REPORT_TYPE_STAFF] ? [rg generateStaffReport] :
+		[type isEqualToString:TFMM3_REPORT_TYPE_LOCATIONS] ? [rg generateLocationsReport] :
+		[type isEqualToString:TFMM3_REPORT_TYPE_DUMP] ? [rg dump]:
+		false;
 	
-	if ([type isEqualToString:TFMM3_REPORT_TYPE_SALES]) path = [rg generateSalesReport];
-	else if ([type isEqualToString:TFMM3_REPORT_TYPE_REDEMPTIONS]) path = [rg generateRedemptionsReport];
-	else if ([type isEqualToString:TFMM3_REPORT_TYPE_DEMOGRAPHICS]) path = [rg generateDemographicsReport];
-	else if ([type isEqualToString:TFMM3_REPORT_TYPE_VENDORS]) path = [rg generateVendorsReport];
-	else if ([type isEqualToString:TFMM3_REPORT_TYPE_STAFF]) path = [rg generateStaffReport];
-	else if ([type isEqualToString:TFMM3_REPORT_TYPE_LOCATIONS]) path = [rg generateLocationsReport];
-	else if ([type isEqualToString:TFMM3_REPORT_TYPE_DUMP]) path = [rg dump];
-	else
+	// alert if report generation failed
+	if (!path)
 	{
-		NSLog (@"no action set for “%@”", type);
-		return false;
+		NSString *error = rg.failureReason;
+		UIAlertController *reportFailedAlert = [UIAlertController alertControllerWithTitle:reportFailedTitle message:[NSString stringWithFormat:reportFailedMessage, error] preferredStyle:UIAlertControllerStyleAlert];
+		[reportFailedAlert addAction:[UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleCancel handler:nil]];
+		[self presentViewController:reportFailedAlert animated:true completion:nil];
 	}
-	 
+	
+	// return path to report
 	return path;
 }
 
