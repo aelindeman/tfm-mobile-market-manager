@@ -235,7 +235,11 @@ static NSString *importSuccessMessage = @"%i entr%@ imported."; // first token: 
 	}
 	
 	if (count > 0)
-		[[[UIAlertView alloc] initWithTitle:importSuccessTitle message:[NSString stringWithFormat:importSuccessMessage, count, (count == 1) ? @"y was" : @"ies were"] delegate:self cancelButtonTitle:nil otherButtonTitles:@"Dismiss", nil] show];
+	{
+		UIAlertController *message = [UIAlertController alertControllerWithTitle:importSuccessTitle message:[NSString stringWithFormat:importSuccessMessage, count, (count == 1) ? @"y was" : @"ies were"] preferredStyle:UIAlertControllerStyleAlert];
+		[message addAction:[UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleCancel handler:nil]];
+		[self presentViewController:message animated:true completion:nil];
+	}
 }
 
 @end

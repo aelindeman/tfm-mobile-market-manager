@@ -94,8 +94,7 @@
 	NSError *error;
 	if (![TFMM3_APP_DELEGATE.managedObjectContext save:&error])
 	{
-		NSLog(@"couldn't save: %@", [error localizedDescription]);
-		[[[UIAlertView alloc] initWithTitle:@"Error saving:" message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Dismiss", nil] show];
+		NSLog(@"couldn't save: %@", error);
 		return false;
 	}
 	

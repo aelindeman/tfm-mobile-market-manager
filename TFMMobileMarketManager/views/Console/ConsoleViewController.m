@@ -11,6 +11,9 @@
 
 @implementation ConsoleViewController
 
+static NSString *invalidRequestTitle = @"Invalid request";
+static NSString *invalidRequestMessage = @"The “Table” field is required. The “Predicate” and “Sort by” fields are optional.";
+
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
@@ -34,7 +37,9 @@
 	{
 		if (!([[self.tableField text] length] > 0))
 		{
-			[[[UIAlertView alloc] initWithTitle:@"Invalid request" message:@"The “Table” field is required. The “Predicate” and “Sort by” fields are optional." delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil] show];
+			UIAlertController *message = [UIAlertController alertControllerWithTitle:invalidRequestTitle message:invalidRequestMessage preferredStyle:UIAlertControllerStyleAlert];
+			[message addAction:[UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleCancel handler:nil]];
+			[self presentViewController:message animated:true completion:nil];
 			return;
 		}
 			

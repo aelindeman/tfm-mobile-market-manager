@@ -119,7 +119,16 @@ static NSString *deleteConfirmationMessageDetails = @"Its associated transaction
 		case UITableViewCellEditingStyleDelete:
 		{
 			self.selectedObject = [self.fetchedResultsController objectAtIndexPath:indexPath];
-			[[[UIAlertView alloc] initWithTitle:deleteConfirmationMessageTitle message:deleteConfirmationMessageDetails delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil] show];
+			UIAlertController *deletePrompt = [UIAlertController alertControllerWithTitle:deleteConfirmationMessageTitle message:deleteConfirmationMessageDetails preferredStyle:UIAlertControllerStyleAlert];
+			[deletePrompt addAction:[UIAlertAction actionWithTitle:@"Don’t delete" style:UIAlertActionStyleCancel handler:nil]];
+			[deletePrompt addAction:[UIAlertAction actionWithTitle:@"Delete" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action)
+			{
+				[TFMM3_APP_DELEGATE.managedObjectContext deleteObject:self.selectedObject];
+				NSError *error;
+				if (![TFMM3_APP_DELEGATE.managedObjectContext save:&error])
+					NSLog(@"error committing edit: %@", error);
+			}]];
+			[self presentViewController:deletePrompt animated:true completion:nil];
 			break;
 		}
 	}
@@ -128,26 +137,6 @@ static NSString *deleteConfirmationMessageDetails = @"Its associated transaction
 	if (![TFMM3_APP_DELEGATE.managedObjectContext save:&error]) NSLog(@"error committing edit: %@", error);
 	
 	[self.tableView endUpdates];
-}
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-	if ([[alertView title] isEqualToString:deleteConfirmationMessageTitle])
-	{
-		switch (buttonIndex)
-		{
-			case 0:
-				// canceled
-				break;
-				
-			case 1:
-				[TFMM3_APP_DELEGATE.managedObjectContext deleteObject:self.selectedObject];
-				break;
-		}
-	}
-	
-	NSError *error;
-	if (![TFMM3_APP_DELEGATE.managedObjectContext save:&error]) NSLog(@"error committing edit: %@", error);
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender

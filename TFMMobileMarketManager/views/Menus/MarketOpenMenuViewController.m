@@ -126,23 +126,6 @@ static NSString *closeMarketDayUnreconciledWarningLabel = @"Terminal totals need
 	[tableView deselectRowAtIndexPath:indexPath animated:true];
 }
 
--(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-	if ([[alertView title] isEqualToString:closeMarketDayWarningTitle])
-	{
-		switch (buttonIndex)
-		{
-			case 0:
-				// canceled
-				break;
-				
-			case 1:
-				[self closeMarketDay];
-				break;
-		}
-	}
-}
-
 - (void)updateInfoLabels
 {
 	// also update the prompt text
@@ -224,9 +207,20 @@ static NSString *closeMarketDayUnreconciledWarningLabel = @"Terminal totals need
 - (void)verifyClosure
 {
 	if (!self.terminalTotalsReconciled)
-		[[[UIAlertView alloc] initWithTitle:closeMarketDayUnreconciledWarningTitle message:closeMarketDayUnreconciledWarningMessage delegate:self cancelButtonTitle:nil otherButtonTitles:@"Dismiss", nil] show];
+	{
+		UIAlertController *cantCloseMarketDayAlert = [UIAlertController alertControllerWithTitle:closeMarketDayUnreconciledWarningTitle message:closeMarketDayUnreconciledWarningMessage preferredStyle:UIAlertControllerStyleAlert];
+		[cantCloseMarketDayAlert addAction:[UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleCancel handler:nil]];
+		[self presentViewController:cantCloseMarketDayAlert animated:true completion:nil];
+	}
 	else
-		[[[UIAlertView alloc] initWithTitle:closeMarketDayWarningTitle message:closeMarketDayWarningMessage delegate:self cancelButtonTitle:@"Don’t close" otherButtonTitles:@"Close", nil] show];
+	{
+		UIAlertController *closeMarketDayPrompt = [UIAlertController alertControllerWithTitle:closeMarketDayWarningTitle message:closeMarketDayWarningMessage preferredStyle:UIAlertControllerStyleAlert];
+		[closeMarketDayPrompt addAction:[UIAlertAction actionWithTitle:@"Don’t close" style:UIAlertActionStyleCancel handler:nil]];
+		[closeMarketDayPrompt addAction:[UIAlertAction actionWithTitle:@"Close" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+			[self closeMarketDay];
+		}]];
+		[self presentViewController:closeMarketDayPrompt animated:true completion:nil];
+	}
 }
 
 // closes the market day gracefully and returns to the main menu
@@ -236,7 +230,8 @@ static NSString *closeMarketDayUnreconciledWarningLabel = @"Terminal totals need
 	[self dismissViewControllerAnimated:true completion:^{
 		NSError *error;
 		[TFMM3_APP_DELEGATE setActiveMarketDay:false];
-		if (![TFMM3_APP_DELEGATE.managedObjectContext save:&error]) NSLog(@"error committing edit: %@", error);
+		if (![TFMM3_APP_DELEGATE.managedObjectContext save:&error])
+			NSLog(@"error committing edit: %@", error);
 		NSLog(@"market day closed");
 	}];
 }

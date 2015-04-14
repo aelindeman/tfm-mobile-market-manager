@@ -144,11 +144,22 @@ static dispatch_once_t setPositionStrings; // NSDictionary can't be set here, so
 			
 			if ([[TFMM3_APP_DELEGATE.managedObjectContext executeFetchRequest:request error:nil] count] > 0)
 			{
-				[[[UIAlertView alloc] initWithTitle:deleteFailedMessageTitle message:deleteFailedMessageDetails delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:nil] show];
+				UIAlertController *cantDeleteAlert = [UIAlertController alertControllerWithTitle:deleteFailedMessageTitle message:deleteFailedMessageDetails preferredStyle:UIAlertControllerStyleAlert];
+				[cantDeleteAlert addAction:[UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleCancel handler:nil]];
+				[self presentViewController:cantDeleteAlert animated:true completion:nil];
 			}
 			else
 			{
-				[[[UIAlertView alloc] initWithTitle:deleteConfirmationMessageTitle message:deleteConfirmationMessageDetails delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil] show];
+				UIAlertController *deletePrompt = [UIAlertController alertControllerWithTitle:deleteConfirmationMessageTitle message:deleteConfirmationMessageDetails preferredStyle:UIAlertControllerStyleAlert];
+				[deletePrompt addAction:[UIAlertAction actionWithTitle:@"Don’t delete" style:UIAlertActionStyleCancel handler:nil]];
+				[deletePrompt addAction:[UIAlertAction actionWithTitle:@"Delete" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action)
+				{
+					[TFMM3_APP_DELEGATE.managedObjectContext deleteObject:self.selectedObject];
+					NSError *error;
+					if (![TFMM3_APP_DELEGATE.managedObjectContext save:&error])
+						NSLog(@"error committing edit: %@", error);
+				}]];
+				[self presentViewController:deletePrompt animated:true completion:nil];
 			}
 			break;
 	}
@@ -157,27 +168,6 @@ static dispatch_once_t setPositionStrings; // NSDictionary can't be set here, so
 	if (![TFMM3_APP_DELEGATE.managedObjectContext save:&error]) NSLog(@"error committing edit: %@", error);
 	
 	[self.tableView endUpdates];
-}
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-	if ([[alertView title] isEqualToString:deleteConfirmationMessageTitle])
-	{
-		switch (buttonIndex)
-		{
-			case 0:
-				// canceled
-				break;
-				
-			case 1:
-			{
-				[TFMM3_APP_DELEGATE.managedObjectContext deleteObject:self.selectedObject];
-				break;
-			}
-		}
-	}
-	
-	NSError *error;
-	if (![TFMM3_APP_DELEGATE.managedObjectContext save:&error]) NSLog(@"error committing edit: %@", error);
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender

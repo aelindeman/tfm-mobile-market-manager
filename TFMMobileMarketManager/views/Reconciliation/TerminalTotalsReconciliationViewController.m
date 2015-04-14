@@ -70,7 +70,7 @@ deviceTotalAmount, deviceTotalTransactionCount;
 	
 	if (error)
 	{
-		[[[UIAlertView alloc] initWithTitle:@"Database error" message:[error localizedDescription] delegate:self cancelButtonTitle:nil otherButtonTitles:@"Dismiss", nil] show];
+		NSLog(@"database error: %@", error);
 		[self discard];
 	}
 	
@@ -245,7 +245,6 @@ deviceTotalAmount, deviceTotalTransactionCount;
 		if (![TFMM3_APP_DELEGATE.managedObjectContext save:&error])
 		{
 			NSLog(@"couldn't save: %@", [error localizedDescription]);
-			[[[UIAlertView alloc] initWithTitle:@"Error saving:" message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Dismiss", nil] show];
 			return false;
 		}
 		
@@ -258,7 +257,9 @@ deviceTotalAmount, deviceTotalTransactionCount;
 	}
 	else
 	{
-		[[[UIAlertView alloc] initWithTitle:validationFailedTitle message:validationFailedMessage delegate:self cancelButtonTitle:nil otherButtonTitles:@"Dismiss", nil] show];
+		UIAlertController *validationFailedAlert = [UIAlertController alertControllerWithTitle:validationFailedTitle message:validationFailedMessage preferredStyle:UIAlertControllerStyleAlert];
+		[validationFailedAlert addAction:[UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleCancel handler:nil]];
+		[self presentViewController:validationFailedAlert animated:true completion:nil];
 		return false;
 	}
 }

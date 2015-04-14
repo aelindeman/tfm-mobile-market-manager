@@ -40,27 +40,14 @@
 	self.navigationItem.rightBarButtonItem = saveButton;
 }
 
--(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+- (void)discard
 {
-	if ([[alertView title] isEqualToString:@"Cancel form entry?"])
-	{
-		switch (buttonIndex)
-		{
-			case 0:
-				// canceled
-				break;
-				
-			case 1:
-				[self dismissViewControllerAnimated:true completion:nil];
-				break;
-		}
-	}
-}
-
--(void)discard
-{
-	UIAlertView *prompt = [[UIAlertView alloc] initWithTitle:@"Cancel form entry?" message:@"Any data entered on this form will not be saved." delegate:self cancelButtonTitle:@"Don’t close" otherButtonTitles:@"Close", nil];
-	[prompt show];
+	UIAlertController *closePrompt = [UIAlertController alertControllerWithTitle:@"Cancel form entry?" message:@"Any data entered on this form will not be saved." preferredStyle:UIAlertControllerStyleAlert];
+	[closePrompt addAction:[UIAlertAction actionWithTitle:@"Don’t close" style:UIAlertActionStyleCancel handler:nil]];
+	[closePrompt addAction:[UIAlertAction actionWithTitle:@"Close" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+		[self dismissViewControllerAnimated:true completion:nil];
+	}]];
+	[self presentViewController:closePrompt animated:true completion:nil];
 }
 
 -(bool)submit
@@ -82,9 +69,9 @@
 	
 	if ([errors count] > 0)
 	{
-		// puke
-		NSLog(@"form failed validation");
-		[[[UIAlertView alloc] initWithTitle:@"More information is needed:" message:[errors componentsJoinedByString:@"\n\n"] delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Dismiss", nil] show];
+		UIAlertController *validationMessage = [UIAlertController alertControllerWithTitle:@"More information is needed" message:[errors componentsJoinedByString:@"\n\n"] preferredStyle:UIAlertControllerStyleAlert];
+		[validationMessage addAction:[UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleCancel handler:nil]];
+		[self presentViewController:validationMessage animated:true completion:nil];
 		return false;
 	}
 	else
@@ -110,7 +97,6 @@
 		if (![TFMM3_APP_DELEGATE.managedObjectContext save:&error])
 		{
 			NSLog(@"couldn't save: %@", [error localizedDescription]);
-			[[[UIAlertView alloc] initWithTitle:@"Error saving:" message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Dismiss", nil] show];
 			return false;
 		}
 		

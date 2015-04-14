@@ -117,9 +117,12 @@
 
 - (void)resetDatabasePrompt
 {
-	// display a prompt - actual deletion happens in alertView:
-	UIAlertView *prompt = [[UIAlertView alloc] initWithTitle:@"Destroy the database?" message:@"All data in the database will be permanently obilterated from existence." delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Destroy", nil];
-	[prompt show];
+	UIAlertController *deletePrompt = [UIAlertController alertControllerWithTitle:@"Destroy the database?" message:@"All data in the database will be permanently obilterated from existence." preferredStyle:UIAlertControllerStyleAlert];
+	[deletePrompt addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil]];
+	[deletePrompt addAction:[UIAlertAction actionWithTitle:@"Destroy" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+		[self resetDatabase];
+	}]];
+	[self presentViewController:deletePrompt animated:true completion:nil];
 }
 
 - (void)resetDatabase
@@ -136,25 +139,9 @@
 	if (![TFMM3_APP_DELEGATE.persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:store.URL options:nil error:&error])
 		NSLog(@"couldn’t recreate database: %@", error);
 	
-	[[[UIAlertView alloc] initWithTitle:@"Database cleared." message:nil delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Dismiss", nil] show];
-}
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-	if ([[alertView title] isEqualToString:@"Destroy the database?"])
-	{
-		switch (buttonIndex)
-		{
-			case 0:
-				// canceled
-				break;
-				
-			case 1:
-				[self resetDatabase];
-				break;
-		}
-	}
-}
+	UIAlertController *postDeleteMessage = [UIAlertController alertControllerWithTitle:@"Database cleared." message:@"" preferredStyle:UIAlertControllerStyleAlert];
+	[postDeleteMessage addAction:[UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleCancel handler:nil]];
+	[self presentViewController:postDeleteMessage animated:true completion:nil];}
 
 - (IBAction)segueToMarketOpenMenu:(UIStoryboardSegue *)unwindSegue
 {

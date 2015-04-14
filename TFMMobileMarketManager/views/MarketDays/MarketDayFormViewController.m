@@ -57,27 +57,14 @@
 	self.navigationItem.rightBarButtonItems = [self editMode] ? [TFMM3_APP_DELEGATE activeMarketDay] ? @[saveButton] : @[openButton, saveButton] : @[openButton];
 }
 
--(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-	if ([[alertView title] isEqualToString:@"Cancel form entry?"])
-	{
-		switch (buttonIndex)
-		{
-			case 0:
-				// canceled
-				break;
-				
-			case 1:
-				[self dismiss:false];
-				break;
-		}
-	}
-}
-
 - (void)discard
 {
-	UIAlertView *prompt = [[UIAlertView alloc] initWithTitle:@"Cancel form entry?" message:@"Any data entered on this form will not be saved." delegate:self cancelButtonTitle:@"Don’t close" otherButtonTitles:@"Close", nil];
-	[prompt show];
+	UIAlertController *closePrompt = [UIAlertController alertControllerWithTitle:@"Cancel form entry?" message:@"Any data entered on this form will not be saved." preferredStyle:UIAlertControllerStyleAlert];
+	[closePrompt addAction:[UIAlertAction actionWithTitle:@"Don’t close" style:UIAlertActionStyleCancel handler:nil]];
+	[closePrompt addAction:[UIAlertAction actionWithTitle:@"Close" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+		[self dismissViewControllerAnimated:true completion:nil];
+	}]];
+	[self presentViewController:closePrompt animated:true completion:nil];
 }
 
 - (void)dismiss:(bool)thenOpenMarketDay
@@ -119,8 +106,9 @@
 		
 	if ([errors count] > 0)
 	{
-		// puke
-		[[[UIAlertView alloc] initWithTitle:@"More information is needed:" message:[errors componentsJoinedByString:@"\n\n"] delegate:self cancelButtonTitle:nil otherButtonTitles:@"Dismiss", nil] show];
+		UIAlertController *validationMessage = [UIAlertController alertControllerWithTitle:@"More information is needed" message:[errors componentsJoinedByString:@"\n\n"] preferredStyle:UIAlertControllerStyleAlert];
+		[validationMessage addAction:[UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleCancel handler:nil]];
+		[self presentViewController:validationMessage animated:true completion:nil];
 		return false;
 	}
 	else
@@ -165,7 +153,6 @@
 		if (![TFMM3_APP_DELEGATE.managedObjectContext save:&error])
 		{
 			NSLog(@"couldn't save: %@", [error localizedDescription]);
-			[[[UIAlertView alloc] initWithTitle:@"Error saving:" message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Dismiss", nil] show];
 		}
 		
 		[self dismiss:andOpenMarketDay];

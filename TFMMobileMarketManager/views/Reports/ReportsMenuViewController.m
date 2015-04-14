@@ -35,7 +35,7 @@ static NSString *reportCreatedMessage = @"The %@ report was created successfully
 			@{@"title": @"Export staff", @"icon": @"staff", @"action": TFMM3_REPORT_TYPE_STAFF},
 			@{@"title": @"Export locations", @"icon": @"locations", @"action": TFMM3_REPORT_TYPE_LOCATIONS},
 		], @[
-			@{@"title": @"Dump entire database", @"icon": @"database", @"action": @"dump"}
+			@{@"title": @"Dump entire database", @"icon": @"database", @"action": TFMM3_REPORT_TYPE_DUMP}
 		]];
 	[self updatePrompt];
 }
@@ -109,7 +109,24 @@ static NSString *reportCreatedMessage = @"The %@ report was created successfully
 		{
 			[self setMostRecentReportPath:path];
 			[self.previewer reloadData];
-			[[[UIAlertView alloc] initWithTitle:reportCreatedTitle message:[NSString stringWithFormat:reportCreatedMessage, [action lowercaseString]] delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil] show];
+			
+			NSString *promptMessage = ([action isEqualToString:TFMM3_REPORT_TYPE_DUMP]) ? @"The dump was created successfully." : [NSString stringWithFormat:reportCreatedMessage, [action lowercaseString]];
+			
+			UIAlertController *openReportPrompt = [UIAlertController alertControllerWithTitle:reportCreatedTitle message:promptMessage preferredStyle:UIAlertControllerStyleAlert];
+			
+			if ([action isEqualToString:TFMM3_REPORT_TYPE_DUMP])
+			{
+				[openReportPrompt addAction:[UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleCancel handler:nil]];
+			}
+			else
+			{
+				[openReportPrompt addAction:[UIAlertAction actionWithTitle:@"Close" style:UIAlertActionStyleCancel handler:nil]];
+				[openReportPrompt addAction:[UIAlertAction actionWithTitle:@"Open report" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+					[self presentViewController:self.previewer animated:true completion:nil];
+				}]];
+			}
+			
+			[self presentViewController:openReportPrompt animated:true completion:nil];
 		}
 	}
 	
@@ -128,25 +145,6 @@ static NSString *reportCreatedMessage = @"The %@ report was created successfully
 	return !!self.mostRecentReportPath;
 }
 
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-	if ([[alertView title] isEqualToString:reportCreatedTitle])
-	{
-		switch (buttonIndex)
-		{
-			case 0:
-				// canceled
-				break;
-				
-			case 1:
-			{
-				[self presentViewController:self.previewer animated:true completion:nil];
-				break;
-			}
-		}
-	}
-}
-
 - (void)setMarketDayFromID:(NSManagedObjectID *)objectID
 {
 	if (objectID == nil) [self setSelectedMarketDay:false];
@@ -160,7 +158,9 @@ static NSString *reportCreatedMessage = @"The %@ report was created successfully
 {
 	if ([TFMM3_REPORT_TYPES_MARKETDAY containsObject:type] && !self.selectedMarketDay)
 	{
-		[[[UIAlertView alloc] initWithTitle:noSelectedMarketDayWarningTitle message:noSelectedMarketDayWarningMessage delegate:self cancelButtonTitle:nil otherButtonTitles:@"Dismiss", nil] show];
+		UIAlertController *message = [UIAlertController alertControllerWithTitle:noSelectedMarketDayWarningTitle message:noSelectedMarketDayWarningMessage preferredStyle:UIAlertControllerStyleAlert];
+		[message addAction:[UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleCancel handler:nil]];
+		[self presentViewController:message animated:true completion:nil];
 		return false;
 	}
 
@@ -173,7 +173,7 @@ static NSString *reportCreatedMessage = @"The %@ report was created successfully
 	else if ([type isEqualToString:TFMM3_REPORT_TYPE_VENDORS]) path = [rg generateVendorsReport];
 	else if ([type isEqualToString:TFMM3_REPORT_TYPE_STAFF]) path = [rg generateStaffReport];
 	else if ([type isEqualToString:TFMM3_REPORT_TYPE_LOCATIONS]) path = [rg generateLocationsReport];
-	else if ([type isEqualToString:@"dump"]) path = [rg dump];
+	else if ([type isEqualToString:TFMM3_REPORT_TYPE_DUMP]) path = [rg dump];
 	else
 	{
 		NSLog (@"no action set for “%@”", type);

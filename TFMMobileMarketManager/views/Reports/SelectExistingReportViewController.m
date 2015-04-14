@@ -102,26 +102,31 @@ static NSString *deleteAllConfirmationMessageDetails = @"All reports on this dev
 	{
 		case UITableViewCellEditingStyleDelete:
 		{
-			NSString *marketday = [[self.items objectAtIndex:indexPath.section] valueForKey:@"name"];
-			NSString *name = [[[self.items objectAtIndex:indexPath.section] objectForKey:@"items"] objectAtIndex:indexPath.row];
-			NSString *resolvedPath = [NSString pathWithComponents:@[self.basePath, marketday, name]];
-			
-			NSError *error;
-			[[NSFileManager defaultManager] removeItemAtPath:resolvedPath error:&error];
-			if (error) [[[UIAlertView alloc] initWithTitle:@"Error deleting report:" message:[error localizedDescription] delegate:self cancelButtonTitle:nil otherButtonTitles:@"Dismiss", nil] show];
-			else
+			UIAlertController *deletePrompt = [UIAlertController alertControllerWithTitle:deleteAllConfirmationMessageTitle message:deleteAllConfirmationMessageDetails preferredStyle:UIAlertControllerStyleAlert];
+			[deletePrompt addAction:[UIAlertAction actionWithTitle:@"Don’t delete" style:UIAlertActionStyleCancel handler:nil]];
+			[deletePrompt addAction:[UIAlertAction actionWithTitle:@"Delete" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action)
 			{
-				// delete the item
-				[self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+				NSString *marketday = [[self.items objectAtIndex:indexPath.section] valueForKey:@"name"];
+				NSString *name = [[[self.items objectAtIndex:indexPath.section] objectForKey:@"items"] objectAtIndex:indexPath.row];
+				NSString *resolvedPath = [NSString pathWithComponents:@[self.basePath, marketday, name]];
 				
-				// delete the section too if it was the last item
-				if ([[[self.items objectAtIndex:indexPath.section] objectForKey:@"items"] count] == 1)
-					[self.tableView deleteSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationFade];
-				
-				// reload the table
-				[self load];
-			}
-			
+				NSError *error;
+				[[NSFileManager defaultManager] removeItemAtPath:resolvedPath error:&error];
+				if (error) NSLog(@"error deleting report: %@", error);
+				else
+				{
+					// delete the item
+					[self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+					
+					// delete the section too if it was the last item
+					if ([[[self.items objectAtIndex:indexPath.section] objectForKey:@"items"] count] == 1)
+						[self.tableView deleteSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationFade];
+					
+					// reload the table
+					[self load];
+				}
+			}]];
+			[self presentViewController:deletePrompt animated:true completion:nil];
 			break;
 		}
 		
@@ -160,40 +165,14 @@ static NSString *deleteAllConfirmationMessageDetails = @"All reports on this dev
 	return !!self.selectedObject;
 }
 
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-	// TODO: implement delete confirmation
-	if ([[alertView title] isEqualToString:deleteConfirmationMessageTitle])
-	{
-		switch (buttonIndex)
-		{
-			case 0:
-				// canceled
-				break;
-				
-			case 1:
-				// delete
-				break;
-		}
-	}
-	if ([[alertView title] isEqualToString:deleteAllConfirmationMessageTitle])
-	{
-		switch (buttonIndex)
-		{
-			case 0:
-				// canceled
-				break;
-				
-			case 1:
-				[self deleteAll];
-				break;
-		}
-	}
-}
-
 - (void)confirmDeleteAll
 {
-	[[[UIAlertView alloc] initWithTitle:deleteAllConfirmationMessageTitle message:deleteAllConfirmationMessageDetails delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil] show];
+	UIAlertController *deleteAllPrompt = [UIAlertController alertControllerWithTitle:deleteAllConfirmationMessageTitle message:deleteAllConfirmationMessageDetails preferredStyle:UIAlertControllerStyleAlert];
+	[deleteAllPrompt addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil]];
+	[deleteAllPrompt addAction:[UIAlertAction actionWithTitle:@"Delete all reports" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+		[self deleteAll];
+	}]];
+	[self presentViewController:deleteAllPrompt animated:true completion:nil];
 }
 
 - (void)deleteAll

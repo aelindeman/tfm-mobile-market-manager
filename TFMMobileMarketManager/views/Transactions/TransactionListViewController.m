@@ -169,7 +169,19 @@ static NSString *deleteConfirmationMessageDetails = @"It won’t be deleted, but
 		case UITableViewCellEditingStyleDelete:
 		{
 			self.selectedObject = [self.fetchedResultsController objectAtIndexPath:indexPath];
-			if (![self.selectedObject markedInvalid]) [[[UIAlertView alloc] initWithTitle:deleteConfirmationMessageTitle message:deleteConfirmationMessageDetails delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil] show];
+			if (![self.selectedObject markedInvalid])
+			{
+				UIAlertController *deletePrompt = [UIAlertController alertControllerWithTitle:deleteConfirmationMessageTitle message:deleteConfirmationMessageDetails preferredStyle:UIAlertControllerStyleAlert];
+				[deletePrompt addAction:[UIAlertAction actionWithTitle:@"Don’t delete" style:UIAlertActionStyleCancel handler:nil]];
+				[deletePrompt addAction:[UIAlertAction actionWithTitle:@"Delete" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action)
+				{
+					[self.selectedObject setMarkedInvalid:true];
+					NSError *error;
+					if (![TFMM3_APP_DELEGATE.managedObjectContext save:&error])
+						NSLog(@"error committing edit: %@", error);
+				}]];
+				[self presentViewController:deletePrompt animated:true completion:nil];
+			}
 			break;
 		}
 	}
@@ -178,26 +190,6 @@ static NSString *deleteConfirmationMessageDetails = @"It won’t be deleted, but
 	if (![TFMM3_APP_DELEGATE.managedObjectContext save:&error]) NSLog(@"error committing edit: %@", error);
 	
 	[self.tableView endUpdates];
-}
-
--(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-	if ([[alertView title] isEqualToString:deleteConfirmationMessageTitle])
-	{
-		switch (buttonIndex)
-		{
-			case 0:
-				// canceled
-				break;
-				
-			case 1:
-				[self.selectedObject setMarkedInvalid:true];
-				break;
-		}
-	}
-	
-	NSError *error;
-	if (![TFMM3_APP_DELEGATE.managedObjectContext save:&error]) NSLog(@"error committing edit: %@", error);
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
