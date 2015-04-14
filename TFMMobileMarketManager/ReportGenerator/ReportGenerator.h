@@ -54,4 +54,6 @@
 @property (nonatomic) NSManagedObjectID *selectedMarketDayID;
 @property (nonatomic) MarketDays *selectedMarketDay;
 
+@property NSString *failureReason;
+
 @end

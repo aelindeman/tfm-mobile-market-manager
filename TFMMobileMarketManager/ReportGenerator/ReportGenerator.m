@@ -425,7 +425,7 @@ static NSString *dumpFormat = @"%@ %@ %@.m3db"; // device name, dumpName, uuid
 	@try
 	{
 		[fm createDirectoryAtPath:[path stringByDeletingLastPathComponent] withIntermediateDirectories:true attributes:nil error:nil];
-		NSString *dbAt = [[[[TFMM3_APP_DELEGATE.persistentStoreCoordinator persistentStores] lastObject] url] path];
+		NSString *dbAt = [[[[TFMM3_APP_DELEGATE.persistentStoreCoordinator persistentStores] lastObject] URL] path];
 		
 		bool did = [fm copyItemAtPath:dbAt toPath:path error:nil];
 		
@@ -435,6 +435,7 @@ static NSString *dumpFormat = @"%@ %@ %@.m3db"; // device name, dumpName, uuid
 	@catch (NSException *exception)
 	{
 		NSLog(@"couldn’t write report: %@", [exception reason]);
+		[self setFailureReason:[exception reason]];
 	}
 	
 	if ([fm fileExistsAtPath:path])
