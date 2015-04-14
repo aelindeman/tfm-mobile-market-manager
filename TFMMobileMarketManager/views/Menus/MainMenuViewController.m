@@ -75,7 +75,7 @@
 		NSDateFormatter *df = [[NSDateFormatter alloc] init];
 		[df setDateFormat:@"YYYY-MM-dd HH:mm:ss"];
 		
-		return [NSString stringWithFormat:@"Version info:\n\t%@\n\trev %@\n\tbuilt %@", [[NSBundle mainBundle] bundleIdentifier], version, [df stringFromDate:builtAt]];
+		return [NSString stringWithFormat:@"Version info:\n\t%@\n\trev %@\n\tbuilt %@\n\nDevice identifier:\n\t%@", [[NSBundle mainBundle] bundleIdentifier], version, [df stringFromDate:builtAt], [[[UIDevice currentDevice] identifierForVendor] UUIDString]];
 	}
 	else return nil;
 }

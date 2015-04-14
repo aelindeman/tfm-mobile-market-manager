@@ -20,6 +20,8 @@
 	[defaults setInteger:1 forKey:@"com.apple.CoreData.SQLDebug"];
 	[defaults setInteger:1 forKey:@"com.apple.CoreData.SyntaxColoredLogging"]; */
 	
+	NSLog(@"%@ launched on device %@", [[NSBundle mainBundle] bundleIdentifier], [[[UIDevice currentDevice] identifierForVendor] UUIDString]);
+	
 	// handle opening files
 	NSURL *url = (NSURL *)[launchOptions valueForKey:UIApplicationLaunchOptionsURLKey];
 	if (url != nil && [url isFileURL])
