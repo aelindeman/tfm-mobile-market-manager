@@ -498,7 +498,7 @@
 		FA0AC1F11A9FB14C00CCA13A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0620;
+				LastUpgradeCheck = 0630;
 				ORGANIZATIONNAME = edu.umw.cpsc;
 				TargetAttributes = {
 					FA0AC1FA1A9FB1EF00CCA13A = {

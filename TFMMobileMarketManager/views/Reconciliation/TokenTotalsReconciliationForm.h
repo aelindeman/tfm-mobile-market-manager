@@ -14,5 +14,8 @@
 @property unsigned int redeemedBonusTokenCount;
 @property unsigned int redeemedCreditTokenCount;
 @property unsigned int redeemedSnapTokenCount;
+@property int creditTokenDifference;
+@property int snapTokenDifference;
+@property int bonusTokenDifference;
 
 @end

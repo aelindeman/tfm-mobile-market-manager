@@ -57,59 +57,38 @@
 	self.navigationItem.rightBarButtonItem = saveButton;
 }
 
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+- (void)updateTokenDeltas:(UITableViewCell<FXFormFieldCell> *)cell
 {
-	if ([[alertView title] isEqualToString:@"Cancel form entry?"])
-	{
-		switch (buttonIndex)
-		{
-			case 0:
-				// canceled
-				break;
-				
-			case 1:
-				[self dismissViewControllerAnimated:true completion:nil];
-				break;
-		}
-	}
+	TokenTotalsReconciliationForm *form = self.formController.form;
+	
+	form.bonusTokenDifference = form.marketBonusTokenCount - form.redeemedBonusTokenCount;
+	form.creditTokenDifference = form.marketCreditTokenCount - form.redeemedCreditTokenCount;
+	form.snapTokenDifference = form.marketSnapTokenCount - form.redeemedSnapTokenCount;
+	
+	self.formController.form = form;
+	[self.tableView reloadData];
 }
 
 - (void)discard
 {
-	UIAlertView *prompt = [[UIAlertView alloc] initWithTitle:@"Cancel form entry?" message:@"Any data entered on this form will not be saved." delegate:self cancelButtonTitle:@"Don’t close" otherButtonTitles:@"Close", nil];
-	[prompt show];
+	UIAlertController *closePrompt = [UIAlertController alertControllerWithTitle:@"Cancel form entry?" message:@"Any data entered on this form will not be saved." preferredStyle:UIAlertControllerStyleAlert];
+	[closePrompt addAction:[UIAlertAction actionWithTitle:@"Don’t close" style:UIAlertActionStyleCancel handler:nil]];
+	[closePrompt addAction:[UIAlertAction actionWithTitle:@"Close" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+		[self dismissViewControllerAnimated:true completion:nil];
+	}]];
+	[self presentViewController:closePrompt animated:true completion:nil];
 }
 
 - (bool)submit
 {
-	// validate
 	TokenTotalsReconciliationForm *form = self.formController.form;
-	NSMutableArray *errors = [[NSMutableArray alloc] init];
 	
-	if (form.marketCreditTokenCount != form.redeemedCreditTokenCount)
-		[errors addObject:@"Market credit token count doesn’t match redeemed credit token count"];
-		
-	if (form.marketSnapTokenCount != form.redeemedSnapTokenCount)
-		[errors addObject:@"Market SNAP token count doesn’t match redeemed SNAP token count"];
-		
-	if (form.marketBonusTokenCount != form.redeemedBonusTokenCount)
-		[errors addObject:@"Market bonus token count doesn’t match redeemed bonus token count"];
-	
-	if ([errors count] > 0)
-	{
-		// puke
-		[[[UIAlertView alloc] initWithTitle:@"More information is needed:" message:[errors componentsJoinedByString:@"\n\n"] delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Dismiss", nil] show];
-		return false;
-	}
-	else
-	{
-		[self.editObject setMarket_bonus_tokens:form.marketBonusTokenCount];
-		[self.editObject setMarket_credit_tokens:form.marketCreditTokenCount];
-		[self.editObject setMarket_snap_tokens:form.marketSnapTokenCount];
-		[self.editObject setRedeemed_bonus_tokens:form.redeemedBonusTokenCount];
-		[self.editObject setRedeemed_credit_tokens:form.redeemedCreditTokenCount];
-		[self.editObject setRedeemed_snap_tokens:form.redeemedSnapTokenCount];
-	}
+	[self.editObject setMarket_bonus_tokens:form.marketBonusTokenCount];
+	[self.editObject setMarket_credit_tokens:form.marketCreditTokenCount];
+	[self.editObject setMarket_snap_tokens:form.marketSnapTokenCount];
+	[self.editObject setRedeemed_bonus_tokens:form.redeemedBonusTokenCount];
+	[self.editObject setRedeemed_credit_tokens:form.redeemedCreditTokenCount];
+	[self.editObject setRedeemed_snap_tokens:form.redeemedSnapTokenCount];
 	
 	// ...and save, hopefully
 	NSError *error;

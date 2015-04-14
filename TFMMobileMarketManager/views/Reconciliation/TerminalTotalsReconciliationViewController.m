@@ -17,9 +17,6 @@ static NSString *menuOptionCellIdentifier = @"MenuOptionCell";
 
 static NSString *helpText =	@"If the totals do not match, it is usually an error involving:\n\t- the terminal not processing a transaction\n\t- a transaction incorrectly marked or not marked as invalid\n\t- a typo either on this device or the terminal";
 
-static NSString *skipMessageTitle = @"Skip terminal total reconciliation?";
-static NSString *skipMessageDetails = @"Reconciliation must be completed before synchronization or generating a report for this market day.";
-
 static NSString *validationFailedTitle = @"Reconciliation failed";
 static NSString *validationFailedMessage = @"There is a discrepancy between the terminal’s totals and this device’s transaction totals.";
 
@@ -106,10 +103,6 @@ deviceTotalAmount, deviceTotalTransactionCount;
 	
 	UIBarButtonItem *verifyButton = [[UIBarButtonItem alloc] initWithTitle:@"Verify" style:UIBarButtonItemStylePlain target:self action:@selector(submit)];
 	self.navigationItem.rightBarButtonItem = verifyButton;
-	
-	/* // TODO: fix reconcilation able to be skipped - only available for debug
-	UIBarButtonItem *skipButton = [[UIBarButtonItem alloc] initWithTitle:@"Skip" style:UIBarButtonItemStylePlain target:self action:@selector(skip)];
-	self.navigationItem.rightBarButtonItem = skipButton; */
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -225,47 +218,14 @@ deviceTotalAmount, deviceTotalTransactionCount;
 	[tableView deselectRowAtIndexPath:indexPath animated:true];
 }
 
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-	if ([[alertView title] isEqualToString:skipMessageTitle])
-	{
-		switch (buttonIndex)
-		{
-			case 0:
-				// canceled
-				break;
-				
-			case 1:
-				NSLog(@"market day about to close with user skipping reconciliation!");
-				[self dismissViewControllerAnimated:false completion:nil];
-				[self performSegueWithIdentifier:@"MainMenuSegue" sender:self];
-				break;
-		}
-	}
-	if ([[alertView title] isEqualToString:@"Cancel form entry?"])
-	{
-		switch (buttonIndex)
-		{
-			case 0:
-				// canceled
-				break;
-				
-			case 1:
-				[self dismissViewControllerAnimated:true completion:nil];
-				break;
-		}
-	}
-}
-
 - (void)discard
 {
-	UIAlertView *prompt = [[UIAlertView alloc] initWithTitle:@"Cancel form entry?" message:@"Any data entered on this form will not be saved." delegate:self cancelButtonTitle:@"Don’t close" otherButtonTitles:@"Close", nil];
-	[prompt show];
-}
-
-- (void)skip
-{
-	[[[UIAlertView alloc] initWithTitle:skipMessageTitle message:skipMessageDetails delegate:self cancelButtonTitle:@"Don’t skip" otherButtonTitles:@"Skip", nil] show];
+	UIAlertController *closePrompt = [UIAlertController alertControllerWithTitle:@"Cancel form entry?" message:@"Any data entered on this form will not be saved." preferredStyle:UIAlertControllerStyleAlert];
+	[closePrompt addAction:[UIAlertAction actionWithTitle:@"Don’t close" style:UIAlertActionStyleCancel handler:nil]];
+	[closePrompt addAction:[UIAlertAction actionWithTitle:@"Close" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+		[self dismissViewControllerAnimated:true completion:nil];
+	}]];
+	[self presentViewController:closePrompt animated:true completion:nil];
 }
 
 - (bool)submit

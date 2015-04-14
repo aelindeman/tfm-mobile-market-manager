@@ -70,7 +70,8 @@ static NSString *importSuccessMessage = @"%i entr%@ imported."; // first token: 
 	}
 	else
 	{
-		// TODO: enable input import
+		// TODO: enable input import, or hide import button from menu
+		[self.filenameLabel setHidden:true];
 		[self.importButton setEnabled:false];
 	}
 }
