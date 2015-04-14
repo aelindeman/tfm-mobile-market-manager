@@ -5,6 +5,27 @@
 
 #import "ConsoleViewController.h"
 
+// stolen from http://stackoverflow.com/a/1351090/262640 and placed into a category
+// fixes field navigation
+@implementation UITextField (Tabbable)
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField;
+{
+	NSInteger nextTag = textField.tag + 1;
+	// Try to find next responder
+	UIResponder* nextResponder = [textField.superview viewWithTag:nextTag];
+	if (nextResponder) {
+		// Found next responder, so set it.
+		[nextResponder becomeFirstResponder];
+	} else {
+		// Not found, so remove keyboard.
+		[textField resignFirstResponder];
+	}
+	return NO; // We do not want UITextField to insert line-breaks.
+}
+
+@end
+
 @interface ConsoleViewController ()
 
 @end
