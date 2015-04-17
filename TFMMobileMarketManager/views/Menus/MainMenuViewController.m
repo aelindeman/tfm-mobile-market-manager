@@ -11,6 +11,12 @@
 
 @implementation MainMenuViewController
 
+static NSString *erasePromptTitle = @"What data would you like to erase?";
+static NSString *erasePromptMessage = @"Deleting data is not reversible - it will be permanently destroyed. Consult the user guide for more information on each option.";
+static NSString *erasePromptMarketDaysActionText = @"All market days";
+static NSString *erasePromptDatabaseActionText = @"Market days, vendors, staff, and locations";
+static NSString *erasePromptAllDataText = @"All data";
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -30,7 +36,7 @@
 			// @{@"title": @"Synchronize database with a PC", @"icon": @"sync", @"action": @"SyncSegue"},
 			@{@"title": @"Import data from spreadsheet", @"icon": @"put", @"action": @"ImportSegue"},
 			@{@"title": @"Console", @"icon": @"console", @"action": @"ConsoleSegue"},
-			@{@"title": @"Destroy database", @"icon": @"reset", @"action": @"resetDatabasePrompt"}
+			@{@"title": @"Erase data", @"icon": @"reset", @"action": @"eraseDataPrompt"}
 		], @[
 			@{@"title": @"About", @"icon": @"about", @"action": @"AboutSegue"}
 		]];
@@ -107,25 +113,50 @@
 		[self performSegueWithIdentifier:action sender:self];
 
 	// or do functions
-	else if ([action isEqualToString:@"resetDatabasePrompt"])
-		[self resetDatabasePrompt];
+	else if ([action isEqualToString:@"eraseDataPrompt"])
+		[self eraseDataPrompt];
 	
 	else NSLog(@"nothing to do for “%@”", [selected valueForKey:@"title"]);
 	
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
-- (void)resetDatabasePrompt
+- (void)eraseDataPrompt
 {
-	UIAlertController *deletePrompt = [UIAlertController alertControllerWithTitle:@"Destroy the database?" message:@"All data in the database will be permanently obilterated from existence." preferredStyle:UIAlertControllerStyleAlert];
-	[deletePrompt addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil]];
-	[deletePrompt addAction:[UIAlertAction actionWithTitle:@"Destroy" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
-		[self resetDatabase];
+	UIAlertController *prompt = [UIAlertController alertControllerWithTitle:erasePromptTitle message:erasePromptMessage preferredStyle:UIAlertControllerStyleAlert];
+	[prompt addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil]];
+	[prompt addAction:[UIAlertAction actionWithTitle:@"Market days" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+		[self eraseMarketDays];
 	}]];
-	[self presentViewController:deletePrompt animated:true completion:nil];
+	[prompt addAction:[UIAlertAction actionWithTitle:@"All except reports" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+		[self eraseDatabase];
+	}]];
+	[prompt addAction:[UIAlertAction actionWithTitle:@"All data" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+		[self eraseAllData];
+	}]];
+	[self presentViewController:prompt animated:true completion:^{
+		UIAlertController *postDeleteMessage = [UIAlertController alertControllerWithTitle:@"Erase complete." message:@"" preferredStyle:UIAlertControllerStyleAlert];
+		[postDeleteMessage addAction:[UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleCancel handler:nil]];
+		[self presentViewController:postDeleteMessage animated:true completion:nil];
+	}];
 }
 
-- (void)resetDatabase
+- (void)eraseMarketDays
+{
+	NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"MarketDays"];
+	//[request setEntity:[NSEntityDescription entityForName:@"MarketDays" inManagedObjectContext:TFMM3_APP_DELEGATE.managedObjectContext]];
+	[request setIncludesPropertyValues:false]; // only fetch the managedObjectID
+	
+	NSArray *marketDays = [TFMM3_APP_DELEGATE.managedObjectContext executeFetchRequest:request error:nil];
+	for (NSManagedObject *m in marketDays)
+		[TFMM3_APP_DELEGATE.managedObjectContext deleteObject:m];
+	
+	[TFMM3_APP_DELEGATE.managedObjectContext save:nil];
+	
+	NSLog(@"erased all market days");
+}
+
+- (void)eraseDatabase
 {
 	// reset the database
 	NSPersistentStore *store = [TFMM3_APP_DELEGATE.persistentStoreCoordinator.persistentStores lastObject];
@@ -134,14 +165,26 @@
 	[TFMM3_APP_DELEGATE.persistentStoreCoordinator removePersistentStore:store error:&error];
 	[[NSFileManager defaultManager] removeItemAtURL:store.URL error:&error];
 	
-	if (error) NSLog(@"database couldn’t be destroyed: %@", error);
-	NSLog(@"destroyed the database, starting fresh...");
+	if (error) NSLog(@"database couldn’t be erased: %@", error);
+	NSLog(@"erased the database, starting fresh...");
 	if (![TFMM3_APP_DELEGATE.persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:store.URL options:nil error:&error])
 		NSLog(@"couldn’t recreate database: %@", error);
+
+}
+
+- (void)eraseAllData
+{
+	[self eraseDatabase];
 	
-	UIAlertController *postDeleteMessage = [UIAlertController alertControllerWithTitle:@"Database cleared." message:@"" preferredStyle:UIAlertControllerStyleAlert];
-	[postDeleteMessage addAction:[UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleCancel handler:nil]];
-	[self presentViewController:postDeleteMessage animated:true completion:nil];}
+	NSFileManager *fm = [NSFileManager defaultManager];
+	if ([fm fileExistsAtPath:[[TFMM3_APP_DELEGATE.applicationDocumentsDirectory path] stringByAppendingPathComponent:@"Reports"] isDirectory:nil])
+		[fm removeItemAtPath:@"Reports" error:nil];
+	
+	if ([fm fileExistsAtPath:[[TFMM3_APP_DELEGATE.applicationDocumentsDirectory path] stringByAppendingPathComponent:@"Inbox"] isDirectory:nil])
+		[fm removeItemAtPath:@"Inbox" error:nil];
+	
+	NSLog(@"erased reports and inbox folder");
+}
 
 - (IBAction)segueToMarketOpenMenu:(UIStoryboardSegue *)unwindSegue
 {
