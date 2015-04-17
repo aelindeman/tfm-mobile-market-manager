@@ -39,7 +39,7 @@ static NSString *reportFailedMessage = @"An error occured while making the repor
 			@{@"title": @"Export staff", @"icon": @"staff", @"action": TFMM3_REPORT_TYPE_STAFF},
 			@{@"title": @"Export locations", @"icon": @"locations", @"action": TFMM3_REPORT_TYPE_LOCATIONS},
 		], @[
-			@{@"title": @"Dump entire database", @"icon": @"database", @"action": TFMM3_REPORT_TYPE_DUMP}
+			@{@"title": @"Dump database", @"icon": @"database", @"action": TFMM3_REPORT_TYPE_DUMP}
 		]];
 	[self updatePrompt];
 }
@@ -47,7 +47,7 @@ static NSString *reportFailedMessage = @"An error occured while making the repor
 - (void)updatePrompt
 {
 	[self.navigationItem setPrompt:(self.selectedMarketDay) ? [self.selectedMarketDay description] : nil];
-	[self.tableView reloadSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, [self.menuOptions count] - 1)] withRowAnimation:UITableViewRowAnimationAutomatic];
+	[self.tableView reloadSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, [self.menuOptions count] - 1)] withRowAnimation:UITableViewRowAnimationNone];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
