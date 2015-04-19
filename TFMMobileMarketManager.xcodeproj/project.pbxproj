@@ -55,6 +55,8 @@
 		FA85F59A1ADB1BA50044E699 /* UITextField+PrefixSuffix.m in Sources */ = {isa = PBXBuildFile; fileRef = FA85F5991ADB1BA50044E699 /* UITextField+PrefixSuffix.m */; };
 		FA8FAA8D1AD36E60001CA886 /* ImportTool.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8FAA8C1AD36E60001CA886 /* ImportTool.m */; };
 		FAB118F11A9FB72B0012ED5D /* tfm-m3.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FAB118EF1A9FB72B0012ED5D /* tfm-m3.xcdatamodeld */; };
+		FAB122951AE2E97100C61ACC /* ImportForm.m in Sources */ = {isa = PBXBuildFile; fileRef = FAB122941AE2E97100C61ACC /* ImportForm.m */; };
+		FAB122981AE2EBFF00C61ACC /* ImportFormViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FAB122971AE2EBFF00C61ACC /* ImportFormViewController.m */; };
 		FAF7150E1AB35D0E00D21067 /* TokenTotalsReconciliationForm.m in Sources */ = {isa = PBXBuildFile; fileRef = FAF7150D1AB35D0E00D21067 /* TokenTotalsReconciliationForm.m */; };
 		FAF715141AB35E0100D21067 /* TokenTotalsReconciliationFormViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FAF715131AB35E0100D21067 /* TokenTotalsReconciliationFormViewController.m */; };
 		FAF84A6A1AB6046E00012B06 /* ConsoleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FAF84A691AB6046E00012B06 /* ConsoleViewController.m */; };
@@ -152,6 +154,10 @@
 		FA8FAA8B1AD36E60001CA886 /* ImportTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImportTool.h; sourceTree = "<group>"; };
 		FA8FAA8C1AD36E60001CA886 /* ImportTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImportTool.m; sourceTree = "<group>"; };
 		FAB118F01A9FB72B0012ED5D /* tfm-m3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "tfm-m3.xcdatamodel"; sourceTree = "<group>"; };
+		FAB122931AE2E97100C61ACC /* ImportForm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImportForm.h; sourceTree = "<group>"; };
+		FAB122941AE2E97100C61ACC /* ImportForm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImportForm.m; sourceTree = "<group>"; };
+		FAB122961AE2EBFF00C61ACC /* ImportFormViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImportFormViewController.h; sourceTree = "<group>"; };
+		FAB122971AE2EBFF00C61ACC /* ImportFormViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImportFormViewController.m; sourceTree = "<group>"; };
 		FAF7150C1AB35D0E00D21067 /* TokenTotalsReconciliationForm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TokenTotalsReconciliationForm.h; sourceTree = "<group>"; };
 		FAF7150D1AB35D0E00D21067 /* TokenTotalsReconciliationForm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TokenTotalsReconciliationForm.m; sourceTree = "<group>"; };
 		FAF715121AB35E0100D21067 /* TokenTotalsReconciliationFormViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TokenTotalsReconciliationFormViewController.h; sourceTree = "<group>"; };
@@ -389,6 +395,10 @@
 			children = (
 				FA0CABFF1AD213500009D2A8 /* ImporterViewController.h */,
 				FA0CAC001AD213500009D2A8 /* ImporterViewController.m */,
+				FAB122931AE2E97100C61ACC /* ImportForm.h */,
+				FAB122941AE2E97100C61ACC /* ImportForm.m */,
+				FAB122961AE2EBFF00C61ACC /* ImportFormViewController.h */,
+				FAB122971AE2EBFF00C61ACC /* ImportFormViewController.m */,
 			);
 			path = Import;
 			sourceTree = "<group>";
@@ -587,6 +597,7 @@
 				FA7115B01ACA0D9700A396FC /* SelectExistingReportViewController.m in Sources */,
 				FA0AC2901A9FB2B000CCA13A /* MarketStaffForm.m in Sources */,
 				FA0AC29A1A9FB2B000CCA13A /* SyncViewController.m in Sources */,
+				FAB122951AE2E97100C61ACC /* ImportForm.m in Sources */,
 				FA0AC2941A9FB2B000CCA13A /* MainMenuViewController.m in Sources */,
 				FA0AC27C1A9FB2B000CCA13A /* FXForms.m in Sources */,
 				FAF715141AB35E0100D21067 /* TokenTotalsReconciliationFormViewController.m in Sources */,
@@ -597,6 +608,7 @@
 				FA0AC2871A9FB2B000CCA13A /* TokenTotals.m in Sources */,
 				FA0AC27F1A9FB2B000CCA13A /* main.m in Sources */,
 				FA8FAA8D1AD36E60001CA886 /* ImportTool.m in Sources */,
+				FAB122981AE2EBFF00C61ACC /* ImportFormViewController.m in Sources */,
 				FAF7150E1AB35D0E00D21067 /* TokenTotalsReconciliationForm.m in Sources */,
 				FA0AC2951A9FB2B000CCA13A /* MarketOpenMenuViewController.m in Sources */,
 				FA0AC2841A9FB2B000CCA13A /* MarketStaff.m in Sources */,

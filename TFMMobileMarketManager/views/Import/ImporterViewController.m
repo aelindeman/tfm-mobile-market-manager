@@ -74,6 +74,9 @@ static NSString *importSuccessMessage = @"%i entr%@ imported."; // first token: 
 		[self.filenameLabel setHidden:true];
 		[self.importButton setEnabled:false];
 	}
+	
+	UIBarButtonItem *closeButton = [[UIBarButtonItem alloc] initWithTitle:@"Close" style:UIBarButtonItemStylePlain target:self action:@selector(discard)];
+	self.navigationItem.leftBarButtonItem = closeButton;
 }
 
 // loads file into text view
@@ -240,6 +243,16 @@ static NSString *importSuccessMessage = @"%i entr%@ imported."; // first token: 
 		[message addAction:[UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleCancel handler:nil]];
 		[self presentViewController:message animated:true completion:nil];
 	}
+}
+
+- (void)discard
+{
+	UIAlertController *closePrompt = [UIAlertController alertControllerWithTitle:@"Cancel import?" message:@"The data will not be added to the database." preferredStyle:UIAlertControllerStyleAlert];
+	[closePrompt addAction:[UIAlertAction actionWithTitle:@"Don’t close" style:UIAlertActionStyleCancel handler:nil]];
+	[closePrompt addAction:[UIAlertAction actionWithTitle:@"Close" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+		[self dismissViewControllerAnimated:true completion:nil];
+	}]];
+	[self presentViewController:closePrompt animated:true completion:nil];
 }
 
 @end

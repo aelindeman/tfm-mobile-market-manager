@@ -47,7 +47,7 @@
                         <segue destination="tiF-zW-WZB" kind="presentation" identifier="NewMarketDayFromMainMenuSegue" modalPresentationStyle="formSheet" id="6RH-vK-sCl"/>
                         <segue destination="KTV-OH-m7B" kind="show" identifier="ReportsSegue" id="P2X-Md-yyO"/>
                         <segue destination="nO0-u0-KKk" kind="show" identifier="ConsoleSegue" id="fIc-Nt-25e"/>
-                        <segue destination="7gL-Gt-FjR" kind="show" identifier="ImportSegue" id="my8-eF-tTS"/>
+                        <segue destination="zlB-rB-Fhv" kind="presentation" identifier="ImportSegue" modalPresentationStyle="formSheet" id="my8-eF-tTS"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3S6-P9-zRm" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1101,7 +1101,7 @@ Stephen Davies</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YR8-qG-AuL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="327" y="1676"/>
+            <point key="canvasLocation" x="-341" y="-405"/>
         </scene>
         <!--Reports-->
         <scene sceneID="exq-ho-4ua">
@@ -1182,7 +1182,7 @@ Stephen Davies</string>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aPu-RX-JRq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1092" y="2029"/>
+            <point key="canvasLocation" x="1092" y="2020"/>
         </scene>
         <!--Edit Staff-->
         <scene sceneID="b0e-M0-xZv">
@@ -1793,7 +1793,7 @@ Stephen Davies</string>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wji-ES-dTa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2673" y="1676"/>
+            <point key="canvasLocation" x="2673" y="1660"/>
         </scene>
         <!--Open Report-->
         <scene sceneID="hHQ-Ss-8W9">
@@ -1834,7 +1834,7 @@ Stephen Davies</string>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dZQ-1d-LdM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2673" y="2404"/>
+            <point key="canvasLocation" x="2673" y="2388"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="cX9-2U-chd">
@@ -1852,7 +1852,7 @@ Stephen Davies</string>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2fQ-tQ-Gml" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1964" y="1676"/>
+            <point key="canvasLocation" x="1964" y="1660"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="uvk-GQ-DWV">
@@ -1870,7 +1870,25 @@ Stephen Davies</string>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vcv-Bf-Wuh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1964" y="2404"/>
+            <point key="canvasLocation" x="1964" y="2388"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="lEa-We-dE6">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="zlB-rB-Fhv" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="YD5-lH-LDr">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="7gL-Gt-FjR" kind="relationship" relationship="rootViewController" id="5Fk-OY-1Eb"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JAy-eA-tJn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1045" y="-405"/>
         </scene>
     </scenes>
     <resources>

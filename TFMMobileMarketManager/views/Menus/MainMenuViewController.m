@@ -32,9 +32,9 @@ static NSString *erasePromptAllDataText = @"All data";
 			@{@"title": @"Edit staff", @"icon": @"staff", @"action": @"MarketStaffSegue"},
 			@{@"title": @"Edit locations", @"icon": @"locations", @"action": @"LocationsSegue"}
 		], @[
-			@{@"title": @"Create and view reports", @"icon": @"reports", @"action": @"ReportsSegue"},
-			// @{@"title": @"Synchronize database with a PC", @"icon": @"sync", @"action": @"SyncSegue"},
-			@{@"title": @"Import data from spreadsheet", @"icon": @"put", @"action": @"ImportSegue"},
+			@{@"title": @"Create, view, and export reports", @"icon": @"reports", @"action": @"ReportsSegue"},
+			@{@"title": @"Import data", @"icon": @"put", @"action": @"ImportSegue"},
+			// @{@"title": @"Synchronize", @"icon": @"sync", @"action": @"SyncSegue"},
 			@{@"title": @"Console", @"icon": @"console", @"action": @"ConsoleSegue"},
 			@{@"title": @"Erase data", @"icon": @"reset", @"action": @"eraseDataPrompt"}
 		], @[
@@ -134,14 +134,10 @@ static NSString *erasePromptAllDataText = @"All data";
 	[prompt addAction:[UIAlertAction actionWithTitle:@"All data" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
 		[self eraseAllData];
 	}]];
-	[self presentViewController:prompt animated:true completion:^{
-		UIAlertController *postDeleteMessage = [UIAlertController alertControllerWithTitle:@"Erase complete." message:@"" preferredStyle:UIAlertControllerStyleAlert];
-		[postDeleteMessage addAction:[UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleCancel handler:nil]];
-		[self presentViewController:postDeleteMessage animated:true completion:nil];
-	}];
+	[self presentViewController:prompt animated:true completion:nil];
 }
 
-- (void)eraseMarketDays
+- (bool)eraseMarketDays
 {
 	NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"MarketDays"];
 	//[request setEntity:[NSEntityDescription entityForName:@"MarketDays" inManagedObjectContext:TFMM3_APP_DELEGATE.managedObjectContext]];
@@ -151,12 +147,18 @@ static NSString *erasePromptAllDataText = @"All data";
 	for (NSManagedObject *m in marketDays)
 		[TFMM3_APP_DELEGATE.managedObjectContext deleteObject:m];
 	
-	[TFMM3_APP_DELEGATE.managedObjectContext save:nil];
+	if ([TFMM3_APP_DELEGATE.managedObjectContext save:nil])
+	{
+		[self eraseCompleteMessage];
+		NSLog(@"erased all market days");
+		return true;
+	}
 	
 	NSLog(@"erased all market days");
+	return false;
 }
 
-- (void)eraseDatabase
+- (bool)eraseDatabase
 {
 	// reset the database
 	NSPersistentStore *store = [TFMM3_APP_DELEGATE.persistentStoreCoordinator.persistentStores lastObject];
@@ -165,25 +167,50 @@ static NSString *erasePromptAllDataText = @"All data";
 	[TFMM3_APP_DELEGATE.persistentStoreCoordinator removePersistentStore:store error:&error];
 	[[NSFileManager defaultManager] removeItemAtURL:store.URL error:&error];
 	
-	if (error) NSLog(@"database couldn’t be erased: %@", error);
-	NSLog(@"erased the database, starting fresh...");
-	if (![TFMM3_APP_DELEGATE.persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:store.URL options:nil error:&error])
-		NSLog(@"couldn’t recreate database: %@", error);
-
+	if (error)
+	{
+		NSLog(@"database couldn’t be erased: %@", error);
+		return false;
+	}
+	
+	if ([TFMM3_APP_DELEGATE.persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:store.URL options:nil error:&error])
+	{
+		[self eraseCompleteMessage];
+		NSLog(@"created empty database");
+		return true;
+	}
+	
+	NSLog(@"couldn’t recreate database: %@", error);
+	return false;
 }
 
-- (void)eraseAllData
+- (bool)eraseAllData
 {
 	[self eraseDatabase];
 	
+	NSError *error;
 	NSFileManager *fm = [NSFileManager defaultManager];
-	if ([fm fileExistsAtPath:[[TFMM3_APP_DELEGATE.applicationDocumentsDirectory path] stringByAppendingPathComponent:@"Reports"] isDirectory:nil])
-		[fm removeItemAtPath:@"Reports" error:nil];
 	
-	if ([fm fileExistsAtPath:[[TFMM3_APP_DELEGATE.applicationDocumentsDirectory path] stringByAppendingPathComponent:@"Inbox"] isDirectory:nil])
-		[fm removeItemAtPath:@"Inbox" error:nil];
+	if ([fm fileExistsAtPath:[[TFMM3_APP_DELEGATE.applicationDocumentsDirectory path] stringByAppendingPathComponent:@"Reports"]])
+		[fm removeItemAtPath:@"Reports" error:&error];
 	
-	NSLog(@"erased reports and inbox folder");
+	if ([fm fileExistsAtPath:[[TFMM3_APP_DELEGATE.applicationDocumentsDirectory path] stringByAppendingPathComponent:@"Inbox"]])
+		[fm removeItemAtPath:@"Inbox" error:&error];
+	
+	if (error) return false;
+	else
+	{
+		[self eraseCompleteMessage];
+		NSLog(@"removed Reports and Inbox folder and contents");
+		return true;
+	}
+}
+
+- (void)eraseCompleteMessage
+{
+	UIAlertController *postDeleteMessage = [UIAlertController alertControllerWithTitle:@"Erase complete." message:nil preferredStyle:UIAlertControllerStyleAlert];
+	[postDeleteMessage addAction:[UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleCancel handler:nil]];
+	[self presentViewController:postDeleteMessage animated:true completion:nil];
 }
 
 - (IBAction)segueToMarketOpenMenu:(UIStoryboardSegue *)unwindSegue
@@ -199,10 +226,9 @@ static NSString *erasePromptAllDataText = @"All data";
 {
 	if ([segue.identifier isEqualToString:@"ImportSegue"] && [sender class] == [NSURL class])
 	{
-		// TODO: implement handleOpenURL in MainMenuViewController and call segue from there, instead of doing that in the app delegate
-		// forward handleOpenURL
+		// TODO: call import action directly to importer view from app delegate, instead of going through the main menu
 		NSLog(@"handoff handleOpenURL to importer view");
-		[segue.destinationViewController handleOpenURL:sender];
+		[[[segue.destinationViewController viewControllers] firstObject] handleOpenURL:sender];
 	}
 }
 
