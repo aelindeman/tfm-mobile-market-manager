@@ -14,7 +14,7 @@
 static NSString *erasePromptTitle = @"What data would you like to erase?";
 static NSString *erasePromptMessage = @"Deleting data is not reversible - it will be permanently destroyed. Consult the user guide for more information on each option.";
 static NSString *erasePromptMarketDaysActionText = @"All market days";
-static NSString *erasePromptDatabaseActionText = @"Market days, vendors, staff, and locations";
+static NSString *erasePromptDatabaseActionText = @"All data, except reports";
 static NSString *erasePromptAllDataText = @"All data";
 
 - (void)viewDidLoad
@@ -125,13 +125,13 @@ static NSString *erasePromptAllDataText = @"All data";
 {
 	UIAlertController *prompt = [UIAlertController alertControllerWithTitle:erasePromptTitle message:erasePromptMessage preferredStyle:UIAlertControllerStyleAlert];
 	[prompt addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil]];
-	[prompt addAction:[UIAlertAction actionWithTitle:@"Market days" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+	[prompt addAction:[UIAlertAction actionWithTitle:erasePromptMarketDaysActionText style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
 		[self eraseMarketDays];
 	}]];
-	[prompt addAction:[UIAlertAction actionWithTitle:@"All except reports" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+	[prompt addAction:[UIAlertAction actionWithTitle:erasePromptDatabaseActionText style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
 		[self eraseDatabase];
 	}]];
-	[prompt addAction:[UIAlertAction actionWithTitle:@"All data" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+	[prompt addAction:[UIAlertAction actionWithTitle:erasePromptAllDataText style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
 		[self eraseAllData];
 	}]];
 	[self presentViewController:prompt animated:true completion:nil];
