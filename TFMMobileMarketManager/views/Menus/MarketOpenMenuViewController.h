@@ -10,7 +10,7 @@
 @optional
 - (void)updateInfoLabels;
 - (void)updateTerminalReconcilationStatus:(bool)status;
-- (void)updateTokenReconcilationStatus:(bool)status;
+- (void)updateTokenReconciliationStatus:(bool)status;
 
 @end
 

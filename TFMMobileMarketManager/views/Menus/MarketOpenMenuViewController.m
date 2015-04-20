@@ -197,7 +197,7 @@ static NSString *closeMarketDayUnreconciledWarningLabel = @"Terminal totals need
 	[self.tableView reloadData];
 }
 
-- (void)updateTokenReconcilationStatus:(bool)status
+- (void)updateTokenReconciliationStatus:(bool)status
 {
 	[self setTokenTotalsReconciled:status];
 	[self.tableView reloadData];
