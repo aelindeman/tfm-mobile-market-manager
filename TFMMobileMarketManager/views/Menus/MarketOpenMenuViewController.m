@@ -23,7 +23,7 @@ static NSString *closeMarketDayUnreconciledWarningMessage = @"Terminal totals ha
 static NSString *closeMarketDayUnreconciledWarningLabel = @"Terminal totals need to be reconciled before closing the market day";
 
 static NSString *validationPassedTitle = @"Reconciliation complete";
-static NSString *validationPassedMessage = @"The market day can now be closed.\n\nAdding or modifying a transaction will require another reconciliation.";
+static NSString *validationPassedMessage = @"The market day can now be closed.\n\nReconciliation will need to be completed again if any transactions are added or modified.";
 
 static NSString *validationFailedTitle = @"Reconciliation failed";
 static NSString *validationFailedMessage = @"There is a discrepancy between the terminal’s totals and this device’s transaction totals.";
