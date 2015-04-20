@@ -315,7 +315,7 @@ static NSString *dumpFormat = @"%@ %@ %@.m3db"; // device name, dumpName, uuid
 	writeString = [writeString stringByAppendingString:header];
 	
 	NSDateFormatter *txdf = [[NSDateFormatter alloc] init];
-	[txdf setDateFormat:@"HH:MM:ss"];
+	[txdf setDateFormat:@"HH:mm:ss"];
 	
 	for (Transactions *tx in query)
 	{
