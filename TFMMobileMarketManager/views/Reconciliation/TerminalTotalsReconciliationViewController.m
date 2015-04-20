@@ -86,8 +86,8 @@ deviceTotalAmount, deviceTotalTransactionCount;
 		if ([t snap_used])
 		{
 			deviceSnapTransactionCount ++;
-			deviceSnapAmount += [t snap_total];
-			deviceTotalAmount += [t snap_total];
+			deviceSnapAmount += ([t snap_total] - [t snap_bonus]);
+			deviceTotalAmount += ([t snap_total] - [t snap_bonus]);
 		}
 	}
 	
