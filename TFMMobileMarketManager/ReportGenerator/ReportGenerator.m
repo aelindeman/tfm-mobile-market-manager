@@ -139,6 +139,7 @@ static NSString *dumpFormat = @"%@ %@ %@.m3db"; // device name, dumpName, uuid
 									 @"EthnicityOther":     @0,
 									 @"GenderFemale":       @0,
 									 @"GenderMale":         @0,
+									 @"GenderOther":        @0,
 									 @"Seniors":            @0,
 									 @"FrequencyFirstTime": @0};
 
@@ -157,16 +158,19 @@ static NSString *dumpFormat = @"%@ %@ %@.m3db"; // device name, dumpName, uuid
 		else if (tx.cust_ethnicity == EthnicityAsian) [activeSet setValue:@([activeSet[@"EthnicityAsian"] intValue] + 1) forKey:@"EthnicityAsian"];
 		else if (tx.cust_ethnicity == EthnicityOther) [activeSet setValue:@([activeSet[@"EthnicityOther"] intValue] + 1) forKey:@"EthnicityOther"];
 
-		if (tx.cust_gender) [activeSet setValue:@([activeSet[@"GenderMale"] intValue] + 1) forKey:@"GenderMale"];
-		else [activeSet setValue:@([activeSet[@"GenderFemale"] intValue] + 1) forKey:@"GenderFemale"];
+		if (tx.cust_gender == GenderMale) [activeSet setValue:@([activeSet[@"GenderMale"] intValue] + 1) forKey:@"GenderMale"];
+		else if (tx.cust_gender == GenderFemale) [activeSet setValue:@([activeSet[@"GenderFemale"] intValue] + 1) forKey:@"GenderFemale"];
+		else if (tx.cust_gender == GenderOther) [activeSet setValue:@([activeSet[@"GenderOther"] intValue] + 1) forKey:@"GenderOther"];
 
 		if (tx.cust_senior) [activeSet setValue:@([activeSet[@"Seniors"] intValue] + 1) forKey:@"Seniors"];
 
 		if (tx.cust_frequency == FrequencyFirstTime) [activeSet setValue:@([activeSet[@"FrequencyFirstTime"] intValue] + 1) forKey:@"FrequencyFirstTime"];
 	}
 
-	// create the csv string
-	for (NSString *key in totalsTemplate)
+	// create the csv string, sort dictionary first (NSDictionary does not keep its order)
+	for (NSString *key in [totalsTemplate keysSortedByValueUsingComparator:^NSComparisonResult(id obj1, id obj2){
+		return [obj1 compare:obj2];
+	}])
 	{
 		int creditValue = [[creditTotals objectForKey:key] intValue];
 		int snapValue = [[snapTotals objectForKey:key] intValue];
@@ -307,12 +311,15 @@ static NSString *dumpFormat = @"%@ %@ %@.m3db"; // device name, dumpName, uuid
 	writeString = [writeString stringByAppendingString:[NSString stringWithFormat:@"\"Grand Total (SNAP + Bonus + Credit + TokenFee)\",,,%i\n", grandtotal]];
 	
 	// create transactions table
-	NSString *header = @"\n#Transactions#\nZipcode,License,CreditAmount,CreditFee,SNAPAmount,SNAPBonus,Total\n";
+	NSString *header = @"\n#Transactions#\nTime,Zipcode,CardLast4,CreditAmount,CreditFee,SNAPAmount,SNAPBonus,Total\n";
 	writeString = [writeString stringByAppendingString:header];
+	
+	NSDateFormatter *txdf = [[NSDateFormatter alloc] init];
+	[txdf setDateFormat:@"HH:MM:ss"];
 	
 	for (Transactions *tx in query)
 	{
-		writeString = [writeString stringByAppendingString:[NSString stringWithFormat:@"\"%@\",%04i,%i,%i,%i,%i,%i\n", tx.cust_zipcode, tx.cust_id, (tx.credit_total - tx.credit_fee), tx.credit_fee, (tx.snap_total - tx.snap_bonus), tx.snap_bonus, (tx.credit_total + tx.snap_total)]];
+		writeString = [writeString stringByAppendingString:[NSString stringWithFormat:@"\"%@\",\"%@\",%04i,%i,%i,%i,%i,%i\n", [txdf stringFromDate:tx.time], tx.cust_zipcode, tx.cust_id, (tx.credit_total - tx.credit_fee), tx.credit_fee, (tx.snap_total - tx.snap_bonus), tx.snap_bonus, (tx.credit_total + tx.snap_total)]];
 	}
 	
 	NSLog(@"prepped sales report: {\n%@\n}", writeString);
