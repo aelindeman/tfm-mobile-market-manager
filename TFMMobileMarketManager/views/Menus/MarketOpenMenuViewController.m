@@ -22,6 +22,12 @@ static NSString *closeMarketDayUnreconciledWarningTitle = @"Can’t close market
 static NSString *closeMarketDayUnreconciledWarningMessage = @"Terminal totals have not been reconciled yet. This must be done before closing the market day.";
 static NSString *closeMarketDayUnreconciledWarningLabel = @"Terminal totals need to be reconciled before closing the market day";
 
+static NSString *validationPassedTitle = @"Reconciliation complete";
+static NSString *validationPassedMessage = @"The market day can now be closed.\n\nAdding or modifying a transaction will require another reconciliation.";
+
+static NSString *validationFailedTitle = @"Reconciliation failed";
+static NSString *validationFailedMessage = @"There is a discrepancy between the terminal’s totals and this device’s transaction totals.";
+
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
@@ -202,6 +208,13 @@ static NSString *closeMarketDayUnreconciledWarningLabel = @"Terminal totals need
 	[self setTokenTotalsReconciled:status];
 	[self.tableView reloadData];
 
+}
+
+- (void)notifyTerminalReconciliationStatus:(bool)status
+{
+	UIAlertController *reconciliationStatusAlert = [UIAlertController alertControllerWithTitle:status ? validationPassedTitle : validationFailedTitle message:status ? validationPassedMessage : validationFailedMessage preferredStyle:UIAlertControllerStyleAlert];
+	[reconciliationStatusAlert addAction:[UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleCancel handler:nil]];
+	[self presentViewController:reconciliationStatusAlert animated:true completion:nil];
 }
 
 - (void)verifyClosure
