@@ -168,9 +168,7 @@ static NSString *dumpFormat = @"%@ %@ %@.m3db"; // device name, dumpName, uuid
 	}
 
 	// create the csv string, sort dictionary first (NSDictionary does not keep its order)
-	for (NSString *key in [totalsTemplate keysSortedByValueUsingComparator:^NSComparisonResult(id obj1, id obj2){
-		return [obj1 compare:obj2];
-	}])
+	for (NSString *key in [[totalsTemplate allKeys] sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)])
 	{
 		int creditValue = [[creditTotals objectForKey:key] intValue];
 		int snapValue = [[snapTotals objectForKey:key] intValue];
