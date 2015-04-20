@@ -197,7 +197,7 @@ static NSString *validationFailedMessage = @"There is a discrepancy between the 
 	if (error) NSLog(@"error updating info labels: %@", error);
 }
 
-- (void)updateTerminalReconcilationStatus:(bool)status
+- (void)updateTerminalReconciliationStatus:(bool)status
 {
 	[self setTerminalTotalsReconciled:status];
 	[self.tableView reloadData];
