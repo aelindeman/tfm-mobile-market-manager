@@ -77,7 +77,7 @@ static NSString *importSuccessMessage = @"%i entr%@ imported."; // first token: 
 }
 
 // loads file into text view
-- (void)handleOpenURL:(NSURL *)url
+- (void)loadFromURL:(NSURL *)url
 {
 	[self setFileToImport:url];
 	[self.filenameLabel setText:[self.fileToImport lastPathComponent]];

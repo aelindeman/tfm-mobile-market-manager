@@ -21,7 +21,7 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *importButton;
 @property (weak, nonatomic) IBOutlet UILabel *filenameLabel;
 
-- (void)handleOpenURL:(NSURL *)url;
+- (void)loadFromURL:(NSURL *)url;
 - (IBAction)prepopulatePrompt:(id)sender;
 - (IBAction)confirmImportData:(id)sender;
 

@@ -4,6 +4,7 @@
 //
 
 #import "AppDelegate.h"
+#import "ImporterViewController.h"
 
 @interface MainMenuViewController : UITableViewController
 

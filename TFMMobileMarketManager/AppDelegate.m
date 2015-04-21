@@ -11,23 +11,9 @@
 
 @implementation AppDelegate
 
-// TODO: save market day state when entering background, and reopen active market day on entering foreground
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-	// Override point for customization after application launch.
-	
-	/* NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	[defaults setInteger:1 forKey:@"com.apple.CoreData.SQLDebug"];
-	[defaults setInteger:1 forKey:@"com.apple.CoreData.SyntaxColoredLogging"]; */
-	
 	NSLog(@"%@ launched on device %@", [[NSBundle mainBundle] bundleIdentifier], [[[UIDevice currentDevice] identifierForVendor] UUIDString]);
-	
-	// handle opening files
-	NSURL *url = (NSURL *)[launchOptions valueForKey:UIApplicationLaunchOptionsURLKey];
-	if (url != nil && [url isFileURL])
-		[self handleOpenURL:url];
-	
 	return YES;
 }
 
