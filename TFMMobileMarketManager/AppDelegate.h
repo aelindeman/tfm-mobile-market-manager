@@ -50,8 +50,6 @@ typedef NS_ENUM(NSInteger, Position)
 @property (strong, nonatomic) UIWindow *window;
 @property MarketDays *activeMarketDay;
 
-- (void)handleOpenURL:(NSURL *)url;
-
 #pragma mark - Core Data stack
 
 @property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;

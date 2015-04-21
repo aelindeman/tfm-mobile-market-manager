@@ -62,18 +62,22 @@
 {
 	if (url != nil && [url isFileURL])
 	{
-		[self handleOpenURL:url];
+		@try
+		{
+			NSAssert1([self.window.rootViewController class] == [UINavigationController class], @"root view controller wasn't a UINavigationController, it was a %@", [self.window.rootViewController class]);
+			NSAssert1([[(UINavigationController *)self.window.rootViewController viewControllers] count] == 1, @"root navigation controller had more than one child view controller (had %i)", [[(UINavigationController *)self.window.rootViewController viewControllers] count]);
+			
+			[[[(UINavigationController *)self.window.rootViewController viewControllers] firstObject] performSegueWithIdentifier:@"ImportSegue" sender:url];
+			
+			NSLog(@"delegate forwarded openURL to root navigation controller's first view controller, from app: %@, filename: %@", sourceApplication, [url lastPathComponent]);
+			return YES;
+		}
+		@catch (NSException *exception)
+		{
+			NSLog(@"delegate couldn't handle url, from app: %@, filename: %@, reason: %@", sourceApplication, [url lastPathComponent], [exception reason]);
+			return NO;
+		}
 	}
-	return YES;
-}
-
-// TODO: cannot rely on ImportSegue - if the user isn't on a menu that isn't the main menu, importing won't work correctly
-- (void)handleOpenURL:(NSURL *)url
-{
-	NSAssert1([self.window.rootViewController class] == [UINavigationController class], @"root view controller wasn't a UINavigationController, it was a %@", [self.window.rootViewController class]);
-	[[[(UINavigationController *)self.window.rootViewController viewControllers] firstObject] performSegueWithIdentifier:@"ImportSegue" sender:url];
-	
-	NSLog(@"handleOpenURL for %@", [url lastPathComponent]);
 }
 
 #pragma mark - Core Data stack
