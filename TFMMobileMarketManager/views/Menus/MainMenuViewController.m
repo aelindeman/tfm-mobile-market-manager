@@ -237,7 +237,7 @@ static NSString *erasePromptAllDataText = @"All data and preferences";
 	{
 		// TODO: call import action directly to importer view from app delegate, instead of going through the main menu
 		NSLog(@"handoff handleOpenURL to importer view");
-		[[[segue.destinationViewController viewControllers] firstObject] handleOpenURL:sender];
+		[[[segue.destinationViewController viewControllers] firstObject] loadFromURL:sender];
 	}
 }
 
