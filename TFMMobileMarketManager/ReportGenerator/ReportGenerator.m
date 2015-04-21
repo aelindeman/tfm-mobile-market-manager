@@ -434,12 +434,12 @@ static NSString *dumpFormat = @"%@ %@ %@.m3db"; // device name, dumpName, uuid
 		
 		bool did = [fm copyItemAtPath:dbAt toPath:path error:nil];
 		
-		NSLog(@"wrote report to %@", path);
+		NSLog(@"copied database to %@", path);
 		return did;
 	}
 	@catch (NSException *exception)
 	{
-		NSLog(@"couldn’t write report: %@", [exception reason]);
+		NSLog(@"couldn’t copy database: %@", [exception reason]);
 		[self setFailureReason:[exception reason]];
 	}
 	
