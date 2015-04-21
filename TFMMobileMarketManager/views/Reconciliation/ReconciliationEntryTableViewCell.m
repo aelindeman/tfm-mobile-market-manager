@@ -8,6 +8,16 @@
 
 @implementation ReconciliationEntryTableViewCell
 
+- (void)awakeFromNib
+{
+	[self.snapField1 setDelegate:self];
+	[self.snapField2 setDelegate:self];
+	[self.creditField1 setDelegate:self];
+	[self.creditField2 setDelegate:self];
+	[self.totalField1 setDelegate:self];
+	[self.totalField2 setDelegate:self];
+}
+
 @synthesize field1Prefix;
 - (void)setField1Prefix:(NSString *)prefix
 {
@@ -124,6 +134,24 @@
 		[sender setPrefixText:self.field2Prefix];
 		//[sender setSuffixText:self.field2Suffix];
 	}
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)sender
+{
+	[sender resignFirstResponder];
+	if ([sender.restorationIdentifier isEqualToString:@"snapField1"])
+		[self.snapField2 becomeFirstResponder];
+	else if ([sender.restorationIdentifier isEqualToString:@"snapField2"])
+		[self.creditField1 becomeFirstResponder];
+	else if ([sender.restorationIdentifier isEqualToString:@"creditField1"])
+		[self.creditField2 becomeFirstResponder];
+	else if ([sender.restorationIdentifier isEqualToString:@"creditField2"])
+		[self.totalField1 becomeFirstResponder];
+	else if ([sender.restorationIdentifier isEqualToString:@"totalField1"])
+		[self.totalField2 becomeFirstResponder];
+	else if ([sender.restorationIdentifier isEqualToString:@"totalField2"])
+		return YES;
+	return NO;
 }
 
 // see if input array (which should be from -getData:) equals the values in the cell

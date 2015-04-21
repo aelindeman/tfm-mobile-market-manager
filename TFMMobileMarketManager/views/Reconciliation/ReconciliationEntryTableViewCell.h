@@ -5,7 +5,7 @@
 
 #import "AppDelegate.h"
 
-@interface ReconciliationEntryTableViewCell : UITableViewCell
+@interface ReconciliationEntryTableViewCell : UITableViewCell <UITextFieldDelegate>
 
 @property (nonatomic) NSString *field1Prefix;
 @property (nonatomic) NSString *field1Suffix;
