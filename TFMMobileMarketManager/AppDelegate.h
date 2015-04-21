@@ -1,6 +1,6 @@
 //
 //  AppDelegate.h
-//  tfmco-mip
+//  TFMMobileMarketManager
 //
 
 #import <CoreData/CoreData.h>
@@ -10,6 +10,7 @@
 #import "MarketDays.h"
 
 #define TFMM3_APP_DELEGATE ((AppDelegate *)[[UIApplication sharedApplication] delegate])
+#define TFMM3_ERROR_DOMAIN @"TFMM3_ERROR"
 
 typedef NS_ENUM(NSInteger, Frequency)
 {
@@ -49,8 +50,6 @@ typedef NS_ENUM(NSInteger, Position)
 @property (strong, nonatomic) UIWindow *window;
 @property MarketDays *activeMarketDay;
 
-- (void)handleOpenURL:(NSURL *)url;
-
 #pragma mark - Core Data stack
 
 @property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
@@ -59,6 +58,7 @@ typedef NS_ENUM(NSInteger, Position)
 
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;
+- (NSURL *)applicationLibraryDirectory;
 
 @end
 

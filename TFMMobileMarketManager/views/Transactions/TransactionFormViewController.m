@@ -93,7 +93,7 @@
 		[errors addObject:@"ZIP code must be 5 digits"];
 		
 	if (form.cust_id > 9999)
-		[errors addObject:@"ID must be the last 4 digits on their driver’s license"];
+		[errors addObject:@"ID must be 4 digits"];
 	
 	if (!form.credit_used && !form.snap_used)
 		[errors addObject:@"Transaction must have payment information"];
@@ -180,7 +180,7 @@
 		}
 		
 		// unwind segue back to table view
-		[self.delegate updateTerminalReconcilationStatus:false];
+		[self.delegate updateTerminalReconciliationStatus:false];
 		[self dismissViewControllerAnimated:true completion:^{
 			[self.delegate updateInfoLabels];
 		}];

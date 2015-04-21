@@ -17,9 +17,6 @@ static NSString *menuOptionCellIdentifier = @"MenuOptionCell";
 
 static NSString *helpText =	@"If the totals do not match, it is usually an error involving:\n\t- the terminal not processing a transaction\n\t- a transaction incorrectly marked or not marked as invalid\n\t- a typo either on this device or the terminal";
 
-static NSString *validationFailedTitle = @"Reconciliation failed";
-static NSString *validationFailedMessage = @"There is a discrepancy between the terminal’s totals and this device’s transaction totals.";
-
 unsigned int deviceCreditAmount, deviceCreditTransactionCount,
 deviceSnapAmount, deviceSnapTransactionCount,
 deviceTotalAmount, deviceTotalTransactionCount;
@@ -89,8 +86,8 @@ deviceTotalAmount, deviceTotalTransactionCount;
 		if ([t snap_used])
 		{
 			deviceSnapTransactionCount ++;
-			deviceSnapAmount += [t snap_total];
-			deviceTotalAmount += [t snap_total];
+			deviceSnapAmount += ([t snap_total] - [t snap_bonus]);
+			deviceTotalAmount += ([t snap_total] - [t snap_bonus]);
 		}
 	}
 	
@@ -235,38 +232,29 @@ deviceTotalAmount, deviceTotalTransactionCount;
 
 - (bool)submit
 {
-	// validate
-	if ([self.inputCell reconcileWith:[self.deviceCell getData]])
+	// set terminal totals in db either way
+	[self.editObject setSnap_amount:[self.inputCell.snapField1.text intValue]];
+	[self.editObject setSnap_transactions:[self.inputCell.snapField2.text intValue]];
+	[self.editObject setCredit_amount:[self.inputCell.creditField1.text intValue]];
+	[self.editObject setCredit_transactions:[self.inputCell.creditField2.text intValue]];
+	[self.editObject setTotal_amount:[self.inputCell.totalField1.text intValue]];
+	[self.editObject setTotal_transactions:[self.inputCell.totalField2.text intValue]];
+	
+	NSError *error;
+	if (![TFMM3_APP_DELEGATE.managedObjectContext save:&error])
 	{
-		// set terminal totals in db
-		[self.editObject setSnap_amount:[self.inputCell.snapField1.text intValue]];
-		[self.editObject setSnap_transactions:[self.inputCell.snapField2.text intValue]];
-		[self.editObject setCredit_amount:[self.inputCell.creditField1.text intValue]];
-		[self.editObject setCredit_transactions:[self.inputCell.creditField2.text intValue]];
-		[self.editObject setTotal_amount:[self.inputCell.totalField1.text intValue]];
-		[self.editObject setTotal_transactions:[self.inputCell.totalField2.text intValue]];
-		
-		NSError *error;
-		if (![TFMM3_APP_DELEGATE.managedObjectContext save:&error])
-		{
-			NSLog(@"couldn't save: %@", [error localizedDescription]);
-			return false;
-		}
-		
-		// dismiss
-		[self.delegate updateTerminalReconcilationStatus:true];
-		[self dismissViewControllerAnimated:true completion:^{
-			[self.delegate updateInfoLabels];
-		}];
-		return true;
-	}
-	else
-	{
-		UIAlertController *validationFailedAlert = [UIAlertController alertControllerWithTitle:validationFailedTitle message:validationFailedMessage preferredStyle:UIAlertControllerStyleAlert];
-		[validationFailedAlert addAction:[UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleCancel handler:nil]];
-		[self presentViewController:validationFailedAlert animated:true completion:nil];
+		NSLog(@"couldn't save: %@", [error localizedDescription]);
 		return false;
 	}
+	
+	bool valid = [self.inputCell reconcileWith:[self.deviceCell getData]];
+	[self.delegate updateTerminalReconciliationStatus:valid];
+	[self dismissViewControllerAnimated:true completion:^{
+		[self.delegate updateInfoLabels];
+		[self.delegate notifyTerminalReconciliationStatus:valid];
+	}];
+	
+	return valid;
 }
 
 @end

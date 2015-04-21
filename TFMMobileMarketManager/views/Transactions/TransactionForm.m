@@ -11,7 +11,7 @@
 {
 	return (self.credit_used) ? @[
 		@{FXFormFieldTitle: @"Credit amount", FXFormFieldKey: @"credit_amount", FXFormFieldAction: @"updateCreditTotal:"},
-		@{FXFormFieldTitle: @"Credit fee", FXFormFieldKey: @"credit_fee", FXFormFieldCell: [FXFormStepperCell class], @"stepper.stepValue": [NSNumber numberWithInt:2], @"stepper.maximumValue": [NSNumber numberWithInt:2], FXFormFieldAction: @"updateCreditTotal:"},
+		@{FXFormFieldTitle: @"Credit fee", FXFormFieldKey: @"credit_fee", FXFormFieldCell: [FXFormOptionSegmentsCell class], FXFormFieldOptions: @[@0, @2], FXFormFieldAction: @"updateCreditTotal:"},
 		@{FXFormFieldTitle: @"Total", FXFormFieldKey: @"credit_total", FXFormFieldType: FXFormFieldTypeLabel},
 	] : @[];
 }
@@ -29,8 +29,8 @@
 {
 	NSMutableArray *fields = [@[
 		// Demographics
-		@{FXFormFieldTitle: @"ZIP Code", FXFormFieldKey: @"cust_zipcode", FXFormFieldHeader: @"Demographics"},
-		@{FXFormFieldTitle: @"ID", FXFormFieldKey: @"cust_id", FXFormFieldFooter: @"Use the last 4 digits on driver’s license"},
+		@{FXFormFieldTitle: @"ZIP Code", FXFormFieldKey: @"cust_zipcode", @"textField.keyboardType": @(UIKeyboardTypeNumberPad), FXFormFieldHeader: @"Demographics"},
+		@{FXFormFieldTitle: @"ID", FXFormFieldKey: @"cust_id", FXFormFieldFooter: @"Use the last 4 digits on credit or EBT card"},
 		@{FXFormFieldTitle: @"Visit Frequency", FXFormFieldKey: @"cust_frequency", FXFormFieldOptions: @[@"First time", @"Few times a season", @"Monthly", @"A few times a month", @"Weekly"]},
 		@{FXFormFieldTitle: @"Referral", FXFormFieldKey: @"cust_referral", FXFormFieldPlaceholder: @"How did you hear about us?"},
 		@{FXFormFieldTitle: @"Gender   ", FXFormFieldKey: @"cust_gender", FXFormFieldOptions: @[@"Male", @"Female", @"Other"], FXFormFieldCell: [FXFormOptionSegmentsCell class]},

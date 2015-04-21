@@ -14,12 +14,12 @@
 static NSString *erasePromptTitle = @"What data would you like to erase?";
 static NSString *erasePromptMessage = @"Deleting data is not reversible - it will be permanently destroyed. Consult the user guide for more information on each option.";
 static NSString *erasePromptMarketDaysActionText = @"All market days";
-static NSString *erasePromptDatabaseActionText = @"Market days, vendors, staff, and locations";
-static NSString *erasePromptAllDataText = @"All data";
+static NSString *erasePromptDatabaseActionText = @"All data, except reports";
+static NSString *erasePromptAllDataText = @"All data and preferences";
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
+	[super viewDidLoad];
 	
 	// populate the menu
 	self.menuSectionHeaders = @[@"Market Day", @"Edit Information", @"Data Management", @""];
@@ -38,10 +38,14 @@ static NSString *erasePromptAllDataText = @"All data";
 			@{@"title": @"Console", @"icon": @"console", @"action": @"ConsoleSegue"},
 			@{@"title": @"Erase data", @"icon": @"reset", @"action": @"eraseDataPrompt"}
 		], @[
+			//@{@"title": @"Preferences", @"icon": @"preferences", @"action": @"PreferencesSegue"},
 			@{@"title": @"About", @"icon": @"about", @"action": @"AboutSegue"}
 		]];
 	
 	[self setTitle:[@"TFM.co Mobile Market Manager – " stringByAppendingString:[[UIDevice currentDevice] name]]];
+	
+	// UIBarButtonItem *helpButton = [[UIBarButtonItem alloc] initWithTitle:@"Help" style:UIBarButtonItemStylePlain target:self action:@selector(showHelp)];
+	// self.navigationItem.rightBarButtonItem = helpButton;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -107,11 +111,11 @@ static NSString *erasePromptAllDataText = @"All data";
 {
 	NSDictionary *selected = [[self.menuOptions objectAtIndex:[indexPath section]] objectAtIndex:[indexPath row]];
 	NSString *action = [selected valueForKey:@"action"];
-
+	
 	// dynamically perform segue if that's what was asked
 	if ([action hasSuffix:@"Segue"])
 		[self performSegueWithIdentifier:action sender:self];
-
+	
 	// or do functions
 	else if ([action isEqualToString:@"eraseDataPrompt"])
 		[self eraseDataPrompt];
@@ -125,13 +129,13 @@ static NSString *erasePromptAllDataText = @"All data";
 {
 	UIAlertController *prompt = [UIAlertController alertControllerWithTitle:erasePromptTitle message:erasePromptMessage preferredStyle:UIAlertControllerStyleAlert];
 	[prompt addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil]];
-	[prompt addAction:[UIAlertAction actionWithTitle:@"Market days" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+	[prompt addAction:[UIAlertAction actionWithTitle:erasePromptMarketDaysActionText style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
 		[self eraseMarketDays];
 	}]];
-	[prompt addAction:[UIAlertAction actionWithTitle:@"All except reports" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+	[prompt addAction:[UIAlertAction actionWithTitle:erasePromptDatabaseActionText style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
 		[self eraseDatabase];
 	}]];
-	[prompt addAction:[UIAlertAction actionWithTitle:@"All data" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+	[prompt addAction:[UIAlertAction actionWithTitle:erasePromptAllDataText style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
 		[self eraseAllData];
 	}]];
 	[self presentViewController:prompt animated:true completion:nil];
@@ -220,6 +224,11 @@ static NSString *erasePromptAllDataText = @"All data";
 	[self.navigationController presentViewController:menu animated:true completion:^{
 		NSLog(@"market day opened: %@", TFMM3_APP_DELEGATE.activeMarketDay);
 	}];
+}
+
+- (void)showHelp
+{
+	// show QLPreviewController with User Guide PDF
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender

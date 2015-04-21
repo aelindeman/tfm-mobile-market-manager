@@ -99,8 +99,8 @@ static unsigned int parseSettings = CHCSVParserOptionsRecognizesBackslashesAsEsc
 			new.phone = [self sanitizePhone:row[4]];
 			new.email = row[5];
 			
-			new.acceptsSNAP = [row[6] integerValue] == 1;
-			new.acceptsIncentives = [row[7] integerValue] == 1;
+			new.acceptsSNAP = ([row[6] integerValue] == 1) || ([[row[6] lowercaseString] hasPrefix:@"y"]) || ([[row[6] lowercaseString] hasPrefix:@"t"]);
+			new.acceptsIncentives = ([row[7] integerValue] == 1) || ([[row[7] lowercaseString] hasPrefix:@"y"]) || ([[row[7] lowercaseString] hasPrefix:@"t"]);
 			
 			new.stateTaxID = row[8];
 			new.federalTaxID = row[9];
