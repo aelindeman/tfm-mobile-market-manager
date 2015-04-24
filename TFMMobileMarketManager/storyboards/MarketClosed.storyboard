@@ -976,7 +976,7 @@ Stephen Davies</string>
             </objects>
             <point key="canvasLocation" x="327" y="-405"/>
         </scene>
-        <!--Import Form View Controller-->
+        <!--Import-->
         <scene sceneID="BZb-Nv-Xxp">
             <objects>
                 <viewController id="7gL-Gt-FjR" customClass="ImportFormViewController" sceneMemberID="viewController">
@@ -988,7 +988,7 @@ Stephen Davies</string>
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     </view>
-                    <navigationItem key="navigationItem" id="4Ua-Gj-KMS"/>
+                    <navigationItem key="navigationItem" title="Import" id="4Ua-Gj-KMS"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YR8-qG-AuL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

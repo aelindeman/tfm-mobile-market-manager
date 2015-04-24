@@ -13,6 +13,7 @@
 
 @property ImportType importType;
 @property ImportFormat importFormat;
+@property ImportDumpOptions importDumpOptions;
 @property bool skipFirstRow;
 
 @end

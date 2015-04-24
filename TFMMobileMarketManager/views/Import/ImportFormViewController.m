@@ -14,30 +14,32 @@
 static NSString *noDestinationSelectedTitle = @"No destination selected";
 static NSString *noDestinationSelectedMessage = @"";
 
-static NSString *dumpImportConfirmationTitle = @"Import this database dump?";
-static NSString *dumpImportConfirmationMessage = @"The current database will be destroyed permanently, and the database you opened will become the current database.";
+static NSString *importConfirmationTitle = @"Import this data?";
+static NSString *importConfirmationMessage = nil;
 
 static NSString *importSuccessTitle = @"Data imported successfully";
 static NSString *importSuccessMessage = @"%i entr%@ imported."; // first token: entry count, second token: pluralize -> (count == 1) ? @"y was" : @"ies were"
+
+static bool hasPendingChanges = false;
 
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
 	self.formController.form = [[ImportForm alloc] init];
 	
-	[self setTitle:@"Import"];
-	
 	UIBarButtonItem *closeButton = [[UIBarButtonItem alloc] initWithTitle:@"Close" style:UIBarButtonItemStylePlain target:self action:@selector(discard)];
 	self.navigationItem.leftBarButtonItem = closeButton;
 	
-	UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(submitPrompt)];
-	self.navigationItem.rightBarButtonItem = saveButton;
+	UIBarButtonItem *importButton = [[UIBarButtonItem alloc] initWithTitle:@"Add" style:UIBarButtonItemStylePlain target:self action:@selector(submitPrompt)];
+	self.navigationItem.rightBarButtonItem = importButton;
 }
 
 - (void)handleOpenURL:(NSURL *)url
 {
+	hasPendingChanges = true;
+
 	ImportForm *form = self.formController.form;
-	//[form setUrl:url];
+	[form setUrl:url];
 	
 	NSString *filename = [url lastPathComponent];
 	NSString *filetype = [filename pathExtension];
@@ -70,26 +72,23 @@ static NSString *importSuccessMessage = @"%i entr%@ imported."; // first token: 
 	self.formController.form = form;
 	[self.tableView reloadData];
 	
-	[self setTitle:[NSString stringWithFormat:@"Importing “%@”", [url lastPathComponent]]];
 	NSLog(@"importer loaded url %@", url);
 }
 
 - (void)updateOptions:(UITableViewCell<FXFormFieldCell> *)cell
 {
 	ImportForm *form = self.formController.form;
-	NSInteger updateAnchor = [[self.tableView indexPathForCell:cell] section];
-	
-	//[self handleOpenURL:form.url];
-	
-	NSLog(@"%@", form.url);
-	
-	self.formController.form = form;
-	[self.tableView reloadSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(updateAnchor + 1, 1)] withRowAnimation:UITableViewRowAnimationAutomatic];
+	[self handleOpenURL:form.url];
 }
 
-- (bool)submitPrompt
+- (void)submitPrompt
 {
-	return true;
+	UIAlertController *message = [UIAlertController alertControllerWithTitle:importConfirmationTitle message:importConfirmationMessage preferredStyle:UIAlertControllerStyleAlert];
+	[message addAction:[UIAlertAction actionWithTitle:@"Don’t import" style:UIAlertActionStyleCancel handler:nil]];
+	[message addAction:[UIAlertAction actionWithTitle:@"Import" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+		[self submit];
+	}]];
+	[self presentViewController:message animated:true completion:nil];
 }
 
 - (void)submit
@@ -120,18 +119,28 @@ static NSString *importSuccessMessage = @"%i entr%@ imported."; // first token: 
 	{
 		UIAlertController *message = [UIAlertController alertControllerWithTitle:importSuccessTitle message:[NSString stringWithFormat:importSuccessMessage, count, (count == 1) ? @"y was" : @"ies were"] preferredStyle:UIAlertControllerStyleAlert];
 		[message addAction:[UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleCancel handler:nil]];
-		[self presentViewController:message animated:true completion:nil];
+		[self presentViewController:message animated:true completion:^{
+			hasPendingChanges = false;
+		}];
 	}
 }
 
 - (void)discard
 {
-	UIAlertController *closePrompt = [UIAlertController alertControllerWithTitle:@"Cancel import?" message:@"The data will not be added to the database." preferredStyle:UIAlertControllerStyleAlert];
-	[closePrompt addAction:[UIAlertAction actionWithTitle:@"Don’t close" style:UIAlertActionStyleCancel handler:nil]];
-	[closePrompt addAction:[UIAlertAction actionWithTitle:@"Close" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+	ImportForm *form = self.formController.form;
+	if (form.url && hasPendingChanges)
+	{
+		UIAlertController *closePrompt = [UIAlertController alertControllerWithTitle:@"Cancel import?" message:@"The data will not be added to the database." preferredStyle:UIAlertControllerStyleAlert];
+		[closePrompt addAction:[UIAlertAction actionWithTitle:@"Don’t close" style:UIAlertActionStyleCancel handler:nil]];
+		[closePrompt addAction:[UIAlertAction actionWithTitle:@"Close" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+			[self dismissViewControllerAnimated:true completion:nil];
+		}]];
+		[self presentViewController:closePrompt animated:true completion:nil];
+	}
+	else
+	{
 		[self dismissViewControllerAnimated:true completion:nil];
-	}]];
-	[self presentViewController:closePrompt animated:true completion:nil];
+	}
 }
 
 @end
