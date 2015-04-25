@@ -34,14 +34,25 @@ static bool hasPendingChanges = false;
 	self.navigationItem.rightBarButtonItem = importButton;
 }
 
-- (void)handleOpenURL:(NSURL *)url
+// TODO: make work
+- (void)loadFromURL:(NSURL *)url
+{
+	ImportForm *form = self.formController.form;
+	[form setUrl:url];
+
+	self.formController.form = form;
+	[self.tableView reloadData];
+	
+	NSLog(@"importer loaded url %@", url);
+}
+
+- (void)updateOptions:(UITableViewCell<FXFormFieldCell> *)cell
 {
 	hasPendingChanges = true;
 
 	ImportForm *form = self.formController.form;
-	[form setUrl:url];
 	
-	NSString *filename = [url lastPathComponent];
+	NSString *filename = [form.url lastPathComponent];
 	NSString *filetype = [filename pathExtension];
 	
 	if ([filetype isEqualToString:@"m3db"])
@@ -50,6 +61,8 @@ static bool hasPendingChanges = false;
 	}
 	else if ([filetype isEqualToString:@"csv"] || [filetype isEqualToString:@"m3table"])
 	{
+		[form setSkipFirstRow:true];
+	
 		NSDictionary *types = @{
 			@"staff": @(ImportTypeStaff),
 			@"employee": @(ImportTypeStaff),
@@ -68,27 +81,36 @@ static bool hasPendingChanges = false;
 			}
 		}
 	}
+	NSLog(@"selected file at url %@", form.url);
 	
 	self.formController.form = form;
 	[self.tableView reloadData];
-	
-	NSLog(@"importer loaded url %@", url);
-}
-
-- (void)updateOptions:(UITableViewCell<FXFormFieldCell> *)cell
-{
-	ImportForm *form = self.formController.form;
-	[self handleOpenURL:form.url];
 }
 
 - (void)submitPrompt
 {
-	UIAlertController *message = [UIAlertController alertControllerWithTitle:importConfirmationTitle message:importConfirmationMessage preferredStyle:UIAlertControllerStyleAlert];
-	[message addAction:[UIAlertAction actionWithTitle:@"Don’t import" style:UIAlertActionStyleCancel handler:nil]];
-	[message addAction:[UIAlertAction actionWithTitle:@"Import" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-		[self submit];
-	}]];
-	[self presentViewController:message animated:true completion:nil];
+	ImportForm *form = self.formController.form;
+	NSMutableArray *errors = [[NSMutableArray alloc] init];
+
+	// validate
+	if (!form.url)
+		[errors addObject:@"Pick a file"];
+	
+	if ([errors count] > 0)
+	{
+		UIAlertController *validationMessage = [UIAlertController alertControllerWithTitle:@"More information is needed" message:[errors componentsJoinedByString:@"\n\n"] preferredStyle:UIAlertControllerStyleAlert];
+		[validationMessage addAction:[UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleCancel handler:nil]];
+		[self presentViewController:validationMessage animated:true completion:nil];
+	}
+	else
+	{
+		UIAlertController *message = [UIAlertController alertControllerWithTitle:importConfirmationTitle message:importConfirmationMessage preferredStyle:UIAlertControllerStyleAlert];
+		[message addAction:[UIAlertAction actionWithTitle:@"Don’t import" style:UIAlertActionStyleCancel handler:nil]];
+		[message addAction:[UIAlertAction actionWithTitle:@"Import" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+			[self submit];
+		}]];
+		[self presentViewController:message animated:true completion:nil];
+	}
 }
 
 - (void)submit
@@ -115,14 +137,11 @@ static bool hasPendingChanges = false;
 			break;
 	}
 	
-	if (count > 0)
-	{
-		UIAlertController *message = [UIAlertController alertControllerWithTitle:importSuccessTitle message:[NSString stringWithFormat:importSuccessMessage, count, (count == 1) ? @"y was" : @"ies were"] preferredStyle:UIAlertControllerStyleAlert];
-		[message addAction:[UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleCancel handler:nil]];
-		[self presentViewController:message animated:true completion:^{
-			hasPendingChanges = false;
-		}];
-	}
+	UIAlertController *message = [UIAlertController alertControllerWithTitle:importSuccessTitle message:[NSString stringWithFormat:importSuccessMessage, count, (count == 1) ? @"y was" : @"ies were"] preferredStyle:UIAlertControllerStyleAlert];
+	[message addAction:[UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleCancel handler:nil]];
+	[self presentViewController:message animated:true completion:^{
+		hasPendingChanges = false;
+	}];
 }
 
 - (void)discard

@@ -9,15 +9,24 @@
 
 - (NSArray *)listAvailableFiles
 {
-	NSURL *importPath = TFMM3_APP_DELEGATE.applicationDocumentsDirectory;
+	sleep (1);
+	NSURL *docsPath = TFMM3_APP_DELEGATE.applicationDocumentsDirectory;
 	NSPredicate *filter = [NSPredicate predicateWithFormat:@"self endswith '.csv' or self endswith '.m3db' or self endswith '.m3table'"];
 	
-	NSArray *files = [[[NSFileManager defaultManager] contentsOfDirectoryAtPath:[importPath path] error:nil] filteredArrayUsingPredicate:filter];
+	// include both root documents dir and inbox dir
+	NSArray *docsFiles = [[[NSFileManager defaultManager] contentsOfDirectoryAtPath:[docsPath path] error:nil] filteredArrayUsingPredicate:filter];
+	NSArray *inboxFiles = [[[NSFileManager defaultManager] contentsOfDirectoryAtPath:[NSString pathWithComponents:@[[docsPath path], @"Inbox"]] error:nil] filteredArrayUsingPredicate:filter];
 	
 	NSMutableArray *fileURLs = [[NSMutableArray alloc] init];
-	for (NSString *f in files)
+	for (NSString *f in docsFiles)
 	{
-		[fileURLs addObject:[importPath URLByAppendingPathComponent:f]];
+		[fileURLs addObject:[NSURL fileURLWithPath:[NSString pathWithComponents:@[[docsPath path], f]]]];
+	}
+	
+	for (NSString *f in inboxFiles)
+	{
+		//[fileURLs addObject:[NSURL fileURLWithPathComponents:@[docsPath, @"Inbox", f]]];
+		[fileURLs addObject:[NSURL fileURLWithPath:[NSString pathWithComponents:@[[docsPath path], @"Inbox", f]]]];
 	}
 	
 	return fileURLs;

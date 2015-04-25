@@ -148,17 +148,20 @@ static NSString *erasePromptAllDataText = @"All data and preferences";
 	[request setIncludesPropertyValues:false]; // only fetch the managedObjectID
 	
 	NSArray *marketDays = [TFMM3_APP_DELEGATE.managedObjectContext executeFetchRequest:request error:nil];
+	unsigned int count = [marketDays count];
+	
 	for (NSManagedObject *m in marketDays)
 		[TFMM3_APP_DELEGATE.managedObjectContext deleteObject:m];
 	
-	if ([TFMM3_APP_DELEGATE.managedObjectContext save:nil])
+	NSError *error;
+	if ([TFMM3_APP_DELEGATE.managedObjectContext save:&error])
 	{
 		[self eraseCompleteMessage];
-		NSLog(@"erased all market days");
+		NSLog(@"erased %i market day%@", count, count == 1 ? @"s" : @"");
 		return true;
 	}
 	
-	NSLog(@"erased all market days");
+	NSLog(@"couldn't save: %@", error);
 	return false;
 }
 

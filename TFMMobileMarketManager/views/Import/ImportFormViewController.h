@@ -9,6 +9,6 @@
 
 @interface ImportFormViewController : FXFormViewController
 
-- (void)handleOpenURL:(NSURL *)url;
+- (void)loadFromURL:(NSURL *)url;
 
 @end
