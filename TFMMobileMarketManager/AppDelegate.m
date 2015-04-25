@@ -13,7 +13,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-	NSLog(@"%@ launched on device %@", [[NSBundle mainBundle] bundleIdentifier], [[[UIDevice currentDevice] identifierForVendor] UUIDString]);
 	return YES;
 }
 
@@ -133,6 +132,7 @@
 		abort();
 	}
 	
+	NSLog(@"connected to database: %@", storeURL);
     return _persistentStoreCoordinator;
 }
 
