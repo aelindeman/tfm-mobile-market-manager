@@ -9,7 +9,6 @@
 
 - (NSArray *)listAvailableFiles
 {
-	sleep (1);
 	NSURL *docsPath = TFMM3_APP_DELEGATE.applicationDocumentsDirectory;
 	NSPredicate *filter = [NSPredicate predicateWithFormat:@"self endswith '.csv' or self endswith '.m3db' or self endswith '.m3table'"];
 	
