@@ -170,27 +170,26 @@ static unsigned int parseSettings = CHCSVParserOptionsRecognizesBackslashesAsEsc
 // TODO: implement option for merging rather than a drop-in replacement db - http://stackoverflow.com/a/10038331/262640
 - (bool)importDump:(NSURL *)url
 {
-	@try
-	{
-		// delete existing database
-		NSPersistentStore *store = [[TFMM3_APP_DELEGATE.persistentStoreCoordinator persistentStores] lastObject];
-		[TFMM3_APP_DELEGATE.persistentStoreCoordinator removePersistentStore:store error:nil];
+	NSPersistentStore *store = [[TFMM3_APP_DELEGATE.persistentStoreCoordinator persistentStores] lastObject];
+	NSFileManager *fm = [NSFileManager defaultManager];
+	NSError *error;
+	
+	// delete existing database
+	if (![TFMM3_APP_DELEGATE.persistentStoreCoordinator removePersistentStore:store error:&error])
+		NSLog(@"failed to remove old store: %@", error);
+	
+	// copy over new database
+	if (![fm removeItemAtURL:store.URL error:&error])
+		NSLog(@"failed to delete old store: %@", error);
+	
+	if (![fm copyItemAtURL:url toURL:store.URL error:&error])
+		NSLog(@"failed to copy store to location: %@", error);
 		
-		// copy over new database
-		[[NSFileManager defaultManager] removeItemAtURL:store.URL error:nil];
-		[[NSFileManager defaultManager] copyItemAtURL:url toURL:store.URL error:nil];
-		
-		// restart persistent store coordinator using new database
-		[TFMM3_APP_DELEGATE.persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:store.URL options:nil error:nil];
-		
-		NSLog(@"using drop-in replacement for database from %@", [url path]);
-		return true;
-	}
-	@catch (NSException *exception)
-	{
-		NSLog(@"drop-in replacement for database failed: %@", [exception reason]);
-		return false;
-	}
+	// restart persistent store coordinator using new database
+	if (![TFMM3_APP_DELEGATE.persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:store.URL options:nil error:&error])
+		NSLog(@"failed to add new store: %@", error);
+	
+	return !!error;
 }
 
 #pragma mark - helper functions
