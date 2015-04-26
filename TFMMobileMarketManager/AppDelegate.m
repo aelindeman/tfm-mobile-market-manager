@@ -121,7 +121,8 @@
 	
 	// Create coordinator and store
     NSError *storeCreationError;
-    if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&storeCreationError])
+	NSDictionary *storeOptions = @{NSSQLitePragmasOption: @{@"journal_mode": @"DELETE"}};
+    if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:storeOptions error:&storeCreationError])
 	{
 		storeCreationError = [NSError errorWithDomain:TFMM3_ERROR_DOMAIN code:4999 userInfo:@{
 			NSLocalizedDescriptionKey: @"Failed to initialize the application's persistent storage",
