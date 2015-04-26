@@ -48,6 +48,8 @@ static NSString *erasePromptAllDataText = @"All data and preferences";
 	// self.navigationItem.rightBarButtonItem = helpButton;
 }
 
+#pragma mark - UITableView methods
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
 	return [self.menuOptions count];
@@ -124,6 +126,8 @@ static NSString *erasePromptAllDataText = @"All data and preferences";
 	
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
+
+#pragma mark - Database erasure
 
 - (void)eraseDataPrompt
 {
@@ -238,9 +242,17 @@ static NSString *erasePromptAllDataText = @"All data and preferences";
 {
 	if ([segue.identifier isEqualToString:@"ImportSegue"] && [sender class] == [NSURL class])
 	{
-		// TODO: call import action directly to importer view from app delegate, instead of going through the main menu
-		NSLog(@"handoff handleOpenURL to importer view");
-		[[[segue.destinationViewController viewControllers] firstObject] loadFromURL:sender];
+		NSAssert1([segue.destinationViewController class] == [UINavigationController class], @"ImportSegue destination view controller is not UINavigationController, instead is %@", [segue.destinationViewController class]);
+		NSAssert1([[[segue.destinationViewController viewControllers] firstObject] class] == [ImportFormViewController class], @"ImportSegue destination view controller is not ImportFormViewController within a navigation controller, instead is %@", [[[segue.destinationViewController viewControllers] firstObject] class]);
+		
+		ImportForm *form = [[ImportForm alloc] init];
+		[form setUrl:sender];
+		
+		ImportFormViewController *ifvc = [[segue.destinationViewController viewControllers] firstObject];
+		[ifvc.formController setForm:form];
+		[ifvc loadFromURL:sender];
+		
+		NSLog(@"%@: %@ forwarding URL ending with “%@” to ImportFormViewController", segue.identifier, [self class], [(NSURL *)sender lastPathComponent]);
 	}
 }
 
