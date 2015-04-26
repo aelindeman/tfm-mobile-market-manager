@@ -1053,18 +1053,7 @@ Stephen Davies</string>
                             <outlet property="delegate" destination="KTV-OH-m7B" id="RJO-gT-6B2"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Reports" id="YkO-bz-ujA">
-                        <barButtonItem key="rightBarButtonItem" id="onZ-3g-OHP">
-                            <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="grg-P1-LHC">
-                                <rect key="frame" x="-61" y="-14" width="133" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <segments>
-                                    <segment title="CSV"/>
-                                    <segment title="JSON" enabled="NO"/>
-                                </segments>
-                            </segmentedControl>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Reports" id="YkO-bz-ujA"/>
                     <connections>
                         <outlet property="creatingReportStatusLabel" destination="AJ2-xE-nt0" id="p0w-L3-O4U"/>
                         <segue destination="uey-mc-gsu" kind="presentation" identifier="SelectMarketDaySegue" modalPresentationStyle="formSheet" id="cdq-NT-cSy"/>

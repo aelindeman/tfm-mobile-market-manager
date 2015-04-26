@@ -25,12 +25,12 @@ static NSString *reportFailedMessage = @"An error occured while making the repor
 	[self.previewer setDataSource:self];
 	
 	// populate the menu
-	self.menuSectionHeaders = @[@"", @"Reports", @"Raw Data", @"Database"];
+	self.menuSectionHeaders = @[@"", @"Market Day Reports", @"Raw Data", @"Database"];
 	self.menuOptions = @[
 		@[
-			@{@"title": @"Open an existing report", @"icon": @"report", @"action": @"SelectExistingReportSegue"},
-			@{@"title": @"Select market day", @"icon": @"marketday", @"action": @"SelectMarketDaySegue"}
+			@{@"title": @"Open an existing report", @"icon": @"report", @"action": @"SelectExistingReportSegue"}
 		], @[
+			@{@"title": @"Select market day", @"icon": @"marketday", @"action": @"SelectMarketDaySegue"}, // @"bold" key is ignored
 			@{@"title": @"Create sales report", @"icon": @"totals", @"action": TFMM3_REPORT_TYPE_SALES},
 			@{@"title": @"Create redemptions report", @"icon": @"inbox", @"action": TFMM3_REPORT_TYPE_REDEMPTIONS},
 			@{@"title": @"Create demographics report", @"icon": @"demographics", @"action": TFMM3_REPORT_TYPE_DEMOGRAPHICS}
@@ -41,13 +41,6 @@ static NSString *reportFailedMessage = @"An error occured while making the repor
 		], @[
 			@{@"title": @"Dump database", @"icon": @"database", @"action": TFMM3_REPORT_TYPE_DUMP}
 		]];
-	[self updatePrompt];
-}
-
-- (void)updatePrompt
-{
-	[self.navigationItem setPrompt:(self.selectedMarketDay) ? [self.selectedMarketDay description] : nil];
-	[self.tableView reloadSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, [self.menuOptions count] - 1)] withRowAnimation:UITableViewRowAnimationNone];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -97,10 +90,11 @@ static NSString *reportFailedMessage = @"An error occured while making the repor
 	{
 		[cell.detailTextLabel setHidden:!self.selectedMarketDay];
 		[cell.detailTextLabel setText:self.selectedMarketDay ? [self.selectedMarketDay description] : @""];
+		[cell.textLabel setFont:self.selectedMarketDay ? [UIFont systemFontOfSize:[cell.textLabel.font pointSize]] : [UIFont boldSystemFontOfSize:[cell.textLabel.font pointSize]]];
 	}
 	
 	// disable report creation buttons if there's no market day
-	if (indexPath.section == [self.menuSectionHeaders indexOfObject:@"Reports"] && ![[option valueForKey:@"action"] isEqualToString:@"SelectMarketDaySegue"])
+	if (indexPath.section == [self.menuSectionHeaders indexOfObject:@"Market Day Reports"] && ![[option valueForKey:@"action"] isEqualToString:@"SelectMarketDaySegue"])
 	{
 		[cell setUserInteractionEnabled:!!self.selectedMarketDay];
 		[cell.textLabel setTextColor:(self.selectedMarketDay) ? [UIColor darkTextColor] : [UIColor lightGrayColor]];
@@ -158,7 +152,11 @@ static NSString *reportFailedMessage = @"An error occured while making the repor
 {
 	if (objectID == nil) [self setSelectedMarketDay:false];
 	else [self setSelectedMarketDay:(MarketDays *)[TFMM3_APP_DELEGATE.managedObjectContext objectWithID:objectID]];
-	[self updatePrompt];
+	
+	[CATransaction setDisableActions:YES];
+	[self.tableView reloadSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(1, 1)] withRowAnimation:UITableViewRowAnimationNone];
+	[CATransaction setDisableActions:NO];
+	
 	NSLog(@"reports using market day %@", self.selectedMarketDay);
 }
 
