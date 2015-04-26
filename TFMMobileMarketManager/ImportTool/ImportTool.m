@@ -167,7 +167,7 @@ static unsigned int parseSettings = CHCSVParserOptionsRecognizesBackslashesAsEsc
 }
 
 // !!!: replaces entire database
-// TODO: implement option for merging rather than a drop-in replacement db - http://stackoverflow.com/a/10038331/262640
+// TODO: implement option for merging rather than a drop-in replacement db - http://stackoverflow.com/a/10038331
 - (bool)importDump:(NSURL *)url
 {
 	NSPersistentStore *store = [[TFMM3_APP_DELEGATE.persistentStoreCoordinator persistentStores] lastObject];

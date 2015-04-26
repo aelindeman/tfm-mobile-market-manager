@@ -5,7 +5,7 @@
 
 #import "ConsoleViewController.h"
 
-// stolen from http://stackoverflow.com/a/1351090/262640 and placed into a category
+// stolen from http://stackoverflow.com/a/1351090 and placed into a category
 // fixes field navigation
 @implementation UITextField (Tabbable)
 
