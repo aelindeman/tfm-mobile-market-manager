@@ -25,7 +25,9 @@ static bool hasPendingChanges = false;
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
-	self.formController.form = [[ImportForm alloc] init];
+	
+	if (!self.formController.form)
+		self.formController.form = [[ImportForm alloc] init];
 	
 	UIBarButtonItem *closeButton = [[UIBarButtonItem alloc] initWithTitle:@"Close" style:UIBarButtonItemStylePlain target:self action:@selector(discard)];
 	self.navigationItem.leftBarButtonItem = closeButton;
