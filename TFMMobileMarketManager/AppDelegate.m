@@ -41,6 +41,20 @@
 	[self saveContext];
 }
 
+#pragma mark - Help file reference
+
+@synthesize helpFile = _helpFile;
+
+- (NSURL *)helpFile
+{
+	if (_helpFile != nil) {
+		return _helpFile;
+	}
+	
+	_helpFile = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"UserDocs" ofType:@"pdf"]];
+	return _helpFile;
+}
+
 #pragma mark - Import/export support
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation

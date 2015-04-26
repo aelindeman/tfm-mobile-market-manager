@@ -56,6 +56,7 @@
 		FAB118F11A9FB72B0012ED5D /* tfm-m3.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FAB118EF1A9FB72B0012ED5D /* tfm-m3.xcdatamodeld */; };
 		FAB122951AE2E97100C61ACC /* ImportForm.m in Sources */ = {isa = PBXBuildFile; fileRef = FAB122941AE2E97100C61ACC /* ImportForm.m */; };
 		FAB122981AE2EBFF00C61ACC /* ImportFormViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FAB122971AE2EBFF00C61ACC /* ImportFormViewController.m */; };
+		FAD0EBD61AED7C0C00EA1042 /* UserDocs.pdf in Resources */ = {isa = PBXBuildFile; fileRef = FAD0EBD51AED7C0C00EA1042 /* UserDocs.pdf */; };
 		FAF7150E1AB35D0E00D21067 /* TokenTotalsReconciliationForm.m in Sources */ = {isa = PBXBuildFile; fileRef = FAF7150D1AB35D0E00D21067 /* TokenTotalsReconciliationForm.m */; };
 		FAF715141AB35E0100D21067 /* TokenTotalsReconciliationFormViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FAF715131AB35E0100D21067 /* TokenTotalsReconciliationFormViewController.m */; };
 		FAF84A6A1AB6046E00012B06 /* ConsoleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FAF84A691AB6046E00012B06 /* ConsoleViewController.m */; };
@@ -155,6 +156,7 @@
 		FAB122941AE2E97100C61ACC /* ImportForm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImportForm.m; sourceTree = "<group>"; };
 		FAB122961AE2EBFF00C61ACC /* ImportFormViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImportFormViewController.h; sourceTree = "<group>"; };
 		FAB122971AE2EBFF00C61ACC /* ImportFormViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImportFormViewController.m; sourceTree = "<group>"; };
+		FAD0EBD51AED7C0C00EA1042 /* UserDocs.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = UserDocs.pdf; sourceTree = "<group>"; };
 		FAF7150C1AB35D0E00D21067 /* TokenTotalsReconciliationForm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TokenTotalsReconciliationForm.h; sourceTree = "<group>"; };
 		FAF7150D1AB35D0E00D21067 /* TokenTotalsReconciliationForm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TokenTotalsReconciliationForm.m; sourceTree = "<group>"; };
 		FAF715121AB35E0100D21067 /* TokenTotalsReconciliationFormViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TokenTotalsReconciliationFormViewController.h; sourceTree = "<group>"; };
@@ -208,6 +210,7 @@
 				FAB118EF1A9FB72B0012ED5D /* tfm-m3.xcdatamodeld */,
 				FA0AC2321A9FB2B000CCA13A /* types */,
 				FA85F5981ADB1A380044E699 /* UITextField+PrefixSuffix */,
+				FAD0EBD51AED7C0C00EA1042 /* UserDocs.pdf */,
 				FA0AC2431A9FB2B000CCA13A /* views */,
 			);
 			name = Source;
@@ -536,6 +539,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA7745401AC1C04300D9B14B /* RedemptionListHeaderView.xib in Resources */,
+				FAD0EBD61AED7C0C00EA1042 /* UserDocs.pdf in Resources */,
 				FA11AB051AB7F83300D4C360 /* ReconciliationEntryTableViewCell.xib in Resources */,
 				FA0AC2A21A9FB2E300CCA13A /* Assets.xcassets in Resources */,
 				FA0AC2801A9FB2B000CCA13A /* MarketClosed.storyboard in Resources */,

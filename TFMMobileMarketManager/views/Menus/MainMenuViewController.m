@@ -21,6 +21,9 @@ static NSString *erasePromptAllDataText = @"All data and preferences";
 {
 	[super viewDidLoad];
 	
+	self.helpViewer = [[QLPreviewController alloc] init];
+	[self.helpViewer setDataSource:self];
+	
 	// populate the menu
 	self.menuSectionHeaders = @[@"Market Day", @"Edit Information", @"Data Management", @""];
 	self.menuOptions = @[
@@ -39,13 +42,11 @@ static NSString *erasePromptAllDataText = @"All data and preferences";
 			@{@"title": @"Erase data", @"icon": @"reset", @"action": @"eraseDataPrompt"}
 		], @[
 			//@{@"title": @"Preferences", @"icon": @"preferences", @"action": @"PreferencesSegue"},
+			@{@"title": @"Help", @"icon": @"help", @"action": @"helpViewer"},
 			@{@"title": @"About", @"icon": @"about", @"action": @"AboutSegue"}
 		]];
 	
 	[self setTitle:[@"TFM.co Mobile Market Manager – " stringByAppendingString:[[UIDevice currentDevice] name]]];
-	
-	// UIBarButtonItem *helpButton = [[UIBarButtonItem alloc] initWithTitle:@"Help" style:UIBarButtonItemStylePlain target:self action:@selector(showHelp)];
-	// self.navigationItem.rightBarButtonItem = helpButton;
 }
 
 #pragma mark - UITableView methods
@@ -121,6 +122,9 @@ static NSString *erasePromptAllDataText = @"All data and preferences";
 	// or do functions
 	else if ([action isEqualToString:@"eraseDataPrompt"])
 		[self eraseDataPrompt];
+	
+	else if ([action isEqualToString:@"helpViewer"])
+		[self presentViewController:self.helpViewer animated:true completion:nil];
 	
 	else NSLog(@"nothing to do for “%@”", [selected valueForKey:@"title"]);
 	
@@ -224,6 +228,22 @@ static NSString *erasePromptAllDataText = @"All data and preferences";
 	[self presentViewController:postDeleteMessage animated:true completion:nil];
 }
 
+#pragma mark - Help file viewer
+
+// set data path for previewer
+- (id <QLPreviewItem>)previewController: (QLPreviewController *)controller previewItemAtIndex:(NSInteger)index
+{
+	return TFMM3_APP_DELEGATE.helpFile;
+}
+
+// set number of objects in previewer - should only be 1
+- (NSInteger) numberOfPreviewItemsInPreviewController: (QLPreviewController *) controller
+{
+	return !!TFMM3_APP_DELEGATE.helpFile;
+}
+
+#pragma mark - Segues
+
 - (IBAction)segueToMarketOpenMenu:(UIStoryboardSegue *)unwindSegue
 {
 	UINavigationController *menu = [[UIStoryboard storyboardWithName:@"MarketOpen" bundle:nil] instantiateInitialViewController];
@@ -231,11 +251,6 @@ static NSString *erasePromptAllDataText = @"All data and preferences";
 	[self.navigationController presentViewController:menu animated:true completion:^{
 		NSLog(@"market day opened: %@", TFMM3_APP_DELEGATE.activeMarketDay);
 	}];
-}
-
-- (void)showHelp
-{
-	// show QLPreviewController with User Guide PDF
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender

@@ -33,6 +33,9 @@ static NSString *validationFailedMessage = @"There is a discrepancy between the 
 	[super viewDidLoad];
 	NSAssert([TFMM3_APP_DELEGATE activeMarketDay] != nil, @"No active market day set!");
 	
+	self.helpViewer = [[QLPreviewController alloc] init];
+	[self.helpViewer setDataSource:self];
+	
 	// populate the menu
 	self.menuOptions = @[
 		@[
@@ -44,9 +47,10 @@ static NSString *validationFailedMessage = @"There is a discrepancy between the 
 		], @[
 			@{@"title": @"Edit market day", @"icon": @"marketday", @"action": @"EditMarketDaySegue"},
 			@{@"title": @"Reconcile token totals", @"icon": @"tokens", @"action": @"TokenTotalsReconciliationFormSegue"},
-			@{@"title": @"Reconcile terminal totals", @"icon": @"terminal", @"action": @"TerminalTotalsReconciliationFormSegue"}
-		], @[
+			@{@"title": @"Reconcile terminal totals", @"icon": @"terminal", @"action": @"TerminalTotalsReconciliationFormSegue"}, // @"bold" key is ignored
 			@{@"title": @"Close market day", @"icon": @"exit", @"action": @"closeMarketDay"}
+		], @[
+			@{@"title": @"Help", @"icon": @"help", @"action": @"helpViewer"}
 		]];
 }
 
@@ -56,6 +60,8 @@ static NSString *validationFailedMessage = @"There is a discrepancy between the 
 	[super viewWillAppear:animated];
 	[self updateInfoLabels];
 }
+
+# pragma mark - UITableView methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -81,7 +87,7 @@ static NSString *validationFailedMessage = @"There is a discrepancy between the 
 
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
 {
-	return ((section == [self.menuOptions count] - 1) && !self.terminalTotalsReconciled) ? closeMarketDayUnreconciledWarningLabel : @"";
+	return ((section == [self.menuOptions count] - 2) && !self.terminalTotalsReconciled) ? closeMarketDayUnreconciledWarningLabel : @"";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -108,6 +114,7 @@ static NSString *validationFailedMessage = @"There is a discrepancy between the 
 	// disable close market day button if reconciliation hasn't been completed
 	if ([[option valueForKey:@"action"] isEqualToString:@"closeMarketDay"])
 	{
+		[cell.textLabel setFont:self.terminalTotalsReconciled ? [UIFont boldSystemFontOfSize:[cell.textLabel.font pointSize]] : [UIFont systemFontOfSize:[cell.textLabel.font pointSize]]];
 		[cell.textLabel setTextColor:(self.terminalTotalsReconciled ? [UIColor darkTextColor] : [UIColor lightGrayColor])];
 		[cell setUserInteractionEnabled:self.terminalTotalsReconciled];
 	}
@@ -127,10 +134,15 @@ static NSString *validationFailedMessage = @"There is a discrepancy between the 
 	else if ([action isEqualToString:@"closeMarketDay"])
 		[self verifyClosure];
 	
+	else if ([action isEqualToString:@"helpViewer"])
+		[self presentViewController:self.helpViewer animated:true completion:nil];
+	
 	else NSLog(@"nothing to do for “%@”", [selected valueForKey:@"title"]);
 	
 	[tableView deselectRowAtIndexPath:indexPath animated:true];
 }
+
+#pragma mark - Interface elements
 
 - (void)updateInfoLabels
 {
@@ -235,6 +247,22 @@ static NSString *validationFailedMessage = @"There is a discrepancy between the 
 		[self presentViewController:closeMarketDayPrompt animated:true completion:nil];
 	}
 }
+
+#pragma mark - Help file viewer
+
+// set data path for previewer
+- (id <QLPreviewItem>)previewController: (QLPreviewController *)controller previewItemAtIndex:(NSInteger)index
+{
+	return TFMM3_APP_DELEGATE.helpFile;
+}
+
+// set number of objects in previewer - should only be 1
+- (NSInteger) numberOfPreviewItemsInPreviewController: (QLPreviewController *) controller
+{
+	return !!TFMM3_APP_DELEGATE.helpFile;
+}
+
+#pragma mark - Segues
 
 // closes the market day gracefully and returns to the main menu
 - (void)closeMarketDay

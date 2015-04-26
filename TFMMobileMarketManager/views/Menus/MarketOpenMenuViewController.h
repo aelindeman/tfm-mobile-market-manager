@@ -3,6 +3,7 @@
 //  tfmco-mip
 //
 
+#import <QuickLook/QuickLook.h>
 #import "AppDelegate.h"
 
 @protocol MarketOpenDelegate
@@ -24,12 +25,14 @@
 #import "Transactions.h"
 #import "TransactionFormViewController.h"
 
-@interface MarketOpenMenuViewController : UITableViewController <MarketOpenDelegate>
+@interface MarketOpenMenuViewController : UITableViewController <MarketOpenDelegate, QLPreviewControllerDataSource>
 
 @property (nonatomic, assign) id <MarketOpenDelegate> delegate;
 
 @property NSArray *menuOptions;
 @property NSArray *menuSectionHeaders;
+
+@property (nonatomic) QLPreviewController *helpViewer;
 
 @property (weak, nonatomic) IBOutlet UILabel *vendorHeaderLabel;
 @property (weak, nonatomic) IBOutlet UILabel *vendorDetailLabel;
