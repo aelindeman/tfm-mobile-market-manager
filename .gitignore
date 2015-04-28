@@ -4,6 +4,9 @@
 *~.nib
 
 build/
+*.pbxuser
 
-xcuserdata
 .xccheckout
+xcshareddata
+xcuserdata
+*.xcworkspace
