@@ -29,6 +29,7 @@
 		
 		form.name = data.name;
 		form.phone = data.phone;
+		form.email = data.email;
 		form.position = data.position;
 	}
 	else [self setTitle:@"Add Staff"];
@@ -60,9 +61,14 @@
 		[errors addObject:@"Name cannot be blank"];
 	
 	NSString *phoneRegex = @"^(\\+\\d{1,2}\\s)?\\(?\\d{3}\\)?[\\s.-]?\\d{3}[\\s.-]?\\d{4}$";
-	NSPredicate *phoneTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", phoneRegex];
+	NSPredicate *phoneTest = [NSPredicate predicateWithFormat:@"self matches %@", phoneRegex];
 	if (![phoneTest evaluateWithObject:form.phone] || !([form.phone length] > 0))
 		[errors addObject:@"Phone number must be valid"];
+		
+	NSString *emailRegex = @"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$";
+	NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"self matches %@", emailRegex];
+	if (![emailTest evaluateWithObject:form.email] || !([form.email length] > 0))
+		[errors addObject:@"Email address must be valid"];
 	
 	if (form.position < 0)
 		[errors addObject:@"Position cannot be blank"];
@@ -81,6 +87,7 @@
 		{
 			[self.editObject setName:[form.name capitalizedString]];
 			[self.editObject setPhone:[self sanitizePhone:form.phone]];
+			[self.editObject setEmail:form.email];
 			[self.editObject setPosition:form.position];
 		}
 		// create a new object otherwise
@@ -89,6 +96,7 @@
 			MarketStaff *new = [NSEntityDescription insertNewObjectForEntityForName:@"MarketStaff" inManagedObjectContext:TFMM3_APP_DELEGATE.managedObjectContext];
 			new.name = [form.name capitalizedString];
 			new.phone = [self sanitizePhone:form.phone];
+			new.email = form.email;
 			new.position = form.position;
 		}
 		
