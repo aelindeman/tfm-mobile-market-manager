@@ -189,7 +189,7 @@ static unsigned int parseSettings = CHCSVParserOptionsRecognizesBackslashesAsEsc
 	if (![TFMM3_APP_DELEGATE.persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:store.URL options:nil error:&error])
 		NSLog(@"failed to add new store: %@", error);
 	
-	return !!error;
+	return !error;
 }
 
 #pragma mark - helper functions

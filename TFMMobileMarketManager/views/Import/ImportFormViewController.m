@@ -11,14 +11,17 @@
 
 @implementation ImportFormViewController
 
-static NSString *noDestinationSelectedTitle = @"No destination selected";
-static NSString *noDestinationSelectedMessage = @"";
-
 static NSString *importConfirmationTitle = @"Import this data?";
 static NSString *importConfirmationMessage = nil;
 
 static NSString *importSuccessTitle = @"Data imported successfully";
 static NSString *importSuccessMessage = @"%i entr%@ imported."; // first token: entry count, second token: pluralize -> (count == 1) ? @"y was" : @"ies were"
+
+static NSString *importDumpSuccessTitle = @"Dump imported successfully.";
+static NSString *importDumpSuccessMessage = nil;
+
+static NSString *importFailureTitle = @"Data couldn’t be imported";
+static NSString *importFailureMessage = @"Check that the file’s syntax is correct and has the correct number of columns in the right order.";
 
 static bool hasPendingChanges = false;
 
@@ -76,7 +79,7 @@ static bool hasPendingChanges = false;
 		
 		for (NSString *t in types)
 		{
-			if ([filename containsString:t])
+			if ([[filename lowercaseString] containsString:t])
 			{
 				[form setImportType:[[types valueForKey:t] intValue]];
 				break;
@@ -139,9 +142,12 @@ static bool hasPendingChanges = false;
 			break;
 	}
 	
-	UIAlertController *message = [UIAlertController alertControllerWithTitle:importSuccessTitle message:[NSString stringWithFormat:importSuccessMessage, count, (count == 1) ? @"y was" : @"ies were"] preferredStyle:UIAlertControllerStyleAlert];
-	[message addAction:[UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleCancel handler:nil]];
-	[self presentViewController:message animated:true completion:^{
+	NSString *title = (count > 0) ? (form.importType == ImportTypeDump) ? importDumpSuccessTitle : importSuccessTitle : importFailureTitle;
+	NSString *message = (count > 0) ? (form.importType == ImportTypeDump) ? importDumpSuccessMessage : [NSString stringWithFormat:importSuccessMessage, count, (count == 1) ? @"y was" : @"ies were"] : importFailureMessage;
+	
+	UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+	[alert addAction:[UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleCancel handler:nil]];
+	[self presentViewController:alert animated:true completion:^{
 		hasPendingChanges = false;
 	}];
 }
