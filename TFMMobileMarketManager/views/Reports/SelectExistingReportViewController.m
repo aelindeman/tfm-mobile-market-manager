@@ -23,10 +23,7 @@ static NSString *deleteAllConfirmationMessageDetails = @"All reports on this dev
 	self.previewer = [[QLPreviewController alloc] init];
 	[self.previewer setDataSource:self];
 	
-	UIBarButtonItem *closeButton = [[UIBarButtonItem alloc] initWithTitle:@"Close" style:UIBarButtonItemStylePlain target:self action:@selector(discard)];
-	self.navigationItem.leftBarButtonItem = closeButton;
-	
-	UIBarButtonItem *deleteAllButton = [[UIBarButtonItem alloc] initWithTitle:@"Delete All" style:UIBarButtonItemStylePlain target:self action:@selector(confirmDeleteAll)];
+	UIBarButtonItem *deleteAllButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(confirmDeleteAll)];
 	self.navigationItem.rightBarButtonItem = deleteAllButton;
 }
 

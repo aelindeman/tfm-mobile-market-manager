@@ -1002,30 +1002,6 @@ Stephen Davies</string>
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
-                        <view key="tableHeaderView" hidden="YES" contentMode="scaleToFill" id="YLh-ka-mbd">
-                            <rect key="frame" x="0.0" y="64" width="600" height="58"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <subviews>
-                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="tXa-wc-QNX">
-                                    <rect key="frame" x="213" y="19" width="20" height="20"/>
-                                </activityIndicatorView>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Creating report..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AJ2-xE-nt0">
-                                    <rect key="frame" x="241" y="20" width="119" height="18"/>
-                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                            </subviews>
-                            <color key="backgroundColor" red="0.12156862745098039" green="0.12941176470588237" blue="0.14117647058823529" alpha="1" colorSpace="calibratedRGB"/>
-                            <constraints>
-                                <constraint firstAttribute="centerX" secondItem="AJ2-xE-nt0" secondAttribute="centerX" id="DXb-cL-IyM"/>
-                                <constraint firstAttribute="centerY" secondItem="tXa-wc-QNX" secondAttribute="centerY" id="MY5-Vy-yhW"/>
-                                <constraint firstItem="AJ2-xE-nt0" firstAttribute="top" relation="greaterThanOrEqual" secondItem="YLh-ka-mbd" secondAttribute="top" constant="20" symbolic="YES" id="RGP-0I-Tru"/>
-                                <constraint firstAttribute="centerY" secondItem="AJ2-xE-nt0" secondAttribute="centerY" id="Yay-vV-BL0"/>
-                                <constraint firstItem="AJ2-xE-nt0" firstAttribute="leading" secondItem="tXa-wc-QNX" secondAttribute="trailing" constant="8" symbolic="YES" id="ceI-Nn-eW2"/>
-                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="AJ2-xE-nt0" secondAttribute="bottom" constant="20" symbolic="YES" id="rbB-EA-wUH"/>
-                            </constraints>
-                        </view>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="MenuOptionCell" textLabel="2KI-qs-KbM" detailTextLabel="fZQ-mF-RBX" style="IBUITableViewCellStyleValue1" id="5dq-aS-qvP">
                                 <autoresizingMask key="autoresizingMask"/>
@@ -1055,9 +1031,8 @@ Stephen Davies</string>
                     </tableView>
                     <navigationItem key="navigationItem" title="Reports" id="YkO-bz-ujA"/>
                     <connections>
-                        <outlet property="creatingReportStatusLabel" destination="AJ2-xE-nt0" id="p0w-L3-O4U"/>
                         <segue destination="uey-mc-gsu" kind="presentation" identifier="SelectMarketDaySegue" modalPresentationStyle="formSheet" id="cdq-NT-cSy"/>
-                        <segue destination="Bx8-nn-nS2" kind="presentation" identifier="SelectExistingReportSegue" modalPresentationStyle="formSheet" id="sTd-BY-ona"/>
+                        <segue destination="Av6-bQ-viV" kind="show" identifier="SelectExistingReportSegue" id="udW-0c-hDM"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aPu-RX-JRq" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1675,7 +1650,7 @@ Stephen Davies</string>
             </objects>
             <point key="canvasLocation" x="2673" y="1660"/>
         </scene>
-        <!--Open Report-->
+        <!--Open An Existing Report-->
         <scene sceneID="hHQ-Ss-8W9">
             <objects>
                 <tableViewController id="Av6-bQ-viV" customClass="SelectExistingReportViewController" sceneMemberID="viewController">
@@ -1710,11 +1685,11 @@ Stephen Davies</string>
                             <outlet property="delegate" destination="Av6-bQ-viV" id="sl6-a3-wqg"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Open Report" id="NfH-1Z-sji"/>
+                    <navigationItem key="navigationItem" title="Open An Existing Report" id="NfH-1Z-sji"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dZQ-1d-LdM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2673" y="2388"/>
+            <point key="canvasLocation" x="1964" y="2398"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="cX9-2U-chd">
@@ -1733,24 +1708,6 @@ Stephen Davies</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2fQ-tQ-Gml" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1964" y="1660"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="uvk-GQ-DWV">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Bx8-nn-nS2" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="dPP-kZ-2fg">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="Av6-bQ-viV" kind="relationship" relationship="rootViewController" id="aFQ-Oo-Ijc"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="vcv-Bf-Wuh" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1964" y="2388"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="lEa-We-dE6">
