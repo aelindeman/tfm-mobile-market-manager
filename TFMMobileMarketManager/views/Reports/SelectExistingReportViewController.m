@@ -16,7 +16,6 @@ static NSString *deleteAllConfirmationMessageDetails = @"All reports on this dev
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
-	if (!self.basePath) [self setBasePath:[NSString pathWithComponents:@[[TFMM3_APP_DELEGATE.applicationDocumentsDirectory path], @"Reports"]]];
 	[self load];
 	
 	// init preview window
@@ -29,17 +28,17 @@ static NSString *deleteAllConfirmationMessageDetails = @"All reports on this dev
 
 - (void)load
 {
-	NSAssert(self.basePath, @"self.basePath must be set");
+	NSAssert(TFMM3_APP_DELEGATE.reportsPath, @"TFMM3_APP_DELEGATE.reportsPath must be set");
 
 	// walk report directories on disk and list CSVs
 	NSError *error;
 	NSFileManager *fm = [NSFileManager defaultManager];
-	NSArray *subs = [fm contentsOfDirectoryAtPath:self.basePath error:&error];
+	NSArray *subs = [fm contentsOfDirectoryAtPath:[TFMM3_APP_DELEGATE.reportsPath path] error:&error];
 	
 	NSMutableArray *items = [[NSMutableArray alloc] init];
 	for (NSString *subfolder in subs)
 	{
-		NSArray *contents = [[fm contentsOfDirectoryAtPath:[NSString pathWithComponents:@[self.basePath, subfolder]] error:&error] filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"self endswith '.csv' or self endswith '.m3db' or self endswith '.m3table'"]];
+		NSArray *contents = [[fm contentsOfDirectoryAtPath:[NSString pathWithComponents:@[[TFMM3_APP_DELEGATE.reportsPath path], subfolder]] error:&error] filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"self endswith '.csv' or self endswith '.m3db' or self endswith '.m3table'"]];
 		if ([contents count] > 0)
 			[items addObject:@{ @"name": subfolder, @"items": contents }];
 	}
@@ -75,7 +74,7 @@ static NSString *deleteAllConfirmationMessageDetails = @"All reports on this dev
 	
 	// TODO: fix so detail label is not dependent on label text - may have to change inner items NSArray to NSDictionary
 	// set detail label to report creation date
-	NSDictionary* fileAttribs = [[NSFileManager defaultManager] attributesOfItemAtPath:[NSString pathWithComponents:@[self.basePath, [[self.items objectAtIndex:indexPath.section] objectForKey:@"name"], [name string]]] error:nil];
+	NSDictionary* fileAttribs = [[NSFileManager defaultManager] attributesOfItemAtPath:[NSString pathWithComponents:@[[TFMM3_APP_DELEGATE.reportsPath path], [[self.items objectAtIndex:indexPath.section] objectForKey:@"name"], [name string]]] error:nil];
 	NSDateFormatter *reportTimeFormat = [[NSDateFormatter alloc] init];
 	[reportTimeFormat setDateFormat:@"'Created' yyyy-MM-dd HH:mm:ss"];
 	NSString *gentime = [reportTimeFormat stringFromDate:[fileAttribs objectForKey:NSFileCreationDate]];
@@ -101,7 +100,7 @@ static NSString *deleteAllConfirmationMessageDetails = @"All reports on this dev
 		{
 			NSString *name = [[[self.items objectAtIndex:indexPath.section] objectForKey:@"items"] objectAtIndex:indexPath.row];
 			NSString *marketday = [[self.items objectAtIndex:indexPath.section] valueForKey:@"name"];
-			NSString *resolvedPath = [NSString pathWithComponents:@[self.basePath, marketday, name]];
+			NSString *resolvedPath = [NSString pathWithComponents:@[[TFMM3_APP_DELEGATE.reportsPath path], marketday, name]];
 			
 			NSError *error;
 			[[NSFileManager defaultManager] removeItemAtPath:resolvedPath error:&error];
@@ -136,7 +135,7 @@ static NSString *deleteAllConfirmationMessageDetails = @"All reports on this dev
 	NSString *marketday = [[self.items objectAtIndex:indexPath.section] valueForKey:@"name"];
 	NSString *name = [[[self.items objectAtIndex:indexPath.section] objectForKey:@"items"] objectAtIndex:indexPath.row];
 	
-	NSString *resolvedPath = [NSString pathWithComponents:@[self.basePath, marketday, name]];
+	NSString *resolvedPath = [NSString pathWithComponents:@[[TFMM3_APP_DELEGATE.reportsPath path], marketday, name]];
 	[self setSelectedObject:resolvedPath];
 	[self.previewer reloadData];
 	
@@ -173,9 +172,9 @@ static NSString *deleteAllConfirmationMessageDetails = @"All reports on this dev
 
 	// delete the reports
 	NSError *error;
-	for (NSString *subfolder in [[NSFileManager defaultManager] contentsOfDirectoryAtPath:self.basePath error:&error])
+	for (NSString *subfolder in [[NSFileManager defaultManager] contentsOfDirectoryAtPath:[TFMM3_APP_DELEGATE.reportsPath path] error:&error])
 	{
-		[[NSFileManager defaultManager] removeItemAtPath:[NSString pathWithComponents:@[self.basePath, subfolder]] error:&error];
+		[[NSFileManager defaultManager] removeItemAtPath:[NSString pathWithComponents:@[[TFMM3_APP_DELEGATE.reportsPath path], subfolder]] error:&error];
 		if (error) NSLog(@"error deleting report: %@", error);
 	}
 	

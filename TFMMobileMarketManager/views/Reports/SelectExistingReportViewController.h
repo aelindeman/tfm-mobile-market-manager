@@ -9,9 +9,6 @@
 
 @interface SelectExistingReportViewController : UITableViewController <QLPreviewControllerDataSource>
 
-// starting directory - will only traverse this folder for its immediate subfolders and their files
-@property NSString *basePath;
-
 @property NSString *selectedObject;
 
 // array of dictionaries

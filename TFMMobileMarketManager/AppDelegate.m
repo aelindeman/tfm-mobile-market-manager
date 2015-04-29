@@ -41,7 +41,7 @@
 	[self saveContext];
 }
 
-#pragma mark - Help file reference
+#pragma mark - File references
 
 @synthesize helpFile = _helpFile;
 
@@ -53,6 +53,18 @@
 	
 	_helpFile = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"UserDocs" ofType:@"pdf"]];
 	return _helpFile;
+}
+
+@synthesize reportsPath = _reportsPath;
+
+- (NSURL *)reportsPath
+{
+	if (_reportsPath != nil) {
+		return _reportsPath;
+	}
+	
+	_reportsPath = [NSURL fileURLWithPathComponents:@[[TFMM3_APP_DELEGATE.applicationDocumentsDirectory path], @"Reports"]];
+	return _reportsPath;
 }
 
 #pragma mark - Import/export support

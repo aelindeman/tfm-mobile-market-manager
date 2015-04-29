@@ -15,7 +15,7 @@ static NSString *erasePromptTitle = @"What data would you like to erase?";
 static NSString *erasePromptMessage = @"Deleting data is not reversible - it will be permanently destroyed. Consult the user guide for more information on each option.";
 static NSString *erasePromptMarketDaysActionText = @"All market days";
 static NSString *erasePromptDatabaseActionText = @"All data, except reports";
-static NSString *erasePromptAllDataText = @"All data and preferences";
+static NSString *erasePromptAllDataText = @"All data";
 
 - (void)viewDidLoad
 {
@@ -206,19 +206,19 @@ static NSString *erasePromptAllDataText = @"All data and preferences";
 	NSError *error;
 	NSFileManager *fm = [NSFileManager defaultManager];
 	
-	if ([fm fileExistsAtPath:[[TFMM3_APP_DELEGATE.applicationDocumentsDirectory path] stringByAppendingPathComponent:@"Reports"]])
-		[fm removeItemAtPath:@"Reports" error:&error];
+	NSString *reportsPath = [TFMM3_APP_DELEGATE.reportsPath path];
+	NSString *inboxPath = [[TFMM3_APP_DELEGATE.applicationDocumentsDirectory path] stringByAppendingPathComponent:@"Inbox"];
 	
-	if ([fm fileExistsAtPath:[[TFMM3_APP_DELEGATE.applicationDocumentsDirectory path] stringByAppendingPathComponent:@"Inbox"]])
-		[fm removeItemAtPath:@"Inbox" error:&error];
+	if ([fm fileExistsAtPath:reportsPath])
+		if (![fm removeItemAtPath:reportsPath error:&error])
+			NSLog(@"couldn’t remove reports folder: %@", error);
 	
-	if (error) return false;
-	else
-	{
-		[self eraseCompleteMessage];
-		NSLog(@"removed Reports and Inbox folder and contents");
-		return true;
-	}
+	if ([fm fileExistsAtPath:inboxPath])
+		if (![fm removeItemAtPath:inboxPath error:&error])
+			NSLog(@"couldn’t remove inbox folder: %@", error);
+	
+	if (!error) [self eraseCompleteMessage];
+	return !error;
 }
 
 - (void)eraseCompleteMessage

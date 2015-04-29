@@ -49,7 +49,9 @@ typedef NS_ENUM(NSInteger, Position)
 
 @property (strong, nonatomic) UIWindow *window;
 @property MarketDays *activeMarketDay;
+
 @property (nonatomic) NSURL *helpFile;
+@property (nonatomic) NSURL *reportsPath;
 
 #pragma mark - Core Data stack
 
