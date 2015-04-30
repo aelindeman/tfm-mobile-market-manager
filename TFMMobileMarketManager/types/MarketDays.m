@@ -42,7 +42,7 @@
 	NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
 	[dateFormatter setDateStyle:NSDateFormatterLongStyle];
 	
-	return [NSString stringWithFormat:@"%@, %@",
+	return [NSString stringWithFormat:@"%@ - %@",
 		[self.location description],
 		[dateFormatter stringFromDate:self.date]];
 }
