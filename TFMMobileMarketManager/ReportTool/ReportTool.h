@@ -1,5 +1,5 @@
 //
-//  ReportGenerator.h
+//  ReportTool.h
 //  TFMMobileMarketManager
 //
 
@@ -26,7 +26,7 @@
 #import "Transactions.h"
 #import "Vendors.h"
 
-@interface ReportGenerator : NSObject
+@interface ReportTool : NSObject
 
 - (id) initWithMarketDay:(MarketDays *)marketDay;
 

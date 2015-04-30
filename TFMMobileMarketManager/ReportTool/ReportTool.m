@@ -1,11 +1,11 @@
 //
-//  ReportGenerator.m
+//  ReportTool.m
 //  TFMMobileMarketManager
 //
 
-#import "ReportGenerator.h"
+#import "ReportTool.h"
 
-@implementation ReportGenerator
+@implementation ReportTool
 
 static NSString *reportsSubfolder = @"Reports"; // relative to application's documents directory
 static NSString *marketDaySubfolder = @"%@"; // relative to reports subfolder, replace token with market day name
@@ -24,6 +24,8 @@ static NSString *locationsExportName = TFMM3_REPORT_TYPE_LOCATIONS;
 
 static NSString *dumpName = TFMM3_REPORT_TYPE_DUMP;
 static NSString *dumpFormat = @"%@ %@ %@.m3db"; // device name, dumpName, uuid
+
+@synthesize selectedMarketDay = _selectedMarketDay;
 
 // allow init using delegate's active market day
 - (id)init

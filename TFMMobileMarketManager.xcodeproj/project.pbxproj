@@ -60,7 +60,7 @@
 		FAF7150E1AB35D0E00D21067 /* TokenTotalsReconciliationForm.m in Sources */ = {isa = PBXBuildFile; fileRef = FAF7150D1AB35D0E00D21067 /* TokenTotalsReconciliationForm.m */; };
 		FAF715141AB35E0100D21067 /* TokenTotalsReconciliationFormViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FAF715131AB35E0100D21067 /* TokenTotalsReconciliationFormViewController.m */; };
 		FAF84A6A1AB6046E00012B06 /* ConsoleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FAF84A691AB6046E00012B06 /* ConsoleViewController.m */; };
-		FAFE4A6F1AC85A7D009935EC /* ReportGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = FAFE4A6E1AC85A7D009935EC /* ReportGenerator.m */; };
+		FAFE4A6F1AC85A7D009935EC /* ReportTool.m in Sources */ = {isa = PBXBuildFile; fileRef = FAFE4A6E1AC85A7D009935EC /* ReportTool.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -163,8 +163,8 @@
 		FAF715131AB35E0100D21067 /* TokenTotalsReconciliationFormViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TokenTotalsReconciliationFormViewController.m; sourceTree = "<group>"; };
 		FAF84A681AB6046E00012B06 /* ConsoleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConsoleViewController.h; sourceTree = "<group>"; };
 		FAF84A691AB6046E00012B06 /* ConsoleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConsoleViewController.m; sourceTree = "<group>"; };
-		FAFE4A6D1AC85A7D009935EC /* ReportGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReportGenerator.h; sourceTree = "<group>"; };
-		FAFE4A6E1AC85A7D009935EC /* ReportGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReportGenerator.m; sourceTree = "<group>"; };
+		FAFE4A6D1AC85A7D009935EC /* ReportTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReportTool.h; sourceTree = "<group>"; };
+		FAFE4A6E1AC85A7D009935EC /* ReportTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReportTool.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -205,7 +205,7 @@
 				FA8FAA8A1AD36E24001CA886 /* ImportTool */,
 				FA0AC22D1A9FB2B000CCA13A /* Info.plist */,
 				FA0AC22E1A9FB2B000CCA13A /* main.m */,
-				FA8FAA871AD36C28001CA886 /* ReportGenerator */,
+				FA8FAA871AD36C28001CA886 /* ReportTool */,
 				FA0AC22F1A9FB2B000CCA13A /* storyboards */,
 				FAB118EF1A9FB72B0012ED5D /* tfm-m3.xcdatamodeld */,
 				FA0AC2321A9FB2B000CCA13A /* types */,
@@ -419,14 +419,14 @@
 			path = "UITextField+PrefixSuffix";
 			sourceTree = "<group>";
 		};
-		FA8FAA871AD36C28001CA886 /* ReportGenerator */ = {
+		FA8FAA871AD36C28001CA886 /* ReportTool */ = {
 			isa = PBXGroup;
 			children = (
-				FAFE4A6D1AC85A7D009935EC /* ReportGenerator.h */,
-				FAFE4A6E1AC85A7D009935EC /* ReportGenerator.m */,
+				FAFE4A6D1AC85A7D009935EC /* ReportTool.h */,
+				FAFE4A6E1AC85A7D009935EC /* ReportTool.m */,
 			);
-			name = ReportGenerator;
-			path = TFMMobileMarketManager/ReportGenerator;
+			name = ReportTool;
+			path = TFMMobileMarketManager/ReportTool;
 			sourceTree = SOURCE_ROOT;
 		};
 		FA8FAA8A1AD36E24001CA886 /* ImportTool */ = {
@@ -613,7 +613,7 @@
 				FA0AC29D1A9FB2B000CCA13A /* TransactionListViewController.m in Sources */,
 				FA0AC28E1A9FB2B000CCA13A /* MarketDayFormViewController.m in Sources */,
 				FA0AC29F1A9FB2B000CCA13A /* VendorFormViewController.m in Sources */,
-				FAFE4A6F1AC85A7D009935EC /* ReportGenerator.m in Sources */,
+				FAFE4A6F1AC85A7D009935EC /* ReportTool.m in Sources */,
 				FA0AC2961A9FB2B000CCA13A /* RedemptionForm.m in Sources */,
 				FA85F59A1ADB1BA50044E699 /* UITextField+PrefixSuffix.m in Sources */,
 				FA7115AD1AC9E2FF00A396FC /* SelectMarketDayViewController.m in Sources */,

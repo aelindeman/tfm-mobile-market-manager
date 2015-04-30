@@ -180,7 +180,7 @@ static NSString *reportFailedMessage = @"An error occured while making the repor
 	}
 
 	// create the report
-	ReportGenerator *rg = [[ReportGenerator alloc] initWithMarketDay:self.selectedMarketDay];
+	ReportTool *rg = [[ReportTool alloc] initWithMarketDay:self.selectedMarketDay];
 	NSString *path =
 		[type isEqualToString:TFMM3_REPORT_TYPE_SALES] ? [rg generateSalesReport] :
 		[type isEqualToString:TFMM3_REPORT_TYPE_REDEMPTIONS] ? [rg generateRedemptionsReport] :
