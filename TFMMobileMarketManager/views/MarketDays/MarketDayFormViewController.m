@@ -152,7 +152,7 @@
 		NSError *error;
 		if (![TFMM3_APP_DELEGATE.managedObjectContext save:&error])
 		{
-			NSLog(@"couldn't save: %@", [error localizedDescription]);
+			NSLog(@"couldn't save: %@", error);
 		}
 		
 		[self dismiss:andOpenMarketDay];

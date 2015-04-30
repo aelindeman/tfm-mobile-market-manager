@@ -53,7 +53,7 @@ static unsigned int parseSettings = CHCSVParserOptionsRecognizesBackslashesAsEsc
 		}
 		
 		if (![TFMM3_APP_DELEGATE.managedObjectContext save:&error])
-			NSLog(@"couldn't save: %@", [error localizedDescription]);
+			NSLog(@"couldn't save: %@", error);
 	}
 	@catch (NSException *exception)
 	{
@@ -109,7 +109,7 @@ static unsigned int parseSettings = CHCSVParserOptionsRecognizesBackslashesAsEsc
 		}
 		
 		if (![TFMM3_APP_DELEGATE.managedObjectContext save:&error])
-			NSLog(@"couldn't save: %@", [error localizedDescription]);
+			NSLog(@"couldn't save: %@", error);
 	}
 	@catch (NSException *exception)
 	{
@@ -154,7 +154,7 @@ static unsigned int parseSettings = CHCSVParserOptionsRecognizesBackslashesAsEsc
 		}
 		
 		if (![TFMM3_APP_DELEGATE.managedObjectContext save:&error])
-			NSLog(@"couldn't save: %@", [error localizedDescription]);
+			NSLog(@"couldn't save: %@", error);
 	}
 	@catch (NSException *exception)
 	{
