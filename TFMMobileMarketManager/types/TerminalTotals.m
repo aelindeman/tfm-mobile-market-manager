@@ -17,4 +17,9 @@
 @dynamic total_transactions;
 @dynamic marketday;
 
+- (NSString *)description
+{
+	return [NSString stringWithFormat:@"Terminal totals for %@", [self.marketday fieldDescription]];
+}
+
 @end

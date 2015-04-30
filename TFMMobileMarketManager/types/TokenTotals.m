@@ -17,4 +17,9 @@
 @dynamic redeemed_snap_tokens;
 @dynamic marketday;
 
+- (NSString *)description
+{
+	return [NSString stringWithFormat:@"Token totals for %@", [self.marketday fieldDescription]];
+}
+
 @end

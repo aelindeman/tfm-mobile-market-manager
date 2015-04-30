@@ -9,7 +9,6 @@
 
 @implementation Locations
 
-@dynamic abbreviation;
 @dynamic address;
 @dynamic name;
 @dynamic marketdays;
@@ -21,7 +20,7 @@
 
 - (NSString *)fieldDescription
 {
-	return [self description];
+	return self.name;
 }
 
 @end

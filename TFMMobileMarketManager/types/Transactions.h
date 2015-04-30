@@ -27,4 +27,6 @@
 @property (nonatomic) NSDate *time;
 @property (nonatomic, retain) MarketDays *marketday;
 
+- (NSString *)description;
+
 @end

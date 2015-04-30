@@ -17,12 +17,16 @@
 
 - (NSString *)description
 {
-	return self.name;
+	return [NSString stringWithFormat:@"%@ (%i) - %i market day%@",
+		self.name,
+		self.position,
+		[self.marketdays count],
+		([self.marketdays count] == 1) ? @"" : @"s"];
 }
 
 - (NSString *)fieldDescription
 {
-	return [self description];
+	return self.name;
 }
 
 @end

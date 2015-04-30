@@ -147,7 +147,7 @@ static NSString *validationFailedMessage = @"There is a discrepancy between the 
 - (void)updateInfoLabels
 {
 	// also update the prompt text
-	[self.navigationItem setPrompt:[TFMM3_APP_DELEGATE.activeMarketDay description]];
+	[self.navigationItem setPrompt:[TFMM3_APP_DELEGATE.activeMarketDay fieldDescription]];
 	
 	// TODO: this feels really lazy having only one NSError
 	NSError *error;

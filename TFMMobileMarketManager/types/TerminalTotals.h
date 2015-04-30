@@ -18,4 +18,6 @@
 @property (nonatomic) int16_t total_transactions;
 @property (nonatomic, retain) MarketDays *marketday;
 
+- (NSString *)description;
+
 @end

@@ -21,4 +21,6 @@
 @property (nonatomic, retain) MarketDays *marketday;
 @property (nonatomic, retain) NSManagedObject *vendor;
 
+- (NSString *)description;
+
 @end

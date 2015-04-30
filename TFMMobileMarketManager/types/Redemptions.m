@@ -20,4 +20,16 @@
 @dynamic marketday;
 @dynamic vendor;
 
+- (NSString *)description
+{
+	NSDateFormatter *df = [[NSDateFormatter alloc] init];
+	[df setDateFormat:@"yyyy-MM-dd"];
+
+	return [NSString stringWithFormat:@"%@ - $%i on %@%@",
+		[self.vendor valueForKey:@"name"],
+		self.total,
+		[df stringFromDate:self.date],
+		(!self.check_number) ? @"" : [NSString stringWithFormat:@" (check %i)", self.check_number]];
+}
+
 @end

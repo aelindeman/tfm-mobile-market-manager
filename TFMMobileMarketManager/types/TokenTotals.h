@@ -18,4 +18,6 @@
 @property (nonatomic) int16_t redeemed_snap_tokens;
 @property (nonatomic, retain) MarketDays *marketday;
 
+- (NSString *)description;
+
 @end

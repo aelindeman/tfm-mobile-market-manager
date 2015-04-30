@@ -22,16 +22,29 @@
 
 - (NSString *)description
 {
-	NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-	[dateFormatter setDateStyle:NSDateFormatterLongStyle];
-	NSString *date = [dateFormatter stringFromDate:self.date];
+	NSDateFormatter *df = [[NSDateFormatter alloc] init];
+	[df setDateFormat:@"yyyy-MM-dd"];
 	
-	return [NSString stringWithFormat:@"%@ - %@", [self.location description], date];
+	return [NSString stringWithFormat:@"%@ %@ - %i staff, %i vendor%@ - %i transaction%@, %i redemption%@",
+		[df stringFromDate:self.date],
+		[self.location valueForKey:@"name"],
+		[self.staff count],
+		[self.vendors count],
+		([self.vendors count] == 1) ? @"" : @"s",
+		[self.transactions count],
+		([self.transactions count] == 1) ? @"" : @"s",
+		[self.redemptions count],
+		([self.redemptions count] == 1) ? @"" : @"s"];
 }
 
 - (NSString *)fieldDescription
 {
-	return [self description];
+	NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+	[dateFormatter setDateStyle:NSDateFormatterLongStyle];
+	
+	return [NSString stringWithFormat:@"%@, %@",
+		[self.location description],
+		[dateFormatter stringFromDate:self.date]];
 }
 
 @end

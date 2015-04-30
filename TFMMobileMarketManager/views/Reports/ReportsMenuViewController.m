@@ -89,7 +89,7 @@ static NSString *reportFailedMessage = @"An error occured while making the repor
 	if ([[option valueForKey:@"action"] isEqualToString:@"SelectMarketDaySegue"])
 	{
 		[cell.detailTextLabel setHidden:!self.selectedMarketDay];
-		[cell.detailTextLabel setText:self.selectedMarketDay ? [self.selectedMarketDay description] : @""];
+		[cell.detailTextLabel setText:self.selectedMarketDay ? [self.selectedMarketDay fieldDescription] : @""];
 		[cell.textLabel setFont:self.selectedMarketDay ? [UIFont systemFontOfSize:[cell.textLabel.font pointSize]] : [UIFont boldSystemFontOfSize:[cell.textLabel.font pointSize]]];
 	}
 	

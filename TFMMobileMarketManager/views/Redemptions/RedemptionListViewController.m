@@ -18,7 +18,7 @@ static NSString *deleteConfirmationMessageDetails = @"It won’t be deleted, but
 {
 	[super viewDidLoad];
 	NSAssert([TFMM3_APP_DELEGATE activeMarketDay], @"No active market day set!");
-	[self.navigationItem setPrompt:[TFMM3_APP_DELEGATE.activeMarketDay description]];
+	[self.navigationItem setPrompt:[TFMM3_APP_DELEGATE.activeMarketDay fieldDescription]];
 	self.tableView.allowsMultipleSelectionDuringEditing = false;
 	[self load];
 }

@@ -26,4 +26,17 @@
 @dynamic marketday;
 @dynamic time;
 
+- (NSString *)description
+{
+	NSDateFormatter *df = [[NSDateFormatter alloc] init];
+	[df setDateFormat:@"HH:mm:ss"];
+
+	return [NSString stringWithFormat:@"%@ at %@ - $%i using %@%@",
+		[self.marketday fieldDescription],
+		[df stringFromDate:self.time],
+		(self.snap_used) ? self.snap_total : (self.credit_used) ? self.credit_total : 0,
+		(self.snap_used) ? @"SNAP" : (self.credit_used) ? @"credit" : @"unknown",
+		(self.markedInvalid) ? @" (Invalid)" : @""];
+}
+
 @end

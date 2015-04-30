@@ -25,12 +25,18 @@
 
 - (NSString *)description
 {
-	return self.businessName;
+	return [NSString stringWithFormat:@"%@ (%@) - %i market day%@, %i redemption%@",
+		self.businessName,
+		self.name,
+		[self.marketdays count],
+		([self.marketdays count] == 1) ? @"" : @"s",
+		[self.redemptions count],
+		([self.redemptions count] == 1) ? @"" : @"s"];
 }
 
 - (NSString *)fieldDescription
 {
-	return [self description];
+	return self.businessName;
 }
 
 @end

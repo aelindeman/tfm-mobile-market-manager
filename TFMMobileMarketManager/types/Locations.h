@@ -10,7 +10,6 @@
 
 @interface Locations : NSManagedObject
 
-@property (nonatomic, retain) NSString * abbreviation;
 @property (nonatomic, retain) NSString * address;
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSSet *marketdays;
