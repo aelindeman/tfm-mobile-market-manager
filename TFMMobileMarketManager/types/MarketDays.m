@@ -25,7 +25,7 @@
 	NSDateFormatter *df = [[NSDateFormatter alloc] init];
 	[df setDateFormat:@"yyyy-MM-dd"];
 	
-	return [NSString stringWithFormat:@"%@ %@ - %i staff, %i vendor%@ - %i transaction%@, %i redemption%@",
+	return [NSString stringWithFormat:@"%@ %@ - %tu staff, %tu vendor%@ - %tu transaction%@, %tu redemption%@",
 		[df stringFromDate:self.date],
 		[self.location valueForKey:@"name"],
 		[self.staff count],

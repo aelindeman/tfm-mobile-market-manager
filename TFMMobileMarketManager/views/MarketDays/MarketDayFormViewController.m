@@ -13,7 +13,7 @@
 
 - (NSString *)fieldDescription
 {
-	return [NSString stringWithFormat:@"%i selected", [self count]];
+	return [NSString stringWithFormat:@"%tu selected", [self count]];
 }
 
 @end

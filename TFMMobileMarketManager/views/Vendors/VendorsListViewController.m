@@ -86,7 +86,7 @@ static NSString *deleteFailedMessageDetails = @"There are market days or redempt
 	NSString *mdplural = ([info.marketdays count] != 1) ? @"s" : @"";
 	NSString *redplural = ([info.redemptions count] != 1) ? @"s" : @"";
 	[cell.textLabel setText:info.businessName];
-	[cell.detailTextLabel setText:[NSString stringWithFormat:@"%i market day%@, %i redemption%@", [info.marketdays count], mdplural, [info.redemptions count], redplural]];
+	[cell.detailTextLabel setText:[NSString stringWithFormat:@"%tu market day%@, %tu redemption%@", [info.marketdays count], mdplural, [info.redemptions count], redplural]];
 }
 
 // populate the table view

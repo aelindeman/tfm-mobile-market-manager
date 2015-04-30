@@ -170,11 +170,11 @@ static NSString *dumpFormat = @"%@ %@ %@.m3db"; // device name, dumpName, uuid
 	// create the csv string, sort dictionary first (NSDictionary does not keep its order)
 	for (NSString *key in [[totalsTemplate allKeys] sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)])
 	{
-		int creditValue = [[creditTotals objectForKey:key] intValue];
-		int snapValue = [[snapTotals objectForKey:key] intValue];
-		int totalValue = creditValue + snapValue;
+		NSUInteger creditValue = [[creditTotals objectForKey:key] intValue];
+		NSUInteger snapValue = [[snapTotals objectForKey:key] intValue];
+		NSUInteger totalValue = creditValue + snapValue;
 
-		writeString = [writeString stringByAppendingString:[NSString stringWithFormat:@"%@,%i,%i,%i\n", key, creditValue, snapValue, totalValue]];
+		writeString = [writeString stringByAppendingString:[NSString stringWithFormat:@"%@,%tu,%tu,%tu\n", key, creditValue, snapValue, totalValue]];
 	}
 
 	NSLog(@"prepped demographics report: {\n%@\n}", writeString);
@@ -266,7 +266,7 @@ static NSString *dumpFormat = @"%@ %@ %@.m3db"; // device name, dumpName, uuid
 	NSMutableDictionary *bonusTotals = [totalsTemplate mutableCopy];
 	NSMutableDictionary *creditTotals = [totalsTemplate mutableCopy];
 	
-	unsigned int creditFeeCount = 0, creditFeeTotal = 0;
+	NSUInteger creditFeeCount = 0, creditFeeTotal = 0;
 	
 	// create disbursements table
 	for (Transactions *tx in query)
@@ -300,13 +300,13 @@ static NSString *dumpFormat = @"%@ %@ %@.m3db"; // device name, dumpName, uuid
 	writeString = [writeString stringByAppendingString:[NSString stringWithFormat:@"%@,%i,%i,%i\n", @"\"Bonus (Red)\"", [bonusTotals[@"TransactionCount"] intValue], [bonusTotals[@"TokensDisbursed"] intValue], [bonusTotals[@"Value"] intValue]]];
 	writeString = [writeString stringByAppendingString:[NSString stringWithFormat:@"%@,%i,%i,%i\n", @"\"Credit (Green)\"", [creditTotals[@"TransactionCount"] intValue], [creditTotals[@"TokensDisbursed"] intValue], [creditTotals[@"Value"] intValue]]];
 	
-	writeString = [writeString stringByAppendingString:[NSString stringWithFormat:@"\"Token Fee\",%i,,%i\n", creditFeeCount, creditFeeTotal]];
+	writeString = [writeString stringByAppendingString:[NSString stringWithFormat:@"\"Token Fee\",%tu,,%tu\n", creditFeeCount, creditFeeTotal]];
 	
-	unsigned int transactionCount = [query count], total = ([snapTotals[@"Value"] intValue] + [bonusTotals[@"Value"] intValue] + [creditTotals[@"Value"] intValue]);
-	writeString = [writeString stringByAppendingString:[NSString stringWithFormat:@"\"Total (SNAP + Credit + TokenFee)\",%i,,%i\n", transactionCount, total]];
+	NSUInteger transactionCount = [query count], total = ([snapTotals[@"Value"] intValue] + [bonusTotals[@"Value"] intValue] + [creditTotals[@"Value"] intValue]);
+	writeString = [writeString stringByAppendingString:[NSString stringWithFormat:@"\"Total (SNAP + Credit + TokenFee)\",%tu,,%tu\n", transactionCount, total]];
 	
-	unsigned int grandtotal = total + creditFeeTotal;
-	writeString = [writeString stringByAppendingString:[NSString stringWithFormat:@"\"Grand Total (SNAP + Bonus + Credit + TokenFee)\",,,%i\n", grandtotal]];
+	NSUInteger grandtotal = total + creditFeeTotal;
+	writeString = [writeString stringByAppendingString:[NSString stringWithFormat:@"\"Grand Total (SNAP + Bonus + Credit + TokenFee)\",,,%tu\n", grandtotal]];
 	
 	// create transactions table
 	NSString *header = @"\n#Transactions#\nTime,Zipcode,CardLast4,CreditAmount,CreditFee,SNAPAmount,SNAPBonus,Total\n";

@@ -76,7 +76,7 @@
 		@try
 		{
 			NSAssert1([self.window.rootViewController class] == [UINavigationController class], @"root view controller wasn't a UINavigationController, it was a %@", [self.window.rootViewController class]);
-			NSAssert1([[(UINavigationController *)self.window.rootViewController viewControllers] count] == 1, @"root navigation controller had more than one child view controller (had %i)", [[(UINavigationController *)self.window.rootViewController viewControllers] count]);
+			NSAssert1([[(UINavigationController *)self.window.rootViewController viewControllers] count] == 1, @"root navigation controller had more than one child view controller (had %tu)", [[(UINavigationController *)self.window.rootViewController viewControllers] count]);
 			
 			[[[(UINavigationController *)self.window.rootViewController viewControllers] firstObject] performSegueWithIdentifier:@"ImportSegue" sender:url];
 			

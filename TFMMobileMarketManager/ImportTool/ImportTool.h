@@ -39,9 +39,9 @@ typedef NS_ENUM(NSInteger, ImportDumpOptions)
 
 - (id)initWithSkipSetting:(bool)skipFirstRow;
 
-- (unsigned int)importStaffFromCSV:(NSURL *)url;
-- (unsigned int)importVendorsFromCSV:(NSURL *)url;
-- (unsigned int)importLocationsFromCSV:(NSURL *)url;
+- (NSUInteger)importStaffFromCSV:(NSURL *)url;
+- (NSUInteger)importVendorsFromCSV:(NSURL *)url;
+- (NSUInteger)importLocationsFromCSV:(NSURL *)url;
 
 - (bool)importDump:(NSURL *)url;
 // - (bool)importTable:(NSURL *)url;

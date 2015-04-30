@@ -82,7 +82,7 @@ static NSString *deleteConfirmationMessageDetails = @"Its associated transaction
 {
 	MarketDays *info = [self.fetchedResultsController objectAtIndexPath:indexPath];
 	[cell.textLabel setText:[info fieldDescription]];
-	[cell.detailTextLabel setText:[NSString stringWithFormat:@"%i vendor%@, %i transaction%@, %i redemption%@", [info.vendors count], ([info.vendors count] != 1) ? @"s" : @"", [info.transactions count], ([info.transactions count] != 1) ? @"s" : @"", [info.redemptions count], ([info.redemptions count] != 1) ? @"s" : @""]];
+	[cell.detailTextLabel setText:[NSString stringWithFormat:@"%tu vendor%@, %tu transaction%@, %tu redemption%@", [info.vendors count], ([info.vendors count] != 1) ? @"s" : @"", [info.transactions count], ([info.transactions count] != 1) ? @"s" : @"", [info.redemptions count], ([info.redemptions count] != 1) ? @"s" : @""]];
 }
 
 // populate the table view

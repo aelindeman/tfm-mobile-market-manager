@@ -86,7 +86,7 @@ static NSString *deleteFailedMessageDetails = @"There are market days in the dat
 	Locations *info = [_fetchedResultsController objectAtIndexPath:indexPath];
 	NSString *plural = ([info.marketdays count] != 1) ? @"s" : @"";
 	[cell.textLabel setText:info.name];
-	[cell.detailTextLabel setText:[NSString stringWithFormat:@"%i market day%@", [info.marketdays count], plural]];
+	[cell.detailTextLabel setText:[NSString stringWithFormat:@"%tu market day%@", [info.marketdays count], plural]];
 }
 
 // populate the table view

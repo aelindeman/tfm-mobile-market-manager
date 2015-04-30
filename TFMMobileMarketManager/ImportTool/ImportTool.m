@@ -7,7 +7,7 @@
 
 @implementation ImportTool
 
-static unsigned int parseSettings = CHCSVParserOptionsRecognizesBackslashesAsEscapes | CHCSVParserOptionsSanitizesFields | CHCSVParserOptionsTrimsWhitespace;
+static CHCSVParserOptions parseSettings = CHCSVParserOptionsRecognizesBackslashesAsEscapes | CHCSVParserOptionsSanitizesFields | CHCSVParserOptionsTrimsWhitespace;
 
 - (id)initWithSkipSetting:(bool)skipFirstRow
 {
@@ -18,10 +18,10 @@ static unsigned int parseSettings = CHCSVParserOptionsRecognizesBackslashesAsEsc
 	return self;
 }
 
-- (unsigned int)importStaffFromCSV:(NSURL *)url
+- (NSUInteger)importStaffFromCSV:(NSURL *)url
 {
 	NSError *error;
-	unsigned int importCount = 0;
+	NSUInteger importCount = 0;
 	NSArray *rows = [NSArray arrayWithContentsOfCSVURL:url options:parseSettings];
 
 	if (rows == nil)
@@ -32,7 +32,7 @@ static unsigned int parseSettings = CHCSVParserOptionsRecognizesBackslashesAsEsc
 	
 	@try
 	{
-		for (unsigned int i = 0; i < [rows count]; i ++)
+		for (NSUInteger i = 0; i < [rows count]; i ++)
 		{
 			NSArray *row = rows[i];
 			if (self.skipFirstRow && i == 0) continue; // skip header row
@@ -57,19 +57,19 @@ static unsigned int parseSettings = CHCSVParserOptionsRecognizesBackslashesAsEsc
 	}
 	@catch (NSException *exception)
 	{
-		NSLog(@"exception at item %i: %@", importCount, [exception reason]);
+		NSLog(@"exception at item %tu: %@", importCount, [exception reason]);
 		return importCount;
 	}
 
-		NSLog(@"import finished, added %i staff", importCount);
+		NSLog(@"import finished, added %tu staff", importCount);
 		return importCount;
 	}
 
-- (unsigned int)importVendorsFromCSV:(NSURL *)url
+- (NSUInteger)importVendorsFromCSV:(NSURL *)url
 {
 	NSError *error;
 	NSArray *rows = [NSArray arrayWithContentsOfCSVURL:url options:parseSettings];
-	unsigned int importCount = 0;
+	NSUInteger importCount = 0;
 	
 	if (rows == nil)
 	{
@@ -79,7 +79,7 @@ static unsigned int parseSettings = CHCSVParserOptionsRecognizesBackslashesAsEsc
 	
 	@try
 	{
-		for (unsigned int i = 0; i < [rows count]; i ++)
+		for (NSUInteger i = 0; i < [rows count]; i ++)
 		{
 			NSArray *row = rows[i];
 			if (self.skipFirstRow && i == 0) continue; // skip header row
@@ -113,19 +113,19 @@ static unsigned int parseSettings = CHCSVParserOptionsRecognizesBackslashesAsEsc
 	}
 	@catch (NSException *exception)
 	{
-		NSLog(@"exception at item %i: %@", importCount, [exception reason]);
+		NSLog(@"exception at item %tu: %@", importCount, [exception reason]);
 		return importCount;
 	}
 	
-	NSLog(@"import finished, added %i vendors", importCount);
+	NSLog(@"import finished, added %tu vendors", importCount);
 	return importCount;
 }
 
-- (unsigned int)importLocationsFromCSV:(NSURL *)url
+- (NSUInteger)importLocationsFromCSV:(NSURL *)url
 {
 	NSError *error;
 	NSArray *rows = [NSArray arrayWithContentsOfCSVURL:url options:parseSettings];
-	unsigned int importCount = 0;
+	NSUInteger importCount = 0;
 	
 	if (rows == nil)
 	{
@@ -135,7 +135,7 @@ static unsigned int parseSettings = CHCSVParserOptionsRecognizesBackslashesAsEsc
 	
 	@try
 	{
-		for (unsigned int i = 0; i < [rows count]; i ++)
+		for (NSUInteger i = 0; i < [rows count]; i ++)
 		{
 			NSArray *row = rows[i];
 			if (self.skipFirstRow && i == 0) continue; // skip header row
@@ -158,11 +158,11 @@ static unsigned int parseSettings = CHCSVParserOptionsRecognizesBackslashesAsEsc
 	}
 	@catch (NSException *exception)
 	{
-		NSLog(@"exception at item %i: %@", importCount, [exception reason]);
+		NSLog(@"exception at item %tu: %@", importCount, [exception reason]);
 		return importCount;
 	}
 	
-	NSLog(@"import finished, added %i locations", importCount);
+	NSLog(@"import finished, added %tu locations", importCount);
 	return importCount;
 }
 

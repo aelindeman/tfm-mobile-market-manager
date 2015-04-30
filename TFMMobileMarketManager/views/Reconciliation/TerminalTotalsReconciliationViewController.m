@@ -17,9 +17,10 @@ static NSString *menuOptionCellIdentifier = @"MenuOptionCell";
 
 static NSString *helpText =	@"If the totals do not match, it is usually an error involving:\n\t- the terminal not processing a transaction\n\t- a transaction incorrectly marked or not marked as invalid\n\t- a typo either on this device or the terminal";
 
-unsigned int deviceCreditAmount, deviceCreditTransactionCount,
+uint16_t deviceCreditAmount, deviceCreditTransactionCount,
 deviceSnapAmount, deviceSnapTransactionCount,
-deviceTotalAmount, deviceTotalTransactionCount;
+deviceTotalAmount;
+NSUInteger deviceTotalTransactionCount;
 
 - (void)viewDidLoad
 {
@@ -179,7 +180,7 @@ deviceTotalAmount, deviceTotalTransactionCount;
 		[cell.creditField2 setText:[NSString stringWithFormat:@"%i", deviceCreditTransactionCount]];
 		
 		[cell.totalField1 setText:[NSString stringWithFormat:@"%i", deviceTotalAmount]];
-		[cell.totalField2 setText:[NSString stringWithFormat:@"%i", deviceTotalTransactionCount]];
+		[cell.totalField2 setText:[NSString stringWithFormat:@"%tu", deviceTotalTransactionCount]];
 		
 		return cell;
 	}

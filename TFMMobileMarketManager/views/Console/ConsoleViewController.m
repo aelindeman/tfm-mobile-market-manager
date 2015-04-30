@@ -74,7 +74,7 @@ static NSString *invalidRequestMessage = @"The “Table” field is required. Th
 
 		NSArray *result = [TFMM3_APP_DELEGATE.managedObjectContext executeFetchRequest:request error:&error];
 		if (error) [NSException raise:@"Core Data error" format:@"%@", error];
-		else [self.output setText:[NSString stringWithFormat:@"Request returned %i rows:\n\n%@", [result count], result]];
+		else [self.output setText:[NSString stringWithFormat:@"Request returned %tu rows:\n\n%@", [result count], result]];
 	}
 	@catch (NSException *exception)
 	{

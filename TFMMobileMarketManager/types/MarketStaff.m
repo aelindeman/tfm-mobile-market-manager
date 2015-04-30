@@ -17,7 +17,7 @@
 
 - (NSString *)description
 {
-	return [NSString stringWithFormat:@"%@ (%i) - %i market day%@",
+	return [NSString stringWithFormat:@"%@ (%i) - %tu market day%@",
 		self.name,
 		self.position,
 		[self.marketdays count],

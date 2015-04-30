@@ -156,7 +156,7 @@ static NSString *erasePromptAllDataText = @"All data";
 	[request setIncludesPropertyValues:false]; // only fetch the managedObjectID
 	
 	NSArray *marketDays = [TFMM3_APP_DELEGATE.managedObjectContext executeFetchRequest:request error:nil];
-	unsigned int count = [marketDays count];
+	NSUInteger count = [marketDays count];
 	
 	for (NSManagedObject *m in marketDays)
 		[TFMM3_APP_DELEGATE.managedObjectContext deleteObject:m];
@@ -165,7 +165,7 @@ static NSString *erasePromptAllDataText = @"All data";
 	if ([TFMM3_APP_DELEGATE.managedObjectContext save:&error])
 	{
 		[self eraseCompleteMessage];
-		NSLog(@"erased %i market day%@", count, count == 1 ? @"s" : @"");
+		NSLog(@"erased %tu market day%@", count, count == 1 ? @"s" : @"");
 		return true;
 	}
 	

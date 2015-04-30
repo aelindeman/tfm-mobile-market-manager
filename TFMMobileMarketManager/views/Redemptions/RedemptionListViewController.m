@@ -100,7 +100,7 @@ static NSString *deleteConfirmationMessageDetails = @"It won’t be deleted, but
 	if (info.markedInvalid)
 	{
 		NSDictionary *strike = @{NSStrikethroughStyleAttributeName: @(NSUnderlineStyleSingle)};
-		for (int i = 1; i <= 4; i ++)
+		for (NSUInteger i = 1; i <= 4; i ++)
 		{
 			[(UILabel *)[c viewWithTag:i] setTextColor:[UIColor lightGrayColor]];
 			[(UILabel *)[c viewWithTag:i] setAttributedText:[[NSAttributedString alloc] initWithString:[(UILabel *)[c viewWithTag:i] text] attributes:strike]];
@@ -109,7 +109,7 @@ static NSString *deleteConfirmationMessageDetails = @"It won’t be deleted, but
 	else
 	{
 		// fix for when a transaction is unmarked invalid and stays gray
-		for (int i = 1; i <= 4; i ++) [(UILabel *)[c viewWithTag:i] setTextColor:[UIColor darkTextColor]];
+		for (NSUInteger i = 1; i <= 4; i ++) [(UILabel *)[c viewWithTag:i] setTextColor:[UIColor darkTextColor]];
 		
 		// highlight paid redemptions
 		if (info.check_number)

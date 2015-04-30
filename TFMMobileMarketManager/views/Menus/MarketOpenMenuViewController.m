@@ -150,16 +150,16 @@ static NSString *validationFailedMessage = @"There is a discrepancy between the 
 	[self.navigationItem setPrompt:[TFMM3_APP_DELEGATE.activeMarketDay fieldDescription]];
 	
 	NSError *error;
-	unsigned int v, v_snap, v_inc; // vendor counts
-	unsigned int t, t_snap, t_credit, t_total = 0; // transaction counts
-	unsigned int r, r_paid, r_total = 0; // redemption counts
+	NSUInteger v, v_snap, v_inc; // vendor counts
+	NSUInteger t, t_snap, t_credit, t_total = 0; // transaction counts
+	NSUInteger r, r_paid, r_total = 0; // redemption counts
 	
 	// vendors header
 	NSFetchRequest *vendors = [NSFetchRequest fetchRequestWithEntityName:@"Vendors"];
 	[vendors setPredicate:[NSPredicate predicateWithFormat:@"%@ in marketdays", TFMM3_APP_DELEGATE.activeMarketDay]];
 	v = [[TFMM3_APP_DELEGATE.managedObjectContext executeFetchRequest:vendors error:&error] count];
 	if (error) NSLog(@"error fetching vendors: %@", error);
-	[self.vendorHeaderLabel setText:[NSString stringWithFormat:@"%i vendor%@", v, (v == 1) ? @"" : @"s"]];
+	[self.vendorHeaderLabel setText:[NSString stringWithFormat:@"%tu vendor%@", v, (v == 1) ? @"" : @"s"]];
 	
 	// vendors detail
 	[vendors setPredicate:[NSPredicate predicateWithFormat:@"(%@ in marketdays) and (acceptsSNAP = true)", TFMM3_APP_DELEGATE.activeMarketDay]];
@@ -169,7 +169,7 @@ static NSString *validationFailedMessage = @"There is a discrepancy between the 
 	
 	v_inc = [[TFMM3_APP_DELEGATE.managedObjectContext executeFetchRequest:vendors error:&error] count];
 	if (error) NSLog(@"error fetching vendors: %@", error);
-	[self.vendorDetailLabel setText:[NSString stringWithFormat:@"%i accept SNAP\n%i accept incentives", v_snap, v_inc]];
+	[self.vendorDetailLabel setText:[NSString stringWithFormat:@"%tu accept SNAP\n%tu accept incentives", v_snap, v_inc]];
 	
 	// transactions header
 	NSFetchRequest *transactions = [NSFetchRequest fetchRequestWithEntityName:@"Transactions"];
@@ -177,7 +177,7 @@ static NSString *validationFailedMessage = @"There is a discrepancy between the 
 	
 	t = [[TFMM3_APP_DELEGATE.managedObjectContext executeFetchRequest:transactions error:&error] count];
 	if (error) NSLog(@"error fetching transactions: %@", error);
-	[self.transactionHeaderLabel setText:[NSString stringWithFormat:@"%i transaction%@", t, (t == 1) ? @"" : @"s"]];
+	[self.transactionHeaderLabel setText:[NSString stringWithFormat:@"%tu transaction%@", t, (t == 1) ? @"" : @"s"]];
 	
 	// transactions detail
 	[transactions setPredicate:[NSPredicate predicateWithFormat:@"((marketday = %@) and (markedInvalid = false)) and (snap_used = true)", TFMM3_APP_DELEGATE.activeMarketDay]];
@@ -194,14 +194,14 @@ static NSString *validationFailedMessage = @"There is a discrepancy between the 
 		NSLog(@"error fetching transactions: %@", error);
 	for (Transactions *tx in txlist)
 		t_total += (tx.snap_used ? tx.snap_total : tx.credit_used ? tx.credit_total : 0);
-	[self.transactionDetailLabel setText:[NSString stringWithFormat:@"%i SNAP\n%i credit\n$%i total", t_snap, t_credit, t_total]];
+	[self.transactionDetailLabel setText:[NSString stringWithFormat:@"%tu SNAP\n%tu credit\n$%tu total", t_snap, t_credit, t_total]];
 
 	// redemptions header
 	NSFetchRequest *redemptions = [NSFetchRequest fetchRequestWithEntityName:@"Redemptions"];
 	[redemptions setPredicate:[NSPredicate predicateWithFormat:@"marketday = %@", TFMM3_APP_DELEGATE.activeMarketDay]];
 	r = [[TFMM3_APP_DELEGATE.managedObjectContext executeFetchRequest:redemptions error:&error] count];
 	if (error) NSLog(@"error fetching redemptions: %@", error);
-	[self.redemptionHeaderLabel setText:[NSString stringWithFormat:@"%i redemption%@", r, (r == 1) ? @"" : @"s"]];
+	[self.redemptionHeaderLabel setText:[NSString stringWithFormat:@"%tu redemption%@", r, (r == 1) ? @"" : @"s"]];
 	
 	// redemptions detail
 	[redemptions setPredicate:[NSPredicate predicateWithFormat:@"((marketday = %@) and (markedInvalid = false)) and (check_number > 0)", TFMM3_APP_DELEGATE.activeMarketDay]];
@@ -213,7 +213,7 @@ static NSString *validationFailedMessage = @"There is a discrepancy between the 
 		NSLog(@"error fetching redemptions: %@", error);
 	for (Redemptions *rd in rdlist)
 		r_total += rd.total;
-	[self.redemptionDetailLabel setText:[NSString stringWithFormat:@"%i paid\n$%i total", r_paid, r_total]];
+	[self.redemptionDetailLabel setText:[NSString stringWithFormat:@"%tu paid\n$%tu total", r_paid, r_total]];
 	
 	[[self.tableView tableHeaderView] setNeedsDisplay];
 }

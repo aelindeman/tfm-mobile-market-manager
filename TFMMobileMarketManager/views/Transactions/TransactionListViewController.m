@@ -96,15 +96,15 @@ static NSString *deleteConfirmationMessageDetails = @"It won’t be deleted, but
 	[(UILabel *)[c viewWithTag:3] setText:[NSString stringWithFormat:@"%04i", info.cust_id]];
 	
 	// transaction details
-	unsigned int transactionTotal = (info.credit_used ? info.credit_total : info.snap_used ? info.snap_total : 0);
+	NSUInteger transactionTotal = (info.credit_used ? info.credit_total : info.snap_used ? info.snap_total : 0);
 	[(UILabel *)[c viewWithTag:4] setText:(info.credit_used ? @"Credit" : info.snap_used ? @"SNAP" : @"None")];
-	[(UILabel *)[c viewWithTag:5] setText:[NSString stringWithFormat:@"$%i", transactionTotal]];
+	[(UILabel *)[c viewWithTag:5] setText:[NSString stringWithFormat:@"$%tu", transactionTotal]];
 	
 	// strike out if marked invalid
 	if (info.markedInvalid)
 	{
 		NSDictionary *strike = @{NSStrikethroughStyleAttributeName: [NSNumber numberWithInt:NSUnderlineStyleSingle]};
-		for (int i = 1; i <= 5; i ++)
+		for (NSUInteger i = 1; i <= 5; i ++)
 		{
 			[(UILabel *)[c viewWithTag:i] setTextColor:[UIColor lightGrayColor]];
 			[(UILabel *)[c viewWithTag:i] setAttributedText:[[NSAttributedString alloc] initWithString:[(UILabel *)[c viewWithTag:i] text] attributes:strike]];
@@ -113,7 +113,7 @@ static NSString *deleteConfirmationMessageDetails = @"It won’t be deleted, but
 	else
 	{
 		// fix for when a transaction is unmarked invalid and stays gray
-		for (int i = 1; i <= 5; i ++) [(UILabel *)[c viewWithTag:i] setTextColor:[UIColor darkTextColor]];
+		for (NSUInteger i = 1; i <= 5; i ++) [(UILabel *)[c viewWithTag:i] setTextColor:[UIColor darkTextColor]];
 		
 		// point out transactions with suspiciously high amounts
 		if ((info.credit_used && transactionTotal > 100) ||

@@ -8,14 +8,14 @@
 
 @interface TokenTotalsReconciliationForm : NSObject <FXForm>
 
-@property unsigned int marketBonusTokenCount;
-@property unsigned int marketCreditTokenCount;
-@property unsigned int marketSnapTokenCount;
-@property unsigned int redeemedBonusTokenCount;
-@property unsigned int redeemedCreditTokenCount;
-@property unsigned int redeemedSnapTokenCount;
-@property int creditTokenDifference;
-@property int snapTokenDifference;
-@property int bonusTokenDifference;
+@property NSUInteger marketBonusTokenCount;
+@property NSUInteger marketCreditTokenCount;
+@property NSUInteger marketSnapTokenCount;
+@property NSUInteger redeemedBonusTokenCount;
+@property NSUInteger redeemedCreditTokenCount;
+@property NSUInteger redeemedSnapTokenCount;
+@property NSInteger creditTokenDifference;
+@property NSInteger snapTokenDifference;
+@property NSInteger bonusTokenDifference;
 
 @end
