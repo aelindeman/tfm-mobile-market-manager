@@ -17,7 +17,7 @@ static NSString *deleteConfirmationMessageDetails = @"It won’t be deleted, but
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
-	NSAssert([TFMM3_APP_DELEGATE activeMarketDay], @"No active market day set!");
+	NSAssert(TFMM3_APP_DELEGATE.activeMarketDay, @"No active market day set!");
 	[self.navigationItem setPrompt:[TFMM3_APP_DELEGATE.activeMarketDay fieldDescription]];
 	self.tableView.allowsMultipleSelectionDuringEditing = false;
 	[self load];
@@ -25,14 +25,14 @@ static NSString *deleteConfirmationMessageDetails = @"It won’t be deleted, but
 
 - (void)load
 {
-	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Redemptions"];[fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"(marketday == %@)", [TFMM3_APP_DELEGATE activeMarketDay]]];
+	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Redemptions"];[fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"(marketday == %@)", TFMM3_APP_DELEGATE.activeMarketDay]];
 	[fetchRequest setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"date" ascending:true], [NSSortDescriptor sortDescriptorWithKey:@"vendor.businessName" ascending:true]]];
 	
 	self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:TFMM3_APP_DELEGATE.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
 	[self.fetchedResultsController setDelegate:self];
 	
 	NSError *error;
-	if (![[self fetchedResultsController] performFetch:&error]) NSLog(@"error populating table: %@", error);
+	if (![self.fetchedResultsController performFetch:&error]) NSLog(@"error populating table: %@", error);
 }
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
@@ -50,11 +50,11 @@ static NSString *deleteConfirmationMessageDetails = @"It won’t be deleted, but
 	switch (type)
 	{
 		case NSFetchedResultsChangeInsert:
-			[self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+			[self.tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
 			break;
 			
 		case NSFetchedResultsChangeDelete:
-			[self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+			[self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
 			break;
 			
 		case NSFetchedResultsChangeUpdate:
@@ -62,8 +62,8 @@ static NSString *deleteConfirmationMessageDetails = @"It won’t be deleted, but
 			break;
 			
 		case NSFetchedResultsChangeMove:
-			[self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-			[self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+			[self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+			[self.tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
 			break;
 	}
 }
@@ -99,7 +99,7 @@ static NSString *deleteConfirmationMessageDetails = @"It won’t be deleted, but
 	
 	if (info.markedInvalid)
 	{
-		NSDictionary *strike = @{NSStrikethroughStyleAttributeName: [NSNumber numberWithInt:NSUnderlineStyleSingle]};
+		NSDictionary *strike = @{NSStrikethroughStyleAttributeName: @(NSUnderlineStyleSingle)};
 		for (int i = 1; i <= 4; i ++)
 		{
 			[(UILabel *)[c viewWithTag:i] setTextColor:[UIColor lightGrayColor]];

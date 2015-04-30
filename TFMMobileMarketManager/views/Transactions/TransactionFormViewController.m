@@ -14,7 +14,7 @@
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
-	NSAssert([TFMM3_APP_DELEGATE activeMarketDay], @"No active market day set!");
+	NSAssert(TFMM3_APP_DELEGATE.activeMarketDay, @"No active market day set!");
 
 	TransactionForm *form = self.formController.form = [[TransactionForm alloc] init];
 
@@ -22,7 +22,7 @@
 	if ([self editMode])
 	{
 		// fetch the object we're supposed to edit
-		[self setEditObject:(Transactions *)[TFMM3_APP_DELEGATE.managedObjectContext objectWithID:[self editObjectID]]];
+		[self setEditObject:(Transactions *)[TFMM3_APP_DELEGATE.managedObjectContext objectWithID:self.editObjectID]];
 		[self setTitle:@"Edit Transaction"];
 		
 		// populate form with passed data if in edit mode

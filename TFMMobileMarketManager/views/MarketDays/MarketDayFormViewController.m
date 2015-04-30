@@ -29,7 +29,7 @@
 	if ([self editMode])
 	{
 		// fetch the object we're supposed to edit
-		[self setMarketday:(MarketDays *)[TFMM3_APP_DELEGATE.managedObjectContext objectWithID:[self marketdayID]]];
+		[self setMarketday:(MarketDays *)[TFMM3_APP_DELEGATE.managedObjectContext objectWithID:self.marketdayID]];
 		[self setTitle:@"Edit Market Day"];
 		
 		// populate form with passed data if in edit mode
@@ -54,7 +54,7 @@
 	UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(submit:)];
 	
 	self.navigationItem.leftBarButtonItem = closeButton;
-	self.navigationItem.rightBarButtonItems = [self editMode] ? [TFMM3_APP_DELEGATE activeMarketDay] ? @[saveButton] : @[openButton, saveButton] : @[openButton];
+	self.navigationItem.rightBarButtonItems = self.editMode ? TFMM3_APP_DELEGATE.activeMarketDay ? @[saveButton] : @[openButton, saveButton] : @[openButton];
 }
 
 - (void)discard

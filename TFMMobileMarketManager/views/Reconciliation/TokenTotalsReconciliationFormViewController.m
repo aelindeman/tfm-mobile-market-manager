@@ -10,15 +10,14 @@
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
-	NSAssert([TFMM3_APP_DELEGATE activeMarketDay], @"No active market day set!");
+	NSAssert(TFMM3_APP_DELEGATE.activeMarketDay, @"No active market day set!");
 	
 	self.formController.form = [[TokenTotalsReconciliationForm alloc] init];
 	
 	// grab terminal totals object from passed identifier
 	if (self.editObjectID)
 	{
-		[self setEditObject:(TokenTotals *)[TFMM3_APP_DELEGATE.managedObjectContext objectWithID:[self editObjectID]]];
-		//NSLog(@"handoff to TokenTotals object %@", self.editObjectID);
+		[self setEditObject:(TokenTotals *)[TFMM3_APP_DELEGATE.managedObjectContext objectWithID:self.editObjectID]];
 	}
 	
 	// for whatever reason the terminal totals object id wasn't passed
@@ -26,7 +25,6 @@
 	else if ([TFMM3_APP_DELEGATE.activeMarketDay terminalTotals])
 	{
 		[self setEditObject:(TokenTotals *)[TFMM3_APP_DELEGATE.activeMarketDay terminalTotals]];
-		//NSLog(@"token totals were not passed but they were set in market day, using TokenTotals object %@", [self.editObject objectID]);
 	}
 	
 	// and if it isn't set, just make a new one
@@ -35,7 +33,6 @@
 		TokenTotals *tt = [NSEntityDescription insertNewObjectForEntityForName:@"TokenTotals" inManagedObjectContext:TFMM3_APP_DELEGATE.managedObjectContext];
 		[TFMM3_APP_DELEGATE.activeMarketDay setTerminalTotals:tt];
 		[self setEditObject:tt];
-		//NSLog(@"token totals were not passed and were not set in market day, created new TokenTotals object %@", [tt objectID]);
 	}
 
 	// populate form

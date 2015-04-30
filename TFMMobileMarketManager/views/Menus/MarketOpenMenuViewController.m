@@ -92,7 +92,7 @@ static NSString *validationFailedMessage = @"There is a discrepancy between the 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	NSDictionary *option = [[self.menuOptions objectAtIndex:[indexPath section]] objectAtIndex:[indexPath row]];
+	NSDictionary *option = [[self.menuOptions objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:optionCellIdentifier forIndexPath:indexPath];
 	
 	[cell.textLabel setText:[option valueForKey:@"title"]];
@@ -124,7 +124,7 @@ static NSString *validationFailedMessage = @"There is a discrepancy between the 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	NSDictionary *selected = [[self.menuOptions objectAtIndex:[indexPath section]] objectAtIndex:[indexPath row]];
+	NSDictionary *selected = [[self.menuOptions objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
 	NSString *action = [selected valueForKey:@"action"];
 	
 	// dynamically perform segue if that's what was asked

@@ -108,7 +108,7 @@ static NSString *deleteAllConfirmationMessageDetails = @"All reports on this dev
 			else
 			{
 				// delete the item
-				[self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+				[self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
 				
 				// delete the section too if it was the last item
 				if ([[[self.items objectAtIndex:indexPath.section] objectForKey:@"items"] count] == 1)

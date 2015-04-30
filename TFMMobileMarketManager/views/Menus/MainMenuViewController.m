@@ -96,7 +96,7 @@ static NSString *erasePromptAllDataText = @"All data";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MenuOptionCell" forIndexPath:indexPath];
-	NSDictionary *option = [[self.menuOptions objectAtIndex:[indexPath section]] objectAtIndex:[indexPath row]];
+	NSDictionary *option = [[self.menuOptions objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
 	
 	[cell.textLabel setText:[option valueForKey:@"title"]];
 	[cell setAccessoryType:[[option valueForKey:@"action"] hasSuffix:@"Segue"] ? UITableViewCellAccessoryDisclosureIndicator : UITableViewCellAccessoryNone];
@@ -112,7 +112,7 @@ static NSString *erasePromptAllDataText = @"All data";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	NSDictionary *selected = [[self.menuOptions objectAtIndex:[indexPath section]] objectAtIndex:[indexPath row]];
+	NSDictionary *selected = [[self.menuOptions objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
 	NSString *action = [selected valueForKey:@"action"];
 	
 	// dynamically perform segue if that's what was asked

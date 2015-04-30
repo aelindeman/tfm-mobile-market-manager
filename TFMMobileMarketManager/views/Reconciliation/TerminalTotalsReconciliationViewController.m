@@ -24,21 +24,19 @@ deviceTotalAmount, deviceTotalTransactionCount;
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
-	NSAssert([TFMM3_APP_DELEGATE activeMarketDay], @"No active market day set!");
+	NSAssert(TFMM3_APP_DELEGATE.activeMarketDay, @"No active market day set!");
 	
 	// grab terminal totals object from passed identifier
 	if (self.editObjectID)
 	{
-		[self setEditObject:(TerminalTotals *)[TFMM3_APP_DELEGATE.managedObjectContext objectWithID:[self editObjectID]]];
-		//NSLog(@"handoff to TerminalTotals object %@", self.editObjectID);
+		[self setEditObject:(TerminalTotals *)[TFMM3_APP_DELEGATE.managedObjectContext objectWithID:self.editObjectID]];
 	}
 	
 	// for whatever reason the terminal totals object id wasn't passed
 	// so first try to fetch it from the active market day
 	else if ([TFMM3_APP_DELEGATE.activeMarketDay terminalTotals])
 	{
-		[self setEditObject:(TerminalTotals *)[TFMM3_APP_DELEGATE.activeMarketDay terminalTotals]];
-		//NSLog(@"terminal totals were not passed but they were set in market day, using TerminalTotals object %@", [self.editObject objectID]);
+		[self setEditObject:(TerminalTotals *)TFMM3_APP_DELEGATE.activeMarketDay.terminalTotals];
 	}
 	
 	// and if it isn't set, just make a new one
@@ -47,7 +45,6 @@ deviceTotalAmount, deviceTotalTransactionCount;
 		TerminalTotals *tt = [NSEntityDescription insertNewObjectForEntityForName:@"TerminalTotals" inManagedObjectContext:TFMM3_APP_DELEGATE.managedObjectContext];
 		[TFMM3_APP_DELEGATE.activeMarketDay setTerminalTotals:tt];
 		[self setEditObject:tt];
-		//NSLog(@"terminal totals were not passed and were not set in market day, created new TerminalTotals object %@", [tt objectID]);
 	}
 	
 	// populate the menu
@@ -62,7 +59,7 @@ deviceTotalAmount, deviceTotalTransactionCount;
 	// calculate totals from transactions
 	NSError *error;
 	NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Transactions"];
-	[request setPredicate:[NSPredicate predicateWithFormat:@"(marketday = %@) and (markedInvalid = false)", [TFMM3_APP_DELEGATE activeMarketDay]]];
+	[request setPredicate:[NSPredicate predicateWithFormat:@"(marketday = %@) and (markedInvalid = false)", TFMM3_APP_DELEGATE.activeMarketDay]];
 	NSArray *tx = [TFMM3_APP_DELEGATE.managedObjectContext executeFetchRequest:request error:&error];
 	
 	if (error)
@@ -140,7 +137,7 @@ deviceTotalAmount, deviceTotalTransactionCount;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	NSDictionary *option = [[self.menuOptions objectAtIndex:[indexPath section]] objectAtIndex:[indexPath row]];
+	NSDictionary *option = [[self.menuOptions objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
 	
 	if ([[option valueForKey:@"title"] isEqualToString:terminalTotalsCellIdentifier])
 	{
@@ -204,7 +201,7 @@ deviceTotalAmount, deviceTotalTransactionCount;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	NSDictionary *selected = [[self.menuOptions objectAtIndex:[indexPath section]] objectAtIndex:[indexPath row]];
+	NSDictionary *selected = [[self.menuOptions objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
 	NSString *action = [selected valueForKey:@"action"];
 	
 	// dynamically perform segue if that's what was asked

@@ -28,7 +28,7 @@ static NSString *dumpFormat = @"%@ %@ %@.m3db"; // device name, dumpName, uuid
 // allow init using delegate's active market day
 - (id)init
 {
-	return [self initWithMarketDay:[TFMM3_APP_DELEGATE activeMarketDay]];
+	return [self initWithMarketDay:TFMM3_APP_DELEGATE.activeMarketDay];
 }
 
 // market day needs to be specified before generating a report

@@ -14,7 +14,7 @@
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
-	NSAssert([TFMM3_APP_DELEGATE activeMarketDay], @"No active market day set!");
+	NSAssert(TFMM3_APP_DELEGATE.activeMarketDay, @"No active market day set!");
 	
 	self.formController.form = [[RedemptionForm alloc] init];
 	
@@ -22,7 +22,7 @@
 	if ([self editMode])
 	{
 		// fetch the object we're supposed to edit
-		[self setEditObject:(Redemptions *)[TFMM3_APP_DELEGATE.managedObjectContext objectWithID:[self editObjectID]]];
+		[self setEditObject:(Redemptions *)[TFMM3_APP_DELEGATE.managedObjectContext objectWithID:self.editObjectID]];
 		[self setTitle:@"Edit Redemption"];
 		
 		// populate form with passed data if in edit mode
@@ -136,7 +136,6 @@
 	RedemptionForm *form = self.formController.form;
 	NSUInteger credit_token_total = form.credit_count * 5;
 	NSUInteger payment_total = form.snap_count + form.bonus_count + (form.credit_count * 5);
-	//  @"detailTextLabel.text": [NSString stringWithFormat:@"$%i.00", self.total]
 	[form setCredit_amount:credit_token_total];
 	[form setTotal:payment_total];
 	[self.formController.tableView reloadData];
