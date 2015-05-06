@@ -341,7 +341,7 @@ static NSString *dumpFormat = @"%@ %@ %@.m3db"; // device name, dumpName, uuid
 	
 	NSError *error;
 	NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"Vendors"];
-	[request setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"businessName" ascending:false]]];
+	[request setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"businessName" ascending:true]]];
 	NSArray *query = [TFMM3_APP_DELEGATE.managedObjectContext executeFetchRequest:request error:&error];
 	
 	for (Vendors *v in query)
