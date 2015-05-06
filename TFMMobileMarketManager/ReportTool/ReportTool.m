@@ -43,6 +43,8 @@ static NSString *dumpFormat = @"%@ %@ %@.m3db"; // device name, dumpName, uuid
 	return self;
 }
 
+#pragma mark - Helper functions
+
 // writes contents to file, creating the file and path on the way. returns true on success
 - (bool)writeReportToFile:(NSString *)path contents:(NSString *)contents
 {
@@ -106,6 +108,8 @@ static NSString *dumpFormat = @"%@ %@ %@.m3db"; // device name, dumpName, uuid
 	
 	else return [NSString pathWithComponents:@[path, exportsSubfolder, [NSString stringWithFormat:reportFormat, [[UIDevice currentDevice] name], reportName, uuidString]]];
 }
+
+#pragma mark - Report generators
 
 // creates demographics report at default path; returns path
 - (NSString *)generateDemographicsReport
@@ -304,8 +308,8 @@ static NSString *dumpFormat = @"%@ %@ %@.m3db"; // device name, dumpName, uuid
 	
 	writeString = [writeString stringByAppendingString:[NSString stringWithFormat:@"\"Token Fee\",%tu,,%tu\n", creditFeeCount, creditFeeTotal]];
 	
-	NSUInteger transactionCount = [query count], total = ([snapTotals[@"Value"] intValue] + [bonusTotals[@"Value"] intValue] + [creditTotals[@"Value"] intValue]);
-	writeString = [writeString stringByAppendingString:[NSString stringWithFormat:@"\"Total (SNAP + Credit + TokenFee)\",%tu,,%tu\n", transactionCount, total]];
+	NSUInteger transactionCount = [query count], total = ([snapTotals[@"Value"] intValue] + creditFeeTotal + [creditTotals[@"Value"] intValue]);
+	writeString = [writeString stringByAppendingString:[NSString stringWithFormat:@"\"Total (SNAP + Credit + CreditFee)\",%tu,,%tu\n", transactionCount, total]];
 	
 	NSUInteger grandtotal = total + creditFeeTotal;
 	writeString = [writeString stringByAppendingString:[NSString stringWithFormat:@"\"Grand Total (SNAP + Bonus + Credit + TokenFee)\",,,%tu\n", grandtotal]];
@@ -325,6 +329,8 @@ static NSString *dumpFormat = @"%@ %@ %@.m3db"; // device name, dumpName, uuid
 	NSLog(@"prepped sales report: {\n%@\n}", writeString);
 	return [self writeReportToFile:path contents:writeString];
 }
+
+#pragma mark - Exporters
 
 // vendors
 - (NSString *)generateVendorsReport
@@ -419,12 +425,15 @@ static NSString *dumpFormat = @"%@ %@ %@.m3db"; // device name, dumpName, uuid
 	return [self writeReportToFile:path contents:writeString];
 }
 
+#pragma mark - Dump packer
+
 - (NSString *)dump
 {
 	NSString *path = [self getReportsPathForReportType:dumpName];
 	return [self dumpAtPath:path] ? path : false;
 }
 
+// TODO: Use NSData
 - (bool)dumpAtPath:(NSString *)path
 {
 	NSFileManager *fm = [NSFileManager defaultManager];
